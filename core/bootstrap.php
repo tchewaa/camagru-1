@@ -16,4 +16,3 @@
 
 //    Route the request
     Router::route($url);
-
