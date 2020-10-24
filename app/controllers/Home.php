@@ -8,6 +8,8 @@ class Home extends Controller {
     }
 
     public function indexAction($name) {
+        $db = DB::getInstance();
+        $contactsQ = $db->delete('contacts', 2);
         $this->view->render('home/index');
     }
 }
