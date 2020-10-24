@@ -43,6 +43,68 @@ class DB {
         return $this;
     }
 
+    protected function _read($table, $params = []) {
+        $conditionString = '';
+        $bind = [];
+        $order = '';
+        $limit = '';
+
+        //conditions
+        if (isset($params['conditions'])) {
+            if (is_array($params['conditions'])) {
+                foreach ($params['conditions'] as $condition) {
+                    $conditionString .= ' ' . $condition . ' AND';
+                }
+                $conditionString = trim($conditionString);
+                $conditionString = rtrim($conditionString, ' AND');
+            } else {
+                $conditionString .= $params['conditions'];
+            }
+
+            if ($conditionString != '') {
+                $conditionString = ' WHERE ' . $conditionString;
+            }
+        }
+
+        //bind
+        if (array_key_exists('bind', $params)) {
+            $bind = $params['bind'];
+        }
+
+        //order
+        if (array_key_exists('order', $params)) {
+            $order = ' ORDER BY ' . $params['order'];
+        }
+
+        //limit
+        if (array_key_exists('limit', $params)) {
+            $limit = ' LIMIT ' . $params['limit'];
+        }
+
+        $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
+        if ($this->query($sql, $bind)) {
+            if (!$this->count($this->_result)) return false;
+            return true;
+        }
+        return false;
+
+
+    }
+
+    public function find($table, $params = []) {
+        if ($this->_read($table, $params)) {
+            return $this->results();
+        }
+        return false;
+    }
+
+    public function findFirst($table, $params = []) {
+        if ($this->_read($table, $params)) {
+            return $this->first();
+        }
+        return false;
+    }
+
     public function insert($table, $fields = []) {
         $fieldString = '';
         $valueString = '';
@@ -73,7 +135,7 @@ class DB {
 
         $fieldString = trim($fieldString);
         $fieldString = rtrim($fieldString, ',');
-        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE 'id' = {$id}";
 
         if (!$this->query($sql, $values)->error()) {
             return true;
@@ -82,7 +144,7 @@ class DB {
     }
 
     public function delete($table, $id) {
-        $sql = "DELETE FROM {$table} WHERE id = {$id}";
+        $sql = "DELETE FROM {$table} WHERE 'id' = {$id}";
 
         if (!$this->query($sql)->error()) {
             return true;
