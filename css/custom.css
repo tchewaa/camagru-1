@@ -1,0 +1,51 @@
+.test {
+    color: red;
+    text-align: center;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav {
+    background-color: darkslategrey;
+    border-bottom: 4px solid #f5c6cb;
+}
+
+form {
+    padding-top: 2em;
+}
+
+footer {
+    text-align: center;
+    background-color: darkslategrey;
+    color: white;
+    width: 100%;
+    padding: 14px 0;
+    border-top: 4px solid #f5c6cb;
+    bottom: 0;
+    position: fixed;
+}
+
+footer a {
+    color: #f5c6cb;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.btn {
+    color: white;
+    background-color: darkslategrey;
+}
+
+.btn:hover {
+    color: gray;
+    background-color: #f5c6cb;
+}
+
+.error {
+    color: white;
+}
