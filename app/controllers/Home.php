@@ -8,6 +8,11 @@ class Home extends Controller {
     }
 
     public function indexAction($name) {
-        $this->view->render('home/index');
+        if (!Session::exists(CURRENT_USER_SESSION_NAME)) {
+            $this->view->render('register/login');
+        } else {
+            $this->view->render('home/index');
+
+        }
     }
 }

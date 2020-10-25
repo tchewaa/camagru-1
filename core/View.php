@@ -3,6 +3,10 @@
 
 class View {
     protected $_head, $_body, $_siteTitle = SITE_TITLE, $_outputBuffer, $_layout = DEFAULT_LAYOUT;
+    /**
+     * @var string
+     */
+    public $displayErrors;
 
     public function __construct() {
     }
