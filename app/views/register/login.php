@@ -1,13 +1,9 @@
-<?php $this->start('head'); ?>
-
-<?php $this->end(); ?>
-
 <?php $this->start('body'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
             <form class="form" action="<?=PROOT?>register/login" method="post">
-                <h3 class="text-center">Login</h3>
+<!--                <h3 class="text-center">Login</h3>-->
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" class="form-control">
@@ -22,7 +18,7 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Login" class="btn btn-large btn-primary">
+                    <input type="submit" value="Login" class="btn btn-large">
                 </div>
                 <div class="text-right">
                     <a href="<?PROOT?>register/register" class="text-primary">Register</a>
