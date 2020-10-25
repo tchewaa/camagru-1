@@ -65,7 +65,7 @@ class Validate {
     }
 
     public function addError($error) {
-        $this->_errors =$error;
+        $this->_errors[] = $error;
         if (empty($this->_errors)) {
             $this->_passed = true;
         } else {
@@ -84,13 +84,10 @@ class Validate {
     public function displayErrors() {
         $html = '<ul class="bg-danger">';
         foreach ($this->_errors as $error) {
-            $html = '<li class="text-danger">'.$error[0].'</li>';
-            // TODO Find a way to do this without using Jquery
-            $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").addClass("is-invalid")});</script>';
+            $html .= '<li class="text-danger">'.$error[0].'</li>';
+            $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").addClass("has-error");});</script>';
         }
         $html .= '</ul>';
         return $html;
-
     }
-
 }

@@ -32,8 +32,8 @@ class Register extends Controller {
                 }
             }
         }
-//        $this->view->
-//        $this->view->displayErrors = $validation->displayErrors();
+        //TODO define field
+        $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/login');
     }
 }
