@@ -1,8 +1,11 @@
+<?php $this->start('head'); ?>
+<?php $this->end(); ?>
 <?php $this->start('body'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
             <form class="form" action="<?=PROOT?>register/login" method="post">
+                <div class="bg-danger"><?=$this->displayErrors() ?></div>
 <!--                <h3 class="text-center">Login</h3>-->
                 <div class="form-group">
                     <label for="username">Username</label>

@@ -10,9 +10,19 @@ class Register extends Controller {
     }
 
     public function loginAction() {
+        $validation = new Validate();
         if ($_POST) {
 //           form validation
-            $validation = true;
+            $validation->check($_POST, [
+                'username' => [
+                    'display' => "Username",
+                    'required' => true
+                ],
+                'password' => [
+                    'display' => 'Password',
+                    'required' => true
+                ]
+            ]);
             if ($validation === true) {
                 $user = $this->UsersModel->findByUsername($_POST['username']);
                 if ($user && password_verify(Input::get('password'), $user->password)) {
@@ -22,6 +32,8 @@ class Register extends Controller {
                 }
             }
         }
+//        $this->view->
+//        $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/login');
     }
 }
