@@ -31,9 +31,17 @@ class Users extends Model {
         return $this->findFirst(['conditions'=>'username = ?', 'bind'=>[$username]]);
     }
 
-    public function login($remeberMe = false) {
+    public static function currentLoggedInUser() {
+        if (!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)) {
+            $user = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
+            self::$currentLoggedInUser = $user;
+        }
+        return self::$currentLoggedInUser;
+    }
+
+    public function login($rememberMe = false) {
         Session::set($this->_sessionName, $this->id);
-        if ($remeberMe) {
+        if ($rememberMe) {
             $hash = md5(uniqid() + rand(0, 100));
             $user_agent = Session::uagent_no_version();
             Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
@@ -41,5 +49,30 @@ class Users extends Model {
             $this->_db->query("DELETE FORM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
             $this->_db->insert('user_sessions', $fields);
         }
+    }
+
+    public static function loginUserFromCookie() {
+//        $userSession = UserSessions::getFromCookie();
+        $user_session_model = new UserSessions();
+        $user_session = $user_session_model->findFirst([
+           'conditions' => 'user_agent ? AND session = ?',
+           'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
+        ]);
+        if ($user_session->user_id != '') {
+            $user = new self((int)$user_session->user_id);
+        }
+        $user->login();
+        return $user;
+    }
+
+    public function logout() {
+        $user_agent = Session::uagent_no_version();
+        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+        Session::delete(CURRENT_USER_SESSION_NAME);
+        if (Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME);
+        }
+        self::$currentLoggedInUser = null;
+        return true;
     }
 }

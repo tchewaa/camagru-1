@@ -35,7 +35,7 @@ class Model {
         $results = [];
         $resultsQuery = $this->_db->find($this->_table, $params);
         foreach ($resultsQuery as $result) {
-            $obj = new$this-> _modelName($this->_table); //TODO don't understand
+            $obj = new $this->_modelName($this->_table); //TODO don't understand
             $obj->populateObjData($result);
             $results[] = $obj;
         }

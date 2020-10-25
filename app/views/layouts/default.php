@@ -13,7 +13,7 @@
     <!-- TODO delete this, this the PDF states that no javascript framework are allowed   -->
     <script src="<?=PROOT?>js/jQuery-2.2.4.min.js"></script>
     <script src="<?=PROOT?>js/custom.js"></script>
-    <script src="<?=PROOT?>js/bootstrap.min.js"></script>
+<!--    <script src="--><?//=PROOT?><!--js/bootstrap.min.js"></script>-->
     <?= $this->content('head'); ?>
 </head>
 <body>
