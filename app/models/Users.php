@@ -65,9 +65,12 @@ class Users extends Model {
         return $user;
     }
 
+    //FIXME I cannot access $id from this method
     public function logout() {
         $user_agent = Session::uagent_no_version();
-        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+        //echo "test 1" . $this->id;
+        $user_id = array_values(Session::get(CURRENT_USER_SESSION_NAME))[0];
+        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$user_id, $user_agent]);
         Session::delete(CURRENT_USER_SESSION_NAME);
         if (Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
             Cookie::delete(REMEMBER_ME_COOKIE_NAME);
