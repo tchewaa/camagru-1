@@ -53,7 +53,6 @@ class Users extends Model {
 
     public static function loginUserFromCookie() {
         $userSession = UserSessions::getFromCookie();
-//        dnd($userSession);
         if ($userSession->user_id != '') {
             $user = new self((int)$userSession->user_id);
         }
@@ -66,11 +65,13 @@ class Users extends Model {
 
     //FIXME I cannot access $id from this method
     public function logout() {
-        $user_agent = Session::uagent_no_version();
+//        $user_agent = Session::uagent_no_version();
         //echo "test 1" . $this->id;
 //        dnd($this->_sessionName);
-        $user_id = array_values(Session::get($this->_sessionName))[0];
-        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$user_id, $user_agent]);
+//        $user_id = array_values(Session::get($this->_sessionName))[0];
+//        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$user_id, $user_agent]);
+        $userSession = UserSessions::getFromCookie();
+        if ($userSession) $userSession->delete();
         Session::delete(CURRENT_USER_SESSION_NAME);
         if (Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
             Cookie::delete(REMEMBER_ME_COOKIE_NAME);
