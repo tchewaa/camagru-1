@@ -3,7 +3,7 @@
 
 class Session {
     public static function exists($name) {
-        return isset($_SESSION[$name]);
+        return (isset($_SESSION[$name])) ? true : false;
     }
 
     public static function get($name) {

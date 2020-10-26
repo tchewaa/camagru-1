@@ -12,6 +12,7 @@ class Home extends Controller {
             $this->view->render('register/login');
         } else {
             $this->view->render('home/index');
+
         }
     }
 }
