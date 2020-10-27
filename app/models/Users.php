@@ -53,6 +53,7 @@ class Users extends Model {
 
     public static function loginUserFromCookie() {
         $userSession = UserSessions::getFromCookie();
+//        dnd("debug ID on login user from cookie method: " . $userSession->user_id);
         if ($userSession->user_id != '') {
             $user = new self((int)$userSession->user_id);
         }
@@ -65,6 +66,7 @@ class Users extends Model {
 
     //FIXME I cannot access $id from this method
     public function logout() {
+//        dnd("debug ID on logout method: " . $this->id);
 //        $user_agent = Session::uagent_no_version();
         //echo "test 1" . $this->id;
 //        dnd($this->_sessionName);

@@ -135,7 +135,7 @@ class DB {
 
         $fieldString = trim($fieldString);
         $fieldString = rtrim($fieldString, ',');
-        $sql = "UPDATE {$table} SET {$fieldString} WHERE 'id' = {$id}";
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
 
         if (!$this->query($sql, $values)->error()) {
             return true;
@@ -144,7 +144,7 @@ class DB {
     }
 
     public function delete($table, $id) {
-        $sql = "DELETE FROM {$table} WHERE 'id' = {$id}";
+        $sql = "DELETE FROM {$table} WHERE id = {$id}";
 
         if (!$this->query($sql)->error()) {
             return true;
