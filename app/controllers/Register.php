@@ -16,17 +16,15 @@ class Register extends Controller {
             $validation->check($_POST, [
                 'username' => [
                     'display' => "Username",
-                    'required' => true
+                    'required' => true,
                 ],
                 'password' => [
                     'display' => 'Password',
                     'required' => true,
-                    'min' => 6
                 ]
             ]);
             if ($validation->passed()) {
                 $user = $this->UsersModel->findByUsername($_POST['username']);
-                dnd(password_verify(Input::get('password'), $user->password));
                 if ($user && password_verify(Input::get('password'), $user->password)) {
                     $remember = isset($_POST['remember_me']) && Input::get('remember_me');
                     $user->login($remember);
