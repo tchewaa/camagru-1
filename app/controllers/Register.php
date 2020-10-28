@@ -26,8 +26,8 @@ class Register extends Controller {
             ]);
             if ($validation->passed()) {
                 $user = $this->UsersModel->findByUsername($_POST['username']);
+                dnd(password_verify(Input::get('password'), $user->password));
                 if ($user && password_verify(Input::get('password'), $user->password)) {
-                    dnd($user);
                     $remember = isset($_POST['remember_me']) && Input::get('remember_me');
                     $user->login($remember);
                     Router::redirect('');
