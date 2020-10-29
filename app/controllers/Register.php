@@ -86,7 +86,6 @@ class Register extends Controller {
                    'matches' => 'password'
                ],
             ]);
-
             if ($validation->passed()) {
                 $newUser = new Users();
                 $newUser->registerNewUser($_POST);

@@ -24,7 +24,7 @@
                     <input type="submit" value="Login" class="btn btn-large">
                 </div>
                 <div class="text-right">
-                    <a href="<?PROOT?>register/register" class="text-primary">Register</a>
+                    <a href="#" class="text-primary">Register</a>
                 </div>
             </form>
         </div>
