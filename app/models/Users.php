@@ -73,4 +73,10 @@ class Users extends Model {
         self::$currentLoggedInUser = null;
         return true;
     }
+
+    public function registerNewUser($params) {
+        $this->assign($params);
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $this->save();
+    }
 }

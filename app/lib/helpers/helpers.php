@@ -14,3 +14,13 @@ function sanitize($dirty) {
 function currentUser() {
     return Users::currentLoggedInUser();
 }
+
+
+//FIXME throws warning
+function posted_values($post) {
+    $clean_array = [];
+     foreach ($post as $key => $value) {
+         $clean_array[$key] = sanitize($value);
+     }
+     return $clean_array;
+}

@@ -89,7 +89,6 @@ class Validate {
         $html = '<ul class="bg-danger">';
         foreach ($this->_errors as $error) {
             if (is_array($error)) {
-                dnd($error);
                 $html .= '<li class="error">'.$error[0].'</li>';
                 // FIXME
                 $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").addClass("has-error");});</script>';
