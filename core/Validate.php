@@ -86,14 +86,16 @@ class Validate {
     }
 
     public function displayErrors() {
-        $html = '<ul class="bg-danger">';
+        $html = '<ul>';
         foreach ($this->_errors as $error) {
             if (is_array($error)) {
-                $html .= '<li class="error">'.$error[0].'</li>';
+                $html .= '<li class="text-danger">'.$error[0].'</li>';
                 // FIXME
                 $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").addClass("has-error");});</script>';
+//                $html .= '<script>const p = document.getElementById("'.$error[1].'"); p.closest("div").classList.add("has-error");</script>';
+
             } else {
-                $html = '<li class="error">'.$error.'</li>';
+                $html = '<li class="text-danger">'.$error.'</li>';
             }
           }
         $html .= '</ul>';

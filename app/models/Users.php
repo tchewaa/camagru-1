@@ -7,7 +7,7 @@ class Users extends Model {
     private $_cookieName;
     public static $currentLoggedInUser = null;
 
-    public function __construct($user = ''){
+    public function __construct($user = '') {
         $table = 'users';
         parent::__construct($table);
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
@@ -46,8 +46,7 @@ class Users extends Model {
             $user_agent = Session::uagent_no_version();
             Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
             $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-            $sql = "DELETE FORM user_sessions WHERE user_id = ? AND user_agent = ?";
-            $this->_db->query($sql, [$this->id, $user_agent]);
+            $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
             $this->_db->insert('user_sessions', $fields);
         }
     }
