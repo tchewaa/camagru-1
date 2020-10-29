@@ -24,12 +24,12 @@ class Validate {
                     switch ($rule) {
                         case 'min':
                             if (strlen($value) < $rule_value) {
-                                $this->addError(["{$display} must be a minimum of {$rule_value} characters."]);
+                                $this->addError(["{$display} must be a minimum of {$rule_value} characters.", $item]);
                             }
                             break;
                         case 'max':
                             if (strlen($value) > $rule_value) {
-                                $this->addError(["{$display} must be a maximum of {$rule_value} characters."]);
+                                $this->addError(["{$display} must be a maximum of {$rule_value} characters.", $item]);
                             }
                             break;
                         case 'matches':
