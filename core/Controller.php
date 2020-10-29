@@ -11,7 +11,7 @@
             $this->view = new View();
         }
 
-//        TODO debug
+        //TODO go through this method line by line
         protected function load_model($model) {
             if (class_exists($model)) {
                 $this->{$model.'Model'} = new $model(strtolower($model));

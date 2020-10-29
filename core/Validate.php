@@ -10,6 +10,7 @@ class Validate {
         $this->_db = DB::getInstance();
     }
 
+    //TODO go through this method line by line
     public function check($source, $items = []) {
         $this->_errors = [];
         foreach ($items as $item => $rules) {
@@ -85,12 +86,12 @@ class Validate {
         return $this->_passed;
     }
 
+    // FIXME remove the jQuery and use vanilla javascript
     public function displayErrors() {
         $html = '<ul>';
         foreach ($this->_errors as $error) {
             if (is_array($error)) {
                 $html .= '<li class="text-danger">'.$error[0].'</li>';
-                // FIXME
                 $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").addClass("has-error");});</script>';
 //                $html .= '<script>const p = document.getElementById("'.$error[1].'"); p.closest("div").classList.add("has-error");</script>';
 

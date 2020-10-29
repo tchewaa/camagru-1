@@ -18,7 +18,7 @@ class Model {
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
 
-    //TODO debug
+    //TODO go through this method line by line
     protected function _setTableColumns() {
         $columns = $this->get_columns();
         foreach ($columns as $column) {
@@ -28,12 +28,11 @@ class Model {
         }
     }
 
-    //TODO debug
+    //TODO go through this method line by line
     public function get_columns() {
         return $this->_db->get_columns($this->_table);
     }
 
-    //TODO debug
     public function find($params = []) {
         $results = [];
         $resultsQuery = $this->_db->find($this->_table, $params);
@@ -58,7 +57,7 @@ class Model {
         return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
     }
 
-    //TODO debug
+    //TODO go through this method line by line
     public function save() {
         $fields = [];
         foreach ($this->_columnNames as $column) {
@@ -82,7 +81,6 @@ class Model {
         return $this->_db->update($this->_table, $id, $fields);
     }
 
-    //TODO debug
     public function delete($id = '') {
         if ($id == '' && $this->id == '') return false;
         $id = ($id == '') ? $this->id : $id;
@@ -96,7 +94,7 @@ class Model {
         return $this->_db->query($sql, $bind);
     }
 
-    //TODO debug
+    //TODO go through this method line by line
     public function data() {
         $data = new stdClass();
         foreach ($this->_columnNames as $column) {
@@ -105,7 +103,7 @@ class Model {
         return $data;
     }
 
-    //TODO debug
+    //TODO go through this method line by line
     public function assign($params) {
         if (!empty($params)) {
             foreach ($params as $key => $val) {

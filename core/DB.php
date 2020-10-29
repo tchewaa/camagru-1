@@ -22,7 +22,7 @@ class DB {
         return self::$_instance;
     }
 
-    
+    //TODO go through this method line by line
     public function query($sql, $params = []) {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
@@ -45,6 +45,7 @@ class DB {
         return $this;
     }
 
+    //TODO go through this method line by line
     protected function _read($table, $params = []) {
         $conditionString = '';
         $bind = [];
