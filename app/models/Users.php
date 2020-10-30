@@ -15,9 +15,9 @@ class Users extends Model {
         $this->_softDelete = true;
         if ($user != '') {
             if (is_int($user)) {
-                $u = $this->_db->findFirst('users', ['conditions'=>'id = ?', 'bind'=>[$user]]);
+                $u = $this->_db->findFirst($table, ['conditions'=>'id = ?', 'bind'=>[$user]]);
             } else {
-                $u = $this->_db->findFirst('users', ['conditions'=>'username = ?', 'bind'=>[$user]]);
+                $u = $this->_db->findFirst($table, ['conditions'=>'username = ?', 'bind'=>[$user]]);
             }
             if ($u) {
                 foreach ($u as $key => $val) {
