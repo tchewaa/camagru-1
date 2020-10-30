@@ -46,6 +46,19 @@ footer a:hover {
     background-color: #f5c6cb;
 }
 
+.container-fluid {
+    /*min-height: cal();*/
+}
+
+.dropdown-item.active {
+    background-color: transparent;
+    color: white;
+}
+
+.dropdown-item {
+    color: white;
+}
+
 .error {
     color: white;
 }

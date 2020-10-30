@@ -7,6 +7,7 @@ define('DEFAULT_CONTROLLER', 'Home'); // default controller if is not specified 
 define ('DEFAULT_LAYOUT', 'default'); // if no layout is set in the controller use this layout
 
 define('SITE_TITLE', 'Camagru'); // this will be used if no site title is set
+define('MEBU_BRAND', 'Camagru');
 
 define('PROOT', '/camagru-2.0/'); //set this to '/' for a live server
 

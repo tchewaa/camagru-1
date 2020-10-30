@@ -6,7 +6,9 @@
     "Restricted" : ["*"]
   },
   "LoggedIn" : {
-    "denied" : ["login", "register"],
+    "denied" : {
+      "Register": ["login", "register"]
+    },
     "Register" : ["logout"],
     "Tools" : ["*"]
   }

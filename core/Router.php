@@ -81,4 +81,46 @@ class Router {
 
         return $grantAccess;
     }
+
+    public static function getMenu($menu) {
+        $menuArray = [];
+        $menuFile = file_get_contents(ROOT . DS . 'app' . DS . $menu . '.json');
+        $acl = json_decode($menuFile, true);
+        foreach ($acl as $key => $value) {
+            if (is_array($value)) {
+                $sub_menu = [];
+                foreach ($value as $k => $v) {
+                    if ($k == 'separator' && !empty($sub_menu)) {
+                        $sub_menu[$k] = '';
+                        continue;
+                    } else if ($finalVal = self::get_link($v)) {
+                        $sub_menu[$k] = $finalVal;
+                    }
+                }
+                if (!empty($sub_menu)) {
+                    $menuArray[$key] = $sub_menu;
+                }
+            } else {
+                if ($finalVal = self::get_link($value)) {
+                    $menuArray[$key] = $finalVal;
+                }
+            }
+        }
+        return $menuArray;
+    }
+
+    //FIXME not showing tools menu
+    private static function get_link($val) {
+        if (preg_match('/https?:\/\//', $val) == 1) {
+            return $val;
+        } else {
+            $urlArray = explode('/', $val);
+            $controller_name = ucwords($urlArray[0]);
+            $action_name = (isset($urlArray[1])) ? $urlArray[1] : '';
+            if (self::hasAccess($controller_name, $action_name)) {
+                return PROOT . $val;
+            }
+            return false;
+        }
+    }
 }
