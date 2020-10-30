@@ -23,7 +23,7 @@ class DB {
     }
 
     //TODO go through this method line by line
-    public function query($sql, $params = []) {
+    public function query($sql, $params = [], $class = false) {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
             $index = 1;
@@ -35,7 +35,11 @@ class DB {
             }
 
             if ($this->_query->execute()) {
-                $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                if ($class) {
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_CLASS, $class);
+                } else {
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                }
                 $this->_count = $this->_query->rowCount();
                 $this->_lastInsertID = $this->_pdo->lastInsertId();
             } else {
@@ -46,7 +50,7 @@ class DB {
     }
 
     //TODO go through this method line by line
-    protected function _read($table, $params = []) {
+    protected function _read($table, $params = [], $class) {
         $conditionString = '';
         $bind = [];
         $order = '';
@@ -85,7 +89,7 @@ class DB {
         }
 
         $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
-        if ($this->query($sql, $bind)) {
+        if ($this->query($sql, $bind, $class)) {
             if (!$this->count($this->_result)) return false;
             return true;
         }
@@ -94,15 +98,15 @@ class DB {
 
     }
 
-    public function find($table, $params = []) {
-        if ($this->_read($table, $params)) {
+    public function find($table, $params = [], $class = false) {
+        if ($this->_read($table, $params, $class)) {
             return $this->results();
         }
         return false;
     }
 
-    public function findFirst($table, $params = []) {
-        if ($this->_read($table, $params)) {
+    public function findFirst($table, $params = [], $class = false) {
+        if ($this->_read($table, $params, $class)) {
             return $this->first();
         }
         return false;
