@@ -1,8 +1,7 @@
 <?php
-    namespace App\Models;
-    use Core\Model;
-    use Core\Validators\RequiredValidator;
-    use \Exception;
+namespace App\Models;
+use Core\Model;
+use Core\Validators\RequiredValidator;
 
 class Login extends Model {
   public $username, $password, $remember_me;
@@ -12,12 +11,8 @@ class Login extends Model {
   }
 
   public function validator(){
-      try {
-          $this->runValidation(new RequiredValidator($this, ['field' => 'username', 'message' => 'Username is required.']));
-          $this->runValidation(new RequiredValidator($this,['field'=>'password','message'=>'Password is required.']));
-      } catch (Exception $e) {
-          echo "test " . $e->getMessage();
-      }
+    $this->runValidation(new RequiredValidator($this,['field'=>'username','msg'=>'Username is required.']));
+    $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
   }
 
   public function getRememberMeChecked(){

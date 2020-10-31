@@ -12,8 +12,8 @@ USE camagru;
 # ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `fname` varchar(150) NOT NULL,
-    `lname` varchar(150) NOT NULL,
+    `first_name` varchar(150) NOT NULL,
+    `last_name` varchar(150) NOT NULL,
     `username` varchar(150) NOT NULL,
     `email` varchar(150) NOT NULL,
     `password` varchar(150) NOT NULL,
