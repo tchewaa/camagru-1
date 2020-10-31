@@ -6,8 +6,10 @@
         <div class="col-6">
             <form class="form" action="<?=PROOT?>register/login" method="post">
                 <?= FormHelper::csrfInput()?>
-                <div class="bg-danger"><?=$this->displayErrors ?></div>
-                <!--                <h3 class="text-center">Login</h3>-->
+                <div class="alert" role="alert" id="message">
+                    <?=$this->displayErrors ?>
+                </div>
+<!--                                <h3 class="text-center">Login</h3>-->
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" class="form-control">

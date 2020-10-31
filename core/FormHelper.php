@@ -56,7 +56,7 @@ class FormHelper {
     public static function posted_values($post) {
         $clean_array = [];
         foreach ($post as $key => $value) {
-            $clean_array[$key] = sanitize($value);
+            $clean_array[$key] = self::sanitize($value);
         }
         return $clean_array;
     }
