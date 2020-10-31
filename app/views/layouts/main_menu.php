@@ -6,69 +6,48 @@
     $currentPage = Helpers::currentPage();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="<?=PROOT?>"><?=MEBU_BRAND?></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_menu" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<?=PROOT?>home"><?=MENU_BRAND?></a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="main_menu">
-        <ul class="navbar-nav mr-auto">
-            <?php foreach ($menu as $key => $val):
-                $active = ''?>
-                <?php if (is_array($val)): ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <?=$key?>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php foreach ($menu as $k => $v):
-                                $active = ($v == $currentPage) ? 'active' : ''; ?>
-                                <?php if ($k == 'separator'): ?>
-                                    <div class="dropdown-divider"></div>
-                                <?php else: ?>
-                                    <a class="dropdown-item <?=$active?>" href="<?=$v?>"><?=$k?> </a>
-                                <?php endif;?>
-                            <?php endforeach;?>
-                        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="main_menu">
+            <ul class="nav navbar-nav">
+                <?php foreach($menu as $key => $val):
+                    $active = ''; ?>
+                    <?php if(is_array($val)): ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$key?> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <?php foreach($val as $k => $v):
+                                $active = ($v == $currentPage)? 'active':''; ?>
+                                <?php if($k == 'separator'): ?>
+                                <li role="separator" class="divider"></li>
+                            <?php else: ?>
+                                <li><a class="<?=$active?>" href="<?=$v?>"><?=$k?></a></li>
+                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
                     </li>
                 <?php else:
-                    $active = ($val == $currentPage) ? 'active' : ''; ?>
-                    <a class="dropdown-item <?=$active?>" href="<?=$val?>"><?=$key?> </a>
+                    $active = ($val == $currentPage)? 'active':''; ?>
+                    <li><a class="<?=$active?>" href="<?=$val?>"><?=$key?></a></li>
                 <?php endif; ?>
-            <?php endforeach; ?>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            <?php if (Users::currentUser()): ?>
-                <li class="nav-item dropdown">
-                    <a href="#"> Y'ello <?= Users::currentUser()->fname ?></a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </div>
+                <?php endforeach; ?>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <?php if(Users::currentUser()): ?>
+                    <li><a href="#">Hello <?=Users::currentUser()->fname?></a></li>
+                <?php endif; ?>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
-
-
-
-<!--<nav class="navbar navbar-expand-lg navbar-dark">-->
-<!--    <a class="navbar-brand" href="#">Camagru</a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="main_menu">-->
-<!--        <ul class="navbar-nav mr-auto">-->
-<!--            <li class="nav-item active">-->
-<!--                <a class="nav-link" href="#">H ome <span class="sr-only">(current)</span></a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <span class="navbar-text">-->
-<!--            <ul class="navbar-nav mr-auto">-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Register</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Login</a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </span>-->
-<!--    </div>-->
-<!--</nav>-->

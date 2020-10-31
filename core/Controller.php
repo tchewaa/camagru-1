@@ -4,8 +4,10 @@
 
 
 class Controller extends Application {
-    protected $_controller, $_action;
+    protected $_controller;
+    protected $_action;
     public $view;
+    public $request;
 
     public function __construct($controller, $action) {
         $this->_controller = $controller;

@@ -1,6 +1,7 @@
 <?php
     namespace App\Controllers;
     use Core\Controller;
+    use Core\Helpers;
     use Core\Router;
     use App\Models\Users;
     use App\Models\Login;

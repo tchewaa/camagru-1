@@ -10,22 +10,12 @@ a, a:hover, a:focus, a:active {
 
 nav {
     background-color: darkslategrey;
-    border-bottom: 4px solid #f5c6cb;
+    border-bottom: 10px solid #f5c6cb;
+    color: white;
 }
 
 form {
     padding-top: 2em;
-}
-
-footer {
-    text-align: center;
-    background-color: darkslategrey;
-    color: white;
-    width: 100%;
-    padding: 14px 0;
-    border-top: 4px solid #f5c6cb;
-    bottom: 0;
-    position: fixed;
 }
 
 .btn {
@@ -40,15 +30,6 @@ footer {
 
 .container-fluid {
     /*min-height: cal();*/
-}
-
-.dropdown-item.active {
-    background-color: transparent;
-    color: white;
-}
-
-.dropdown-item {
-    color: white;
 }
 
 .error {
@@ -74,6 +55,17 @@ footer {
 .form-errors li {
     list-style: none;
     font-size: 16px;
+}
+
+footer {
+    text-align: center;
+    background-color: darkslategrey;
+    color: white;
+    width: 100%;
+    padding: 14px 0;
+    border-top: 4px solid #f5c6cb;
+    bottom: 0;
+    position: fixed;
 }
 
 footer a {

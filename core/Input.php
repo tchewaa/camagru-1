@@ -21,7 +21,7 @@ class Input {
         return strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
-     public static function get($input) {
+     public static function get($input = false) {
          if(!$input){
              $data = [];
              foreach($_REQUEST as $field => $value){

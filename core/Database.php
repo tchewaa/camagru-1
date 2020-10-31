@@ -4,7 +4,7 @@ use \PDO;
 use \PDOException;
 
 
-class DB {
+class Database {
     private static $_instance = null;
     private $_pdo, $_query, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
@@ -20,7 +20,7 @@ class DB {
 
     public static function getInstance() {
         if (!isset(self::$_instance)) {
-            self::$_instance = new DB();
+            self::$_instance = new Database();
         }
         return self::$_instance;
     }

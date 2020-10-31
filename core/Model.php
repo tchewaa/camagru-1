@@ -6,12 +6,12 @@ class Model {
      protected $_table;
      protected $_modelName;
      protected $_softDelete = false;
-     protected $_validates = false;
+     protected $_validates = true;
      protected $_validationErrors = [];
      public $id;
 
     public function __construct($table) {
-        $this->_db = DB::getInstance();
+        $this->_db = Database::getInstance();
         $this->_table = $table;
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
@@ -131,7 +131,7 @@ class Model {
         $key = $validator->field;
         if(!$validator->success){
             $this->_validates = false;
-            $this->_validationErrors[$key] = $validator->msg;
+            $this->_validationErrors[$key] = $validator->message;
         }
     }
 
