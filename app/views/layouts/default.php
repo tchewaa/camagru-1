@@ -20,6 +20,7 @@
 
     <?php include( 'main_menu.php'); ?>
     <div class="container-fluid" >
+        <?= Session::displayMessage()?>
         <?= $this->content('body'); ?>
     </div>
     <?php include('footer.php'); ?>
