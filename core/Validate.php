@@ -100,7 +100,7 @@ class Validate {
                 $html .= '<li>'.$error[0].'</li>';
                 $html .= '<script>
                             const p = document.getElementById("message"); 
-                            p.closest("div").classList.add("alert-danger");
+                            p.classList.add("alert-danger");
                           </script>';
             } else {
                 $html = '<li>'.$error.'</li>';
