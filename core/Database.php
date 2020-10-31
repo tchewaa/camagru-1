@@ -1,14 +1,18 @@
 <?php
+namespace Core;
+use \PDO;
+use \PDOException;
 
 
-class DB {
+class Database {
     private static $_instance = null;
     private $_pdo, $_query, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
     private function __construct() {
         try {
             $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-            //TODO automate creating database and tables
+            $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
        } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -16,12 +20,13 @@ class DB {
 
     public static function getInstance() {
         if (!isset(self::$_instance)) {
-            self::$_instance = new DB();
+            self::$_instance = new Database();
         }
         return self::$_instance;
     }
 
-    public function query($sql, $params = []) {
+    //TODO go through this method line by line
+    public function query($sql, $params = [], $class = false) {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
             $index = 1;
@@ -33,7 +38,11 @@ class DB {
             }
 
             if ($this->_query->execute()) {
-                $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                if ($class) {
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_CLASS, $class);
+                } else {
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                }
                 $this->_count = $this->_query->rowCount();
                 $this->_lastInsertID = $this->_pdo->lastInsertId();
             } else {
@@ -43,7 +52,8 @@ class DB {
         return $this;
     }
 
-    protected function _read($table, $params = []) {
+    //TODO go through this method line by line
+    protected function _read($table, $params = [], $class) {
         $conditionString = '';
         $bind = [];
         $order = '';
@@ -82,7 +92,7 @@ class DB {
         }
 
         $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
-        if ($this->query($sql, $bind)) {
+        if ($this->query($sql, $bind, $class)) {
             if (!$this->count($this->_result)) return false;
             return true;
         }
@@ -91,15 +101,15 @@ class DB {
 
     }
 
-    public function find($table, $params = []) {
-        if ($this->_read($table, $params)) {
+    public function find($table, $params = [], $class = false) {
+        if ($this->_read($table, $params, $class)) {
             return $this->results();
         }
         return false;
     }
 
-    public function findFirst($table, $params = []) {
-        if ($this->_read($table, $params)) {
+    public function findFirst($table, $params = [], $class = false) {
+        if ($this->_read($table, $params, $class)) {
             return $this->first();
         }
         return false;
@@ -127,16 +137,13 @@ class DB {
     public function update($table, $id, $fields = []) {
         $fieldString = '';
         $values = [];
-
         foreach ($fields as $field => $value) {
             $fieldString .= ' ' . $field . ' = ?,';
             $values[] = $value;
         }
-
         $fieldString = trim($fieldString);
         $fieldString = rtrim($fieldString, ',');
-        $sql = "UPDATE {$table} SET {$fieldString} WHERE 'id' = {$id}";
-
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
         if (!$this->query($sql, $values)->error()) {
             return true;
         }
@@ -144,8 +151,7 @@ class DB {
     }
 
     public function delete($table, $id) {
-        $sql = "DELETE FROM {$table} WHERE 'id' = {$id}";
-
+        $sql = "DELETE FROM {$table} WHERE id = {$id}";
         if (!$this->query($sql)->error()) {
             return true;
         }
