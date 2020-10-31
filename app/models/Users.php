@@ -17,8 +17,8 @@ class Users extends Model {
     public $username;
     public $email;
     public $password;
-    public $fname;
-    public $lname;
+    public $first_name;
+    public $last_name;
     public $acl;
     public $deleted = 0;
 

@@ -9,8 +9,8 @@ use Core\FormHelper;
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
         <?= FormHelper::displayErrors($this->displayErrors) ?>
-        <?= FormHelper::inputBlock('text','First Name','fname',$this->newUser->fname,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('text','Last Name','lname',$this->newUser->lname,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','First Name','first_name',$this->newUser->first_name,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','Last Name','last_name',$this->newUser->last_name,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('text','Email','email',$this->newUser->email,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('text','Username','username',$this->newUser->username,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Password','password',$this->newUser->password,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
