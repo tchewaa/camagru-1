@@ -15,7 +15,6 @@ class RegisterController extends Controller {
     }
 
     public function loginAction() {
-        $validation = new Validate();
         $loginModel = new Login();
         if($this->request->isPost()) {
             // form validation
