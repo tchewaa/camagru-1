@@ -16,7 +16,7 @@ class Login extends Model {
           $this->runValidation(new RequiredValidator($this, ['field' => 'username', 'message' => 'Username is required.']));
           $this->runValidation(new RequiredValidator($this,['field'=>'password','message'=>'Password is required.']));
       } catch (Exception $e) {
-          echo $e->getMessage();
+          echo "test " . $e->getMessage();
       }
   }
 

@@ -11,6 +11,7 @@
     use Core\Validators\EmailValidator;
     use Core\Validators\MatchesValidator;
     use Core\Validators\UniqueValidator;
+    use \Exception;
 
 class Users extends Model {
     public $id;
@@ -50,8 +51,8 @@ class Users extends Model {
 
     public function validator(){
         try {
-            $this->runValidation(new RequiredValidator($this, ['field' => 'fname', 'message' => 'First Name is required.']));
-            $this->runValidation(new RequiredValidator($this,['field'=>'lname','message'=>'Last Name is required.']));
+            $this->runValidation(new RequiredValidator($this, ['field' => 'first_name', 'message' => 'First Name is required.']));
+            $this->runValidation(new RequiredValidator($this,['field'=>'last_name','message'=>'Last Name is required.']));
             $this->runValidation(new RequiredValidator($this,['field'=>'email','message'=>'Email is required.']));
             $this->runValidation(new EmailValidator($this, ['field'=>'email','message'=>'You must provide a valid email address']));
             $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'message'=>'Email must be less than 150 characters.']));
@@ -63,8 +64,8 @@ class Users extends Model {
             if($this->isNew()){
                 $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>"Your passwords do not match"]));
             }
-        } catch (\Exception $e) {
-            echo $e->getMessage();
+        } catch (Exception $e) {
+            echo "test " . $e->getMessage();
         }
     }
 

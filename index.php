@@ -3,7 +3,6 @@
     use Core\Cookie;
     use Core\Router;
     use App\Models\Users;
-
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT', dirname(__FILE__));
 
