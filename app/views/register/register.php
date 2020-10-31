@@ -1,45 +1,22 @@
+<?php
+use Core\FormHelper;
+?>
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <form class="form" action="<?=PROOT?>register/register" method="post">
-                <?= FormHelper::csrfInput()?>
-                <div class="alert" role="alert" id="message">
-                    <?=$this->displayErrors ?>
-                </div>
-                <h3 class="text-center">Register</h3>
-                <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="fname" class="form-control" value="<?=$this->post['fname']?>">
-                </div>
-                <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lname" class="form-control" value="<?=$this->post['lname']?>">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" value="<?=$this->post['email']?>">
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" class="form-control" value="<?=$this->post['username']?>">
-                </div>
-                <div class="form-group">
-                    <label for="password">Choose a Password</label>
-                    <input type="password" id="password" name="password" class="form-control" value="<?=$this->post['password']?>">
-                </div>
-                <div class="form-group">
-                    <label for="confirm">Confirm Password</label>
-                    <input type="password" id="confirm" name="confirm" class="form-control" value="<?=$this->post['confirm']?>">
-                </div>
-                <div class="pull-right">
-                    <input type="submit" value="Register" class="btn btn-large">
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="col-md-6 col-md-offset-3 well">
+    <h3 class="text-center">Register Here!</h3><hr>
+    <form class="form" action="" method="post">
+        <?= FormHelper::csrfInput() ?>
+        <?= FormHelper::displayErrors($this->displayErrors) ?>
+        <?= FormHelper::inputBlock('text','First Name','fname',$this->newUser->fname,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','Last Name','lname',$this->newUser->lname,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','Email','email',$this->newUser->email,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','Username','username',$this->newUser->username,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('password','Password','password',$this->newUser->password,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::submitBlock('Register',['class'=>'btn btn-primary btn-large'],['class'=>'text-right']) ?>
+    </form>
 </div>
 <?php $this->end(); ?>
 

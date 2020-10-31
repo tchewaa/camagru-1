@@ -1,5 +1,6 @@
 <?php
-
+namespace Core;
+use Core\Session;
 
 class FormHelper {
     public static function inputBlock ($type, $lable, $name, $value = '', $inputAttributes = [], $divAttributes = []) {
@@ -35,6 +36,16 @@ class FormHelper {
         return $string;
     }
 
+    public static function checkboxBlock($label,$name,$checked=false,$inputAttrs=[],$divAttrs=[]){
+        $divString = self::stringifyAttributes($divAttrs);
+        $inputString = self::stringifyAttributes($inputAttrs);
+        $checkString = ($checked)? ' checked="checked"' : '';
+        $html = '<div'.$divString.'>';
+        $html .= '<label for="'.$name.'">'.$label.' <input type="checkbox" id="'.$name.'" name="'.$name.'" value="on"'.$checkString.$inputString.'></label>';
+        $html .= '</div>';
+        return $html;
+    }
+
     public static function generateToken() {
         $token = base64_encode(openssl_random_pseudo_bytes(32));
         Session::set('csrf_token', $token);
@@ -59,5 +70,16 @@ class FormHelper {
             $clean_array[$key] = self::sanitize($value);
         }
         return $clean_array;
+    }
+
+    public static function displayErrors($errors) {
+        $hasErrors = (!empty($errors))? ' has-errors' : '';
+        $html = '<div class="form-errors"><ul class="bg-danger'.$hasErrors.'">';
+        foreach($errors as $field => $error) {
+            $html .= '<li class="text-danger">'.$error.'</li>';
+            $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$field.'").parent().closest("div").addClass("has-error");});</script>';
+        }
+        $html .= '</ul></div>';
+        return $html;
     }
 }

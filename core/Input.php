@@ -1,16 +1,39 @@
 <?php
-
+namespace Core;
+use Core\FormHelper;
+use Core\Router;
 
 class Input {
- public static function sanitize($dirty) {
-     return htmlentities($dirty, ENT_QUOTES, "UTF-8");
- }
 
- public static function get($input) {
-     if (isset($_POST[$input])) {
-         return FormHelper::sanitize($_POST[$input]);
-     } elseif (isset($_GET[$input])) {
-         return FormHelper::sanitize($_GET[$input]);
+    public function isPost(){
+        return $this->getRequestMethod() === 'POST';
+    }
+
+    public function isPut(){
+        return $this->getRequestMethod() === 'PUT';
+    }
+
+    public function isGet(){
+        return $this->getRequestMethod() === 'GET';
+    }
+
+    public function getRequestMethod(){
+        return strtoupper($_SERVER['REQUEST_METHOD']);
+    }
+
+     public static function get($input) {
+         if(!$input){
+             $data = [];
+             foreach($_REQUEST as $field => $value){
+                 $data[$field] = FormHelper::sanitize($value);
+             }
+             return $data;
+         }
+         return FormHelper::sanitize($_REQUEST[$input]);
      }
- }
+
+    public function csrfCheck(){
+        if(!FormHelper::checkToken($this->get('csrf_token'))) Router::redirect('restricted/badToken');
+        return true;
+    }
 }

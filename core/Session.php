@@ -1,19 +1,14 @@
 <?php
+namespace Core;
 
 
-/**
- * Class Session
- */
 class Session {
     public static function exists($name) {
         return isset($_SESSION[$name]);
     }
 
     public static function get($name) {
-        if (isset($_SESSION[$name])) {
-            return $_SESSION[$name];
-        }
-        return null;
+        return $_SESSION[$name];
     }
 
     public static function set($name, $value) {
@@ -36,8 +31,8 @@ class Session {
     /**
      * Adds a session alert message
      * @method addMessage
-     * @param string $type can be info, success, warning or danger
-     * @param $message the message you want to display in the alert
+     * @param  string $type can be info, success, warning or danger
+     * @param  string $message  the message you want to display in the alert
      */
     public static function addMessage($type, $message) {
         $sessionName = 'alert-'. $type;

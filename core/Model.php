@@ -1,14 +1,14 @@
-
 <?php
-
+namespace Core;
 
 class Model {
- protected $_db;
- protected $_table;
- protected $_modelName;
- protected $_softDelete = false;
- public $id;
-
+     protected $_db;
+     protected $_table;
+     protected $_modelName;
+     protected $_softDelete = false;
+     protected $_validates = false;
+     protected $_validationErrors = [];
+     public $id;
 
     public function __construct($table) {
         $this->_db = DB::getInstance();
@@ -37,14 +37,14 @@ class Model {
     }
 
     public function find($params = []) {
-//        $params = $this->_softDeleteParams($params); //fixme not working
+        $params = $this->_softDeleteParams($params); //fixme not working
         $resultsQuery = $this->_db->find($this->_table, $params, get_class($this));
         if (!$resultsQuery) return [];
         return $resultsQuery;
     }
 
     public function findFirst($params = []) {
-//        $params = $this->_softDeleteParams($params); //fixme not working
+        $params = $this->_softDeleteParams($params); //fixme not working
         $resultQuery = $this->_db->findFirst($this->_table, $params, get_class($this));
         return $resultQuery;
     }
@@ -55,17 +55,27 @@ class Model {
 
     //TODO go through this method line by line
     public function save() {
-        $fields = Helpers::getObjectProperties($this);
-        //determine whether to update or insert
-        if (property_exists($this, 'id') && $this->id != '') {
-            return $this->update($this->id, $fields);
-        } else {
-            return $this->insert($fields);
+        $this->validator();
+        if($this->_validates){
+            $this->beforeSave();
+            $fields = Helpers::getObjectProperties($this);
+            // determine whether to update or insert
+            if(property_exists($this, 'id') && $this->id != '') {
+                $save = $this->update($this->id, $fields);
+                $this->afterSave();
+                return $save;
+            } else {
+                $save = $this->insert($fields);
+                $this->afterSave();
+                return $save;
+            }
         }
+        return false;
     }
 
     public function insert($fields) {
-        if (empty($fields)) return false;
+        if(empty($fields)) return false;
+        if(array_key_exists('id', $fields)) unset($fields['id']);
         return $this->_db->insert($this->_table, $fields);
     }
 
@@ -115,6 +125,33 @@ class Model {
         }
     }
 
+    public function validator(){}
 
+    public function runValidation($validator){
+        $key = $validator->field;
+        if(!$validator->success){
+            $this->_validates = false;
+            $this->_validationErrors[$key] = $validator->msg;
+        }
+    }
 
+    public function getErrorMessages(){
+        return $this->_validationErrors;
+    }
+
+    public function validationPassed(){
+        return $this->_validates;
+    }
+
+    public function addErrorMessage($field,$msg){
+        $this->_validates = false;
+        $this->_validationErrors[$field] = $msg;
+    }
+
+    public function beforeSave(){}
+    public function afterSave(){}
+
+    public function isNew(){
+        return (property_exists($this,'id') && !empty($this->id))? false : true;
+    }
 }

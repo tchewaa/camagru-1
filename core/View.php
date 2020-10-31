@@ -1,5 +1,5 @@
 <?php
-
+namespace Core;
 
 class View {
     protected $_head, $_body, $_siteTitle = SITE_TITLE, $_outputBuffer, $_layout = DEFAULT_LAYOUT;
@@ -53,5 +53,9 @@ class View {
 
     public function setLayout($path) {
         $this->_layout = $path;
+    }
+
+    public function insert($path){
+        include ROOT . DS . 'app' . DS . 'views' . DS . $path . '.php';
     }
 }

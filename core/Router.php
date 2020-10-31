@@ -1,5 +1,7 @@
 <?php
-
+    namespace Core;
+    use Core\Session;
+    use App\Models\Users;
 
 class Router {
 
@@ -25,7 +27,7 @@ class Router {
 
         //params
         $queryParams = $url;
-
+        $controller = 'App\Controllers\\' . $controller;
         $dispatch = new $controller($controller_name, $action);
 
         if (method_exists($controller, $action)) {
@@ -110,7 +112,6 @@ class Router {
         return $menuArray;
     }
 
-    //FIXME not showing tools menu
     private static function get_link($val) {
         if (preg_match('/https?:\/\//', $val) == 1) {
             return $val;
