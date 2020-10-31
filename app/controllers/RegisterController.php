@@ -22,7 +22,7 @@ class RegisterController extends Controller {
                     'display' => 'Password',
                     'required' => true,
                 ]
-            ]);
+            ], true);
             if ($validation->passed()) {
                 $user = $this->UsersModel->findByUsername($_POST['username']);
                 if ($user && password_verify(Input::get('password'), $user->password)) {
@@ -40,8 +40,8 @@ class RegisterController extends Controller {
     }
 
     public function logoutAction() {
-        if (currentUser()) {
-            currentUser()->logout();
+        if (Users::currentUser()) {
+            Users::currentUser()->logout();
         }
         Router::redirect('register/login');
     }
@@ -50,7 +50,7 @@ class RegisterController extends Controller {
         $validation = new Validate();
         $posted_values = ['fname'=> '', 'lname'=> '', 'username' => '', 'email' => '', 'password' => '', 'confirm' => ''];
         if ($_POST) {
-            $posted_values = posted_values($_POST);
+            $posted_values = FormHelper::posted_values($_POST);
             $validation->check($_POST, [
                'fname' => [
                    'display' => 'First Name',
@@ -85,11 +85,10 @@ class RegisterController extends Controller {
                    'required' => true,
                    'matches' => 'password'
                ],
-            ]);
+            ], true);
             if ($validation->passed()) {
                 $newUser = new Users();
                 $newUser->registerNewUser($_POST);
-//                dnd($newUser);
                 Router::redirect('register/login');
 
             }

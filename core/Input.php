@@ -8,9 +8,9 @@ class Input {
 
  public static function get($input) {
      if (isset($_POST[$input])) {
-         return self::sanitize($_POST[$input]);
+         return FormHelper::sanitize($_POST[$input]);
      } elseif (isset($_GET[$input])) {
-         return self::sanitize($_GET[$input]);
+         return FormHelper::sanitize($_GET[$input]);
      }
  }
 }

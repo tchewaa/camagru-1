@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <form class="form" action="<?=PROOT?>register/login" method="post">
+                <?= FormHelper::csrfInput()?>
                 <div class="bg-danger"><?=$this->displayErrors ?></div>
                 <!--                <h3 class="text-center">Login</h3>-->
                 <div class="form-group">

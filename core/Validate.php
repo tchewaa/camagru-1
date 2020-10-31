@@ -11,13 +11,19 @@ class Validate {
     }
 
     //TODO go through this method line by line
-    public function check($source, $items = []) {
+    public function check($source, $items = [], $csrfCheck = false) {
         $this->_errors = [];
+        if ($csrfCheck) {
+            $csrfPass = FormHelper::checkToken($source['csrf_token']);
+            if (!isset($source['csrf_token']) || !$csrfPass) {
+                $this->addError(['Something has gone wrong','csrf_token']);
+            }
+        }
         foreach ($items as $item => $rules) {
-            $item = Input::sanitize($item);
+            $item = FormHelper::sanitize($item);
             $display = $rules['display'];
             foreach ($rules as $rule => $rule_value) {
-                $value = Input::sanitize(trim($source[$item]));
+                $value = FormHelper::sanitize(trim($source[$item]));
 
                 if ($rule === 'required' && empty($value)) {
                     $this->addError(["{$display} is required", $item]);
