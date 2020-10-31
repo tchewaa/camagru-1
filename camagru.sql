@@ -12,12 +12,12 @@ USE camagru;
 # ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `first_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `last_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `username` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `password` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `acl` text COLLATE utf8mb4_unicode_ci,
+    `first_name` varchar(150) NOT NULL,
+    `last_name` varchar(150) NOT NULL,
+    `username` varchar(150) NOT NULL,
+    `email` varchar(150) NOT NULL,
+    `password` varchar(150) NOT NULL,
+    `acl` text(255),
     `confirmed` tinyint(1) DEFAULT '0',
     `deleted` tinyint(4) DEFAULT '0',
     `notifications` tinyint(1) DEFAULT '1',
