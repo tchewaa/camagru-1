@@ -1,3 +1,6 @@
+<?php
+use Core\Session;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +16,17 @@
     <!-- TODO delete this, this the PDF states that no javascript framework are allowed   -->
     <script src="<?=PROOT?>js/jQuery-2.2.4.min.js"></script>
     <script src="<?=PROOT?>js/custom.js"></script>
-<!--    <script src="--><?//=PROOT?><!--js/bootstrap.min.js"></script>-->
+    <script src="<?=PROOT?>js/bootstrap.min.js"></script>
     <?= $this->content('head'); ?>
 </head>
 <body>
-    <?php include(ROOT . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'header.html'); ?>
-    <?= $this->content('body'); ?>
-    <?php include(ROOT . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'footer.html'); ?>
+
+    <?php include( 'main_menu.php'); ?>
+    <div class="container-fluid" style="min-height:cal(100% - 125px);" >
+        <?= Session::displayMessage()?>
+        <?= $this->content('body'); ?>
+    </div>
+    <?php include('footer.php'); ?>
 
 </body>
 </html>

@@ -10,11 +10,51 @@ a, a:hover, a:focus, a:active {
 
 nav {
     background-color: darkslategrey;
-    border-bottom: 4px solid #f5c6cb;
+    border-bottom: 10px solid #f5c6cb;
+    color: white;
 }
 
 form {
     padding-top: 2em;
+}
+
+.btn {
+    color: white;
+    background-color: darkslategrey;
+}
+
+.btn:hover {
+    color: gray;
+    background-color: #f5c6cb;
+}
+
+.container-fluid {
+    /*min-height: cal();*/
+}
+
+.error {
+    color: white;
+}
+
+.red {
+    color: red;
+}
+
+.form-errors{
+    border-radius: 8px;
+    margin: 10px 25px 45px 25px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+
+.form-errors ul.has-errors{
+    padding:10px 15px;
+    border:1px solid #a94442;
+    border-radius:8px;
+}
+
+.form-errors li {
+    list-style: none;
+    font-size: 16px;
 }
 
 footer {
@@ -33,19 +73,5 @@ footer a {
 }
 
 footer a:hover {
-    color: white;
-}
-
-.btn {
-    color: white;
-    background-color: darkslategrey;
-}
-
-.btn:hover {
-    color: gray;
-    background-color: #f5c6cb;
-}
-
-.error {
     color: white;
 }
