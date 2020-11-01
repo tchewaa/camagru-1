@@ -6,7 +6,7 @@ use Core\FormHelper;
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
     <h3 class="text-center">Log In</h3>
-    <form class="form" action="<?=PROOT?>register/login" method="post">
+    <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
         <?= FormHelper::displayErrors($this->displayErrors) ?>
         <?= FormHelper::inputBlock('text','Username','username',$this->login->username,['class'=>'form-control'],['class'=>'form-group']) ?>
@@ -14,7 +14,7 @@ use Core\FormHelper;
         <?= FormHelper::checkboxBlock('Remember Me','remember_me',$this->login->getRememberMeChecked(),[],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Login', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
         <div class="text-right">
-            <a href="<?=PROOT?>register/register" class="text-primary">Register</a>
+            <a href="<?=PROOT?>register" class="text-primary">Register</a>
         </div>
     </form>
 </div>

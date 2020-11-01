@@ -1,14 +1,16 @@
 {
   "Guest" : {
     "denied" : {},
-    "Home" : ["*"],
-    "Register": ["login", "register", "verify"],
+    "Home" : ["index"],
+    "Register": ["index", "verify", "resendToken"],
+    "Login": ["index"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {
     "denied" : {
-      "Register": ["login", "register"]
+      "Register": ["index"],
+      "Login": ["index"]
     },
-    "Register" : ["logout"]
+    "Home" : ["logout"]
   }
 }

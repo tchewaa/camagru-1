@@ -30,8 +30,12 @@ class EmailVerification extends Model {
         $this->user_id = $user->id;
         $this->confirmation_token = md5($user->first_name . $user->email . Helpers::generateRandomString());
         $this->save();
-        $message = Helpers::formatEmailMessage($this->confirmation_token, $user);
+        $message = Helpers::formatConfirmationMessage($this->confirmation_token, $user);
         mail($fields->email, $subject, $message, $headers);
+    }
+
+    public function resendVerificationToken($email, $token) {
+        //TODO send token to user
     }
 
 }

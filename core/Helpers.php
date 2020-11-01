@@ -21,7 +21,7 @@ class Helpers {
         return get_object_vars($obj);
     }
 
-    public static function formatEmailMessage($token, $user) {
+    public static function formatConfirmationMessage($token, $user) {
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "

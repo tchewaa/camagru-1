@@ -3,7 +3,7 @@
     text-align: center;
 }
 
-a, a:hover, a:focus, a:active {
+nav a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }

@@ -15,58 +15,17 @@ class RegisterController extends Controller {
     $this->view->setLayout('default');
   }
 
-  public function testSendMail() {
-      $to_email = "phetomalope@gmail.com";
-      $subject = "Simple EmailVerification Test via PHP";
-      $body = "Hi, This is test email send by PHP Script";
-      $headers = "From: pmalope@student.wethinkcode.co.za";
 
-      if (mail($to_email, $subject, $body, $headers)) {
-          echo "EmailVerification successfully sent to $to_email...";
-      } else {
-          echo "EmailVerification sending failed...";
-      }
-  }
 
-  public function loginAction() {
-    $loginModel = new Login();
-    if($this->request->isPost()) {
-      // form validation
-      $this->request->csrfCheck();
-      $loginModel->assign($this->request->get());
-      $loginModel->validator();
-      if($loginModel->validationPassed()){
-        $user = $this->UsersModel->findByUsername($_POST['username']);
-        if($user && password_verify($this->request->get('password'), $user->password)) {
-          $remember = $loginModel->getRememberMeChecked();
-          $user->login($remember);
-          Router::redirect('');
-        }  else {
-          $loginModel->addErrorMessage('username','There is an error with your username or password');
-        }
-      }
-    }
-    $this->view->login = $loginModel;
-    $this->view->displayErrors = $loginModel->getErrorMessages();
-    $this->view->render('register/login');
-  }
-
-  public function logoutAction() {
-    if(Users::currentUser()) {
-      Users::currentUser()->logout();
-    }
-    Router::redirect('register/login');
-  }
-
-  public function registerAction() {
+  public function indexAction() {
     $newUser = new Users();
     if($this->request->isPost()) {
       $this->request->csrfCheck();
       $newUser->assign($this->request->get());
       $newUser->setConfirm($this->request->get('confirm'));
       if($newUser->save()){
-        $this->_sendConfirmation($newUser);
-        Router::redirect('register/login');
+//        $this->_sendConfirmation($newUser);
+        Router::redirect('login');
       }
     }
     $this->view->newUser = $newUser;
@@ -91,8 +50,35 @@ class RegisterController extends Controller {
       }
   }
 
+  public function resendTokenAction() {
+//      Router::redirect('register/login');
+      if ($this->request->isPost()) {
+          $user = new Users();
+          $user->assign($this->request->get());
+          $user = $user->findFirst([
+              'conditions' => 'email = ?',
+              'bind' => [$user->email]
+          ]);
+          $this->_resendToken($user);
+      }
+      $this->view->render('register/resendToken');
+  }
+
   protected function _sendConfirmation($user) {
-      $verifyEmail = new EmailVerification();
-      $verifyEmail->sendVerificationToken($user);
+      $emailVerification = new EmailVerification();
+      $emailVerification->sendVerificationToken($user);
+  }
+
+  protected function _resendToken($user) {
+      if ($user) {
+          $verification = new EmailVerification();
+          $verification = $verification->findFirst([
+              'conditions' => 'user_id = ?',
+              'bind' => [$user->id]
+          ]);
+          if ($verification) {
+              $verification->resendVerificationToken($user->email, $verification->confirmation_token);
+          }
+      }
   }
 }
