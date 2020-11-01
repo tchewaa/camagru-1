@@ -39,4 +39,12 @@ class LoginController extends Controller {
         $this->view->displayErrors = $loginModel->getErrorMessages();
         $this->view->render('login/login');
     }
+
+    public function forgotPasswordAction() {
+        $this->view->render('login/forgotPassword');
+    }
+
+    public function updatePasswordAction() {
+        $this->view->render('login/updatePassword');
+    }
 }

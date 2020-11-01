@@ -15,8 +15,10 @@ use Core\FormHelper;
         <?= FormHelper::inputBlock('text','Username','username',$this->newUser->username,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Password','password',$this->newUser->password,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-        <a href="<?=PROOT?>register/resendToken">Resend Verification</a>
-        <?= FormHelper::submitBlock('Register',['class'=>'btn btn-primary btn-large'],['class'=>'text-right']) ?>
+        <?= FormHelper::submitBlock('Register',['class'=>'btn btn-primary btn-large'],['class'=>'form-group']) ?>
+        <div class="text-right">
+            <a href="<?=PROOT?>register/resendToken">Resend Verification</a>
+        </div>
     </form>
 </div>
 <?php $this->end(); ?>

@@ -14,7 +14,7 @@ use Core\FormHelper;
         <?= FormHelper::checkboxBlock('Remember Me','remember_me',$this->login->getRememberMeChecked(),[],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Login', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
         <div class="text-right">
-            <a href="<?=PROOT?>register" class="text-primary">Register</a>
+            <a href="<?=PROOT?>login/forgotPassword" class="text-primary">Forgot password?</a>
         </div>
     </form>
 </div>
