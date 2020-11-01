@@ -3,14 +3,15 @@
     "denied" : {},
     "Home" : ["index"],
     "Register": ["index", "verify", "resendToken"],
-    "Login": ["index", "forgotPassword", "updatePassword"],
+    "Login": ["index", "forgotPassword", "resetPassword"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {
     "denied" : {
-      "Register": ["index"],
-      "Login": ["index"]
+      "Register": ["index", "verify", "resendToken"],
+      "Login": ["index", "forgotPassword", "resetPassword"]
     },
-    "Home" : ["logout"]
+    "Home" : ["logout"],
+    "Profile" : ["updatePassword", "updateEmail", "updateDetails"]
   }
 }

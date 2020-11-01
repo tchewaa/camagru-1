@@ -14,9 +14,7 @@ class RegisterController extends Controller {
     $this->load_model('Users');
     $this->view->setLayout('default');
   }
-
-
-
+  
   public function indexAction() {
     $newUser = new Users();
     if($this->request->isPost()) {
@@ -33,19 +31,24 @@ class RegisterController extends Controller {
     $this->view->render('register/register');
   }
 
-  public function verifyAction($username, $token) {
-      $user = new Users($username);
-      $emailVerification = new EmailVerification();
-      $emailVerification = $emailVerification->findFirst([
-          'conditions' => 'user_id = ?',
-          'bind' => [$user->id]
-      ]);
-      if ($emailVerification != null) {
-          $emailVerification->confirmed = 1;
-          $emailVerification->save();
-          Router::redirect('login/login');
+  public function verifyAction($username = "", $token = "") {
+      if ($username && $token) {
+          $user = new Users($username);
+          $emailVerification = new EmailVerification();
+          $emailVerification = $emailVerification->findFirst([
+              'conditions' => 'user_id = ?',
+              'bind' => [$user->id]
+          ]);
+          if ($emailVerification != null) {
+              $emailVerification->confirmed = 1;
+              $emailVerification->save();
+              Router::redirect('login/login');
+          } else {
+              //TODO redirect and display the error
+              echo "Something went wrong";
+          }
       } else {
-          //TODO display the error
+          //TODO redirect and display the error
           echo "Something went wrong";
       }
   }

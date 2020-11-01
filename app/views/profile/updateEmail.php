@@ -5,12 +5,11 @@ use Core\FormHelper;
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
-    <h3 class="text-center">Update Password</h3>
+    <h3 class="text-center">Update Email</h3>
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
-<!--        FormHelper::displayErrors($this->displayErrors)-->
-        <?= FormHelper::inputBlock('password','Password','password',"",['class'=>'form-control'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('password','Confirm Password','confirm_password',"",['class'=>'form-control'],['class'=>'form-group']) ?>
+        <!--        FormHelper::displayErrors($this->displayErrors)-->
+        <?= FormHelper::inputBlock('email','Email','email',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Update', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
     </form>
 </div>

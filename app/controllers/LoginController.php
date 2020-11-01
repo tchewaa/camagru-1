@@ -44,7 +44,7 @@ class LoginController extends Controller {
         $this->view->render('login/forgotPassword');
     }
 
-    public function updatePasswordAction() {
-        $this->view->render('login/updatePassword');
+    public function resetPasswordAction() {
+        $this->view->render('login/resetPassword');
     }
 }

@@ -15,15 +15,15 @@ class HomeController extends Controller {
       $this->view->render('home/home');
     }
 
-    public function testAjaxAction(){
-      $resp = ['success'=>true,'data'=>['id'=>23,'name'=>'Phetho','favorite_food'=>'bread']];
-      $this->jsonResponse($resp);
-    }
-
     public function logoutAction() {
       if(Users::currentUser()) {
           Users::currentUser()->logout();
       }
       Router::redirect('login');
+    }
+
+    public function testAjaxAction(){
+        $resp = ['success'=>true,'data'=>['id'=>23,'name'=>'Phetho','favorite_food'=>'bread']];
+        $this->jsonResponse($resp);
     }
 }
