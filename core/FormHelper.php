@@ -72,14 +72,21 @@ class FormHelper {
         return $clean_ary;
     }
 
-    public static function displayErrors($errors) {
-        $hasErrors = (!empty($errors))? ' has-errors' : '';
-        $html = '<div class="form-errors"><ul class="bg-danger'.$hasErrors.'">';
-        foreach($errors as $field => $error) {
-            $html .= '<li class="text-danger">'.$error.'</li>';
-            $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$field.'").parent().closest("div").addClass("has-error");});</script>';
+    public static function displayValidationMessage($errors) {
+        $html = "";
+        if (isset($errors['success'])) {
+            Helpers::dnd("testing");
+
+        } else if (!empty($errors)) {
+            $html .= '<div class="form-errors"><ul class="bg-danger has-errors">';
+            foreach($errors as $field => $error) {
+                $html .= '<li class="text-danger">'.$error.'</li>';
+                $html .= '<script>var p = document.getElementById("'.$field.'"); p.closest("div").classList.add("has-error");</script>';
+
+            }
+            $html .= '</ul></div>';
+            return $html;
         }
-        $html .= '</ul></div>';
         return $html;
     }
 }

@@ -36,7 +36,7 @@ class LoginController extends Controller {
             }
         }
         $this->view->login = $loginModel;
-        $this->view->displayErrors = $loginModel->getErrorMessages();
+        $this->view->validationMessages = $loginModel->getErrorMessages();
         $this->view->render('login/login');
     }
 

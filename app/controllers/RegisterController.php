@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-use App\Models\EmailVerification;
+use App\Models\Verification;
 use Core\Controller;
 use Core\Helpers;
 use Core\Router;
@@ -14,8 +14,12 @@ class RegisterController extends Controller {
     $this->load_model('Users');
     $this->view->setLayout('default');
   }
-  
+
   public function indexAction() {
+      $this->view->render('register/register');
+  }
+
+  public function registerAction() {
     $newUser = new Users();
     if($this->request->isPost()) {
       $this->request->csrfCheck();
@@ -23,18 +27,19 @@ class RegisterController extends Controller {
       $newUser->setConfirm($this->request->get('confirm'));
       if($newUser->save()){
 //        $this->_sendConfirmation($newUser);
-        Router::redirect('login');
+//          $this->view->validationMessages = ['success' => "Testing success message"];
+          Router::redirect('login');
       }
     }
-    $this->view->newUser = $newUser;
-    $this->view->displayErrors = $newUser->getErrorMessages();
+    $this->view->user = $newUser;
+    $this->view->validationMessages = $newUser->getErrorMessages();
     $this->view->render('register/register');
   }
 
   public function verifyAction($username = "", $token = "") {
       if ($username && $token) {
           $user = new Users($username);
-          $emailVerification = new EmailVerification();
+          $emailVerification = new Verification();
           $emailVerification = $emailVerification->findFirst([
               'conditions' => 'user_id = ?',
               'bind' => [$user->id]
@@ -54,7 +59,6 @@ class RegisterController extends Controller {
   }
 
   public function resendTokenAction() {
-//      Router::redirect('register/login');
       if ($this->request->isPost()) {
           $user = new Users();
           $user->assign($this->request->get());
@@ -68,13 +72,13 @@ class RegisterController extends Controller {
   }
 
   protected function _sendConfirmation($user) {
-      $emailVerification = new EmailVerification();
+      $emailVerification = new Verification();
       $emailVerification->sendVerificationToken($user);
   }
 
   protected function _resendToken($user) {
       if ($user) {
-          $verification = new EmailVerification();
+          $verification = new Verification();
           $verification = $verification->findFirst([
               'conditions' => 'user_id = ?',
               'bind' => [$user->id]

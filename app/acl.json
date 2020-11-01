@@ -2,8 +2,8 @@
   "Guest" : {
     "denied" : {},
     "Home" : ["index"],
-    "Register": ["index", "verify", "resendToken"],
-    "Login": ["index", "forgotPassword", "resetPassword"],
+    "Register": ["index", "register", "verify", "resendToken"],
+    "Login": ["index","forgotPassword", "resetPassword"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {

@@ -32,7 +32,7 @@ class Helpers {
                 <body>
                     <h1>Y'ello {$user->first_name} {$user->last_name}</h1> <br />
                     <h4>Please click on the following link to verify your email: </h4> <br />
-                    <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">Confirm EmailVerification</a>
+                    <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
                     <br />
                     <h6>Regards</h6>
                     <h6>Camagru Holdings</h6>
@@ -48,7 +48,7 @@ class Helpers {
                 <body>
                     <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">Confirm EmailVerification</a>
+                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>

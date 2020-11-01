@@ -8,7 +8,7 @@ use Core\FormHelper;
 use Core\Helpers;
 use Core\Model;
 
-class EmailVerification extends Model {
+class Verification extends Model {
     public $id;
     public $user_id;
     public $confirmation_token;

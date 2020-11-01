@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use Core\Model;
-use App\Models\UserSessions;
+use App\Models\UserSession;
 use Core\Cookie;
 use Core\Session;
 use Core\Validators\MinValidator;
@@ -39,9 +39,9 @@ class Users extends Model {
   public function validator(){
     $this->runValidation(new RequiredValidator($this,['field'=>'first_name','msg'=>'First Name is required.']));
     $this->runValidation(new RequiredValidator($this,['field'=>'last_name','msg'=>'Last Name is required.']));
-    $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'EmailVerification is required.']));
+    $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
     $this->runValidation(new EmailValidator($this, ['field'=>'email','msg'=>'You must provide a valid email address']));
-    $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'EmailVerification must be less than 150 characters.']));
+    $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Verification must be less than 150 characters.']));
     $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username must be at least 6 characters.']));
     $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username must be less than 150 characters.']));
     $this->runValidation(new UniqueValidator($this,['field'=>'username','msg'=>'That username already exists. Please choose a new one.']));
@@ -83,7 +83,7 @@ class Users extends Model {
   }
 
   public static function loginUserFromCookie() {
-    $userSession = UserSessions::getFromCookie();
+    $userSession = UserSession::getFromCookie();
     if($userSession && $userSession->user_id != '') {
       $user = new self((int)$userSession->user_id);
       if($user) {
@@ -95,7 +95,7 @@ class Users extends Model {
   }
 
   public function logout() {
-    $userSession = UserSessions::getFromCookie();
+    $userSession = UserSession::getFromCookie();
     if($userSession) $userSession->delete();
     Session::delete(CURRENT_USER_SESSION_NAME);
     if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {

@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `user_sessions` (
 # Create table for email_verification
 # ------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `email_verification` (
+CREATE TABLE IF NOT EXISTS `verification` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
     `confirmation_token` varchar(150) NOT NULL,
