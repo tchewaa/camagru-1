@@ -43,7 +43,7 @@ class RegisterController extends Controller {
       if ($emailVerification != null) {
           $emailVerification->confirmed = 1;
           $emailVerification->save();
-          Router::redirect('register/login');
+          Router::redirect('login/login');
       } else {
           //TODO display the error
           echo "Something went wrong";
