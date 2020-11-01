@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS `users` (
     `email` varchar(150) NOT NULL,
     `password` varchar(150) NOT NULL,
     `acl` text(255),
-    `confirmed` tinyint(1) DEFAULT '0',
     `deleted` tinyint(4) DEFAULT '0',
     `notifications` tinyint(1) DEFAULT '1',
     PRIMARY KEY (`id`)
@@ -32,5 +31,19 @@ CREATE TABLE IF NOT EXISTS `user_sessions` (
     `user_id` int(11) NOT NULL,
     `session` varchar(255) NOT NULL,
     `user_agent` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+# Create table for email_verification
+# ------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `email_verification` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `confirmation_token` varchar(150) NOT NULL,
+    `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

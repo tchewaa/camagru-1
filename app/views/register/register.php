@@ -11,7 +11,7 @@ use Core\FormHelper;
         <?= FormHelper::displayErrors($this->displayErrors) ?>
         <?= FormHelper::inputBlock('text','First Name','first_name',$this->newUser->first_name,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('text','Last Name','last_name',$this->newUser->last_name,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('text','Email','email',$this->newUser->email,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','EmailVerification','email',$this->newUser->email,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('text','Username','username',$this->newUser->username,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Password','password',$this->newUser->password,['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
