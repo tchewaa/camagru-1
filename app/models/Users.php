@@ -46,7 +46,7 @@ class Users extends Model {
         $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username must be less than 150 characters.']));
         $this->runValidation(new UniqueValidator($this,['field'=>'username','msg'=>'That username already exists. Please choose a new one.']));
         $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
-        $this->runValidation(new MinValidator($this,['field'=>'password','msg'=>'Password must be a minimum of 6 characters']));
+        $this->runValidation(new MinValidator($this,['field'=>'password','rule'=>6,'msg'=>'Password must be a minimum of 6 characters']));
         if($this->isNew()){
           $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>"Your passwords do not match"]));
         }

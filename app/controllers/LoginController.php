@@ -67,25 +67,37 @@ class LoginController extends Controller {
 
     public function resetPasswordAction($username = "", $token = "") {
         if ($username && $token) {
+            $loginModel = new Login();
             if ($this->request->isPost()) {
                 $this->request->csrfCheck();
-                $user = $this->UsersModel->findByUsername($username);
-                //check if user exists
-                //get token
-                $verification = new Verification();
-                //TODO Refactor
-                $verification = $verification->findFirst([
-                    'conditions' => 'user_id = ?',
-                    'bind' => [$user->id]
-                ]);
-                //TODO refactor
-                //validate token
-                if ($verification->confirmation_token == $token) {
-                    $user->password = password_hash(FormHelper::sanitize($_POST['password']), PASSWORD_DEFAULT);
-                    //update password
-                    if ($user->save()) {
-                        Router::redirect('login');
+                $loginModel->assign($this->request->get());
+                $loginModel->confirm_password = $this->request->get('confirm_password');
+                $loginModel->validator();
+                if ($loginModel->validationPassed()) {
+                    $user = $this->UsersModel->findByUsername($username);
+                    //TODO Refactor
+                    //check if user exists
+                    if ($user) {
+                        //get token
+                        $verification = new Verification();
+                        $verification = $verification->findFirst([
+                            'conditions' => 'user_id = ?',
+                            'bind' => [$user->id]
+                        ]);
+                        //validate token
+                        if ($verification->confirmation_token == $token) {
+                            $user->password = password_hash(FormHelper::sanitize($_POST['password']), PASSWORD_DEFAULT);
+                            //update password
+                            $user->save();
+                            Router::redirect('login');
+                        } else {
+                            $this->view->validationMessages = ['token' => 'Invalid token'];
+                        }
+                    } else {
+                        $this->view->validationMessages = ['token' => 'Invalid token'];
                     }
+                } else {
+                    $this->view->validationMessages = $loginModel->getErrorMessages();
                 }
             }
             $this->view->render('login/resetPassword');
