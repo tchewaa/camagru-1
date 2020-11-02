@@ -6,8 +6,12 @@ namespace App\Controllers;
 
 use App\Models\Login;
 use App\Models\Users;
+use App\Models\Verification;
 use Core\Controller;
+use Core\FormHelper;
+use Core\Helpers;
 use Core\Router;
+use http\Client\Curl\User;
 
 class LoginController extends Controller {
 
@@ -41,6 +45,16 @@ class LoginController extends Controller {
     }
 
     public function forgotPasswordAction() {
+        if ($this->request->isPost()) {
+            $this->request->csrfCheck();
+            $email = FormHelper::sanitize($this->request->get('email'));
+            $user = $this->UsersModel->findByEmail($email);
+            if ($user) {
+                $this->_forgotPasswordToken($user);
+            } else {
+                echo "User not found";
+            }
+        }
         $this->view->render('login/forgotPassword');
     }
 

@@ -9,83 +9,66 @@ use App\Models\Login;
 
 class RegisterController extends Controller {
 
-  public function __construct($controller, $action) {
-    parent::__construct($controller, $action);
-    $this->load_model('Users');
-    $this->view->setLayout('default');
-  }
-
-  public function indexAction() {
-      $this->view->render('register/register');
-  }
-
-  public function registerAction() {
-    $newUser = new Users();
-    if($this->request->isPost()) {
-      $this->request->csrfCheck();
-      $newUser->assign($this->request->get());
-      $newUser->setConfirm($this->request->get('confirm'));
-      if($newUser->save()){
-//        $this->_sendConfirmation($newUser);
-//          $this->view->validationMessages = ['success' => "Testing success message"];
-          Router::redirect('login');
-      }
+    public function __construct($controller, $action) {
+        parent::__construct($controller, $action);
+        $this->load_model('Users');
+        $this->view->setLayout('default');
     }
-    $this->view->user = $newUser;
-    $this->view->validationMessages = $newUser->getErrorMessages();
-    $this->view->render('register/register');
-  }
 
-  public function verifyAction($username = "", $token = "") {
-      if ($username && $token) {
-          $user = new Users($username);
-          $emailVerification = new Verification();
-          $emailVerification = $emailVerification->findFirst([
-              'conditions' => 'user_id = ?',
-              'bind' => [$user->id]
-          ]);
-          if ($emailVerification != null) {
-              $emailVerification->confirmed = 1;
-              $emailVerification->save();
-              Router::redirect('login/login');
-          } else {
-              //TODO redirect and display the error
-              echo "Something went wrong";
+    public function indexAction() {
+        $this->view->render('register/register');
+    }
+
+    public function registerAction() {
+        $newUser = new Users();
+        if($this->request->isPost()) {
+          $this->request->csrfCheck();
+          $newUser->assign($this->request->get());
+          $newUser->setConfirm($this->request->get('confirm'));
+          if($newUser->save() && $this->_sendConfirmation($newUser)){
+//$this->view->validationMessages = ['success' => "Testing success message"];
+              Router::redirect('login');
           }
-      } else {
-          //TODO redirect and display the error
-          echo "Something went wrong";
-      }
-  }
+        }
+        $this->view->user = $newUser;
+        $this->view->validationMessages = $newUser->getErrorMessages();
+        $this->view->render('register/register');
+    }
 
-  public function resendTokenAction() {
-      if ($this->request->isPost()) {
-          $user = new Users();
-          $user->assign($this->request->get());
-          $user = $user->findFirst([
+    public function verifyAction($username = "", $token = "") {
+        if ($username && $token) {
+            $user = new Users($username);
+            $emailVerification = new Verification();
+            $emailVerification = $emailVerification->findFirst([
+            'conditions' => 'user_id = ?',
+            'bind' => [$user->id]
+            ]);
+            if ($emailVerification != null) {
+                $emailVerification->confirmed = 1;
+                $emailVerification->save();
+                Router::redirect('login');
+            } else {
+                //TODO redirect and display the error
+                echo "Something went wrong";
+            }
+        } else {
+            //TODO redirect and display the error
+            echo "Something went wrong";
+        }
+    }
+
+    public function resendTokenAction() {
+        if ($this->request->isPost()) {
+            $user = new Users();
+            $user->assign($this->request->get());
+            $user = $user->findFirst([
               'conditions' => 'email = ?',
               'bind' => [$user->email]
-          ]);
-          $this->_resendToken($user);
-      }
-      $this->view->render('register/resendToken');
-  }
-
-  protected function _sendConfirmation($user) {
-      $emailVerification = new Verification();
-      $emailVerification->sendVerificationToken($user);
-  }
-
-  protected function _resendToken($user) {
-      if ($user) {
-          $verification = new Verification();
-          $verification = $verification->findFirst([
-              'conditions' => 'user_id = ?',
-              'bind' => [$user->id]
-          ]);
-          if ($verification) {
-              $verification->resendVerificationToken($user->email, $verification->confirmation_token);
-          }
-      }
-  }
+            ]);
+            if ($user && $this->_resendToken($user)) {
+                Router::redirect('login');
+            }
+        }
+        $this->view->render('register/resendToken');
+    }
 }

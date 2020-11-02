@@ -21,6 +21,10 @@ class Helpers {
         return get_object_vars($obj);
     }
 
+    public static function formatForgotPasswordMessage($token, $user) {
+        return "test";
+    }
+
     public static function formatConfirmationMessage($token, $user) {
         $message = "";
         if (php_uname('s') == 'Linux') {

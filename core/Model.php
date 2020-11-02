@@ -45,10 +45,6 @@ class Model {
     return $resultQuery;
   }
 
-  public function findById($id) {
-    return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
-  }
-
   public function save() {
     $this->validator();
     if($this->_validates){

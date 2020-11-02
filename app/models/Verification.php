@@ -24,18 +24,31 @@ class Verification extends Model {
         $headers = Helpers::getHeaders();
         $subject = 'Camagru account confirmation';
         $user = new Users($fields->username);
-        $params = ['user_id' => $user->id];
-        $this->assign($params);
+        //TODO check if user exists
+        //TODO investigate
+//        $params = [
+//            'user_id' => $user->id,
+//        ];
+//        $this->assign($params); //
         $this->confirmed = 0;
         $this->user_id = $user->id;
         $this->confirmation_token = md5($user->first_name . $user->email . Helpers::generateRandomString());
-        $this->save();
         $message = Helpers::formatConfirmationMessage($this->confirmation_token, $user);
-        mail($fields->email, $subject, $message, $headers);
+        //TODO check if token was saved
+        if ($this->save() && mail($fields->email, $subject, $message, $headers)) {
+            return true;
+        }
+        return false;
     }
 
-    public function resendVerificationToken($email, $token) {
-        //TODO send token to user
+
+    //TODO move to helpers
+    public function resendVerificationToken($user, $token) {
+        $headers = Helpers::getHeaders();
+        $subject = 'Camagru account confirmation';
+        $message = Helpers::formatConfirmationMessage($token, $user);
+        if (mail($user->email, $subject, $message, $headers)) return true;
+        return false;
     }
 
 }

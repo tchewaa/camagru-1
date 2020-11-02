@@ -76,7 +76,6 @@ class FormHelper {
         $html = "";
         if (isset($errors['success'])) {
             Helpers::dnd("testing");
-
         } else if (!empty($errors)) {
             $html .= '<div class="form-errors"><ul class="bg-danger has-errors">';
             foreach($errors as $field => $error) {
