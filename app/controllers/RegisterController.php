@@ -42,13 +42,11 @@ class RegisterController extends Controller {
             $user->assign($this->request->get());
             $user->validator();
             if ($user->validationPassed()) {
-//                $user = $user->findFirst([
-//                    'conditions' => 'email = ?',
-//                    'bind' => [$user->email]
-//                ]);
                 $user = $user->findByEmail($user->email);
                 if ($user && $this->_resendToken($user)) {
                     Router::redirect('login');
+                } else {
+                    $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
                 }
             } else {
                 $this->view->validationMessages = $user->getErrorMessages();
