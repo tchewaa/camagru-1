@@ -2,5 +2,6 @@
   "Home" : "home/index",
   "Logout" : "home/logout",
   "Login" : "login/index",
-  "Register" : "register/index"
+  "Register" : "register/index",
+  "Profile" : "profile/index"
 }

@@ -14,14 +14,9 @@ class Verification extends Model {
     public $confirmation_token;
     public $confirmed;
 
-
     public function __construct(){
         $table = 'email_verification';
         parent::__construct($table);
-    }
-
-    public function findById($id) {
-        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
     }
 
     public function sendVerificationToken($fields) {

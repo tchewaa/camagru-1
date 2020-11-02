@@ -14,7 +14,6 @@ class Auth extends Model {
     }
 
     public function validator() {
-        Helpers::dnd($this);
         if (isset($this->username)) {
             $this->runValidation(new RequiredValidator($this,['field'=>'username','msg'=>'Username is required.']));
         } elseif (isset($this->password)) {

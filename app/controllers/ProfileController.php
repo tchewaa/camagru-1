@@ -14,7 +14,7 @@ class ProfileController extends Controller {
     }
 
     public function indexAction() {
-        $this->view->render('profile/index');
+        $this->view->render('profile/updateDetails');
     }
 
     public function updateDetailsAction() {

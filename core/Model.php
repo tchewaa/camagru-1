@@ -64,6 +64,22 @@ class Model {
     return false;
   }
 
+    public function findByUsername($username) {
+        return $this->findFirst(['conditions'=> "username = ?", 'bind'=>[$username]]);
+    }
+
+    public function findByEmail($email) {
+        return $this->findFirst(['conditions'=> "email = ?", 'bind'=>[$email]]);
+    }
+
+    public function findById($id) {
+        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
+    }
+
+    public function findByUserId($user_id) {
+        return $this->findFirst(['conditions'=> "user_id = ?", 'bind'=>[$user_id]]);
+    }
+
   public function insert($fields) {
     if(empty($fields)) return false;
     if(array_key_exists('id', $fields)) unset($fields['id']);

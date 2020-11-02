@@ -4,7 +4,7 @@ use Core\FormHelper;
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
-<div class="col-md-6 col-md-offset-3 well">
+<div class="col-md-4 col-md-offset-4 jumbotron">
     <h3 class="text-center">Update Email</h3>
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>

@@ -37,43 +37,23 @@ class Users extends Model {
         }
     }
 
-    public function validator() {
-        if (isset($this->first_name)) {
-            $this->runValidation(new RequiredValidator($this,['field'=>'first_name','msg'=>'First Name is required.']));
-        } elseif ($this->last_name) {
-            $this->runValidation(new RequiredValidator($this,['field'=>'last_name','msg'=>'Last Name is required.']));
-        }
-        Helpers::dnd($this);
-        $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
-        $this->runValidation(new EmailValidator($this, ['field'=>'email','msg'=>'You must provide a valid email address']));
-        $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Verification must be less than 150 characters.']));
-        $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username must be at least 6 characters.']));
-        $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username must be less than 150 characters.']));
-        $this->runValidation(new UniqueValidator($this,['field'=>'username','msg'=>'That username already exists. Please choose a new one.']));
-        $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
-        $this->runValidation(new MinValidator($this,['field'=>'password','rule'=>6,'msg'=>'Password must be a minimum of 6 characters']));
-        if($this->isNew()){
-          $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>"Your passwords do not match"]));
-        }
-    }
-
     public function beforeSave(){
         if($this->isNew()){
           $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         }
     }
 
-    public function findByUsername($username) {
-        return $this->findFirst(['conditions'=> "username = ?", 'bind'=>[$username]]);
-    }
-
-    public function findByEmail($email) {
-        return $this->findFirst(['conditions'=> "email = ?", 'bind'=>[$email]]);
-    }
-
-    public function findById($id) {
-        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
-    }
+//    public function findByUsername($username) {
+//        return $this->findFirst(['conditions'=> "username = ?", 'bind'=>[$username]]);
+//    }
+//
+//    public function findByEmail($email) {
+//        return $this->findFirst(['conditions'=> "email = ?", 'bind'=>[$email]]);
+//    }
+//
+//    public function findById($id) {
+//        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
+//    }
 
     public static function currentUser() {
         if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)) {
@@ -121,6 +101,54 @@ class Users extends Model {
     public function acls() {
         if(empty($this->acl)) return [];
         return json_decode($this->acl, true);
+    }
+
+    public function validator() {
+        $this->_checkFirstName();
+        $this->_checkLastName();
+        $this->_checkEmail();
+        $this->_checkUsername();
+        $this->_checkPassword();
+    }
+
+    protected function _checkFirstName() {
+        if (isset($this->first_name)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'first_name','msg'=>'First Name is required.']));
+        }
+    }
+
+    protected function _checkLastName() {
+        if (isset($this->last_name)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'last_name','msg'=>'Last Name is required.']));
+        }
+    }
+
+    protected function _checkEmail() {
+        if (isset($this->email)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
+            $this->runValidation(new EmailValidator($this, ['field'=>'email','msg'=>'You must provide a valid email address']));
+            $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Verification must be less than 150 characters.']));
+            $this->runValidation(new UniqueValidator($this,['field'=>'email','msg'=>'That email already exists. Please choose a different one.']));
+        }
+    }
+
+    protected function _checkUsername() {
+        if (isset($this->username)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'username','msg'=>'Username is required.']));
+            $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username must be at least 6 characters.']));
+            $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username must be less than 150 characters.']));
+            $this->runValidation(new UniqueValidator($this,['field'=>'username','msg'=>'That username already exists. Please choose a new one.']));
+        }
+    }
+
+    protected function _checkPassword() {
+        if (isset($this->password)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
+            $this->runValidation(new MinValidator($this,['field'=>'password','rule'=>6,'msg'=>'Password must be a minimum of 6 characters']));
+            if($this->isNew()){
+                $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>"Your passwords do not match"]));
+            }
+        }
     }
 
     public function setConfirm($value){

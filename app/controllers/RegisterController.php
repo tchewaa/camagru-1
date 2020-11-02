@@ -20,15 +20,15 @@ class RegisterController extends Controller {
     }
 
     public function registerAction() {
-        $newUser = new Users();
         if($this->request->isPost()) {
-          $this->request->csrfCheck();
-          $newUser->assign($this->request->get());
-          $newUser->setConfirm($this->request->get('confirm'));
-          if($newUser->save() && $this->_sendConfirmation($newUser)){
-//$this->view->validationMessages = ['success' => "Testing success message"];
+            $newUser = new Users();
+            $this->request->csrfCheck();
+            $newUser->assign($this->request->get());
+            $newUser->setConfirm($this->request->get('confirm'));
+            if($newUser->save() && $this->_sendConfirmation($newUser)){
+                //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
-          }
+            }
         }
         $this->view->user = $newUser;
         $this->view->validationMessages = $newUser->getErrorMessages();
@@ -42,10 +42,11 @@ class RegisterController extends Controller {
             $user->assign($this->request->get());
             $user->validator();
             if ($user->validationPassed()) {
-                $user = $user->findFirst([
-                    'conditions' => 'email = ?',
-                    'bind' => [$user->email]
-                ]);
+//                $user = $user->findFirst([
+//                    'conditions' => 'email = ?',
+//                    'bind' => [$user->email]
+//                ]);
+                $user = $user->findByEmail($user->email);
                 if ($user && $this->_resendToken($user)) {
                     Router::redirect('login');
                 }
@@ -59,14 +60,15 @@ class RegisterController extends Controller {
     public function verifyAction($username = "", $token = "") {
         if ($username && $token) {
             $user = new Users($username);
-            $emailVerification = new Verification();
-            $emailVerification = $emailVerification->findFirst([
-            'conditions' => 'user_id = ?',
-            'bind' => [$user->id]
-            ]);
-            if ($emailVerification != null) {
-                $emailVerification->confirmed = 1;
-                $emailVerification->save();
+            $verificationToken = new Verification();
+//            $emailVerification = $emailVerification->findFirst([
+//            'conditions' => 'user_id = ?',
+//            'bind' => [$user->id]
+//            ]);
+            $verificationToken = $verificationToken->findByUserId($user->id);
+            if ($verificationToken != null) {
+                $verificationToken->confirmed = 1;
+                $verificationToken->save();
                 Router::redirect('login');
             } else {
                 //TODO redirect and display the error

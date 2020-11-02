@@ -4,7 +4,7 @@ use Core\FormHelper;
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
-<div class="col-md-6 col-md-offset-3 well">
+<div class="col-md-4 col-md-offset-4 jumbotron">
     <h3 class="text-center">Register Here!</h3><hr>
     <form class="form" action="<?=PROOT?>register/register" method="post">
         <?= FormHelper::csrfInput() ?>
