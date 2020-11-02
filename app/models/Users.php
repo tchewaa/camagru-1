@@ -43,18 +43,6 @@ class Users extends Model {
         }
     }
 
-//    public function findByUsername($username) {
-//        return $this->findFirst(['conditions'=> "username = ?", 'bind'=>[$username]]);
-//    }
-//
-//    public function findByEmail($email) {
-//        return $this->findFirst(['conditions'=> "email = ?", 'bind'=>[$email]]);
-//    }
-//
-//    public function findById($id) {
-//        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
-//    }
-
     public static function currentUser() {
         if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)) {
           $u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
