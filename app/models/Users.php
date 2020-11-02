@@ -99,7 +99,7 @@ class Users extends Model {
           }
           return $user;
         }
-        return;
+        return null;
     }
 
     public function logout() {

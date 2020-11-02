@@ -5,7 +5,7 @@ use Core\Controller;
 use Core\Helpers;
 use Core\Router;
 use App\Models\Users;
-use App\Models\Login;
+use App\Models\Auth;
 
 class RegisterController extends Controller {
 

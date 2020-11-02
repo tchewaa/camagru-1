@@ -80,7 +80,13 @@ class FormHelper {
             $html .= '<div class="form-errors"><ul class="bg-danger has-errors">';
             foreach($errors as $field => $error) {
                 $html .= '<li class="text-danger">'.$error.'</li>';
-                $html .= '<script>var p = document.getElementById("'.$field.'"); p.closest("div").classList.add("has-error");</script>';
+                $html .= '<script>
+                                const messages = document.getElementById("'.$field.'"); 
+                                messages.closest("div").classList.add("has-error");
+                                setTimeout(function(){
+                                    document.getElementById("'.$field.'").style.display = "none"; 
+                                }, 3000);
+                            </script>';
 
             }
             $html .= '</ul></div>';

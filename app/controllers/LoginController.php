@@ -4,7 +4,7 @@
 namespace App\Controllers;
 
 
-use App\Models\Login;
+use App\Models\Auth;
 use App\Models\Users;
 use App\Models\Verification;
 use Core\Controller;
@@ -21,37 +21,39 @@ class LoginController extends Controller {
     }
 
     public function indexAction() {
-        $loginModel = new Login();
+        $auth = new Auth();
         if($this->request->isPost()) {
             // form validation
             $this->request->csrfCheck();
-            $loginModel->assign($this->request->get());
-            $loginModel->validator();
-            if($loginModel->validationPassed()){
+            $auth->assign($this->request->get());
+            $auth->validator();
+            if($auth->validationPassed()){
                 $user = $this->UsersModel->findByUsername($_POST['username']);
+                //TODO Refactor
                 if($user && password_verify($this->request->get('password'), $user->password)) {
-                    $remember = $loginModel->getRememberMeChecked();
+                    $remember = $auth->getRememberMeChecked();
                     $user->login($remember);
                     Router::redirect('');
                 }  else {
-                    $loginModel->addErrorMessage('username','There is an error with your username or password');
+                    $auth->addErrorMessage('username','There is an error with your username or password');
                 }
             }
         }
-        $this->view->login = $loginModel;
-        $this->view->validationMessages = $loginModel->getErrorMessages();
+        $this->view->auth = $auth;
+        $this->view->validationMessages = $auth->getErrorMessages();
         $this->view->render('login/login');
     }
 
     public function forgotPasswordAction() {
-        $loginModel = new Login();
+        $auth = new Auth();
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $loginModel->assign($this->request->get());
-            $loginModel->validator();
-            if ($loginModel->validationPassed()) {
+            $auth->assign($this->request->get());
+            $auth->validator();
+            if ($auth->validationPassed()) {
                 $email = FormHelper::sanitize($this->request->get('email'));
                 $user = $this->UsersModel->findByEmail($email);
+                //TODO Refactor
                 if ($user && $this->_forgotPasswordToken($user)) {
                     Router::redirect('login');
 //                    return;
@@ -59,7 +61,7 @@ class LoginController extends Controller {
                     $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
                 }
             } else {
-                $this->view->validationMessages = $loginModel->getErrorMessages();
+                $this->view->validationMessages = $auth->getErrorMessages();
             }
         }
         $this->view->render('login/forgotPassword');
@@ -67,13 +69,13 @@ class LoginController extends Controller {
 
     public function resetPasswordAction($username = "", $token = "") {
         if ($username && $token) {
-            $loginModel = new Login();
+            $auth = new Auth();
             if ($this->request->isPost()) {
                 $this->request->csrfCheck();
-                $loginModel->assign($this->request->get());
-                $loginModel->confirm_password = $this->request->get('confirm_password');
-                $loginModel->validator();
-                if ($loginModel->validationPassed()) {
+                $auth->assign($this->request->get());
+                $auth->confirm_password = $this->request->get('confirm_password');
+                $auth->validator();
+                if ($auth->validationPassed()) {
                     $user = $this->UsersModel->findByUsername($username);
                     //TODO Refactor
                     //check if user exists
@@ -97,7 +99,7 @@ class LoginController extends Controller {
                         $this->view->validationMessages = ['token' => 'Invalid token'];
                     }
                 } else {
-                    $this->view->validationMessages = $loginModel->getErrorMessages();
+                    $this->view->validationMessages = $auth->getErrorMessages();
                 }
             }
             $this->view->render('login/resetPassword');

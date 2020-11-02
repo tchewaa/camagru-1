@@ -6,7 +6,7 @@ use Core\Validators\MatchesValidator;
 use Core\Validators\MinValidator;
 use Core\Validators\RequiredValidator;
 
-class Login extends Model {
+class Auth extends Model {
     public $username, $password, $email, $remember_me, $confirm_password;
 
     public function __construct(){
