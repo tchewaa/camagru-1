@@ -60,12 +60,23 @@ class LoginController extends Controller {
             if ($this->request->isPost()) {
                 $this->request->csrfCheck();
                 $user = $this->UsersModel->findByUsername($username);
-                //check token
-                //validate input
-                //update password
-                echo 'passed';
-            } else {
-                echo 'failed';
+                //check if user exists
+                //get token
+                $verification = new Verification();
+                //TODO Refactor
+                $verification = $verification->findFirst([
+                    'conditions' => 'user_id = ?',
+                    'bind' => [$user->id]
+                ]);
+                //TODO refactor
+                //validate token
+                if ($verification->confirmation_token == $token) {
+                    $user->password = password_hash(FormHelper::sanitize($_POST['password']), PASSWORD_DEFAULT);
+                    //update password
+                    if ($user->save()) {
+                        Router::redirect('login');
+                    }
+                }
             }
             $this->view->render('login/resetPassword');
         } else {
