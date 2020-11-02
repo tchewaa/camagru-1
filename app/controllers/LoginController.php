@@ -44,12 +44,22 @@ class LoginController extends Controller {
     }
 
     public function forgotPasswordAction() {
+        $loginModel = new Login();
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $email = FormHelper::sanitize($this->request->get('email'));
-            $user = $this->UsersModel->findByEmail($email);
-            if ($this->_forgotPasswordToken($user)) {
-                Router::redirect('login');
+            $loginModel->assign($this->request->get());
+            $loginModel->validator();
+            if ($loginModel->validationPassed()) {
+                $email = FormHelper::sanitize($this->request->get('email'));
+                $user = $this->UsersModel->findByEmail($email);
+                if ($user && $this->_forgotPasswordToken($user)) {
+                    Router::redirect('login');
+//                    return;
+                } else {
+                    $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
+                }
+            } else {
+                $this->view->validationMessages = $loginModel->getErrorMessages();
             }
         }
         $this->view->render('login/forgotPassword');
