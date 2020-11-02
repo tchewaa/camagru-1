@@ -8,7 +8,7 @@ use Core\FormHelper;
     <h3 class="text-center">Resend Verification Token</h3>
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
-        <!--        FormHelper::displayErrors($this->displayErrors)-->
+        <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <?= FormHelper::inputBlock('email','Email','email',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Resend', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
     </form>

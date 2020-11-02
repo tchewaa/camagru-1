@@ -35,6 +35,27 @@ class RegisterController extends Controller {
         $this->view->render('register/register');
     }
 
+    public function resendTokenAction() {
+        if ($this->request->isPost()) {
+            $user = new Users();
+            $this->request->csrfCheck();
+            $user->assign($this->request->get());
+            $user->validator();
+            if ($user->validationPassed()) {
+                $user = $user->findFirst([
+                    'conditions' => 'email = ?',
+                    'bind' => [$user->email]
+                ]);
+                if ($user && $this->_resendToken($user)) {
+                    Router::redirect('login');
+                }
+            } else {
+                $this->view->validationMessages = $user->getErrorMessages();
+            }
+        }
+        $this->view->render('register/resendToken');
+    }
+
     public function verifyAction($username = "", $token = "") {
         if ($username && $token) {
             $user = new Users($username);
@@ -55,20 +76,5 @@ class RegisterController extends Controller {
             //TODO redirect and display the error
             echo "Something went wrong";
         }
-    }
-
-    public function resendTokenAction() {
-        if ($this->request->isPost()) {
-            $user = new Users();
-            $user->assign($this->request->get());
-            $user = $user->findFirst([
-              'conditions' => 'email = ?',
-              'bind' => [$user->email]
-            ]);
-            if ($user && $this->_resendToken($user)) {
-                Router::redirect('login');
-            }
-        }
-        $this->view->render('register/resendToken');
     }
 }

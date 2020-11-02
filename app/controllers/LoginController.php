@@ -45,8 +45,8 @@ class LoginController extends Controller {
     }
 
     public function forgotPasswordAction() {
-        $auth = new Auth();
         if ($this->request->isPost()) {
+            $auth = new Auth();
             $this->request->csrfCheck();
             $auth->assign($this->request->get());
             $auth->validator();

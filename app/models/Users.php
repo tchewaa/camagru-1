@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use Core\Helpers;
 use Core\Model;
 use App\Models\UserSession;
 use Core\Cookie;
@@ -36,9 +37,13 @@ class Users extends Model {
         }
     }
 
-    public function validator(){
-        $this->runValidation(new RequiredValidator($this,['field'=>'first_name','msg'=>'First Name is required.']));
-        $this->runValidation(new RequiredValidator($this,['field'=>'last_name','msg'=>'Last Name is required.']));
+    public function validator() {
+        if (isset($this->first_name)) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'first_name','msg'=>'First Name is required.']));
+        } elseif ($this->last_name) {
+            $this->runValidation(new RequiredValidator($this,['field'=>'last_name','msg'=>'Last Name is required.']));
+        }
+        Helpers::dnd($this);
         $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
         $this->runValidation(new EmailValidator($this, ['field'=>'email','msg'=>'You must provide a valid email address']));
         $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Verification must be less than 150 characters.']));
