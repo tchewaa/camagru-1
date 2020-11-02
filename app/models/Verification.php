@@ -20,6 +20,10 @@ class Verification extends Model {
         parent::__construct($table);
     }
 
+    public function findById($id) {
+        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
+    }
+
     public function sendVerificationToken($fields) {
         $headers = Helpers::getHeaders();
         $subject = 'Camagru account confirmation';
@@ -45,10 +49,18 @@ class Verification extends Model {
     //TODO move to helpers
     public function resendVerificationToken($user, $token) {
         $headers = Helpers::getHeaders();
-        $subject = 'Camagru account confirmation';
+        $subject = 'Camagru: Account confirmation';
         $message = Helpers::formatConfirmationMessage($token, $user);
         if (mail($user->email, $subject, $message, $headers)) return true;
         return false;
+    }
+
+    public function sendForgotPasswordToken($user, $token) {
+        $headers = Helpers::getHeaders();
+        $subject = 'Camagru: Forgot your password?';
+        $message = Helpers::formatForgotPasswordMessage($token, $user);
+        if (mail($user->email, $subject, $message, $headers)) return true;
+        Helpers::dnd($message);
     }
 
 }

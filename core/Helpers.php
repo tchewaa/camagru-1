@@ -22,7 +22,41 @@ class Helpers {
     }
 
     public static function formatForgotPasswordMessage($token, $user) {
-        return "test";
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru Forgot Password</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3> <br />
+                    <h4>Did you forgot your password? No worries, just follow the link: </h4> <br />
+                    <a href=\"http://127.0.0.1:8080/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
+                    <br />
+                    <h6>Regards</h6>
+                    <h6>Camagru Holdings</h6>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru Forgot Password</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
+                    <h4>Did you forgot your password? No worries, just follow the link:
+                        <a href=\"http://localhost/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
+                    </h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
     }
 
     public static function formatConfirmationMessage($token, $user) {
@@ -34,12 +68,12 @@ class Helpers {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h1>Y'ello {$user->first_name} {$user->last_name}</h1> <br />
-                    <h4>Please click on the following link to verify your email: </h4> <br />
-                    <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
-                    <br />
-                    <h6>Regards</h6>
-                    <h6>Camagru Holdings</h6>
+                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
+                    <h4>Please click on the following link to verify your email:
+                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
+                    </h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
                 </body>
              </html>
             ";

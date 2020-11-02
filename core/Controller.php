@@ -48,6 +48,13 @@ class Controller extends Application {
     }
 
     protected function _forgotPasswordToken($user) {
-        echo "testing";
+        if (!$user) return false;
+        $verification = new Verification();
+        $verification = $verification->findFirst([
+            'conditions' => 'user_id = ?',
+            'bind' => [$user->id]
+        ]);
+        $token = $verification->confirmation_token;
+        return $verification->sendForgotPasswordToken($user, $token);
     }
 }
