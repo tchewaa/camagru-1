@@ -11,11 +11,11 @@ use Core\Model;
 class Verification extends Model {
     public $id;
     public $user_id;
-    public $confirmation_token;
+    public $token;
     public $confirmed;
 
     public function __construct(){
-        $table = 'email_verification';
+        $table = 'verification';
         parent::__construct($table);
     }
 
@@ -31,8 +31,8 @@ class Verification extends Model {
 //        $this->assign($params); //
         $this->confirmed = 0;
         $this->user_id = $user->id;
-        $this->confirmation_token = md5($user->first_name . $user->email . Helpers::generateRandomString());
-        $message = Helpers::formatConfirmationMessage($this->confirmation_token, $user);
+        $this->token = md5($user->username . $user->email . Helpers::generateRandomString());
+        $message = Helpers::formatConfirmationMessage($this->token, $user);
         //TODO check if token was saved
         if ($this->save() && mail($fields->email, $subject, $message, $headers)) {
             return true;
