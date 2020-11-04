@@ -21,6 +21,7 @@ class LoginController extends Controller {
     }
 
     public function indexAction() {
+        //TODO create index page for login
         $auth = new Auth();
         if($this->request->isPost()) {
             // form validation
