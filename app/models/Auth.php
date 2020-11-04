@@ -4,6 +4,7 @@ use Core\Helpers;
 use Core\Model;
 use Core\Validators\MatchesValidator;
 use Core\Validators\MinValidator;
+use Core\Validators\PasswordValidator;
 use Core\Validators\RequiredValidator;
 
 class Auth extends Model {
@@ -18,7 +19,9 @@ class Auth extends Model {
             $this->runValidation(new RequiredValidator($this,['field'=>'username','msg'=>'Username is required.']));
         } elseif (isset($this->password)) {
             $this->runValidation(new MinValidator($this,['field'=>'password','rule'=>6,'msg'=>'Password must be a minimum of 6 characters']));
+            $this->runValidation(new PasswordValidator($this,['field'=>'password','rule'=>$this->password,'msg'=>"Password must contain Uppercase, Lowercase, Number and special character."]));
             $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->confirm_password,'msg'=>"Your passwords do not match"]));
+            $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
         } elseif (isset($this->email)) {
             $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
         }
