@@ -16,6 +16,7 @@ class RegisterController extends Controller {
     }
 
     public function indexAction() {
+        //TODO create index page for register
         $this->view->render('register/register');
     }
 
@@ -25,7 +26,8 @@ class RegisterController extends Controller {
             $this->request->csrfCheck();
             $newUser->assign($this->request->get());
             $newUser->setConfirm($this->request->get('confirm'));
-            if($newUser->save() && $this->_sendConfirmation($newUser)){
+            if($newUser->save()){
+                $this->_sendConfirmation($newUser);
                 //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
             }
