@@ -30,7 +30,7 @@ class Helpers {
                     <title>Camagru Forgot Password</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3> <br />
+                    <h3>Y'ello {$user->username}</h3> <br />
                     <h4>Did you forgot your password? No worries, just follow the link: </h4> <br />
                     <a href=\"http://127.0.0.1:8080/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
                     <br />
@@ -46,7 +46,7 @@ class Helpers {
                     <title>Camagru Forgot Password</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
+                    <h3>Y'ello {$user->username}</h3>
                     <h4>Did you forgot your password? No worries, just follow the link:
                         <a href=\"http://localhost/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
                     </h4>
@@ -68,9 +68,9 @@ class Helpers {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
+                    <h3>Y'ello {$user->username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
+                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -84,9 +84,9 @@ class Helpers {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->first_name} {$user->last_name}</h3>
+                    <h3>Y'ello {$user->username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">Confirm Verification</a>
+                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>

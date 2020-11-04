@@ -12,7 +12,7 @@ USE camagru;
 # ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `username` varchar(150) NOT NULL,
+    `username` varchar(50) NOT NULL,
     `email` varchar(150) NOT NULL,
     `password` varchar(150) NOT NULL,
     `notification` tinyint(1) NOT NULL,

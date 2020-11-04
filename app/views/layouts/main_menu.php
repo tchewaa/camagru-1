@@ -29,7 +29,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if(Users::currentUser()): ?>
-                    <li><a href="#">Y'ello <?=Users::currentUser()->first_name?></a></li>
+                    <li><a href="#">Y'ello <?=Users::currentUser()->username?></a></li>
                 <?php endif; ?>
             </ul>
         </div><!-- /.navbar-collapse -->
