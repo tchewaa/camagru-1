@@ -6,9 +6,9 @@ use Core\FormHelper;
 <?php $this->start('body'); ?>
 <div class="col-md-4 col-md-offset-4 jumbotron">
     <h3 class="text-center">Update Profile Details</h3><hr>
-    <form class="form" action="" method="post">
+    <form class="form" action="<?=PROOT?>profile/updateUsername" method="post">
         <?= FormHelper::csrfInput() ?>
-<!--        --><?//= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
+        <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <?= FormHelper::inputBlock('text','Username','username',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Update',['class'=>'btn btn-primary btn-large'],['class'=>'form-group']) ?>
         <div class="pull-left">
