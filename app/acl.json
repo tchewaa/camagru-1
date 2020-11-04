@@ -3,7 +3,7 @@
     "denied" : {},
     "Home" : ["index"],
     "Register": ["index", "register", "verify", "resendToken"],
-    "Login": ["index","forgotPassword", "resetPassword"],
+    "Login": ["index", "forgotPassword", "resetPassword"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {
