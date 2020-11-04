@@ -18,12 +18,12 @@ class Users extends Model {
     private $_sessionName;
     private $_cookieName;
     private $_confirm;
+    private $_new_password;
     public static $currentLoggedInUser = null;
     public $id;
     public $username;
     public $email;
     public $password;
-    public $new_password;
     public $notification = 1;
 
     public function __construct($user='') {
