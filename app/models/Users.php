@@ -23,6 +23,7 @@ class Users extends Model {
     public $username;
     public $email;
     public $password;
+    public $new_password;
     public $notification = 1;
 
     public function __construct($user='') {
