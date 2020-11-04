@@ -6,7 +6,10 @@ use Core\Cookie;
 
 class UserSession extends Model {
 
-  public $id,$user_id,$session,$user_agent;
+  public $id;
+  public $user_id;
+  public $session;
+  public $user_agent;
 
   public function __construct() {
     $table = 'user_sessions';
