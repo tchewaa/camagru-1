@@ -38,7 +38,7 @@ class Controller extends Application {
             'bind' => [$user->id]
         ]);
         if (!$verification) return false;
-        $token = $verification->confirmation_token;
+        $token = $verification->token;
         return $verification->resendVerificationToken($user, $token);
     }
 
@@ -54,7 +54,7 @@ class Controller extends Application {
             'conditions' => 'user_id = ?',
             'bind' => [$user->id]
         ]);
-        $token = $verification->confirmation_token;
+        $token = $verification->token;
         return $verification->sendForgotPasswordToken($user, $token);
     }
 }
