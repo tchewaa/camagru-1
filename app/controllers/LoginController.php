@@ -88,7 +88,7 @@ class LoginController extends Controller {
                             'bind' => [$user->id]
                         ]);
                         //validate token
-                        if ($verification->confirmation_token == $token) {
+                        if ($verification->token == $token) {
                             $user->password = password_hash(FormHelper::sanitize($_POST['password']), PASSWORD_DEFAULT);
                             //update password
                             $user->save();
