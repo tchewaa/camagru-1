@@ -4,7 +4,12 @@ namespace Core;
 use stdClass;
 
 class Model {
-  protected $_db, $_table, $_modelName, $_softDelete = false,$_validates=true,$_validationErrors=[];
+  protected $_db;
+  protected $_table;
+  protected $_modelName;
+  protected $_softDelete = false;
+  protected $_validates=true;
+  protected $_validationErrors=[];
   public $id;
 
   public function __construct($table) {
@@ -17,36 +22,33 @@ class Model {
     return $this->_db->get_columns($this->_table);
   }
 
-  protected function _softDeleteParams($params){
-    if($this->_softDelete){
-      if(array_key_exists('conditions',$params)){
-        if(is_array($params['conditions'])){
-          $params['conditions'][] = "deleted != 1";
-        } else {
-          $params['conditions'] .= " AND deleted != 1";
-        }
-      } else {
-        $params['conditions'] = "deleted != 1";
-      }
-    }
-    return $params;
-  }
+  //TODO remove
+//  protected function _softDeleteParams($params){
+//    if($this->_softDelete){
+//      if(array_key_exists('conditions',$params)){
+//        if(is_array($params['conditions'])){
+//          $params['conditions'][] = "deleted != 1";
+//        } else {
+//          $params['conditions'] .= " AND deleted != 1";
+//        }
+//      } else {
+//        $params['conditions'] = "deleted != 1";
+//      }
+//    }
+//    return $params;
+//  }
 
   public function find($params = []) {
-    $params = $this->_softDeleteParams($params);
+//    $params = $this->_softDeleteParams($params);
     $resultsQuery = $this->_db->find($this->_table, $params,get_class($this));
     if(!$resultsQuery) return [];
     return $resultsQuery;
   }
 
   public function findFirst($params = []) {
-    $params = $this->_softDeleteParams($params);
+//    $params = $this->_softDeleteParams($params);
     $resultQuery = $this->_db->findFirst($this->_table, $params,get_class($this));
     return $resultQuery;
-  }
-
-  public function findById($id) {
-    return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
 
   public function save() {
@@ -68,6 +70,22 @@ class Model {
     return false;
   }
 
+    public function findByUsername($username) {
+        return $this->findFirst(['conditions'=> "username = ?", 'bind'=>[$username]]);
+    }
+
+    public function findByEmail($email) {
+        return $this->findFirst(['conditions'=> "email = ?", 'bind'=>[$email]]);
+    }
+
+    public function findById($id) {
+        return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
+    }
+
+    public function findByUserId($user_id) {
+        return $this->findFirst(['conditions'=> "user_id = ?", 'bind'=>[$user_id]]);
+    }
+
   public function insert($fields) {
     if(empty($fields)) return false;
     if(array_key_exists('id', $fields)) unset($fields['id']);
@@ -75,7 +93,7 @@ class Model {
   }
 
   public function update($id, $fields) {
-    if(empty($fields) || $id == '') return false;
+      if(empty($fields) || $id == '') return false;
     return $this->_db->update($this->_table, $id, $fields);
   }
 

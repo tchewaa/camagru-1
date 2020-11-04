@@ -11,6 +11,10 @@ class RestrictedController extends Controller {
     $this->view->render('restricted/index');
   }
 
+  public function pageNotFound() {
+      $this->view->render('restricted/404');
+  }
+
   public function badTokenAction(){
     $this->view->render('restricted/badToken');
   }

@@ -1,14 +1,17 @@
 {
   "Guest" : {
     "denied" : {},
-    "Home" : ["*"],
-    "Register": ["login", "register"],
+    "Home" : ["index"],
+    "Register": ["index", "register", "verify", "resendToken"],
+    "Login": ["index", "forgotPassword", "resetPassword"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {
     "denied" : {
-      "Register": ["login", "register"]
+      "Register": ["index", "verify", "resendToken"],
+      "Login": ["index", "forgotPassword", "resetPassword"]
     },
-    "Register" : ["logout"]
+    "Home" : ["logout"],
+    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"]
   }
 }

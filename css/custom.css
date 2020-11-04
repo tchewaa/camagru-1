@@ -3,9 +3,13 @@
     text-align: center;
 }
 
-a, a:hover, a:focus, a:active {
+nav a, a:focus, a:active {
     text-decoration: none;
     color: inherit;
+}
+
+nav a, a:hover {
+    text-decoration: none;
 }
 
 nav {
@@ -19,13 +23,15 @@ form {
 }
 
 .btn {
+    text-decoration: none;
     color: white;
     background-color: darkslategrey;
 }
 
 .btn:hover {
-    color: gray;
-    background-color: #f5c6cb;
+    text-decoration: none;
+    color: white;
+    background-color: #4e555b;
 }
 
 .container-fluid {
