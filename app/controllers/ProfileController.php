@@ -15,6 +15,7 @@ class ProfileController extends Controller {
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
         $this->load_model('Users');
+        $this->user = new Users();
         $this->view->setLayout('default');
     }
 
@@ -42,7 +43,25 @@ class ProfileController extends Controller {
 
     public function updatePasswordAction() {
         if ($this->request->isPost()) {
-            echo "Updating Password";
+            $this->request->csrfCheck();
+            $current_password = $this->request->get('password');
+            $new_password = $this->request->get('new_password');
+            $confirm_password = $this->request->get('confirm_password');
+            if (password_verify($current_password, Users::currentUser()->password)) {
+                $this->user->password = $new_password;
+                $this->user->setConfirm($confirm_password);
+                $this->user->validator();
+                if ($this->user->validationPassed()) {
+                    $new_password = password_hash($new_password, PASSWORD_DEFAULT);
+                    $id = Users::currentUser()->id;
+                    $this->user->update($id, ['password' => $new_password]);
+                    Router::redirect('home');
+                }
+                $this->view->validationMessages = $this->user->getErrorMessages();
+            } else {
+                //TODO custom error message
+                $this->view->validationMessages = ['password' => 'Invalid password'];
+            }
         }
         $this->view->render('profile/updatePassword');
     }
