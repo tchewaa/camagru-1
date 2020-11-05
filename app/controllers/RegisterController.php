@@ -26,7 +26,7 @@ class RegisterController extends Controller {
             $newUser->assign($this->request->get());
             $newUser->setConfirm($this->request->get('confirm'));
             if($newUser->save()){
-                // $this->_sendConfirmation($newUser);
+                $this->_sendConfirmation($newUser);
                 //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
             }
@@ -43,8 +43,8 @@ class RegisterController extends Controller {
             $user->assign($this->request->get());
             $user->validator();
             if ($user->validationPassed()) {
-                $user = $user->findByEmail($user->email);
-                if ($user && $this->_resendToken($user)) {
+                $u = $user->findByEmail($user->email);
+                if ($u && $this->_resendToken($u)) {
                     Router::redirect('login');
                 } else {
                     $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
