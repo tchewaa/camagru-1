@@ -2,6 +2,7 @@
 namespace Core;
 use App\Models\Verification;
 use Core\Application;
+use Core\Helpers;
 
 class Controller extends Application {
     protected $_controller, $_action;
