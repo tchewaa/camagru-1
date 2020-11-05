@@ -119,8 +119,11 @@ class Users extends Model {
         if (isset($this->email)) {
             $this->runValidation(new RequiredValidator($this,['field'=>'email','msg'=>'Email is required.']));
             $this->runValidation(new EmailValidator($this, ['field'=>'email','msg'=>'You must provide a valid email address']));
-            $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Your email address cannot be more that 150 characters']));
-            $this->runValidation(new UniqueValidator($this,['field'=>'email','msg'=>'That email already exists.']));
+            if ($this->username && $this->password) {
+                $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Your email address cannot be more that 150 characters']));
+                $this->runValidation(new UniqueValidator($this,['field'=>'email','msg'=>'That email already exists.']));
+            }
+        
         }
     }
 
