@@ -12,6 +12,7 @@
       "Login": ["index", "forgotPassword", "resetPassword"]
     },
     "Home" : ["logout"],
-    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"]
+    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"],
+    "Gallery" : ["index"]
   }
 }
