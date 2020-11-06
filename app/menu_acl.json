@@ -3,5 +3,6 @@
   "Logout" : "home/logout",
   "Login" : "login/index",
   "Register" : "register/index",
-  "Profile" : "profile/index"
+  "Profile" : "profile/index",
+  "Gallery" : "gallery/index"
 }
