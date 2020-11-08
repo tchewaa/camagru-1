@@ -64,13 +64,10 @@ class RegisterController extends Controller {
                 $verification->save();
                 Router::redirect('login');
             } else {
-                //TODO redirect and display the error
-                echo "Something went wrong";
-
+                $this->view->validationMessages = ['token' => 'Invalid token'];
             }
         } else {
-            //TODO redirect and display the error
-            echo "Something went wrong";
+            $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
         }
     }
 }
