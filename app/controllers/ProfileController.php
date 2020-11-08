@@ -28,17 +28,15 @@ class ProfileController extends Controller {
 
     public function updateUsernameAction() {
         if ($this->request->isPost()) {
-            $user = new Users();
             $this->request->csrfCheck();
-            $user->assign($this->request->get());
-            $user->validator();
+            $this->UsersModel->assign($this->request->get());
+            $this->UsersModel->validator();
             $username = $this->request->get('username');
-            if ($user->validationPassed()) {
-                $u = Users::$currentLoggedInUser;
-                $user->update($u->id, ['username' => $username]);
-                Router::redirect('home');
+            if ($this->UsersModel->validationPassed()) {
+                $this->UsersModel->update(Users::currentUser()->id, ['username' => $username]);
+                Router::redirect('profile/index');
             }
-            $this->view->validationMessages = $user->getErrorMessages();
+            $this->view->validationMessages = $this->UsersModel->getErrorMessages();
         }
         $this->view->render('profile/updateUsername');
     }
@@ -57,7 +55,7 @@ class ProfileController extends Controller {
                     $new_password = password_hash($new_password, PASSWORD_DEFAULT);
                     $id = Users::currentUser()->id;
                     $this->user->update($id, ['password' => $new_password]);
-                    Router::redirect('home');
+                    Router::redirect('profile/index');
                 }
                 $this->view->validationMessages = $this->user->getErrorMessages();
             } else {
@@ -74,16 +72,19 @@ class ProfileController extends Controller {
             $this->request->csrfCheck();
             $email = $this->request->get('email');
             $notification = $this->_getNotificationChecked($this->request->get('notification'));
-            $this->user->assign($this->request->get());
-            $this->user->validator();
-            if ($this->user->validationPassed()) {
+//            $this->user->assign($this->request->get());
+            $this->UsersModel->assign($this->request->get());
+//            $this->user->validator();
+            $this->UsersModel->validator();
+            if ($this->UsersModel->validationPassed()) {
                 $emailExists = $this->UsersModel->findByEmail($email);
                 if (!$emailExists) {
                     $verification = $this->VerificationModel->findFirst([
                         'conditions' => 'user_id = ?',
                         'bind' => [$current_user->id]
                     ]);
-                    if ($verification && $verification->sendVerificationToken($current_user)) {
+                    Helpers::dnd($emailExists);
+                    if ($verification && $verification->sendVerificationToken($this->UsersModel)) {
                         $current_user->update($current_user->id, ['email' => $email, 'notification' => $notification]);
                         $verification->update($current_user->id, ['confirmed' => 0]);
                         $current_user->logout();
