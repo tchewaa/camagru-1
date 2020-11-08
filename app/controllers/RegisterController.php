@@ -12,6 +12,7 @@ class RegisterController extends Controller {
     public function __construct($controller, $action) {
         parent::__construct($controller, $action);
         $this->load_model('Users');
+        $this->load_model('Verification');
         $this->view->setLayout('default');
     }
 
@@ -25,7 +26,7 @@ class RegisterController extends Controller {
             $this->UsersModel->assign($this->request->get());
             $this->UsersModel->setConfirm($this->request->get('confirm'));
             if($this->UsersModel->save()){
-//                $this->_sendConfirmation($this->UsersModel);
+                $this->_sendConfirmation($this->UsersModel);
                 //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
             }
@@ -37,19 +38,18 @@ class RegisterController extends Controller {
 
     public function resendTokenAction() {
         if ($this->request->isPost()) {
-            $user = new Users();
             $this->request->csrfCheck();
-            $user->assign($this->request->get());
-            $user->validator();
-            if ($user->validationPassed()) {
-                $u = $user->findByEmail($user->email);
-                if ($u && $this->_resendToken($u)) {
+            $this->UsersModel->assign($this->request->get());
+            $this->UsersModel->validator();
+            if ($this->UsersModel->validationPassed()) {
+                $user = $this->UsersModel->findByEmail($this->request->get("email"));
+                if ($user && $this->_resendToken($user)) {
                     Router::redirect('login');
                 } else {
                     $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
                 }
             } else {
-                $this->view->validationMessages = $user->getErrorMessages();
+                $this->view->validationMessages = $this->UsersModel->getErrorMessages();
             }
         }
         $this->view->render('register/resendToken');
@@ -57,16 +57,16 @@ class RegisterController extends Controller {
 
     public function verifyAction($username = "", $token = "") {
         if ($username && $token) {
-            $user = new Users($username);
-            $verificationToken = new Verification();
-            $verificationToken = $verificationToken->findByUserId($user->id);
-            if ($verificationToken != null) {
-                $verificationToken->confirmed = 1;
-                $verificationToken->save();
+            $user = $this->UsersModel->findByUsername($username);
+            $verification= $this->VerificationModel->findByUserId($user->id);
+            if ($verification != null) {
+                $verification->confirmed = 1;
+                $verification->save();
                 Router::redirect('login');
             } else {
                 //TODO redirect and display the error
                 echo "Something went wrong";
+
             }
         } else {
             //TODO redirect and display the error
