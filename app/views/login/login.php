@@ -9,9 +9,9 @@ use Core\FormHelper;
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
         <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
-        <?= FormHelper::inputBlock('text','Username','username',$this->auth->username,['class'=>'form-control'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('password','Password','password',$this->auth->password,['class'=>'form-control'],['class'=>'form-group']) ?>
-        <?= FormHelper::checkboxBlock('Remember Me','remember_me',$this->auth->getRememberMeChecked(),[],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('text','Username','username',$this->user->username,['class'=>'form-control'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('password','Password','password',$this->user->password,['class'=>'form-control'],['class'=>'form-group']) ?>
+        <?= FormHelper::checkboxBlock('Remember Me','remember_me',$this->user->getRememberMeChecked(),[],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Login', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
         <div class="text-right">
             <a href="<?=PROOT?>login/forgotPassword" class="text-primary">Forgot password?</a>
