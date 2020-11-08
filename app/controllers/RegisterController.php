@@ -21,18 +21,17 @@ class RegisterController extends Controller {
 
     public function registerUserAction() {
         if($this->request->isPost()) {
-            $newUser = new Users();
             $this->request->csrfCheck();
-            $newUser->assign($this->request->get());
-            $newUser->setConfirm($this->request->get('confirm'));
-            if($newUser->save()){
-                $this->_sendConfirmation($newUser);
+            $this->UsersModel->assign($this->request->get());
+            $this->UsersModel->setConfirm($this->request->get('confirm'));
+            if($this->UsersModel->save()){
+//                $this->_sendConfirmation($this->UsersModel);
                 //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
             }
         }
-        $this->view->user = $newUser;
-        $this->view->validationMessages = $newUser->getErrorMessages();
+        $this->view->user = $this->UsersModel;
+        $this->view->validationMessages = $this->UsersModel->getErrorMessages();
         $this->view->render('register/index');
     }
 
