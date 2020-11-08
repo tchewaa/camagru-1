@@ -17,26 +17,35 @@ class LoginController extends Controller {
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
         $this->load_model('Users');
+        $this->load_model('Verification');
         $this->view->setLayout('default');
     }
 
     public function indexAction() {
         //TODO create index page for login
         $auth = new Auth();
-        if($this->request->isPost()) {
+        if ($this->request->isPost()) {
             // form validation
             $this->request->csrfCheck();
             $auth->assign($this->request->get());
+            //TODO find a way to move validation to the model
             $auth->validator();
-            if($auth->validationPassed()){
+            if ($auth->validationPassed()){
+                //TODO find a way to use a Join technique instead of querying the database twice
                 $user = $this->UsersModel->findByUsername($_POST['username']);
-                //TODO Refactor
-                if($user && password_verify($this->request->get('password'), $user->password)) {
+                $verification = $this->VerificationModel->findFirst([
+                    'conditions' => 'user_id = ?',
+                    'bind' => [$user->id]
+                ]);
+                $passwordVerified = password_verify($this->request->get('password'), $user->password);
+                if ($verification->confirmed == 0) {
+                    $auth->addErrorMessage('username','Please confirm your email before you login');
+                } elseif ($user && $passwordVerified) {
+                    $auth->addErrorMessage('username','There is an error with your username or password');
+                }  else {
                     $remember = $auth->getRememberMeChecked();
                     $user->login($remember);
                     Router::redirect('');
-                }  else {
-                    $auth->addErrorMessage('username','There is an error with your username or password');
                 }
             }
         }
