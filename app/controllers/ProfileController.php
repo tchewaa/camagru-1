@@ -22,8 +22,8 @@ class ProfileController extends Controller {
     }
 
     public function indexAction() {
-        //TODO create index page for profile
-        $this->view->render('profile/updateUsername');
+        $this->view->user = Users::currentUser();
+        $this->view->render('profile/index');
     }
 
     public function updateUsernameAction() {
