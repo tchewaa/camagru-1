@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Models\Users;
+use App\Models\Verification;
 use Core\Controller;
 use Core\Helpers;
 use Core\Router;
@@ -15,6 +16,7 @@ class ProfileController extends Controller {
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
         $this->load_model('Users');
+        $this->load_model('Verification');
         $this->user = new Users();
         $this->view->setLayout('default');
     }
@@ -67,9 +69,42 @@ class ProfileController extends Controller {
     }
 
     public function updateEmailAction() {
+        $current_user = Users::$currentLoggedInUser;
         if ($this->request->isPost()) {
-            echo "Updating Email";
+            $this->request->csrfCheck();
+            $email = $this->request->get('email');
+            $notification = $this->_getNotificationChecked($this->request->get('notification'));
+            $this->user->assign($this->request->get());
+            $this->user->validator();
+            if ($this->user->validationPassed()) {
+                $emailExists = $this->UsersModel->findByEmail($email);
+                if (!$emailExists) {
+                    $verification = $this->VerificationModel->findFirst([
+                        'conditions' => 'user_id = ?',
+                        'bind' => [$current_user->id]
+                    ]);
+                    if ($verification && $verification->sendVerificationToken($current_user)) {
+                        $current_user->update($current_user->id, ['email' => $email, 'notification' => $notification]);
+                        $verification->update($current_user->id, ['confirmed' => 0]);
+                        $current_user->logout();
+                        Router::redirect('login');
+                    }
+                } else {
+                    $this->view->validationMessages = ['email' => 'Email address exists in our records'];
+                }
+            } else {
+                echo 'failed';
+                $this->view->validationMessages = $this->user->getErrorMessages();
+            }
         }
+        $this->view->user = $current_user;
         $this->view->render('profile/updateEmail');
+    }
+
+    protected function _getNotificationChecked($notification) {
+        if ($notification == 'on') {
+            return 1;
+        }
+        return 0;
     }
 }

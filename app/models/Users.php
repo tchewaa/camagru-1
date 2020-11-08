@@ -138,20 +138,28 @@ class Users extends Model {
         }
     }
 
-    public function setConfirm($value){
+    public function setConfirm($value) {
         $this->_confirm = $value;
     }
 
-    public function getConfirm(){
+    public function getConfirm() {
         return $this->_confirm;
     }
 
-    public function getIsLoggedIn(){
+    public function getIsLoggedIn() {
         return $this->_isLoggedIn;
     }
 
-    public function setIsLoggedIn($isLoggedIn){
+    public function setIsLoggedIn($isLoggedIn) {
         $this->_isLoggedIn = $isLoggedIn;
+    }
+
+    public function getNotificationChecked() {
+        if ($this->notification == 1) {
+            return 'on';
+        } else {
+            return 'off';
+        }
     }
 
 }

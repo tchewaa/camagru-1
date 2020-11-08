@@ -28,6 +28,6 @@ class Auth extends Model {
     }
 
     public function getRememberMeChecked(){
-    return $this->remember_me == 'on';
+        return $this->remember_me == 'on';
     }
 }
