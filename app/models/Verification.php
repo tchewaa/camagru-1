@@ -46,7 +46,6 @@ class Verification extends Model {
         $headers = Helpers::getHeaders();
         $subject = 'Camagru: Account confirmation';
         $message = Helpers::formatConfirmationMessage($token, $user);
-        Helpers::dnd(mail($user->email, $subject, $message, $headers));
         if (mail($user->email, $subject, $message, $headers)) return true;
         return false;
     }
