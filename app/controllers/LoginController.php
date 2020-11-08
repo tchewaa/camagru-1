@@ -28,25 +28,28 @@ class LoginController extends Controller {
             // form validation
             $this->request->csrfCheck();
             $auth->assign($this->request->get());
+            $user = $this->UsersModel->findByUsername($_POST['username']);
             //TODO find a way to move validation to the model
             $auth->validator();
-            if ($auth->validationPassed()){
+            if ($auth->validationPassed() && $user){
                 //TODO find a way to use a Join technique instead of querying the database twice
-                $user = $this->UsersModel->findByUsername($_POST['username']);
                 $verification = $this->VerificationModel->findFirst([
                     'conditions' => 'user_id = ?',
                     'bind' => [$user->id]
                 ]);
                 $passwordVerified = password_verify($this->request->get('password'), $user->password);
+//                Helpers::dnd($passwordVerified);
                 if ($verification->confirmed == 0) {
                     $auth->addErrorMessage('username','Please confirm your email before you login');
-                } elseif ($user && $passwordVerified) {
+                } elseif (!$passwordVerified) {
                     $auth->addErrorMessage('username','There is an error with your username or password');
                 }  else {
                     $remember = $auth->getRememberMeChecked();
                     $user->login($remember);
                     Router::redirect('');
                 }
+            } else {
+                $auth->addErrorMessage('username','There is an error with your username or password');
             }
         }
         $this->view->auth = $auth;
