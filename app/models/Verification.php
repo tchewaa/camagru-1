@@ -55,7 +55,6 @@ class Verification extends Model {
         $subject = 'Camagru: Forgot your password?';
         $message = Helpers::formatForgotPasswordMessage($token, $user);
         if (mail($user->email, $subject, $message, $headers)) return true;
-        Helpers::dnd($message);
     }
 
 }

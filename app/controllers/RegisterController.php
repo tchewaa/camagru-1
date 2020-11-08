@@ -16,11 +16,10 @@ class RegisterController extends Controller {
     }
 
     public function indexAction() {
-        //TODO create index page for register
-        $this->view->render('register/register');
+        $this->view->render('register/index');
     }
 
-    public function registerAction() {
+    public function registerUserAction() {
         if($this->request->isPost()) {
             $newUser = new Users();
             $this->request->csrfCheck();
@@ -34,7 +33,7 @@ class RegisterController extends Controller {
         }
         $this->view->user = $newUser;
         $this->view->validationMessages = $newUser->getErrorMessages();
-        $this->view->render('register/register');
+        $this->view->render('register/index');
     }
 
     public function resendTokenAction() {
@@ -44,8 +43,8 @@ class RegisterController extends Controller {
             $user->assign($this->request->get());
             $user->validator();
             if ($user->validationPassed()) {
-                $user = $user->findByEmail($user->email);
-                if ($user && $this->_resendToken($user)) {
+                $u = $user->findByEmail($user->email);
+                if ($u && $this->_resendToken($u)) {
                     Router::redirect('login');
                 } else {
                     $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
@@ -61,10 +60,6 @@ class RegisterController extends Controller {
         if ($username && $token) {
             $user = new Users($username);
             $verificationToken = new Verification();
-//            $emailVerification = $emailVerification->findFirst([
-//            'conditions' => 'user_id = ?',
-//            'bind' => [$user->id]
-//            ]);
             $verificationToken = $verificationToken->findByUserId($user->id);
             if ($verificationToken != null) {
                 $verificationToken->confirmed = 1;

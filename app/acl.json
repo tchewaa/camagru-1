@@ -2,7 +2,7 @@
   "Guest" : {
     "denied" : {},
     "Home" : ["index"],
-    "Register": ["index", "register", "verify", "resendToken"],
+    "Register": ["index", "registerUser", "verify", "resendToken"],
     "Login": ["index", "forgotPassword", "resetPassword"],
     "Restricted" : ["*"]
   },
@@ -12,6 +12,7 @@
       "Login": ["index", "forgotPassword", "resetPassword"]
     },
     "Home" : ["logout"],
-    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"]
+    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"],
+    "Gallery" : ["index", "upload"]
   }
 }

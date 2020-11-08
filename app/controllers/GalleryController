@@ -1,0 +1,33 @@
+<?php
+
+
+namespace App\Controllers;
+
+
+use App\Models\Users;
+use Core\Controller;
+use Core\Helpers;
+use Core\Router;
+
+class GalleryController extends Controller {
+    public $user;
+
+    public function __construct($controller, $action){
+        parent::__construct($controller, $action);
+        $this->load_model('Users');
+        // $this->user = new Users();
+        $this->view->setLayout('default');
+    }
+
+    public function indexAction() {
+        //TODO create index page for profile
+        Helpers::dnd("test");
+        $this->view->render('gallery/index');
+    }
+
+    public function uploadAction() {
+        //TODO create index page for profile
+        Helpers::dnd("test");
+        $this->view->render('gallery/index');
+    }
+}
