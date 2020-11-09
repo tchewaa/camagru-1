@@ -25,7 +25,7 @@
         <div class="col-md-6 col-md-offset-3 jumbotron submit-form">
             <form action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="get_image">
                 <label>Image File:</label><br/>
-                <input type="file" id="imageLoader" name="imageLoader"/>
+                <input name="imageLoader" id="imageLoader" type="file"/>
                 <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
                 <input name="hidden_data" id='hidden_data' type="hidden"/>
                 <input name="hidden_top" id='hidden_top' type="hidden"/>
