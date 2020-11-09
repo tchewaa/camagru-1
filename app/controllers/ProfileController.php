@@ -17,7 +17,6 @@ class ProfileController extends Controller {
         parent::__construct($controller, $action);
         $this->load_model('Users');
         $this->load_model('Verification');
-        $this->user = new Users();
         $this->view->setLayout('default');
     }
 
@@ -48,13 +47,13 @@ class ProfileController extends Controller {
             $new_password = $this->request->get('new_password');
             $confirm_password = $this->request->get('confirm_password');
             if (password_verify($current_password, Users::currentUser()->password)) {
-                $this->user->password = $new_password;
-                $this->user->setConfirm($confirm_password);
-                $this->user->validator();
-                if ($this->user->validationPassed()) {
+                $this->UsersModel->password = $new_password;
+                $this->UsersModel->setConfirm($confirm_password);
+                $this->UsersModel->validator();
+                if ($this->UsersModel->validationPassed()) {
                     $new_password = password_hash($new_password, PASSWORD_DEFAULT);
                     $id = Users::currentUser()->id;
-                    $this->user->update($id, ['password' => $new_password]);
+                    $this->UsersModel->update($id, ['password' => $new_password]);
                     Router::redirect('profile/index');
                 }
                 $this->view->validationMessages = $this->user->getErrorMessages();
