@@ -52,6 +52,7 @@ class GalleryController extends Controller {
         } else {
             Router::redirect('gallery');
         }
+        
     }
 
     public function getFrame($src) {
