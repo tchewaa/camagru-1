@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Core\Model;
 
-class Images extends Model {
+class Gallery extends Model {
     public $id;
     public $user_id;
     public $image_name;
