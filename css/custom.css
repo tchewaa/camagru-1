@@ -3,48 +3,6 @@
     padding: 0px;
 }
 
-.red {
-    color: red;
-}
-
-/* The Modal (background) */
-.modal {
-    display: block; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 h1, h2, h3, h4, h5, h6, .navbar, .form {
     font-family: 'Poor Story', cursive;
 }
@@ -52,6 +10,45 @@ h1, h2, h3, h4, h5, h6, .navbar, .form {
 body {
     margin: 0px;
     padding: 0px;
+}
+
+nav a, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav a, a:hover {
+    text-decoration: none;
+}
+
+nav {
+    background-color: darkslategrey;
+    border-bottom: 10px solid #f5c6cb;
+    color: white;
+}
+
+div.polaroid {
+    width: 80%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+}
+
+div.container {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.btn {
+    text-decoration: none;
+    color: white;
+    background-color: darkslategrey;
+}
+
+.btn:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #4e555b;
 }
 
 .frame {
@@ -109,59 +106,13 @@ img {
     }
 }
 
-div.polaroid {
-    width: 80%;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 25px;
-}
-
-div.container {
-    text-align: center;
-    padding: 10px 20px;
-}
-
-nav a, a:focus, a:active {
-    text-decoration: none;
-    color: inherit;
-}
-
-nav a, a:hover {
-    text-decoration: none;
-}
-
-nav {
-    background-color: darkslategrey;
-    border-bottom: 10px solid #f5c6cb;
-    color: white;
-}
-
-form {
-    padding-top: 2em;
-}
-
-.btn {
-    text-decoration: none;
-    color: white;
-    background-color: darkslategrey;
-}
-
-.btn:hover {
-    text-decoration: none;
-    color: white;
-    background-color: #4e555b;
-}
-
-.container-fluid {
-    /*min-height: cal();*/
-}
-
 .error {
     color: white;
 }
 
-.red {
-    color: red;
+/*Form*/
+form {
+    padding-top: 2em;
 }
 
 .form-errors{
@@ -179,6 +130,54 @@ form {
 .form-errors li {
     list-style: none;
     font-size: 16px;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Sticker*/
+
+.sticker {
+    width: auto;
+    height: auto;
+    max-width: 160px;
+    max-height: 120px;
 }
 
 footer {

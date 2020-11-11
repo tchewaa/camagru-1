@@ -6,13 +6,14 @@
         <nav class="sidebar-nav">
             <ul class="nav">
                 <?php
-                $fileDir = ROOT . DS . 'app' . DS . 'resources' . DS . 'stickers';
-                if (!is_dir($fileDir)) {
+                //TODO refactor: move to Helpers class - getStickers()
+                $fileDir = ROOT . DS . 'app' . DS . 'assets' . DS . 'stickers';
+                if (is_dir($fileDir)) {
                     $files = scandir($fileDir);
                     $itr = 2;
                     while ($itr < count($files)) {
                         echo '<li class="nav-item">';
-                        echo "<img src=\"" . PROOT . 'app' . DS . 'resources' . DS . "stickers" . DS . "{$files[$itr]}\" class=\"frame\" alt=\"frame\" style=\"width: 100%; height: 100%; max-width: 160px; max-height: 120px;\">";
+                        echo "<img src=\"" . PROOT . 'app' . DS . 'assets' . DS . "stickers" . DS . "{$files[$itr]}\" class=\"frame sticker\" alt=\"frame\">";
                         echo '</li>';
                         $itr++;
                     }
