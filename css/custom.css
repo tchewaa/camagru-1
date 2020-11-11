@@ -192,6 +192,30 @@ form {
     max-height: 100px;
 }
 
+
+/*gallery*/
+
+.top-container {
+    width: 500px;
+    margin: 30px auto;
+}
+
+.bottom-container {
+    max-width: 960px;
+    margin: auto;
+    padding: 10px;
+}
+
+#photos img {
+    width: 100%;
+    border: 3px #fff solid;
+}
+
+#canvas {
+    display: none;
+}
+
+
 footer {
     text-align: center;
     background-color: darkslategrey;

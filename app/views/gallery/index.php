@@ -20,27 +20,28 @@
             ?>
         </ul>
     </div>
-    <div class="main-section" style="flex: 2;">
-        <div class="col-md-6  submit-form">
-            <form action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="get_image">
-                <label>Image File:</label><br/>
-                <input class="form-group" name="image" id="imageLoader" type="file"/>
-                <input name="hidden_data" id='hidden_data' type="hidden"/>
-                <input name="hidden_top" id='hidden_top' type="hidden"/>
-                <input type="submit" class="btn btn-primary btn-large" value="upload" id="image_submit">
-                <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
-            </form>
+    <div class="main-section">
+        <div class="top-container">
+            <video id="video">Stream not available</video>
+            <button class="btn btn-dark" id="photo-button">
+                Take Photo
+            </button>
+            <select id="photo-filter">
+                <option value="none">Normal</option>
+                <option value="grayscale(100%)">Grayscale</option>
+                <option value="sepia(100%)">Sepia</option>
+                <option value="invert(100%)">Invert</option>
+                <option value="hue-rotate(90deg)">Hue</option>
+                <option value="blur(10px)">Blur</option>
+                <option value="contrast(200%)">Contrast</option>
+            </select>
+            <button class="btn btn-dark" id="clear-button">Clear</button>
+            <canvas id="canvas"></canvas>
         </div>
-        <canvas id="canvas" style="display: none;"></canvas>
-        <br>
-        <canvas id="imageCanvas" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;"></canvas></center>
-        <div class="camera">
-            <video id="video" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;">Video stream not available</video> <br />
-            <button id="startbutton" class="btn btn-primary btn-large" style="display: inline-block;">Take photo</button>
+        <div class="bottom-container">
+            <div id="photos"></div>
         </div>
-    </div>
-    <div class="side-bar jumbotron">
-        <h4>Your Images:</h4>
     </div>
 </div>
+<script type="text/javascript" src="<?=PROOT?>js/webcam.js"></script>
 <?php $this->end(); ?>

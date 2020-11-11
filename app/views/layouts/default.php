@@ -15,10 +15,7 @@ use Core\Session;
     <link type="text/css" rel="stylesheet" href="<?=PROOT?>css/custom.css" media="screen" title="no title" charset="UTF-8">
     <!-- TODO delete this, this the PDF states that no javascript framework are allowed   -->
     <script type="text/javascript" src="<?=PROOT?>js/jQuery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="<?=PROOT?>js/camcontrol.js"></script>
-    <script type="text/javascript" src="<?=PROOT?>js/canvas.js"></script>
     <script type="text/javascript" src="<?=PROOT?>js/custom.js"></script>
-    <script type="text/javascript" src="<?=PROOT?>js/modal.js"></script>
     <script type="text/javascript" src="<?=PROOT?>js/bootstrap.min.js"></script>
     <?= $this->content('head'); ?>
 </head>

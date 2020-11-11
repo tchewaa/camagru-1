@@ -42,7 +42,7 @@ function closeMenusOnResize() {
 
 // Event listeners
 window.addEventListener('resize', closeMenusOnResize, false);
-toggle.addEventListener('click', toggleMenu, false);
+// toggle.addEventListener('click', toggleMenu, false);
 
 
 function hasClass(element, className) {
@@ -94,3 +94,6 @@ document.addEventListener("click", function (e) {
         }
     }, false);
 })();
+
+
+//WTRC API
