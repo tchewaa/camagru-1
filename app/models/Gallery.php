@@ -4,6 +4,7 @@
 namespace App\Models;
 
 
+use Core\Helpers;
 use Core\Model;
 
 class Gallery extends Model {
@@ -18,12 +19,11 @@ class Gallery extends Model {
     }
 
     public function upload($file, $name) {
-        $user = currentUser();
+        $user = Users::currentUser();
         $this->user_id = $user->id;
         $this->image_name = $name;
         $this->image_data = $file;
-        $this->save();
-        Router::redirect('');
+        return $this->save();
     }
 
 }

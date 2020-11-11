@@ -1,7 +1,7 @@
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
 <div class="primary">
-    <div class="side-bar sidebar jumbotron" style="flex: 1; max-width: 400px;">
+    <div class="side-bar sidebar jumbotron">
         <h4>Select a frame for your picture</h4>
         <nav class="sidebar-nav">
             <ul class="nav">
@@ -26,7 +26,7 @@
         <div class="col-md-6 col-md-offset-3 jumbotron submit-form">
             <form action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="get_image">
                 <label>Image File:</label><br/>
-                <input name="imageLoader" id="imageLoader" type="file"/>
+                <input name="image" id="imageLoader" type="file"/>
                 <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
                 <input name="hidden_data" id='hidden_data' type="hidden"/>
                 <input name="hidden_top" id='hidden_top' type="hidden"/>

@@ -1,3 +1,4 @@
+console.log('test 1');
 window.onload = function(){
     var camera = document.querySelector('.camera');
     var body = this.document.querySelector('.container-fluid');
@@ -6,6 +7,7 @@ window.onload = function(){
 }
 
 function toggleCamera() {
+    console.log('test');
     var camera = document.querySelector('.camera');
     if (camera.style.display == 'none') {
         camera.setAttribute('style', 'display: inline block');

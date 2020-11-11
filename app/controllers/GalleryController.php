@@ -13,7 +13,7 @@ class GalleryController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Images');
+        $this->load_model('Gallery');
         $this->view->setLayout('default');
     }
 
@@ -24,7 +24,6 @@ class GalleryController extends Controller {
 
     public function uploadAction() {
         $newDims = ['x' => 640, 'y' => 480];
-        Helpers::dnd($this->request->get());
         if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
             $this->getFrame($_POST['hidden_top']);
             $image = $_POST['hidden_data'];
@@ -49,10 +48,13 @@ class GalleryController extends Controller {
             imagedestroy($new_img);
             imagedestroy($img_src);
             $this->_saveImage($data);
-        } else {
-            Router::redirect('gallery');
+        } elseif (isset($_FILES)) {
+            $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+            if ($this->_saveImage($image)) {
+                echo "Image saved...";
+            }
         }
-        
+        Router::redirect('gallery');
     }
 
     public function getFrame($src) {
@@ -60,10 +62,9 @@ class GalleryController extends Controller {
         return $newFrame;
     }
 
-    private function _saveImage($data) {
-//        $imageSaver = new Image();
+    private function _saveImage($image) {
         $type = 'data:image/jpeg;base64, ';
-        $data = $type . $data;
-        $this->ImagesModel->upload($data, Users::currentUser()->username . time());
+        $image = $type . $image;
+        return $this->GalleryModel->upload($image, Users::currentUser()->username . time());
     }
 }
