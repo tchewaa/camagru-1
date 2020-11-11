@@ -53,7 +53,7 @@ class ProfileController extends Controller {
                 if ($this->UsersModel->validationPassed()) {
                     $new_password = password_hash($new_password, PASSWORD_DEFAULT);
                     $id = Users::currentUser()->id;
-                    $this->UsersModel->update($id, ['password' => $new_password]);
+                    $this->UsersMode->update($id, ['password' => $new_password]);
                     Router::redirect('profile/index');
                 }
                 $this->view->validationMessages = $this->user->getErrorMessages();
