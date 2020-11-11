@@ -1,6 +1,6 @@
-const imageLoader = document.getElementById('imageLoader');
-console.log(imageLoader);
-imageLoader.addEventListener('change', handleImage, false);
+// const imageLoader = document.getElementById('image');
+// console.log(imageLoader);
+// imageLoader.addEventListener('change', handleImage, false);
 var canvas = document.getElementById('imageCanvas');
 var ctx = canvas.getContext('2d');
 var fd = new FormData(document.forms["get_image"]);

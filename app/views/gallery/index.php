@@ -20,30 +20,24 @@
             ?>
         </ul>
     </div>
-    <div class="main-section" style="flex: 2;" class="container">
-        <canvas id="canvas" style="display: none;"></canvas>
-        <br>
-        <center><canvas id="imageCanvas" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;"></canvas></center>
-        <center>
-            <div class="camera">
-                <video id="video" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;">Video stream not available</video> <br />
-                <button id="startbutton" class="btn btn-primary btn-large" style="display: inline-block;">Take photo</button>
-            </div>
-        </center>
-        <div class="col-md-6 col-md-offset-3 jumbotron submit-form">
+    <div class="main-section" style="flex: 2;">
+        <div class="col-md-6  submit-form">
             <form action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="get_image">
                 <label>Image File:</label><br/>
-                <input name="image" id="imageLoader" type="file"/>
-                <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
+                <input class="form-group" name="image" id="imageLoader" type="file"/>
                 <input name="hidden_data" id='hidden_data' type="hidden"/>
                 <input name="hidden_top" id='hidden_top' type="hidden"/>
-                <div class="pull-right">
-                    <input type="submit" class="btn btn-primary btn-large" value="submit" id="image_submit">
-                </div>
+                <input type="submit" class="btn btn-primary btn-large" value="upload" id="image_submit">
+                <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
             </form>
         </div>
-        <script src="#"></script>
-        <script src="#"></script>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <br>
+        <canvas id="imageCanvas" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;"></canvas></center>
+        <div class="camera">
+            <video id="video" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;">Video stream not available</video> <br />
+            <button id="startbutton" class="btn btn-primary btn-large" style="display: inline-block;">Take photo</button>
+        </div>
     </div>
     <div class="side-bar jumbotron">
         <h4>Your Images:</h4>
