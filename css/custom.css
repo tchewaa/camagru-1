@@ -226,6 +226,10 @@ form {
     text-align: center;
 }
 
+#image-upload {
+    display: inline-block;
+}
+
 ::-webkit-file-upload-button {
     background: #FF4B2B;
     color: white;
