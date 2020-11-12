@@ -222,6 +222,10 @@ form {
     display: none;
 }
 
+#gallery {
+    text-align: center;
+}
+
 ::-webkit-file-upload-button {
     background: #FF4B2B;
     color: white;
