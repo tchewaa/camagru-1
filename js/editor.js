@@ -11,6 +11,7 @@ const photos = document.getElementById('photos');
 const photoButton = document.getElementById('photo-button');
 const clearButton = document.getElementById('clear-button');
 const photoFilter = document.getElementById('photo-filter');
+const imageUpload = document.getElementById('image-upload');
 
 //Get stream
 navigator.mediaDevices.getUserMedia({video: true, audio: false}
@@ -50,6 +51,19 @@ photoButton.addEventListener('click', function(e) {
 }, false);
 
 
+//image upload
+const handleImage = (e) => {
+	// const selectedFiles = [...imageUpload.files];
+	const context = canvas.getContext('2d');
+
+	// console.log(e.target.files[0]);
+	const image = e.target.files[0];
+	context.drawImage(image, 0, 0, width, height);
+
+	e.preventDefault();
+}
+imageUpload.addEventListener("change", handleImage);
+
 //filter event
 photoFilter.addEventListener('click', function(e) {
 	//set filter to choosen option
@@ -72,6 +86,7 @@ clearButton.addEventListener('click', function(e) {
 	//reset select list
 	photoFilter.selectedIndex = 0;
 })
+
 
 // take picture from canvas
 function takePicture() {

@@ -10,7 +10,10 @@
                     <button class="btn btn-dark" id="photo-button">
                         Take Photo
                     </button>
-                    <input name="image" id="image-upload" type="file"/>
+                    <form id="upload-form" action="<?=PROOT?>gallery/upload" method="post">
+                        <input id="image-upload" name="image-upload" type="file"/>
+                        <input class="btn btn-dark" value="upload" type="submit"/>
+                    </form>
 <!--                    <select class="btn btn-dark" id="photo-filter" >-->
 <!--                        <option value="none">Normal</option>-->
 <!--                        <option value="grayscale(100%)">Grayscale</option>-->
@@ -21,19 +24,19 @@
 <!--                        <option value="contrast(200%)">Contrast</option>-->
 <!--                    </select>-->
                     <div id="stickers">
-                        <input type="checkbox" name="sticker-menu2" id="sticker1" value="">
+                        <input type="checkbox" name="sticker-menu" id="sticker1" value="">
                         <label for="sticker1">
                             <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
                         </label>
-                        <input type="checkbox" name="sticker-menu2" id="sticker1" value="">
+                        <input type="checkbox" name="sticker-menu" id="sticker2" value="">
                         <label for="sticker2">
                             <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
                         </label>
-                        <input type="checkbox" name="sticker-menu2" id="sticker1" value="">
+                        <input type="checkbox" name="sticker-menu" id="sticker3" value="">
                         <label for="sticker1">
                             <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
                         </label>
-                        <input type="checkbox" name="sticker-menu2" id="sticker1" value="">
+                        <input type="checkbox" name="sticker-menu" id="sticker4" value="">
                         <label for="sticker2">
                             <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
                         </label>
@@ -63,5 +66,5 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="<?=PROOT?>js/webcam.js"></script>
+<script type="text/javascript" src="<?=PROOT?>/js/editor.js"></script>
 <?php $this->end(); ?>
