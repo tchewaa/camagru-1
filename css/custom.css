@@ -97,17 +97,6 @@ img {
     overflow: auto;
 }
 
-.primary {
-    display: flex;
-    flex-direction: row;
-}
-
-.primary .main-section .submit-form {
-    width: 100%;
-    margin: 0px;
-    background-color: white;
-}
-
 @media only screen and (max-width: 600px) {
     .gallery img{
         width: 100%;
@@ -194,6 +183,24 @@ form {
 
 
 /*gallery*/
+
+.sidebar {
+    margin-right: 15em;
+    float: right;
+    text-align:center; /*It will center the content inside block*/
+}
+
+.thumbnail {
+    border:0;
+}
+.thumbnail a{
+    display:block;
+    padding:10px;
+    background:red;
+}
+.thumbnail img{
+    width:100%;
+}
 
 .top-container {
     width: 500px;
