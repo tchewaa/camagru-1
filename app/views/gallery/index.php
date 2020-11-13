@@ -23,6 +23,7 @@
 <!--                        <option value="blur(10px)">Blur</option>-->
 <!--                        <option value="contrast(200%)">Contrast</option>-->
 <!--                    </select>-->
+                    
                     <div id="stickers">
                         <input type="checkbox" name="sticker-menu" id="sticker1" value="">
                         <label for="sticker1">
