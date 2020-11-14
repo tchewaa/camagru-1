@@ -1,71 +1,70 @@
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
     <div class="row" id="gallery">
-        <div class="col-md-8 jumbotron">
+        <div class="jumbotron">
             <h3>Upload or Take a Picture</h3>
             <div class="row">
                 <div class="col-md-6">
-                    <h3>Editor</h3>
+                    <h3>Webcam</h3>
                     <video id="video">Stream not available</video>
-                    <button class="btn btn-dark" id="photo-button">
-                        Take Photo
-                    </button>
-                    <form id="upload-form" action="<?=PROOT?>gallery/upload" method="post">
-                        <input id="image-upload" name="image-upload" type="file"/>
-                        <input class="btn btn-dark" value="upload" type="submit"/>
-                    </form>
-<!--                    <select class="btn btn-dark" id="photo-filter" >-->
-<!--                        <option value="none">Normal</option>-->
-<!--                        <option value="grayscale(100%)">Grayscale</option>-->
-<!--                        <option value="sepia(100%)">Sepia</option>-->
-<!--                        <option value="invert(100%)">Invert</option>-->
-<!--                        <option value="hue-rotate(90deg)">Hue</option>-->
-<!--                        <option value="blur(10px)">Blur</option>-->
-<!--                        <option value="contrast(200%)">Contrast</option>-->
-<!--                    </select>-->
-                    
-                    <div id="stickers">
-                        <input type="checkbox" name="sticker-menu" id="sticker1" value="">
-                        <label for="sticker1">
-                            <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
-                        </label>
-                        <input type="checkbox" name="sticker-menu" id="sticker2" value="">
-                        <label for="sticker2">
-                            <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
-                        </label>
-                        <input type="checkbox" name="sticker-menu" id="sticker3" value="">
-                        <label for="sticker1">
-                            <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
-                        </label>
-                        <input type="checkbox" name="sticker-menu" id="sticker4" value="">
-                        <label for="sticker2">
-                            <img src="<?=PROOT?>app/assets/stickers/580b57fcd9996e24bc43c319.png" width="100px" height="100px"  alt="sticker 1">
-                        </label>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-dark" id="photo-button">Take Photo</button>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="upload-form" action="<?=PROOT?>gallery/upload" method="post">
+                                <input id="image-upload" name="image-upload" type="file"/>
+                                <input class="btn btn-dark" value="upload" type="submit"/>
+                            </form>  
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Captured Image</h3>
+                    <h3>Editor</h3>
                     <canvas id="canvas"></canvas>
-                    <button class="btn btn-dark" id="clear-button">Clear</button>
                     <!--TODO do I need this-->
                     <div id="photos"></div>
+                    <div id="stickers" class="hide">
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="1.png">
+                        <label for="sticker1">
+                            <img src="<?=PROOT?>app/assets/stickers/1.png" width="100px" height="100px"  alt="sticker 1">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="2.png">
+                        <label for="sticker2">
+                            <img src="<?=PROOT?>app/assets/stickers/2.png" width="100px" height="100px"  alt="sticker 2">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="3.png">
+                        <label for="sticker1">
+                            <img src="<?=PROOT?>app/assets/stickers/3.png" width="100px" height="100px"  alt="sticker 3">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="4.png">
+                        <label for="sticker2">
+                            <img src="<?=PROOT?>app/assets/stickers/4.png" width="100px" height="100px"  alt="sticker 4">
+                        </label>
+                </div>
+                    <button class="btn btn-dark hide" id="save-button">Save</button>
+                    <button class="btn btn-dark hide" id="clear-button">Clear</button>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 sidebar">
-            <h3>Your images</h3>
             <div class="row">
-                <div class="col-sm-6 thumbnail">
-                    <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
-                </div>
-                <div class="col-sm-6 thumbnail">
-                    <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
-                </div>
-                <div class="col-sm-6 thumbnail">
-                    <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                <div class="col-sm-12">
+                    <h3>Your images</h3>
+                    <div class="row">
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<script type="text/javascript" src="<?=PROOT?>/js/editor.js"></script>
+<script type="text/javascript" src="<?=PROOT?>js/editor.js"></script>
 <?php $this->end(); ?>

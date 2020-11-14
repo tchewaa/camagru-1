@@ -199,7 +199,7 @@ form {
     background:red;
 }
 .thumbnail img{
-    width:100%;
+    width:100px;
 }
 
 .top-container {
@@ -226,12 +226,13 @@ form {
     text-align: center;
 }
 
-#image-upload {
-    display: inline-block;
-}
-
 #upload-form {
     display: inline;
+}
+
+.hide {
+    display: none;
+    visibility: hidden;
 }
 
 ::-webkit-file-upload-button {
