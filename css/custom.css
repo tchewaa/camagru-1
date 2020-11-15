@@ -1,6 +1,15 @@
-.test {
-    color: red;
-    text-align: center;
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar, .form {
+    font-family: 'Poor Story', cursive;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
 }
 
 nav a, a:focus, a:active {
@@ -18,8 +27,29 @@ nav {
     color: white;
 }
 
-form {
-    padding-top: 2em;
+.main-section {
+
+}
+
+.sidebar {
+    flex: 1;
+    max-width: 400px;
+}
+
+.side-bar nav {
+    background-color: transparent;
+}
+
+div.polaroid {
+    width: 80%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+}
+
+div.container {
+    text-align: center;
+    padding: 10px 20px;
 }
 
 .btn {
@@ -34,16 +64,57 @@ form {
     background-color: #4e555b;
 }
 
-.container-fluid {
-    /*min-height: cal();*/
+.frame {
+    transition: all .2s ease-in-out;
+}
+
+.frame:hover {
+    transform: scale(1.1);
+}
+
+.mypics {
+    width: 20%;
+    height: 20%;
+    padding: 15px;
+}
+
+img {
+    padding: 15px;
+}
+
+.gallery {
+    padding-left: 10%;
+}
+
+.user_images {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.end-section {
+    height: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .gallery img{
+        width: 100%;
+        height: 100%;
+    }
+    .primary {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .error {
     color: white;
 }
 
-.red {
-    color: red;
+/*Form*/
+form {
+    padding-top: 2em;
 }
 
 .form-errors{
@@ -61,6 +132,128 @@ form {
 .form-errors li {
     list-style: none;
     font-size: 16px;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Sticker*/
+
+.sticker {
+
+    max-width: 100px;
+    max-height: 100px;
+}
+
+
+/*gallery*/
+
+.sidebar {
+    margin-right: 15em;
+    float: right;
+    text-align:center; /*It will center the content inside block*/
+}
+
+.thumbnail {
+    border:0;
+}
+.thumbnail a{
+    display:block;
+    padding:10px;
+    background:red;
+}
+.thumbnail img{
+    width:100px;
+}
+
+.top-container {
+    width: 500px;
+    margin: 30px auto;
+}
+
+.bottom-container {
+    max-width: 960px;
+    margin: auto;
+    padding: 10px;
+}
+
+#photos img {
+    width: 100%;
+    border: 3px #fff solid;
+}
+
+#canvas {
+    display: none;
+}
+
+#gallery {
+    text-align: center;
+}
+
+#upload-form {
+    display: inline;
+}
+
+.hide {
+    display: none;
+    visibility: hidden;
+}
+
+::-webkit-file-upload-button {
+    background: darkslategrey;
+    color: white;
+    padding: 8px 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.15s ease;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    line-height: 1.5;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
 }
 
 footer {
