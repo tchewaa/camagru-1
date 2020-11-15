@@ -19,6 +19,7 @@ class GalleryController extends Controller {
 
     public function indexAction() {
         //TODO create index page for profile
+        $this->view->userImages = $this->GalleryModel->getUserImages();
         $this->view->render('gallery/index');
     }
 
@@ -83,9 +84,10 @@ class GalleryController extends Controller {
             $imageData = base64_encode($imageData);
             $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
             if ($this->_saveImage($base64Image)) {
-                echo $base64Image;
+                // echo $base64Image;
             }
         }
+        $this->view->userImages = $this->GalleryModel->getUserImages();
         $this->view->render('gallery/index');
         // Router::redirect('gallery');
     }
