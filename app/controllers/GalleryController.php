@@ -26,7 +26,10 @@ class GalleryController extends Controller {
         // $image = file_get_contents($_POST['selectedStickers'][0]);
         $stickerArray = explode(',', $_POST['selectedStickers']);
         // $image = imagecreatefromstring(file_get_contents($stickerArray[0]));
+        // $test = ROOT . $stickerArray[0];
         Helpers::dnd($stickerArray);
+        $test = file_get_contents(ROOT . '/app/assets/stickers/1.png');
+        Helpers::dnd($test);
         $newDims = ['x' => 640, 'y' => 480];
         if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
             $this->getFrame($_POST['hidden_top']);
