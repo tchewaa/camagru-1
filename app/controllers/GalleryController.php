@@ -25,11 +25,18 @@ class GalleryController extends Controller {
     public function uploadAction() {
         // $image = file_get_contents($_POST['selectedStickers'][0]);
         $stickerArray = explode(',', $_POST['selectedStickers']);
+        $stickerName = explode('/', $stickerArray[0]);
+        // Helpers::dnd($stickerName[5]);
         // $image = imagecreatefromstring(file_get_contents($stickerArray[0]));
         // $test = ROOT . $stickerArray[0];
-        Helpers::dnd($stickerArray);
-        $test = file_get_contents(ROOT . '/app/assets/stickers/1.png');
-        Helpers::dnd($test);
+        $stickerImage = imagecreatefromjpeg(ROOT . '/app/assets/stickers/' . $stickerName[5]);
+        $stickerWidth = imagesx($stickerImage);
+        $stickerHeigth = imagesy($stickerImage);
+        Helpers::dnd("sticker image " . $stickerImage);
+        Helpers::dnd("sticker width " . $stickerWidth);
+        Helpers::dnd("sticker heigth " . $stickerHeigth);
+
+        // Helpers::dnd(imagesx($stickerImage));
         $newDims = ['x' => 640, 'y' => 480];
         if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
             $this->getFrame($_POST['hidden_top']);
