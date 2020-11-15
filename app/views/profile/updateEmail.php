@@ -8,9 +8,14 @@ use Core\FormHelper;
     <h3 class="text-center">Update Email</h3>
     <form class="form" action="" method="post">
         <?= FormHelper::csrfInput() ?>
-        <!--        FormHelper::displayErrors($this->displayErrors)-->
+        <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <?= FormHelper::inputBlock('email','Email','email',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::checkboxBlock('Notification','notification',$this->user->getNotificationChecked(),['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Update', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
+        <div class="text-center">
+            <a href="<?=PROOT?>profile/updateUsername"><h5>Update Username</h5></a>
+            <a href="<?=PROOT?>profile/updateEmail"><h5>Update Password</h5></a>
+        </div>
     </form>
 </div>
 <?php $this->end(); ?>

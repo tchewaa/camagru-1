@@ -11,7 +11,8 @@ class Auth extends Model {
     public $username, $password, $email, $remember_me, $confirm_password;
 
     public function __construct(){
-        parent::__construct('tmp_fake');
+        $table = 'users';
+        parent::__construct($table);
     }
 
     public function validator() {
@@ -28,6 +29,6 @@ class Auth extends Model {
     }
 
     public function getRememberMeChecked(){
-    return $this->remember_me == 'on';
+        return $this->remember_me == 'on';
     }
 }

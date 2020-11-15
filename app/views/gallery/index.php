@@ -1,41 +1,70 @@
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
-<div class="primary">
-    <div class="side-bar sidebar jumbotron" style="flex: 1; max-width: 300px;">
-        <h4>Select a frame for your picture</h4>
-        <nav class="sidebar-nav">
-            <ul class="nav">
-
-            </ul>
-        </nav>
-    </div>
-    <div class="main-section" style="flex: 2;" class="container">
-        <div class="col-md-6 col-md-offset-3 jumbotron submit-form">
-            <form action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="get_image">
-            <label>Image File:</label><br/>
-            <input type="file" id="imageLoader" name="imageLoader"/>
-            <input type="button" value="Camera" class="btn btn-large btn-primary" onclick="toggleCamera()" id="photograph">
-            <input name="hidden_data" id='hidden_data' type="hidden"/>
-            <input name="hidden_top" id='hidden_top' type="hidden"/>
-            <div class="pull-right">
-                <input type="submit" class="btn btn-primary btn-large" value="submit" id="image_submit">
+    <div class="row" id="gallery">
+        <div class="jumbotron">
+            <h3>Upload or Take a Picture</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Webcam</h3>
+                    <video id="video">Stream not available</video>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-dark" id="photo-button">Take Photo</button>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="upload-form" action="<?=PROOT?>gallery/upload" method="post">
+                                <input id="image-upload" name="image-upload" type="file"/>
+                                <input class="btn btn-dark" value="upload" type="submit"/>
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Editor</h3>
+                    <canvas id="canvas"></canvas>
+                    <!--TODO do I need this-->
+                    <div id="photos"></div>
+                    <div id="stickers" class="hide">
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="1.png">
+                        <label for="sticker1" id="sticker-1">
+                            <img src="<?=PROOT?>app/assets/stickers/1.png" width="100px" height="100px"  alt="sticker 1">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="2.png">
+                        <label for="sticker2" id="sticker-2">
+                            <img src="<?=PROOT?>app/assets/stickers/2.png" width="100px" height="100px"  alt="sticker 2">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="3.png">
+                        <label for="sticker3" id="sticker-3">
+                            <img src="<?=PROOT?>app/assets/stickers/3.png" width="100px" height="100px"  alt="sticker 3">
+                        </label>
+                        <input type="checkbox" name="sticker-menu" id="sticker" value="4.png">
+                        <label for="sticker4" id="sticker-4">
+                            <img src="<?=PROOT?>app/assets/stickers/4.png" width="100px" height="100px"  alt="sticker 4">
+                        </label>
+                    </div>
+                    <button class="btn btn-dark hide" id="save-button">Save</button>
+                    <button class="btn btn-dark hide" id="clear-button">Clear</button>
+                </div>
             </div>
-            </form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Your images</h3>
+                    <div class="row">
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                        <div class="col-sm-4 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <canvas id="canvas" style="display: none;"></canvas>
-        <br>
-        <center><canvas id="imageCanvas" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;"></canvas></center>
-        <center>
-        <div class="camera">
-            <video id="video" style="width: 100%; height: 100%; max-height: 480px; max-width: 640px;">Video stream not available</video> <br />
-            <button id="startbutton" class="btn btn-primary btn-large" style="display: inline-block;">Take photo</button>
-        </div>
-        </center>
-        <script src="#"></script>
-        <script src="#"></script>
     </div>
-    <div class="end-section" style="flex: 3; max-width:300px;">
-
-    </div>
-</div>
+<script type="text/javascript" src="<?=PROOT?>js/editor.js"></script>
 <?php $this->end(); ?>

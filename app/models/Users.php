@@ -34,9 +34,9 @@ class Users extends Model {
         $this->_softDelete = true;
         if($user != '') {
           if(is_int($user)) {
-            $u = $this->_db->findFirst('users',['conditions'=>'id = ?', 'bind'=>[$user]],'App\Models\Users');
+            $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]],'App\Models\Users');
           } else {
-            $u = $this->_db->findFirst('users', ['conditions'=>'username = ?','bind'=>[$user]],'App\Models\Users');
+            $u = $this->_db->findFirst($table, ['conditions'=>'username = ?','bind'=>[$user]],'App\Models\Users');
           }
           if($u) {
             foreach($u as $key => $val) {
@@ -138,20 +138,27 @@ class Users extends Model {
         }
     }
 
-    public function setConfirm($value){
+    public function setConfirm($value) {
         $this->_confirm = $value;
     }
 
-    public function getConfirm(){
+    public function getConfirm() {
         return $this->_confirm;
     }
 
-    public function getIsLoggedIn(){
+    public function getIsLoggedIn() {
         return $this->_isLoggedIn;
     }
 
-    public function setIsLoggedIn($isLoggedIn){
+    public function setIsLoggedIn($isLoggedIn) {
         $this->_isLoggedIn = $isLoggedIn;
     }
 
+    public function getNotificationChecked() {
+        if ($this->notification == 1) {
+            return 'on';
+        } else {
+            return 'off';
+        }
+    }
 }
