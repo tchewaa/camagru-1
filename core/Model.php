@@ -87,7 +87,7 @@ class Model {
     }
 
     public function userImages($user_id) {
-        return $this->findFirst(['conditions'=> "user_id = ?", 'limit' => 1, 'bind'=>[$user_id]]);
+        return $this->find(['conditions'=> "user_id = ?", 'bind'=>[$user_id]]);
     }
 
     public function insert($fields) {

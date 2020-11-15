@@ -115,14 +115,20 @@ class Helpers {
     }
 
     public static function displayImages($images) {
+        $html = '';
+        echo "test 1";
         if (isset($images)) {
-            $html = '<div class="row">';
+            $html .= '<div class="row">';
+            echo '<div class="row">';
+            echo "test 22";
             foreach ($images as $key => $value) {
+                echo "test 3";
                 $html .= '<div class="col-sm-4 thumbnail">';
                 $html .= '<img src="<?=$value->image_data?>" class="img-rounded" alt="sanfran">';
                 $html .= '</div>';
             }
             $html = '</div>';
+            echo $html;
         }
         return $html;
     }

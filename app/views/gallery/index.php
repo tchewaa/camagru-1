@@ -1,5 +1,6 @@
 <?php
 use Core\Helpers
+?>
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
     <div class="row" id="gallery">
