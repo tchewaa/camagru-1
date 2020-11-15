@@ -1,8 +1,9 @@
 let width = 500,
 	height = 0,
 	filter = 0,
-	selectedSticker = "",
-	streaming = false;
+	selectedSticker = [],
+	streaming = false,
+	imageUrl = "";
 
 //Dom element
 const video = document.getElementById('video');
@@ -115,7 +116,7 @@ function takePicture() {
 		context.drawImage(video, 0, 0, width, height);
 
 		//create image from the canvas
-		const imageUrl = canvas.toDataURL('image/png');
+		imageUrl = canvas.toDataURL('image/png');
 
 		//create image element
 		const img = document.createElement('img');
@@ -131,48 +132,89 @@ function takePicture() {
 	}
 }
 
+
+saveButton.addEventListener('click', function(e) {
+	// console.log("test click");
+	console.log("Web cam imageUrl: " + imageUrl);
+	console.log("selected sticker: ");
+	console.log(selectedSticker);
+
+	const url = "http://localhost:8080/camagru/gallery/upload";
+	var payload = {
+    				a: 1,
+    				b: 2
+					};
+
+	var data = new FormData();
+	data.append( "json", JSON.stringify( payload ) );
+	fetch(url, {
+				headers: {
+			    'Accept': 'application/json',
+			    'Content-Type': 'application/json'
+			    // "Content-Type": "multipart/form-data",
+				},
+			    method : "POST",
+			    // body: new FormData(document.getElementById("inputform")),
+			    // -- or --
+			    body : data
+	}).then(
+	    response => response.text() // .json(), etc.
+	).then(
+    	html => console.log(html)
+	);
+	// let xhttp = new XMLHttpRequest();
+	// xhttp.onreadystatechange = function() {
+	// 	if (this.readyState == 4 && this.status == 200) {
+	// 		console.log("saved");
+	// 	}
+	// }
+	// xhttp.open("POST", "http://localhost:8080/camagru/gallery/upload", true);
+	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// xhttp.send("test=testing");
+});
+
+
 stickerMenu[0].addEventListener('change', function(e) {
+	const sticker = document.getElementById("sticker-1");
 	if (stickerMenu[0].checked == true) {
-		console.log('sticker 1 checked');
-		selectedSticker = selectedSticker + e.target.value + ','; 		
+		const stickerPath = sticker.children[0].getAttribute('src');
+		selectedSticker.push(stickerPath); 		
 	} else {
-		console.log('sticker 1 unchecked')
-		selectedSticker = selectedSticker.replace('1.png,', '');
+		selectedSticker.splice(0, 1);
 	}
 	e.preventDefault();
 })
 
 
 stickerMenu[1].addEventListener('change', function(e) {
+	const sticker = document.getElementById("sticker-2");
 	if (stickerMenu[1].checked == true) {
-		console.log('sticker 2 checked');
-		selectedSticker = selectedSticker + e.target.value + ','; 		
+		const stickerPath = sticker.children[0].getAttribute('src');
+		selectedSticker.push(stickerPath);
 	} else {
-		console.log('sticker 2 unchecked')
-		selectedSticker = selectedSticker.replace('2.png,', '');
+		selectedSticker.splice(1, 1);
 	}
 	e.preventDefault();
 })
 
 stickerMenu[2].addEventListener('change', function(e) {
+	const sticker = document.getElementById("sticker-3");
 	if (stickerMenu[2].checked == true) {
-		console.log('sticker 3 checked');
-		selectedSticker = selectedSticker + e.target.value + ','; 		
+		const stickerPath = sticker.children[0].getAttribute('src');
+		selectedSticker.push(stickerPath);
 	} else {
-		console.log('sticker 3 unchecked')
-		selectedSticker = selectedSticker.replace('3.png,', '');
+		selectedSticker.splice(2, 1);
 	}
 	e.preventDefault();
 })
 
 stickerMenu[3].addEventListener('change', function(e) {
+	const sticker = document.getElementById("sticker-4");
 	if (stickerMenu[3].checked == true) {
-		console.log('sticker 4 checked');
-		selectedSticker = selectedSticker + e.target.value + ','; 		
+		const stickerPath = sticker.children[0].getAttribute('src');
+		selectedSticker.push(stickerPath);
 	} else {
-		console.log('sticker 4 unchecked')
-		selectedSticker = selectedSticker.replace('4.png,', '');
+		selectedSticker.splice(3, 1);
 	}
-	console.log(selectedSticker);
 	e.preventDefault();
 })

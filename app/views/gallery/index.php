@@ -28,22 +28,22 @@
                     <div id="photos"></div>
                     <div id="stickers" class="hide">
                         <input type="checkbox" name="sticker-menu" id="sticker" value="1.png">
-                        <label for="sticker1">
+                        <label for="sticker1" id="sticker-1">
                             <img src="<?=PROOT?>app/assets/stickers/1.png" width="100px" height="100px"  alt="sticker 1">
                         </label>
                         <input type="checkbox" name="sticker-menu" id="sticker" value="2.png">
-                        <label for="sticker2">
+                        <label for="sticker2" id="sticker-2">
                             <img src="<?=PROOT?>app/assets/stickers/2.png" width="100px" height="100px"  alt="sticker 2">
                         </label>
                         <input type="checkbox" name="sticker-menu" id="sticker" value="3.png">
-                        <label for="sticker1">
+                        <label for="sticker3" id="sticker-3">
                             <img src="<?=PROOT?>app/assets/stickers/3.png" width="100px" height="100px"  alt="sticker 3">
                         </label>
                         <input type="checkbox" name="sticker-menu" id="sticker" value="4.png">
-                        <label for="sticker2">
+                        <label for="sticker4" id="sticker-4">
                             <img src="<?=PROOT?>app/assets/stickers/4.png" width="100px" height="100px"  alt="sticker 4">
                         </label>
-                </div>
+                    </div>
                     <button class="btn btn-dark hide" id="save-button">Save</button>
                     <button class="btn btn-dark hide" id="clear-button">Clear</button>
                 </div>

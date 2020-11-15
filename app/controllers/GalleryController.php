@@ -23,6 +23,7 @@ class GalleryController extends Controller {
     }
 
     public function uploadAction() {
+        Helpers::dnd("testig");
         $newDims = ['x' => 640, 'y' => 480];
         if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
             $this->getFrame($_POST['hidden_top']);
