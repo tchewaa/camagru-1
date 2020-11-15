@@ -22,6 +22,7 @@ class GalleryController extends Controller {
         $this->view->render('gallery/index');
     }
 
+    //TODO handle validation
     public function uploadAction() {
         
         if (isset($_POST['webCamImage'])) {
@@ -30,46 +31,62 @@ class GalleryController extends Controller {
             $base64Image = str_replace('data:image/png;base64,','',$base64Image);
             $imageBinary = base64_decode($base64Image);
             $image = imagecreatefromstring($imageBinary);
+            $imageWidth = imagesx($image);
+            $imageHeight = imagesx($image);
 
             if ($_POST['selectedStickers']) {
                 //stickers 
                 $stickers = $_POST['selectedStickers'];
+                $stickerWidth = 80;
+                $stickerHeight = 80;
                 $stickers = explode(',', $stickers);
                 foreach ($stickers as $key => $value) {
                     $stickerName = explode('/', $stickers[$key]);
                     $stickerPath = ROOT . '/app/assets/stickers/' . $stickerName[5];
                     $stickerImage = imagecreatefrompng($stickerPath);
+                    list($width, $height) = getimagesize($stickerPath);
                     if ($key == 0) {
-                        list($width, $heigth) = getimagesize($stickerPath);
-                        $newWidth = 80;
-                        $newHeigth = 80;
-                        imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $newWidth, $newHeigth, $width, $heigth);        
+                        imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 1) {
+                        $postionX = $imageWidth - $stickerWidth;
+                        imagecopyresized($image, $stickerImage, 420, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 2) {
+                        $postionY = $imageHeight - $stickerHeight;
+                        imagecopyresized($image, $stickerImage, 0, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 3) {
+                        $postionY = $imageHeight - $stickerHeight;
+                            imagecopyresized($image, $stickerImage, 420, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
                     }
                 }
-                // Helpers::dnd(count($stickers));
-
-                // $stickerName = explode('/', $stickers[0]);
-                // $stickerPath = ROOT . '/app/assets/stickers/' . $stickerName[5];
-                // $stickerImage = imagecreatefrompng($stickerPath);
-                // list($width, $heigth) = getimagesize($stickerPath);
-                // $newWidth = 80;
-                // $newHeigth = 80;
-                // imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $newWidth, $newHeigth, $width, $heigth);
             }
             ob_start();
             imagepng($image);
             $imageData = ob_get_clean();
             $imageData = base64_encode($imageData);
-            $base64 = 'data:image/' . 'png' . ';base64,' . $imageData;
-            echo $base64;       
-        
+            $base64Image = 'data:image/' . 'png' . ';base64,' . $imageData;
+            if ($this->_saveImage($base64Image)) {
+                echo $base64Image;
+
+            }
         } elseif (isset($_FILES)) {
-            $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-            if ($this->_saveImage($image)) {
-                echo "Image saved...";
+            $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
+            $image = imagecreatefromstring($imageData);
+            ob_start();
+            imagepng($image);
+            $imageData = ob_get_clean();
+            $imageData = base64_encode($imageData);
+            $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
+            if ($this->_saveImage($base64Image)) {
+                echo $base64Image;
             }
         }
-    
+        $this->view->render('gallery/index');
         // Router::redirect('gallery');
     }
 
@@ -79,8 +96,6 @@ class GalleryController extends Controller {
     }
 
     private function _saveImage($image) {
-        $type = 'data:image/jpeg;base64, ';
-        $image = $type . $image;
         return $this->GalleryModel->upload($image, Users::currentUser()->username . time());
     }
 }
