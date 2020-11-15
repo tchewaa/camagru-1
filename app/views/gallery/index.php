@@ -56,14 +56,14 @@ use Core\Helpers
                     <h3>Your images</h3>
                     <?= Helpers::displayImages($this->userImages); ?>
                     <div class="row">
-                        <div class="col-sm-4 thumbnail">
-                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        <div class="col-lg-6 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" alt="sanfran">
                         </div>
-                        <div class="col-sm-4 thumbnail">
-                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        <div class="col-lg-6 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" alt="sanfran">
                         </div>
-                        <div class="col-sm-4 thumbnail">
-                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
+                        <div class="col-lg-6 thumbnail">
+                            <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" alt="sanfran">
                         </div>
                     </div>
                 </div>
