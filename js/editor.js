@@ -144,7 +144,19 @@ saveButton.addEventListener('click', function(e) {
 		}).then(
 	    response => response.text() 
 	    ).then(
-	    html => console.log(html)
+	    data => {
+			//create image element
+			// console.log(html);
+			const img = document.createElement('img');
+
+			//strip unwanted text
+			const image = data.replace('<script type="text/javascript">window.location.href="/camagru/gallery";</script><noscript><meta http-equiv="refresh" content="0;url=gallery" /></noscript>', '');
+			console.log(image);
+
+			//set image src
+			img.setAttribute('src', image);
+			photos.appendChild(img);
+	    	}
 	    );
 });
 

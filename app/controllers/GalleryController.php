@@ -23,52 +23,54 @@ class GalleryController extends Controller {
     }
 
     public function uploadAction() {
-        // $image = file_get_contents($_POST['selectedStickers'][0]);
-        $stickerArray = explode(',', $_POST['selectedStickers']);
-        $stickerName = explode('/', $stickerArray[0]);
-        // Helpers::dnd($stickerName[5]);
-        // $image = imagecreatefromstring(file_get_contents($stickerArray[0]));
-        // $test = ROOT . $stickerArray[0];
-        $stickerImage = imagecreatefromjpeg(ROOT . '/app/assets/stickers/' . $stickerName[5]);
-        $stickerWidth = imagesx($stickerImage);
-        $stickerHeigth = imagesy($stickerImage);
-        Helpers::dnd("sticker image " . $stickerImage);
-        Helpers::dnd("sticker width " . $stickerWidth);
-        Helpers::dnd("sticker heigth " . $stickerHeigth);
+        
+        if (isset($_POST['webCamImage'])) {
+            //webcam image
+            $base64Image = $_POST['webCamImage'];
+            $base64Image = str_replace('data:image/png;base64,','',$base64Image);
+            $imageBinary = base64_decode($base64Image);
+            $image = imagecreatefromstring($imageBinary);
 
-        // Helpers::dnd(imagesx($stickerImage));
-        $newDims = ['x' => 640, 'y' => 480];
-        if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
-            $this->getFrame($_POST['hidden_top']);
-            $image = $_POST['hidden_data'];
-            $img_str = base64_decode(explode(',', $image)[1]);
-            $type = explode('/', explode(';', explode(',', $image)[0])[0])[1];
-            $img_src = imagecreatefromstring($img_str);
-            $x_size = imagesx($img_src);
-            $y_size = imagesy($img_src);
-            $new_img = imagecreatetruecolor($newDims['x'], $newDims['y']);
-            imagecopyresampled($new_img, $img_src, 0, 0, 0, 0, $newDims['x'], $newDims['y'], $x_size, $y_size);
-            if ($_POST['hidden_top'] && Helpers::sanitize($_POST['hidden_top']) != '') {
-                $frame = $this->getFrame($_POST['hidden_top']);
-                $x_size = imagesx($frame);
-                $y_size = imagesy($frame);
-                imagecopyresampled($new_img, $frame, 0, 0, 0, 0, $newDims['x'] / 4, $newDims['y'] / 4, $x_size, $y_size);
-                imagedestroy($frame);
+            if ($_POST['selectedStickers']) {
+                //stickers 
+                $stickers = $_POST['selectedStickers'];
+                $stickers = explode(',', $stickers);
+                foreach ($stickers as $key => $value) {
+                    $stickerName = explode('/', $stickers[$key]);
+                    $stickerPath = ROOT . '/app/assets/stickers/' . $stickerName[5];
+                    $stickerImage = imagecreatefrompng($stickerPath);
+                    if ($key == 0) {
+                        list($width, $heigth) = getimagesize($stickerPath);
+                        $newWidth = 80;
+                        $newHeigth = 80;
+                        imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $newWidth, $newHeigth, $width, $heigth);        
+                    }
+                }
+                // Helpers::dnd(count($stickers));
+
+                // $stickerName = explode('/', $stickers[0]);
+                // $stickerPath = ROOT . '/app/assets/stickers/' . $stickerName[5];
+                // $stickerImage = imagecreatefrompng($stickerPath);
+                // list($width, $heigth) = getimagesize($stickerPath);
+                // $newWidth = 80;
+                // $newHeigth = 80;
+                // imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $newWidth, $newHeigth, $width, $heigth);
             }
             ob_start();
-            imagejpeg($new_img, NULL, 100);
-            $data = ob_get_clean();
-            $data = base64_encode($data);
-            imagedestroy($new_img);
-            imagedestroy($img_src);
-            $this->_saveImage($data);
+            imagepng($image);
+            $imageData = ob_get_clean();
+            $imageData = base64_encode($imageData);
+            $base64 = 'data:image/' . 'png' . ';base64,' . $imageData;
+            echo $base64;       
+        
         } elseif (isset($_FILES)) {
             $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
             if ($this->_saveImage($image)) {
                 echo "Image saved...";
             }
         }
-        Router::redirect('gallery');
+    
+        // Router::redirect('gallery');
     }
 
     public function getFrame($src) {
