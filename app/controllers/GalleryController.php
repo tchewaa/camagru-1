@@ -23,7 +23,10 @@ class GalleryController extends Controller {
     }
 
     public function uploadAction() {
-        Helpers::dnd("testig");
+        // $image = file_get_contents($_POST['selectedStickers'][0]);
+        $stickerArray = explode(',', $_POST['selectedStickers']);
+        // $image = imagecreatefromstring(file_get_contents($stickerArray[0]));
+        Helpers::dnd($stickerArray);
         $newDims = ['x' => 640, 'y' => 480];
         if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
             $this->getFrame($_POST['hidden_top']);

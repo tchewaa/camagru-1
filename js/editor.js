@@ -134,43 +134,18 @@ function takePicture() {
 
 
 saveButton.addEventListener('click', function(e) {
-	// console.log("test click");
-	console.log("Web cam imageUrl: " + imageUrl);
-	console.log("selected sticker: ");
-	console.log(selectedSticker);
-
 	const url = "http://localhost:8080/camagru/gallery/upload";
-	var payload = {
-    				a: 1,
-    				b: 2
-					};
-
-	var data = new FormData();
-	data.append( "json", JSON.stringify( payload ) );
+	const formData = new FormData();
+	formData.append('webCamImage', imageUrl);
+	formData.append('selectedStickers', selectedSticker);
 	fetch(url, {
-				headers: {
-			    'Accept': 'application/json',
-			    'Content-Type': 'application/json'
-			    // "Content-Type": "multipart/form-data",
-				},
-			    method : "POST",
-			    // body: new FormData(document.getElementById("inputform")),
-			    // -- or --
-			    body : data
-	}).then(
-	    response => response.text() // .json(), etc.
-	).then(
-    	html => console.log(html)
-	);
-	// let xhttp = new XMLHttpRequest();
-	// xhttp.onreadystatechange = function() {
-	// 	if (this.readyState == 4 && this.status == 200) {
-	// 		console.log("saved");
-	// 	}
-	// }
-	// xhttp.open("POST", "http://localhost:8080/camagru/gallery/upload", true);
-	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	// xhttp.send("test=testing");
+		    method : 'POST',
+		    body: formData
+		}).then(
+	    response => response.text() 
+	    ).then(
+	    html => console.log(html)
+	    );
 });
 
 
