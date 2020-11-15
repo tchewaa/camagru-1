@@ -28,9 +28,8 @@ class Gallery extends Model {
 
     public function getUserImages() {
         $user = Users::currentUser();
-        $temp = $this->userImages($user->id);
-        Helpers::dnd($temp);
-        // return $temp;
+        $images = $this->userImages($user->id);
+        return $images;
     }
 
 }

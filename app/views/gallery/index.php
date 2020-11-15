@@ -53,8 +53,8 @@ use Core\Helpers
             <div class="row">
                 <div class="col-sm-12">
                     <h3>Your images</h3>
+                    <?= Helpers::displayImages($this->userImages); ?>
                     <div class="row">
-                        <?php Helpers::dnd($this->userImages); ?>
                         <div class="col-sm-4 thumbnail">
                             <img src="<?=PROOT?>app/assets/dummy/sanfran.jpg" class="img-rounded" alt="sanfran">
                         </div>

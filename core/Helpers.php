@@ -113,4 +113,17 @@ class Helpers {
         $headers .= "From: pmalope@student.wethinkcode.co.za";
         return $headers;
     }
+
+    public static function displayImages($images) {
+        if (isset($images)) {
+            $html = '<div class="row">';
+            foreach ($images as $key => $value) {
+                $html .= '<div class="col-sm-4 thumbnail">';
+                $html .= '<img src="<?=$value->image_data?>" class="img-rounded" alt="sanfran">';
+                $html .= '</div>';
+            }
+            $html = '</div>';
+        }
+        return $html;
+    }
 }
