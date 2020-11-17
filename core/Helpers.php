@@ -115,35 +115,15 @@ class Helpers {
     }
 
     public static function displayImages($images) {
-        // Helpers::dnd($images[0]->image_data);
-        $html = '';
-        $temp = '';
-        $temp .= '<div class="row">';
-        $temp .= '<div class="col-sm-4 thumbnail">';
-        $temp .= "
-            <h3>Y'ello test</h3>
-            <h4>Please click on the following link to verify your email:
-            </h4>
-            <p>Regards</p>
-            <p>Camagru Holdings</p>
-        ";
-        $temp .= '<img src="{$images[0]->image_data}" class="img-rounded" alt="sanfran">';
-        $temp .= "</div>";
-        $temp .= "</div>";
-        return $temp;
-        Helpers::dnd($temp);
-        echo "test 1";
+        $html = "";
         if (isset($images)) {
-            $html .= '<div class="row">';
+            $html .= "<div class=\"row\">";
             foreach ($images as $key => $value) {
-                echo "test3";
                 $html .= '<div class="col-sm-4 thumbnail">';
-                $html .= '<img src="<?=$value->image_data?>" class="img-rounded" alt="sanfran">';
-                $html .= '<h1> Testing </h1>';
+                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\" value=\"" . $value->id . "\">";
                 $html .= '</div>';
             }
-            $html = '</div>';
-            echo "test 4";
+            $html .= '</div>';
         }
         return $html;
     }
