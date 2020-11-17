@@ -120,8 +120,8 @@ class Helpers {
             $html .= "<div class=\"row\">";
             foreach ($images as $key => $value) {
                 $html .= "<div class=\"col-sm-4 thumbnail\">";
-                $html .= "<span id=\"delete\" class=\"glyphicon glyphicon-remove-sign pull-right\" style=\"color:red;font-size:30px\"></span>";
-                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\" value=\"" . $value->id . "\">";
+                $html .= "<span class=\"glyphicon glyphicon-remove-sign pull-right delete\" id=\"" . $value->id . "\" style=\"color:red;font-size:30px\"> </span>";
+                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\">";
                 $html .= '</div>';
             }
             $html .= '</div>';

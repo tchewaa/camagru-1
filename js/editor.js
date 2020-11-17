@@ -16,6 +16,7 @@ const stickerMenu = document.getElementsByName('sticker-menu');
 const saveButton = document.getElementById('save-button');
 const stickers = document.getElementById('stickers');
 const uploadForm = document.getElementById('upload-form');
+const deleteIcon = document.getElementsByClassName('delete');
 
 
 //Get stream
@@ -159,6 +160,30 @@ saveButton.addEventListener('click', function(e) {
 	    	}
 	    );
 });
+
+//delete icon
+for(let i = 0; i < deleteIcon.length; i++) {
+  deleteIcon[i].addEventListener("click", function(e) {
+    const imageID =  deleteIcon[i].getAttribute("id");
+    const url = "http://localhost:8080/camagru/gallery/delete";
+	const formData = new FormData();
+	formData.append('image-id', imageID);
+	fetch(url, {
+		method : 'POST',
+		body: formData
+	}).then(
+	response => response.text()
+	).then(
+	data => {
+		console.log(data);
+	})
+	e.preventDefault();
+  })
+}
+// deleteIcon.addEventListener('click', function(e) {
+// 	console.log("Image Id test:");
+// 	e.preventDefault();
+// });
 
 
 stickerMenu[0].addEventListener('change', function(e) {

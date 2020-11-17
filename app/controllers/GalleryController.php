@@ -92,6 +92,14 @@ class GalleryController extends Controller {
         // Router::redirect('gallery');
     }
 
+    public function deleteAction() {
+        if ($this->request->isPost()) {
+            $userID = Users::currentUser()->id;
+            $imageID = $this->request->get("image-id");
+            Helpers::dnd("user id: " . $userID . "image id: " . $imageID);
+        }
+    }
+
     public function getFrame($src) {
         $newFrame = imagecreatefrompng($src);
         return $newFrame;
