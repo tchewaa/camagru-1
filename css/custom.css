@@ -168,11 +168,6 @@ form {
 
 /*gallery*/
 
-/*.thumbnail a{
-    display:block;
-    padding:10px;
-    background:red;
-}*/
 
 .thumbnail img{
     width: 400px;
@@ -194,6 +189,11 @@ form {
 #upload-form {
     display: inline;
 }
+
+#delete {
+    color: red;
+}
+
 
 .hide {
     display: none;
@@ -219,6 +219,12 @@ form {
     vertical-align: middle;
     user-select: none;
     border: 1px solid transparent;
+}
+
+/*Icons*/
+
+.glyphicon {
+    font-size: 50px;
 }
 
 footer {

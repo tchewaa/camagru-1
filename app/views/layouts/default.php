@@ -9,8 +9,6 @@ use Core\Session;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?=$this->siteTitle(); ?></title>
-    <!-- TODO delete this, seems to be outdated   -->
-<!--    <link rel="stylesheet" href="--><?//=PROOT?><!--css/bootstrapOld.min.css" media="screen" title="no title" charset="UTF-8">-->
     <link type="text/css" rel="stylesheet" href="<?=PROOT?>css/bootstrap.min.css" media="screen" title="no title" charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="<?=PROOT?>css/custom.css" media="screen" title="no title" charset="UTF-8">
     <!-- TODO delete this, this the PDF states that no javascript framework are allowed   -->
