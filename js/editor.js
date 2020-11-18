@@ -57,19 +57,6 @@ photoButton.addEventListener('click', function(e) {
 	e.preventDefault();
 }, false);
 
-
-//image upload
-// const handleImage = (e) => {
-// 	const context = canvas.getContext('2d');
-// 	const image = e.target.files[0];
-// 	context.drawImage(image, 0, 0, width, height);
-
-// 	e.preventDefault();
-// }
-
-// imageUpload.addEventListener("change", handleImage);
-
-
 //clear event
 clearButton.addEventListener('click', function(e) {
 	//Reload page
