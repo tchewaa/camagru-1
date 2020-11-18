@@ -27,19 +27,6 @@ nav {
     color: white;
 }
 
-.main-section {
-
-}
-
-.sidebar {
-    flex: 1;
-    max-width: 400px;
-}
-
-.side-bar nav {
-    background-color: transparent;
-}
-
 div.polaroid {
     width: 80%;
     background-color: white;
@@ -50,6 +37,10 @@ div.polaroid {
 div.container {
     text-align: center;
     padding: 10px 20px;
+}
+
+.jumbotron {
+    background-color: transparent;
 }
 
 .btn {
