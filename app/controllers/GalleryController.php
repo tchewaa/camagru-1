@@ -88,8 +88,9 @@ class GalleryController extends Controller {
             }
         }
         $this->view->userImages = $this->GalleryModel->getUserImages();
-        $this->view->render('gallery/index');
-        // Router::redirect('gallery');
+        // $this->view->render('gallery/index');
+        Router::redirect('gallery/index');
+        // $this->view->render('gallery/index');
     }
 
     public function deleteAction() {

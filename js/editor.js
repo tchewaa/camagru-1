@@ -126,7 +126,6 @@ function takePicture() {
 		img.setAttribute('src', imageUrl);
 
 		//set image filter
-		// img.style.filter = filter;
 
 		//add image to photos
 		photos.appendChild(img);
@@ -146,17 +145,7 @@ saveButton.addEventListener('click', function(e) {
 	    response => response.text() 
 	    ).then(
 	    data => {
-			//create image element
 			console.log(data);
-			// const img = document.createElement('img');
-
-			//strip unwanted text
-			// const image = data.replace('<script type="text/javascript">window.location.href="/camagru/gallery";</script><noscript><meta http-equiv="refresh" content="0;url=gallery" /></noscript>', '');
-			// console.log(image);
-
-			//set image src
-			// img.setAttribute('src', image);
-			// photos.appendChild(img);
 	    	}
 	    );
 });
