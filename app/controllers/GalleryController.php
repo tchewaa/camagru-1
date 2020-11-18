@@ -98,10 +98,9 @@ class GalleryController extends Controller {
             $imageID = $this->request->get("image-id");
             if ($this->GalleryModel->delete($imageID)) {
                 echo "image deleted";
-            } else {
-                echo "something went wrong";
             }
         }
+        // $this->view->render('gallery/index');
     }
 
     public function getFrame($src) {
