@@ -71,10 +71,7 @@ class GalleryController extends Controller {
             $imageData = ob_get_clean();
             $imageData = base64_encode($imageData);
             $base64Image = 'data:image/' . 'png' . ';base64,' . $imageData;
-            if ($this->_saveImage($base64Image)) {
-                echo $base64Image;
-
-            }
+            $this->_saveImage($base64Image);
         } elseif (isset($_FILES)) {
             $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
             $image = imagecreatefromstring($imageData);
@@ -83,14 +80,10 @@ class GalleryController extends Controller {
             $imageData = ob_get_clean();
             $imageData = base64_encode($imageData);
             $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
-            if ($this->_saveImage($base64Image)) {
-                // echo $base64Image;
-            }
+            $this->_saveImage($base64Image);
         }
         $this->view->userImages = $this->GalleryModel->getUserImages();
-        // $this->view->render('gallery/index');
-        Router::redirect('gallery/index');
-        // $this->view->render('gallery/index');
+        $this->view->render('gallery/index');
     }
 
     public function deleteAction() {

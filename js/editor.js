@@ -23,9 +23,6 @@ const deleteIcon = document.getElementsByClassName('delete');
 navigator.mediaDevices.getUserMedia({video: true, audio: false}
 	)
 	.then(function(stream) {
-		// console.log(stream);
-		// console.log(video);
-		//link to video source
 		video.srcObject = stream;
 		//Play video
 		video.play();
@@ -62,40 +59,21 @@ photoButton.addEventListener('click', function(e) {
 
 
 //image upload
-const handleImage = (e) => {
-	// const selectedFiles = [...imageUpload.files];
-	const context = canvas.getContext('2d');
+// const handleImage = (e) => {
+// 	const context = canvas.getContext('2d');
+// 	const image = e.target.files[0];
+// 	context.drawImage(image, 0, 0, width, height);
 
-	// console.log(e.target.files[0]);
-	const image = e.target.files[0];
-	context.drawImage(image, 0, 0, width, height);
+// 	e.preventDefault();
+// }
 
-	e.preventDefault();
-}
+// imageUpload.addEventListener("change", handleImage);
 
-imageUpload.addEventListener("change", handleImage);
-
-//filter event
-// photoFilter.addEventListener('click', function(e) {
-	//set filter to choosen option
-	// filter = e.target.value;
-	//set filter to video
-	// video.style.filter = filter;
-
-	// e.preventDefault();
-
-// });
 
 //clear event
 clearButton.addEventListener('click', function(e) {
-	//clear photos
-	photos.innerHTML = '';
-	//change filter back to none
-	// filter = 'none';
-	// set video filter
-	// video.style.filter = filter;
-	//reset select list
-	// photoFilter.selectedIndex = 0;
+	//Reload page
+	console.log(e);
 })
 
 
@@ -148,6 +126,7 @@ saveButton.addEventListener('click', function(e) {
 			console.log(data);
 	    	}
 	    );
+	    //Reload page
 });
 
 //delete icon
@@ -166,13 +145,10 @@ for(let i = 0; i < deleteIcon.length; i++) {
 	data => {
 		console.log(data);
 	})
+	//Reload page
 	e.preventDefault();
   })
 }
-// deleteIcon.addEventListener('click', function(e) {
-// 	console.log("Image Id test:");
-// 	e.preventDefault();
-// });
 
 
 stickerMenu[0].addEventListener('change', function(e) {
