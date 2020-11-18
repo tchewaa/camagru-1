@@ -87,7 +87,7 @@ class Model {
     }
 
     public function userImages($user_id) {
-        return $this->find(['conditions'=> "user_id = ?", 'bind'=>[$user_id]]);
+        return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
 
     public function insert($fields) {
@@ -103,10 +103,11 @@ class Model {
 
     public function delete($id = '') {
         if($id == '' && $this->id == '') return false;
-            $id = ($id == '')? $this->id : $id;
-        if($this->_softDelete) {
-            return $this->update($id, ['deleted' => 1]);
-        }
+        $id = ($id == '')? $this->id : $id;
+        //TODO
+        // if($this->_softDelete) {
+        //     return $this->update($id, ['deleted' => 1]);
+        // }
         return $this->_db->delete($this->_table, $id);
     }
 

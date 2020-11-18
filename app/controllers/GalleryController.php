@@ -96,7 +96,11 @@ class GalleryController extends Controller {
         if ($this->request->isPost()) {
             $userID = Users::currentUser()->id;
             $imageID = $this->request->get("image-id");
-            Helpers::dnd("user id: " . $userID . "image id: " . $imageID);
+            if ($this->GalleryModel->delete($imageID)) {
+                echo "image deleted";
+            } else {
+                echo "something went wrong";
+            }
         }
     }
 
