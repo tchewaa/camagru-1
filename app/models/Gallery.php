@@ -26,4 +26,10 @@ class Gallery extends Model {
         return $this->save();
     }
 
+    public function getUserImages() {
+        $user = Users::currentUser();
+        $images = $this->userImages($user->id);
+        return $images;
+    }
+
 }

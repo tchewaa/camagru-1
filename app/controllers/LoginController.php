@@ -52,7 +52,7 @@ class LoginController extends Controller {
         }
         $this->view->user = $this->AuthModel;
         $this->view->validationMessages = $this->AuthModel->getErrorMessages();
-        $this->view->render('login/login');
+        $this->view->render('login/index');
     }
 
     public function forgotPasswordAction() {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controllers;
-
 
 use App\Models\Users;
 use Core\Controller;
@@ -19,49 +17,82 @@ class GalleryController extends Controller {
 
     public function indexAction() {
         //TODO create index page for profile
+        $this->view->userImages = $this->GalleryModel->getUserImages();
         $this->view->render('gallery/index');
     }
 
+    //TODO handle validation
     public function uploadAction() {
-        // $image = file_get_contents($_POST['selectedStickers'][0]);
-        $stickerArray = explode(',', $_POST['selectedStickers']);
-        // $image = imagecreatefromstring(file_get_contents($stickerArray[0]));
-        // $test = ROOT . $stickerArray[0];
-        Helpers::dnd($stickerArray);
-        $test = file_get_contents(ROOT . '/app/assets/stickers/1.png');
-        Helpers::dnd($test);
-        $newDims = ['x' => 640, 'y' => 480];
-        if ($_POST['hidden_data'] != '' || $_POST['hidden_data'] != null){
-            $this->getFrame($_POST['hidden_top']);
-            $image = $_POST['hidden_data'];
-            $img_str = base64_decode(explode(',', $image)[1]);
-            $type = explode('/', explode(';', explode(',', $image)[0])[0])[1];
-            $img_src = imagecreatefromstring($img_str);
-            $x_size = imagesx($img_src);
-            $y_size = imagesy($img_src);
-            $new_img = imagecreatetruecolor($newDims['x'], $newDims['y']);
-            imagecopyresampled($new_img, $img_src, 0, 0, 0, 0, $newDims['x'], $newDims['y'], $x_size, $y_size);
-            if ($_POST['hidden_top'] && Helpers::sanitize($_POST['hidden_top']) != '') {
-                $frame = $this->getFrame($_POST['hidden_top']);
-                $x_size = imagesx($frame);
-                $y_size = imagesy($frame);
-                imagecopyresampled($new_img, $frame, 0, 0, 0, 0, $newDims['x'] / 4, $newDims['y'] / 4, $x_size, $y_size);
-                imagedestroy($frame);
+        
+        if (isset($_POST['webCamImage'])) {
+            //webcam image
+            $base64Image = $_POST['webCamImage'];
+            $base64Image = str_replace('data:image/png;base64,','',$base64Image);
+            $imageBinary = base64_decode($base64Image);
+            $image = imagecreatefromstring($imageBinary);
+            $imageWidth = imagesx($image);
+            $imageHeight = imagesx($image);
+
+            if ($_POST['selectedStickers']) {
+                //stickers 
+                $stickers = $_POST['selectedStickers'];
+                $stickerWidth = 80;
+                $stickerHeight = 80;
+                $stickers = explode(',', $stickers);
+                foreach ($stickers as $key => $value) {
+                    $stickerName = explode('/', $stickers[$key]);
+                    $stickerPath = ROOT . '/app/assets/stickers/' . $stickerName[5];
+                    $stickerImage = imagecreatefrompng($stickerPath);
+                    list($width, $height) = getimagesize($stickerPath);
+                    if ($key == 0) {
+                        imagecopyresized($image, $stickerImage, 0, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 1) {
+                        $postionX = $imageWidth - $stickerWidth;
+                        imagecopyresized($image, $stickerImage, 420, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 2) {
+                        $postionY = $imageHeight - $stickerHeight;
+                        imagecopyresized($image, $stickerImage, 0, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+
+                    if ($key == 3) {
+                        $postionY = $imageHeight - $stickerHeight;
+                            imagecopyresized($image, $stickerImage, 420, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                    }
+                }
             }
             ob_start();
-            imagejpeg($new_img, NULL, 100);
-            $data = ob_get_clean();
-            $data = base64_encode($data);
-            imagedestroy($new_img);
-            imagedestroy($img_src);
-            $this->_saveImage($data);
+            imagepng($image);
+            $imageData = ob_get_clean();
+            $imageData = base64_encode($imageData);
+            $base64Image = 'data:image/' . 'png' . ';base64,' . $imageData;
+            $this->_saveImage($base64Image);
         } elseif (isset($_FILES)) {
-            $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-            if ($this->_saveImage($image)) {
-                echo "Image saved...";
+            $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
+            $image = imagecreatefromstring($imageData);
+            ob_start();
+            imagepng($image);
+            $imageData = ob_get_clean();
+            $imageData = base64_encode($imageData);
+            $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
+            $this->_saveImage($base64Image);
+        }
+        $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->render('gallery/index');
+    }
+
+    public function deleteAction() {
+        if ($this->request->isPost()) {
+            $userID = Users::currentUser()->id;
+            $imageID = $this->request->get("image-id");
+            if ($this->GalleryModel->delete($imageID)) {
+                echo "image deleted";
             }
         }
-        Router::redirect('gallery');
+        // $this->view->render('gallery/index');
     }
 
     public function getFrame($src) {
@@ -70,8 +101,6 @@ class GalleryController extends Controller {
     }
 
     private function _saveImage($image) {
-        $type = 'data:image/jpeg;base64, ';
-        $image = $type . $image;
         return $this->GalleryModel->upload($image, Users::currentUser()->username . time());
     }
 }

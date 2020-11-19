@@ -27,19 +27,6 @@ nav {
     color: white;
 }
 
-.main-section {
-
-}
-
-.sidebar {
-    flex: 1;
-    max-width: 400px;
-}
-
-.side-bar nav {
-    background-color: transparent;
-}
-
 div.polaroid {
     width: 80%;
     background-color: white;
@@ -50,6 +37,10 @@ div.polaroid {
 div.container {
     text-align: center;
     padding: 10px 20px;
+}
+
+.jumbotron {
+    background-color: transparent;
 }
 
 .btn {
@@ -72,24 +63,8 @@ div.container {
     transform: scale(1.1);
 }
 
-.mypics {
-    width: 20%;
-    height: 20%;
-    padding: 15px;
-}
-
-img {
-    padding: 15px;
-}
-
 .gallery {
     padding-left: 10%;
-}
-
-.user_images {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
 }
 
 .end-section {
@@ -184,33 +159,9 @@ form {
 
 /*gallery*/
 
-.sidebar {
-    margin-right: 15em;
-    float: right;
-    text-align:center; /*It will center the content inside block*/
-}
 
-.thumbnail {
-    border:0;
-}
-.thumbnail a{
-    display:block;
-    padding:10px;
-    background:red;
-}
 .thumbnail img{
-    width:100px;
-}
-
-.top-container {
-    width: 500px;
-    margin: 30px auto;
-}
-
-.bottom-container {
-    max-width: 960px;
-    margin: auto;
-    padding: 10px;
+    width: 400px;
 }
 
 #photos img {
@@ -229,6 +180,11 @@ form {
 #upload-form {
     display: inline;
 }
+
+#delete {
+    color: red;
+}
+
 
 .hide {
     display: none;
@@ -254,6 +210,12 @@ form {
     vertical-align: middle;
     user-select: none;
     border: 1px solid transparent;
+}
+
+/*Icons*/
+
+.glyphicon {
+    font-size: 50px;
 }
 
 footer {

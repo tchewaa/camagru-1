@@ -12,7 +12,7 @@ class HomeController extends Controller {
     }
 
     public function indexAction() {
-      $this->view->render('home/home');
+      $this->view->render('home/index');
     }
 
     public function logoutAction() {

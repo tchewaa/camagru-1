@@ -16,15 +16,13 @@ const stickerMenu = document.getElementsByName('sticker-menu');
 const saveButton = document.getElementById('save-button');
 const stickers = document.getElementById('stickers');
 const uploadForm = document.getElementById('upload-form');
+const deleteIcon = document.getElementsByClassName('delete');
 
 
 //Get stream
 navigator.mediaDevices.getUserMedia({video: true, audio: false}
 	)
 	.then(function(stream) {
-		// console.log(stream);
-		// console.log(video);
-		//link to video source
 		video.srcObject = stream;
 		//Play video
 		video.play();
@@ -59,42 +57,11 @@ photoButton.addEventListener('click', function(e) {
 	e.preventDefault();
 }, false);
 
-
-//image upload
-const handleImage = (e) => {
-	// const selectedFiles = [...imageUpload.files];
-	const context = canvas.getContext('2d');
-
-	// console.log(e.target.files[0]);
-	const image = e.target.files[0];
-	context.drawImage(image, 0, 0, width, height);
-
-	e.preventDefault();
-}
-
-imageUpload.addEventListener("change", handleImage);
-
-//filter event
-// photoFilter.addEventListener('click', function(e) {
-	//set filter to choosen option
-	// filter = e.target.value;
-	//set filter to video
-	// video.style.filter = filter;
-
-	// e.preventDefault();
-
-// });
-
 //clear event
 clearButton.addEventListener('click', function(e) {
-	//clear photos
-	photos.innerHTML = '';
-	//change filter back to none
-	// filter = 'none';
-	// set video filter
-	// video.style.filter = filter;
-	//reset select list
-	// photoFilter.selectedIndex = 0;
+	//Reload page
+	console.log(e);
+	window.location.reload();
 })
 
 
@@ -125,7 +92,6 @@ function takePicture() {
 		img.setAttribute('src', imageUrl);
 
 		//set image filter
-		// img.style.filter = filter;
 
 		//add image to photos
 		photos.appendChild(img);
@@ -144,9 +110,35 @@ saveButton.addEventListener('click', function(e) {
 		}).then(
 	    response => response.text() 
 	    ).then(
-	    html => console.log(html)
+	    data => {
+			console.log(data);
+			window.location.reload();
+	    	}
 	    );
+	    //Reload page
 });
+
+//delete icon
+for(let i = 0; i < deleteIcon.length; i++) {
+  deleteIcon[i].addEventListener("click", function(e) {
+    const imageID =  deleteIcon[i].getAttribute("id");
+    const url = "http://localhost:8080/camagru/gallery/delete";
+	const formData = new FormData();
+	formData.append('image-id', imageID);
+	fetch(url, {
+		method : 'POST',
+		body: formData
+	}).then(
+	response => response.text()
+	).then(
+	data => {
+		console.log(data);
+		window.location.reload();
+	})
+	//Reload page
+	e.preventDefault();
+  })
+}
 
 
 stickerMenu[0].addEventListener('change', function(e) {
