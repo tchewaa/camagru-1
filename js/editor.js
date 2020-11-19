@@ -61,6 +61,7 @@ photoButton.addEventListener('click', function(e) {
 clearButton.addEventListener('click', function(e) {
 	//Reload page
 	console.log(e);
+	window.location.reload();
 })
 
 
@@ -111,6 +112,7 @@ saveButton.addEventListener('click', function(e) {
 	    ).then(
 	    data => {
 			console.log(data);
+			window.location.reload();
 	    	}
 	    );
 	    //Reload page
@@ -131,6 +133,7 @@ for(let i = 0; i < deleteIcon.length; i++) {
 	).then(
 	data => {
 		console.log(data);
+		window.location.reload();
 	})
 	//Reload page
 	e.preventDefault();
