@@ -3,7 +3,10 @@ let width = 500,
 	filter = 0,
 	selectedSticker = [],
 	streaming = false,
-	imageUrl = "";
+	imageUrl = "",
+	url = "";
+
+const host = location.host;
 
 //Dom element
 const video = document.getElementById('video');
@@ -121,8 +124,14 @@ saveButton.addEventListener('click', function(e) {
 //delete icon
 for(let i = 0; i < deleteIcon.length; i++) {
   deleteIcon[i].addEventListener("click", function(e) {
+  	let url = "";
+	if (host.indexOf("Windows")) {
+		console.log('test');
+		url += "http://localhost/camagru/gallery/delete";
+	} else {
+		url += "http://localhost:8080/camagru/gallery/delete";
+	}
     const imageID =  deleteIcon[i].getAttribute("id");
-    const url = "http://localhost:8080/camagru/gallery/delete";
 	const formData = new FormData();
 	formData.append('image-id', imageID);
 	fetch(url, {

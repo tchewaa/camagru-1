@@ -128,4 +128,17 @@ class Helpers {
         }
         return $html;
     }
+
+    public static function validationMessage($message) {
+        $html = "";
+        if (isset($message['upload-error'])) {
+            $html .= "<div class='alert-danger'>";
+            $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+            $html .= $message['upload-error'];
+            $html .= "</div>";
+        } elseif (isset($message['upload-success'])) {
+            echo $message['upload-success'];
+        }
+        return $html;
+    }
 }

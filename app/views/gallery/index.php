@@ -1,9 +1,10 @@
 <?php
-use Core\Helpers
+use Core\Helpers;
 ?>
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
     <div class="row jumbotron" id="gallery">
+        <?= Helpers::validationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <h3>Upload or Take a Picture</h3>
         <div class="row">
             <div class="col-md-6">
