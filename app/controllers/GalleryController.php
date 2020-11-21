@@ -84,6 +84,7 @@ class GalleryController extends Controller {
                 $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
                 $this->view->validationMessages = ["upload-success" => "Image uploaded.."];
                 $this->_saveImage($base64Image);
+                echo "<meta http-equiv='refresh' content='0'>";
             } else {
                 $this->view->validationMessages = ["upload-error" => "Something went wrong while uploading your image, please try again later"];
             }
