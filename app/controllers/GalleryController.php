@@ -72,23 +72,24 @@ class GalleryController extends Controller {
             $this->_saveImage($base64Image);
             $this->view->render('gallery/index');
         } elseif (isset($_FILES) && isset($_FILES['image-upload'])) {
+//            $imageName = $_FILES['image-upload']['name'];
+//            $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
             $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
             if ($imageData) {
-                $image = imagecreatefromstring($imageData);
+                $imageData = imagecreatefromstring($imageData);
                 ob_start();
-                imagepng($image);
+                imagejpeg($imageData);
                 $imageData = ob_get_clean();
                 $imageData = base64_encode($imageData);
                 $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
                 $this->view->validationMessages = ["upload-success" => "Image uploaded.."];
                 $this->_saveImage($base64Image);
-                $this->view->render('gallery/index');
             } else {
                 $this->view->validationMessages = ["upload-error" => "Something went wrong while uploading your image, please try again later"];
-                $this->view->render('gallery/index');
             }
         }
         $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->render('gallery/index');
     }
 
     public function deleteAction() {
@@ -99,7 +100,8 @@ class GalleryController extends Controller {
                 echo "image deleted";
             }
         }
-        // $this->view->render('gallery/index');
+        $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->render('gallery/index');
     }
 
     public function getFrame($src) {
