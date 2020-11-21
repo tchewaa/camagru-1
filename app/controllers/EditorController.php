@@ -30,11 +30,9 @@ class EditorController extends Controller {
             $base64Image = str_replace('data:image/png;base64,','',$base64Image);
             $imageBinary = base64_decode($base64Image);
             $image = imagecreatefromstring($imageBinary);
-            $imageWidth = imagesx($image);
-            $imageHeight = imagesx($image);
 
             if ($_POST['selectedStickers']) {
-                //stickers 
+                //TODO Refactor _applyStickers($image, $stickers);
                 $stickers = $_POST['selectedStickers'];
                 $stickerWidth = 80;
                 $stickerHeight = 80;
