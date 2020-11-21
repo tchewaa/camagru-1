@@ -113,4 +113,32 @@ class Helpers {
         $headers .= "From: pmalope@student.wethinkcode.co.za";
         return $headers;
     }
+
+    public static function displayImages($images) {
+        $html = "";
+        if (isset($images)) {
+            $html .= "<div class=\"row\">";
+            foreach ($images as $key => $value) {
+                $html .= "<div class=\"col-sm-4 thumbnail\">";
+                $html .= "<span class=\"glyphicon glyphicon-remove-sign pull-right delete\" id=\"" . $value->id . "\" style=\"color:red;font-size:30px\"> </span>";
+                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\">";
+                $html .= '</div>';
+            }
+            $html .= '</div>';
+        }
+        return $html;
+    }
+
+    public static function validationMessage($message) {
+        $html = "";
+        if (isset($message['upload-error'])) {
+            $html .= "<div class='alert-danger'>";
+            $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+            $html .= $message['upload-error'];
+            $html .= "</div>";
+        } elseif (isset($message['upload-success'])) {
+            echo $message['upload-success'];
+        }
+        return $html;
+    }
 }

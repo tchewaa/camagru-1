@@ -27,7 +27,6 @@ class RegisterController extends Controller {
             $this->UsersModel->setConfirm($this->request->get('confirm'));
             if($this->UsersModel->save()){
                 $this->_sendConfirmation($this->UsersModel);
-                //$this->view->validationMessages = ['success' => "Testing success message"];
               Router::redirect('login');
             }
         }

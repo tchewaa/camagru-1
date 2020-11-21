@@ -7,7 +7,7 @@ namespace App\Models;
 use Core\Helpers;
 use Core\Model;
 
-class Gallery extends Model {
+class Images extends Model {
     public $id;
     public $user_id;
     public $image_name;
@@ -24,6 +24,12 @@ class Gallery extends Model {
         $this->image_name = $name;
         $this->image_data = $file;
         return $this->save();
+    }
+
+    public function getUserImages() {
+        $user = Users::currentUser();
+        $images = $this->userImages($user->id);
+        return $images;
     }
 
 }
