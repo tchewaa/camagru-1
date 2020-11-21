@@ -60,6 +60,7 @@ class EditorController extends Controller {
                 }
             }
             ob_start();
+            //TODO use jpeg
             imagepng($image);
             $imageData = ob_get_clean();
             $imageData = base64_encode($imageData);
@@ -67,8 +68,6 @@ class EditorController extends Controller {
             $this->_saveImage($base64Image);
             $this->view->render('editor/index');
         } elseif (isset($_FILES) && isset($_FILES['image-upload'])) {
-//            $imageName = $_FILES['image-upload']['name'];
-//            $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
             $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
             if ($imageData) {
                 $imageData = imagecreatefromstring($imageData);
