@@ -49,18 +49,15 @@ class EditorController extends Controller {
                     }
 
                     if ($key == 1) {
-                        $postionX = $imageWidth - $stickerWidth;
-                        imagecopyresized($image, $stickerImage, 420, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                        imagecopyresized($image, $stickerImage, 420, 0, 0, 0, $stickerWidth, $stickerHeight, $width, $height);
                     }
 
                     if ($key == 2) {
-                        $postionY = $imageHeight - $stickerHeight;
-                        imagecopyresized($image, $stickerImage, 0, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                        imagecopyresized($image, $stickerImage, 0, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);
                     }
 
                     if ($key == 3) {
-                        $postionY = $imageHeight - $stickerHeight;
-                            imagecopyresized($image, $stickerImage, 420, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);        
+                            imagecopyresized($image, $stickerImage, 420, 280, 0, 0, $stickerWidth, $stickerHeight, $width, $height);
                     }
                 }
             }
@@ -87,6 +84,7 @@ class EditorController extends Controller {
                 echo "<meta http-equiv='refresh' content='0'>";
             } else {
                 $this->view->validationMessages = ["upload-error" => "Something went wrong while uploading your image, please try again later"];
+                echo "<meta http-equiv='refresh' content='0'>";
             }
         }
         $this->view->userImages = $this->ImagesModel->getUserImages();
