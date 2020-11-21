@@ -156,6 +156,17 @@ form {
     max-height: 100px;
 }
 
+/*Gallery*/
+.gallery {
+    padding-left: 10%;
+}
+
+.images {
+    width: 20%;
+    height: 20%;
+    padding: 15px;
+}
+
 
 /*editor*/
 

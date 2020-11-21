@@ -90,6 +90,10 @@ class Model {
         return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
 
+    public function images() {
+        return $this->find();
+    }
+
     public function insert($fields) {
         if(empty($fields)) return false;
         if(array_key_exists('id', $fields)) unset($fields['id']);

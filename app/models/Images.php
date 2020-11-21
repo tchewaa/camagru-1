@@ -32,4 +32,8 @@ class Images extends Model {
         return $images;
     }
 
+    public function getImages() {
+        return $this->images();
+    }
+
 }
