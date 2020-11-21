@@ -11,13 +11,13 @@ class GalleryController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Gallery');
+        $this->load_model('Images');
         $this->view->setLayout('default');
     }
 
     public function indexAction() {
         //TODO create index page for profile
-        $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->userImages = $this->ImagesModel->getUserImages();
         $this->view->render('gallery/index');
     }
 
@@ -89,7 +89,7 @@ class GalleryController extends Controller {
                 $this->view->validationMessages = ["upload-error" => "Something went wrong while uploading your image, please try again later"];
             }
         }
-        $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->userImages = $this->ImagesModel->getUserImages();
         $this->view->render('gallery/index');
     }
 
@@ -97,11 +97,11 @@ class GalleryController extends Controller {
         if ($this->request->isPost()) {
             $userID = Users::currentUser()->id;
             $imageID = $this->request->get("image-id");
-            if ($this->GalleryModel->delete($imageID)) {
+            if ($this->ImagesModel->delete($imageID)) {
                 echo "image deleted";
             }
         }
-        $this->view->userImages = $this->GalleryModel->getUserImages();
+        $this->view->userImages = $this->ImagesModel->getUserImages();
         $this->view->render('gallery/index');
     }
 
@@ -111,6 +111,6 @@ class GalleryController extends Controller {
     }
 
     private function _saveImage($image) {
-        return $this->GalleryModel->upload($image, Users::currentUser()->username . time());
+        return $this->ImagesModel->upload($image, Users::currentUser()->username . time());
     }
 }
