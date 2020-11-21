@@ -103,7 +103,7 @@ function takePicture() {
 
 
 saveButton.addEventListener('click', function(e) {
-	const url = "http://localhost:8080/camagru/gallery/upload";
+	const url = "http://localhost:8080/camagru/editor/upload";
 	const formData = new FormData();
 	formData.append('webCamImage', imageUrl);
 	formData.append('selectedStickers', selectedSticker);
@@ -127,9 +127,9 @@ for(let i = 0; i < deleteIcon.length; i++) {
   	let url = "";
 	if (host.indexOf("Windows")) {
 		console.log('test');
-		url += "http://localhost/camagru/gallery/delete";
+		url += "http://localhost/camagru/editor/delete";
 	} else {
-		url += "http://localhost:8080/camagru/gallery/delete";
+		url += "http://localhost:8080/camagru/editor/delete";
 	}
     const imageID =  deleteIcon[i].getAttribute("id");
 	const formData = new FormData();

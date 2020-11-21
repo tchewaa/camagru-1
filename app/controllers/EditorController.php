@@ -7,7 +7,7 @@ use Core\Controller;
 use Core\Helpers;
 use Core\Router;
 
-class GalleryController extends Controller {
+class EditorController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
@@ -18,7 +18,7 @@ class GalleryController extends Controller {
     public function indexAction() {
         //TODO create index page for profile
         $this->view->userImages = $this->ImagesModel->getUserImages();
-        $this->view->render('gallery/index');
+        $this->view->render('editor/index');
     }
 
     //TODO handle validation
@@ -70,7 +70,7 @@ class GalleryController extends Controller {
             $imageData = base64_encode($imageData);
             $base64Image = 'data:image/' . 'png' . ';base64,' . $imageData;
             $this->_saveImage($base64Image);
-            $this->view->render('gallery/index');
+            $this->view->render('editor/index');
         } elseif (isset($_FILES) && isset($_FILES['image-upload'])) {
 //            $imageName = $_FILES['image-upload']['name'];
 //            $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
@@ -90,7 +90,7 @@ class GalleryController extends Controller {
             }
         }
         $this->view->userImages = $this->ImagesModel->getUserImages();
-        $this->view->render('gallery/index');
+        $this->view->render('editor/index');
     }
 
     public function deleteAction() {
@@ -102,7 +102,7 @@ class GalleryController extends Controller {
             }
         }
         $this->view->userImages = $this->ImagesModel->getUserImages();
-        $this->view->render('gallery/index');
+        $this->view->render('editor/index');
     }
 
     public function getFrame($src) {

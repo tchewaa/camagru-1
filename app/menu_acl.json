@@ -4,5 +4,5 @@
   "Login" : "login/index",
   "Register" : "register/index",
   "Profile" : "profile/index",
-  "Gallery" : "gallery/index"
+  "Editor" : "editor/index"
 }

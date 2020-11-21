@@ -17,7 +17,7 @@ use Core\Helpers;
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form id="upload-form" action="<?=PROOT?>gallery/upload" method="post" enctype="multipart/form-data" name="imageUpload">
+                        <form id="upload-form" action="<?=PROOT?>editor/upload" method="post" enctype="multipart/form-data" name="imageUpload">
                             <input id="image-upload" name="image-upload" type="file"/>
                             <input class="btn btn-dark" value="upload" type="submit"/>
                         </form>  

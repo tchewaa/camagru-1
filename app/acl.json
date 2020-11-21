@@ -13,6 +13,6 @@
     },
     "Home" : ["logout"],
     "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"],
-    "Gallery" : ["index", "upload", "delete"]
+    "Editor" : ["index", "upload", "delete"]
   }
 }
