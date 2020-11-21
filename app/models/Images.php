@@ -4,7 +4,7 @@
 namespace App\Models;
 
 
-use Core\Helpers;
+use Core\Helper;
 use Core\Model;
 
 class Images extends Model {

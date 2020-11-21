@@ -1,9 +1,9 @@
 <?php
     use Core\Router;
-    use Core\Helpers;
+    use Core\Helper;
     use App\Models\Users;
     $menu = Router::getMenu('menu_acl');
-    $currentPage = Helpers::currentPage();
+    $currentPage = Helper::currentPage();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">

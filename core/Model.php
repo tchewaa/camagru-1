@@ -55,7 +55,7 @@ class Model {
         $this->validator();
         if($this->_validates){
           $this->beforeSave();
-          $fields = Helpers::getObjectProperties($this);
+          $fields = Helper::getObjectProperties($this);
           // determine whether to update or insert
           if(property_exists($this, 'id') && $this->id != '') {
             $save = $this->update($this->id, $fields);
@@ -121,7 +121,7 @@ class Model {
 
     public function data() {
         $data = new stdClass();
-        foreach(Helpers::getObjectProperties($this) as $column => $value) {
+        foreach(Helper::getObjectProperties($this) as $column => $value) {
           $data->column = $value;
         }
         return $data;

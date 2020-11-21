@@ -2,7 +2,7 @@
 namespace App\Controllers;
 use App\Models\Verification;
 use Core\Controller;
-use Core\Helpers;
+use Core\Helper;
 use Core\Router;
 use App\Models\Users;
 use App\Models\Auth;

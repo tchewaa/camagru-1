@@ -75,7 +75,7 @@ class FormHelper {
     public static function displayValidationMessage($errors) {
         $html = "";
         if (isset($errors['success'])) {
-            Helpers::dnd("testing");
+            Helper::dnd("testing");
         } else if (!empty($errors)) {
             $html .= '<div class="form-errors"><ul class="bg-danger has-errors">';
             foreach($errors as $field => $error) {

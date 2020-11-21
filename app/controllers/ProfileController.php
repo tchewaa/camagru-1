@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Models\Users;
 use App\Models\Verification;
 use Core\Controller;
-use Core\Helpers;
+use Core\Helper;
 use Core\Router;
 
 class ProfileController extends Controller {
@@ -82,7 +82,7 @@ class ProfileController extends Controller {
                         'conditions' => 'user_id = ?',
                         'bind' => [$current_user->id]
                     ]);
-                    Helpers::dnd($emailExists);
+                    Helper::dnd($emailExists);
                     if ($verification && $verification->sendVerificationToken($this->UsersModel)) {
                         $current_user->update($current_user->id, ['email' => $email, 'notification' => $notification]);
                         $verification->update($current_user->id, ['confirmed' => 0]);

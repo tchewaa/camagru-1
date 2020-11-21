@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class Helpers {
+class Helper {
     public static function dnd($data) {
         echo '<pre>';
         var_dump($data);
@@ -125,6 +125,14 @@ class Helpers {
                 $html .= '</div>';
             }
             $html .= '</div>';
+        }
+        return $html;
+    }
+
+    public static function displayGalleryImages($images) {
+        $html = "";
+        foreach($images as $image) {
+            $html .= '<a href="http://localhost/camagru/home/article/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
         }
         return $html;
     }

@@ -4,7 +4,7 @@
 namespace Core\Validators;
 
 
-use Core\Helpers;
+use Core\Helper;
 
 class PasswordValidator extends CustomValidator {
 

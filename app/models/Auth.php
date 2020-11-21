@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-use Core\Helpers;
+use Core\Helper;
 use Core\Model;
 use Core\Validators\MatchesValidator;
 use Core\Validators\MinValidator;

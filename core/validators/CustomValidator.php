@@ -1,6 +1,6 @@
 <?php
 namespace Core\Validators;
-use Core\Helpers;
+use Core\Helper;
 use \Exception;
 
 abstract class CustomValidator {
@@ -17,7 +17,7 @@ abstract class CustomValidator {
     }
 
     if(!property_exists($model, $this->field)){
-        Helpers::dnd($this->field);
+        Helper::dnd($this->field);
       throw new Exception("The field must exist in the model");
     }
 

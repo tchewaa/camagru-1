@@ -3,7 +3,7 @@
   use Core\Controller;
   use Core\H;
   use App\Models\Users;
-  use Core\Helpers;
+  use Core\Helper;
   use Core\Router;
 
 class HomeController extends Controller {
@@ -17,7 +17,7 @@ class HomeController extends Controller {
     public function indexAction($page = 1) {
         $this->view->page = $page;
 //        $images = array_slice(array_reverse($this->ImagesModel->getImages()), ($this->view->page - 1) * PAGE_SIZE, PAGE_SIZE);
-//        Helpers::dnd($images);
+//        Helper::dnd($images);
         $this->view->images = $this->ImagesModel->getImages();
         $this->view->render('home/index');
     }
