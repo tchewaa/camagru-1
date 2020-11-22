@@ -161,10 +161,14 @@ form {
     padding-left: 10%;
 }
 
+.pagination {
+    display: inline;
+}
+
 .images {
-    width: 20%;
-    height: 20%;
-    padding: 35px;
+    width: 30%;
+    height: 30%;
+    padding: 15px;
 }
 
 
