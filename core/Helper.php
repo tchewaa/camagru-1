@@ -138,7 +138,7 @@ class Helper {
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
-            $html .= '<a href="http://localhost/camagru/home/article/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
+            $html .= '<a href="http://localhost/camagru/home/image/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
             $html .= '</div>';
 
         }

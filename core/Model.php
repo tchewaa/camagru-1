@@ -94,6 +94,20 @@ class Model {
         return $this->find();
     }
 
+    public function getImageById($imageId = '') {
+        //TODO join tables
+        $params = ['conditions' => "id = ?", 'bind' => [$imageId]];
+        $imageDetails = $this->findFirst($params);
+//        $author = $this->findFirst(['conditions' => 'id = ?', 'bind' => [$imageDetails->user_id]]);
+//        $imageDetails->author = $author;
+//        Helper::dnd($imageDetails);
+        //Retrieve author
+        //Retrieve Likes
+        //Retrieve Comments
+        //return imageData;
+        return $imageDetails;
+    }
+
     public function insert($fields) {
         if(empty($fields)) return false;
         if(array_key_exists('id', $fields)) unset($fields['id']);

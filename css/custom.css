@@ -39,6 +39,10 @@ div.container {
     padding: 10px 20px;
 }
 
+small {
+    display: inline-block;
+}
+
 .jumbotron {
     background-color: transparent;
 }
@@ -85,6 +89,49 @@ div.container {
 
 .error {
     color: white;
+}
+
+/*view image*/
+
+.polaroid {
+    display: inline-block;
+    margin: 50px;
+    position: center;
+    width: auto;
+}
+
+.polaroids {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/*.image-view {*/
+/*    padding-left: 100px;*/
+/*}*/
+
+.user-image > img {
+    width: 60%;
+}
+
+.image-meta-data > p {
+    display: inline;
+    font-size: 15px;
+}
+
+.image-meta-data > .buttons {
+    display: inline;
+}
+
+.image-meta-data > .buttons > span {
+    padding: 5px;
+    font-size: 20px;
+}
+
+.comments {
+    padding-bottom: 50px;
+    padding-top: 20px;
+    font-size: 20px;
 }
 
 /*Form*/

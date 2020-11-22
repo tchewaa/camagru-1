@@ -115,6 +115,10 @@ class Database {
         return false;
     }
 
+    public function findImage($table, $params = [], $class = false) {
+
+    }
+
     public function insert($table, $fields = []) {
         $fieldString = '';
         $valueString = '';

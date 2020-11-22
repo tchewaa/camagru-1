@@ -12,6 +12,7 @@ class Images extends Model {
     public $user_id;
     public $image_name;
     public $image_data;
+    public $date;
 
     public function __construct(){
         $table = 'images';
@@ -34,6 +35,12 @@ class Images extends Model {
 
     public function getImages() {
         return $this->images();
+    }
+
+    public function getImage($imageId = '') {
+        return $this->getImageById($imageId);
+//        $imageDetails = $this->getImageById($imageId);
+//        Helper::dnd($imageDetails);
     }
 
     public function imageCount() {
