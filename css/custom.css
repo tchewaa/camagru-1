@@ -106,9 +106,9 @@ small {
     text-align: center;
 }
 
-/*.image-view {*/
-/*    padding-left: 100px;*/
-/*}*/
+.image-view {
+    padding-left: 100px;
+}
 
 .user-image > img {
     width: 60%;

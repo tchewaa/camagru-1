@@ -5,7 +5,7 @@ use Core\Helper;
     <div class="row polaroid">
 <!--        <h1 class="welcomeHeader">ImageID </h1>-->
         <div class="col-lg-9 col-lg-offset-3 user-image">
-            <img src="<?=$this->image->image_data?>" alt="article image" class="img-thumbnail">
+            <img src="<?=$this->image->image_data?>" alt="article image">
         </div>
         <div class="col-lg-4 col-lg-offset-3 image-meta-data">
             <p>Author: </p>
