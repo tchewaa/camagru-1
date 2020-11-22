@@ -17,4 +17,4 @@ define('REMEMBER_ME_COOKIE_EXPIRY', 2592000); // time in seconds for remember me
 
 define('ACCESS_RESTRICTED', 'Restricted'); // controller name for the restricted redirect
 
-define('PAGE_SIZE', 10);
+define('PAGE_SIZE', 6);

@@ -36,4 +36,12 @@ class Images extends Model {
         return $this->images();
     }
 
+    public function imageCount() {
+        return count($this->getImages());
+    }
+
+    public function pageCount() {
+        return ceil($this->imageCount() / PAGE_SIZE);
+    }
+
 }
