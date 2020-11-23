@@ -214,6 +214,11 @@ form {
     padding: 15px;
 }
 
+.image-meta-data, .comments > small {
+    font-weight: bold;
+    font-size: 15px;
+}
+
 
 /*editor*/
 

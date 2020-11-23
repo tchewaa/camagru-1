@@ -19,7 +19,6 @@ use Core\Helper;
             <form class="form" action="<?=PROOT?>home/comment" method="post">
                 <div class="form-group">
                     <label for="comment">Comment</label>
-                    <!--                    <input type="text" id="comment" name="comment" class="form-control">-->
                     <textarea class="form-control" id="comment-text" name="comment" rows="4" cols="50"></textarea>
                 </div>
                 <div class="pull-left">
