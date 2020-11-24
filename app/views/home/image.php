@@ -8,12 +8,11 @@ use Core\Helper;
             <img src="<?=$this->image->image_data?>" alt="article image">
         </div>
         <div class="col-lg-4 col-lg-offset-3 image-meta-data">
-            <p>Author: </p>
-            <p>Timestamp: </p>
-            <div class="buttons">
-                <span class="glyphicon glyphicon-thumbs-up">0</span>
-                <span class="glyphicon glyphicon-comment">0</span>
-            </div>
+            <p>Author: test1 </p>
+            <p>Timestamp: 20 November 2020</p>
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+            </button>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comment-area">
             <form class="form" action="<?=PROOT?>home/comment" method="post">

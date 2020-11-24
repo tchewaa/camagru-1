@@ -119,8 +119,9 @@ small {
     font-size: 15px;
 }
 
-.image-meta-data > .buttons {
+.image-meta-data > button {
     display: inline;
+    font-size: 10px;
 }
 
 .image-meta-data > .buttons > span {
