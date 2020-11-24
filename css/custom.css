@@ -27,13 +27,6 @@ nav {
     color: white;
 }
 
-div.polaroid {
-    width: 80%;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 25px;
-}
-
 div.container {
     text-align: center;
     padding: 10px 20px;
@@ -106,6 +99,11 @@ small {
     text-align: center;
 }
 
+.polaroid > button > span {
+    padding: 15px;
+    font-size: 10px;
+}
+
 .image-view {
     padding-left: 100px;
 }
@@ -117,16 +115,6 @@ small {
 .image-meta-data > p {
     display: inline;
     font-size: 15px;
-}
-
-.image-meta-data > button {
-    display: inline;
-    font-size: 10px;
-}
-
-.image-meta-data > .buttons > span {
-    padding: 5px;
-    font-size: 20px;
 }
 
 .comments {

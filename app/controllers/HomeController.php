@@ -33,7 +33,6 @@ class HomeController extends Controller {
 
     public function imageAction($imageId = '') {
         $this->view->image = $this->ImagesModel->getImage($imageId);
-        $this->view->imageId = $imageId;
         $this->view->render('home/image');
     }
 }
