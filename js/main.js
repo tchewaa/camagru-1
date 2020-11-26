@@ -25,6 +25,7 @@ likeButton.addEventListener('click', function(e) {
             console.log(data);
             //reload page after liking image
             // window.location.reload();
+            
         }
     )
     console.log("URL:" + url);
