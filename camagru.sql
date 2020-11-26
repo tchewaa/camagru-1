@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `images` (
     `user_id` int(11) NOT NULL,
     `image_name` varchar(255) NOT NULL,
     `image_data` longblob NOT NULL,
+    `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `user_id` int(11) NOT NULL,
     `image_id` int(11) NOT NULL,
     `content` text NOT NULL,
+    `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES users(id),
     FOREIGN KEY (`image_id`) REFERENCES images(id)
@@ -76,9 +78,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
     `image_id` int(11) NOT NULL,
-    `comment_id` int(11) NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES users(id),
-    FOREIGN KEY (`image_id`) REFERENCES images(id),
-    FOREIGN KEY (`comment_id`) REFERENCES comments(id)
+    FOREIGN KEY (`image_id`) REFERENCES images(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

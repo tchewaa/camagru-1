@@ -1,10 +1,10 @@
 <?php
-use Core\Helpers;
+use Core\Helper;
 ?>
 <?php $this->setSiteTitle('upload or take a pic'); ?>
 <?php $this->start('body'); ?>
     <div class="row jumbotron" id="gallery">
-        <?= Helpers::validationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
+        <?= Helper::validationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <h3>Upload or Take a Picture</h3>
         <div class="row">
             <div class="col-md-6">
@@ -53,7 +53,7 @@ use Core\Helpers;
             <div class="row">
                 <div class="col-sm-12">
                     <h3>Your images</h3>
-                    <?= Helpers::displayImages($this->userImages); ?>
+                    <?= Helper::displayImages($this->userImages); ?>
                 </div>
             </div>
         </div>

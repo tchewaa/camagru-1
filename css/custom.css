@@ -27,16 +27,13 @@ nav {
     color: white;
 }
 
-div.polaroid {
-    width: 80%;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 25px;
-}
-
 div.container {
     text-align: center;
     padding: 10px 20px;
+}
+
+small {
+    display: inline-block;
 }
 
 .jumbotron {
@@ -85,6 +82,45 @@ div.container {
 
 .error {
     color: white;
+}
+
+/*view image*/
+
+.polaroid {
+    display: inline-block;
+    margin: 50px;
+    position: center;
+    width: auto;
+}
+
+.polaroids {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.polaroid > button > span {
+    padding: 15px;
+    font-size: 10px;
+}
+
+.image-view {
+    padding-left: 100px;
+}
+
+.user-image > img {
+    width: 60%;
+}
+
+.image-meta-data > p {
+    display: inline;
+    font-size: 15px;
+}
+
+.comments {
+    padding-bottom: 50px;
+    padding-top: 20px;
+    font-size: 20px;
 }
 
 /*Form*/
@@ -154,6 +190,22 @@ form {
 
     max-width: 100px;
     max-height: 100px;
+}
+
+/*Gallery*/
+.gallery {
+    padding-left: 10%;
+}
+
+.images {
+    width: 350px;
+    height: 250px;
+    padding: 15px;
+}
+
+.image-meta-data, .comments > small {
+    font-weight: bold;
+    font-size: 15px;
 }
 
 

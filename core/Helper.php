@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class Helpers {
+class Helper {
     public static function dnd($data) {
         echo '<pre>';
         var_dump($data);
@@ -121,11 +121,45 @@ class Helpers {
             foreach ($images as $key => $value) {
                 $html .= "<div class=\"col-sm-4 thumbnail\">";
                 $html .= "<span class=\"glyphicon glyphicon-remove-sign pull-right delete\" id=\"" . $value->id . "\" style=\"color:red;font-size:30px\"> </span>";
-                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\">";
+//                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\">";
+                $html .= '<img src="'. $value->image_data .'" class="images" id="user-image">';
                 $html .= '</div>';
             }
             $html .= '</div>';
         }
+        return $html;
+    }
+
+    public static function displayGalleryImages($images, $pageNumber, $pageCount) {
+        $html = "";
+        $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
+        $pages = [];
+        $html .= '<div class="row">';
+        //TODO refactor
+        foreach($images as $image) {
+            $html .= '<div class="col-lg-4">';
+            //TODO refactor url
+            $html .= '<a href="http://localhost/camagru/home/image/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
+            $html .= '</div>';
+
+        }
+        $html .= '</div>';
+        //TODO refactor
+        $html .= '<div class="row">';
+        $html .= '<div class="col-lg-12 col-lg-offset-4">';
+        $html .= '<ul class="pagination">';
+        while ($pageIndex <= $pageCount) {
+            $pages[] = '<li><a href="http://localhost/camagru/home/index/'.$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
+            $pageIndex++;
+        }
+        $html .= '<li><a href="http://localhost/camagru/home/index/1" class="pages" id="pageNumber1">Begin</a></li>';
+        foreach ($pages as $page) {
+            $html .= $page;
+        }
+        $html .= '<li><a href="http://localhost/camagru/home/index/'.$pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">End</a></li>';
+        $html .= '</ul>';
+        $html .= '</div>';
+        $html .= '</div>';
         return $html;
     }
 

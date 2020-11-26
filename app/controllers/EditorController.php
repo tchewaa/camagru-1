@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Users;
 use Core\Controller;
-use Core\Helpers;
+use Core\Helper;
 use Core\Router;
 
 class EditorController extends Controller {

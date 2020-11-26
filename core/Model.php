@@ -55,7 +55,7 @@ class Model {
         $this->validator();
         if($this->_validates){
           $this->beforeSave();
-          $fields = Helpers::getObjectProperties($this);
+          $fields = Helper::getObjectProperties($this);
           // determine whether to update or insert
           if(property_exists($this, 'id') && $this->id != '') {
             $save = $this->update($this->id, $fields);
@@ -90,6 +90,24 @@ class Model {
         return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
 
+    public function images() {
+        return $this->find();
+    }
+
+    public function getImageById($imageId = '') {
+        //TODO join tables
+        $params = ['conditions' => "id = ?", 'bind' => [$imageId]];
+        $imageDetails = $this->findFirst($params);
+//        $author = $this->findFirst(['conditions' => 'id = ?', 'bind' => [$imageDetails->user_id]]);
+//        $imageDetails->author = $author;
+//        Helper::dnd($imageDetails);
+        //Retrieve author
+        //Retrieve Likes
+        //Retrieve Comments
+        //return imageData;
+        return $imageDetails;
+    }
+
     public function insert($fields) {
         if(empty($fields)) return false;
         if(array_key_exists('id', $fields)) unset($fields['id']);
@@ -117,7 +135,7 @@ class Model {
 
     public function data() {
         $data = new stdClass();
-        foreach(Helpers::getObjectProperties($this) as $column => $value) {
+        foreach(Helper::getObjectProperties($this) as $column => $value) {
           $data->column = $value;
         }
         return $data;

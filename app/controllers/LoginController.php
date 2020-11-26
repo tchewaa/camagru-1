@@ -9,7 +9,7 @@ use App\Models\Users;
 use App\Models\Verification;
 use Core\Controller;
 use Core\FormHelper;
-use Core\Helpers;
+use Core\Helper;
 use Core\Router;
 
 class LoginController extends Controller {

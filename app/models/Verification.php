@@ -5,7 +5,7 @@ namespace App\Models;
 
 
 use Core\FormHelper;
-use Core\Helpers;
+use Core\Helper;
 use Core\Model;
 
 class Verification extends Model {
@@ -20,7 +20,7 @@ class Verification extends Model {
     }
 
     public function sendVerificationToken($fields) {
-        $headers = Helpers::getHeaders();
+        $headers = Helper::getHeaders();
         $subject = 'Camagru account confirmation';
         $user = new Users($fields->username);
         //TODO check if user exists
@@ -31,8 +31,8 @@ class Verification extends Model {
 //        $this->assign($params); //
         $this->confirmed = 0;
         $this->user_id = $user->id;
-        $this->token = md5($user->username . $user->email . Helpers::generateRandomString());
-        $message = Helpers::formatConfirmationMessage($this->token, $user);
+        $this->token = md5($user->username . $user->email . Helper::generateRandomString());
+        $message = Helper::formatConfirmationMessage($this->token, $user);
         //TODO check if token was saved
         if ($this->save() && mail($fields->email, $subject, $message, $headers)) {
             return true;
@@ -43,17 +43,17 @@ class Verification extends Model {
 
     //TODO move to helpers
     public function resendVerificationToken($user, $token) {
-        $headers = Helpers::getHeaders();
+        $headers = Helper::getHeaders();
         $subject = 'Camagru: Account confirmation';
-        $message = Helpers::formatConfirmationMessage($token, $user);
+        $message = Helper::formatConfirmationMessage($token, $user);
         if (mail($user->email, $subject, $message, $headers)) return true;
         return false;
     }
 
     public function sendForgotPasswordToken($user, $token) {
-        $headers = Helpers::getHeaders();
+        $headers = Helper::getHeaders();
         $subject = 'Camagru: Forgot your password?';
-        $message = Helpers::formatForgotPasswordMessage($token, $user);
+        $message = Helper::formatForgotPasswordMessage($token, $user);
         if (mail($user->email, $subject, $message, $headers)) return true;
     }
 
