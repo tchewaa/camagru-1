@@ -35,4 +35,14 @@ class HomeController extends Controller {
         $this->view->image = $this->ImagesModel->getImage($imageId);
         $this->view->render('home/image');
     }
+
+    public function likeAction() {
+        //check if data was posted
+        Helper::dnd("liking image Id: " . $this->request->get('image-id'));
+    }
+
+    public function commentAction() {
+        //check if data was posted
+        Helper::dnd("commenting on image Id: " . $this->request->get('image-id') . "\n" . "Comment: " . $this->request->get('comment'));
+    }
 }

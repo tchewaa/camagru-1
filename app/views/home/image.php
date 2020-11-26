@@ -15,9 +15,9 @@ use Core\Helper;
             <form class="form" action="<?=PROOT?>home/comment" method="post">
                 <div class="form-group">
                     <label for="comment">Comment</label>
-                    <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50">Test 1</textarea>
+                    <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50"></textarea>
                 </div>
-                <button type="button" class="btn btn-default pull-left" id="comment-button">Submit</button>
+                <button type="button" class="btn btn-default pull-left" id="comment-button" value="<?=$this->image->id?>">Submit</button>
             </form>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comments">
