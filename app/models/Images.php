@@ -51,4 +51,12 @@ class Images extends Model {
         return ceil($this->imageCount() / PAGE_SIZE);
     }
 
+    public function likeImage($imageId) {
+        $image = $this->findById($imageId);
+        $imageLike = new Likes();
+        $imageLike = $imageLike->upload($image);
+        if ($imageLike) return true;
+        return false;
+    }
+
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use App\Models\Users;
+
 class Helper {
     public static function dnd($data) {
         echo '<pre>';
@@ -96,6 +98,42 @@ class Helper {
         }
         return $message;
     }
+
+    public static function formatImageLikeMessage($imageAuthor) {
+        $currentUser = Users::currentUser();
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
+    }
+
 
     public static function generateRandomString($length = 30) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

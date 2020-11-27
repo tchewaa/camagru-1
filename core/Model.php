@@ -108,6 +108,11 @@ class Model {
         return $imageDetails;
     }
 
+    public function likedImage($image, $user) {
+        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
+        return $this->query($sql, [$user->id, $image->id]);
+    }
+
     public function insert($fields) {
         if(empty($fields)) return false;
         if(array_key_exists('id', $fields)) unset($fields['id']);

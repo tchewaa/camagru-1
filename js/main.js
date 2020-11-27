@@ -1,9 +1,8 @@
 const host = location.host;
 
 window.addEventListener('load', function (e) {
-   console.log('Page loaded');
+    console.log('Page loaded');
 });
-
 
 //handle Like button
 const likeButton = document.getElementById('like-button');
@@ -24,16 +23,8 @@ likeButton.addEventListener('click', function(e) {
         method: 'POST',
         body: formData
     }).then(
-        response => response.text()
-    ).then(
-        data => {
-            console.log(data);
-            //reload page after liking image
-            // window.location.reload();
-            
-        }
+        window.location.reload()
     )
-    console.log("URL:" + url);
     e.preventDefault();
 });
 
