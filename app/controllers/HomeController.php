@@ -12,6 +12,7 @@ class HomeController extends Controller {
         parent::__construct($controller, $action);
         $this->load_model('Images');
         $this->load_model('Likes');
+        $this->load_model('Comments');
         $this->view->setLayout('default');
     }
 
@@ -63,6 +64,9 @@ class HomeController extends Controller {
 
     public function commentAction() {
         //check if data was posted
+        if ($this->request->isPost()) {
+            $comment = $this->CommentsModel->comment($this->request->get('comment'), $this->request->get('image-id'));
+        }
         Helper::dnd("commenting on image Id: " . $this->request->get('image-id') . "\n" . "Comment: " . $this->request->get('comment'));
     }
 }
