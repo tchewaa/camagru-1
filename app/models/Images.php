@@ -62,4 +62,8 @@ class Images extends Model {
         $likedImage = new Likes();
         $likedImage->deleteLike($imageId, $userId);
     }
+
+    public function deleteImage($imageId) {
+        Helper::dnd("deleting images and related comments and likes");
+    }
 }
