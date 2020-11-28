@@ -23,7 +23,11 @@ likeButton.addEventListener('click', function(e) {
         method: 'POST',
         body: formData
     }).then(
-        window.location.reload()
+        response => response.text()
+    ).then(
+        data => {
+            console.log(data);
+        }
     )
     e.preventDefault();
 });
