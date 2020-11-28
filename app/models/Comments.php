@@ -25,8 +25,23 @@ class Comments extends Model {
         $this->user_id = $currentUser->id;
         $this->image_id = $imageId;
         $this->content = $comment;
-        $this->save();
+        if ($this->save()) {
+            //TODO refactor
+            $image = new Images();
+            $image = $image->findById($imageId);
+            $imageAuthor = new Users($image->user_id);
+            if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
+                $this->_sendCommentEmail($imageAuthor);
+            }
+        }
         return $this->getErrorMessages();
+    }
+
+    private function _sendCommentEmail($imageAuthor) {
+        $headers = Helper::getHeaders();
+        $subject = 'Camagru: Comment made your image';
+        $message = Helper::formatImageCommentMessage($imageAuthor);
+        if (mail($imageAuthor->email, $subject, $message, $headers)) return true;
     }
 
     public function getComments($imageId) {

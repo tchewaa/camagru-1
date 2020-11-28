@@ -33,7 +33,7 @@ class Likes extends Model {
             $this->user_id = $currentUser->id;
             if ($this->save()) {
                 $imageAuthor = new Users($image->user_id);
-                if ($imageAuthor->notification === 1) {
+                if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
                     $this->_sendLikeEmail($imageAuthor);
                 }
             } else {
