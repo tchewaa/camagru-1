@@ -208,12 +208,13 @@ class Helper {
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
         $html .= '<div class="row">';
-        $url = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
+        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
+        $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
         //TODO refactor
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
-            $html .= '<a href="' . $url . $image->id . '"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
+            $html .= '<a href="' . $imageUrl . $image->id . '"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
             $html .= '</div>';
 
         }
@@ -223,14 +224,14 @@ class Helper {
         $html .= '<div class="col-lg-12 col-lg-offset-4">';
         $html .= '<ul class="pagination">';
         while ($pageIndex <= $pageCount) {
-            $pages[] = '<li><a href="http://localhost/camagru/home/index/'.$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
+            $pages[] = '<li><a href="' . $pageUrl .$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
             $pageIndex++;
         }
-        $html .= '<li><a href="http://localhost/camagru/home/index/1" class="pages" id="pageNumber1">Begin</a></li>';
+        $html .= '<li><a href="'. $pageUrl . 1 . '" class="pages" id="pageNumber1">Begin</a></li>';
         foreach ($pages as $page) {
             $html .= $page;
         }
-        $html .= '<li><a href="http://localhost/camagru/home/index/'.$pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">End</a></li>';
+        $html .= '<li><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">End</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '</div>';
