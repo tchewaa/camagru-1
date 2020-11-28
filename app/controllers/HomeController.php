@@ -58,15 +58,22 @@ class HomeController extends Controller {
                 //send error message
             }
         }
-        $this->view->image = $this->ImagesModel->getImage($imageId);
-        $this->view->render('home/image');
+//        $this->view->image = $this->ImagesModel->getImage($imageId);
+//        $this->view->render('home/image');
     }
 
     public function commentAction() {
-        //check if data was posted
+        $imageId = '';
         if ($this->request->isPost()) {
-            $comment = $this->CommentsModel->comment($this->request->get('comment'), $this->request->get('image-id'));
+            $comment = $this->request->get('comment');
+            $imageId .= $this->request->get('image-id');
+            $saveComment = $this->CommentsModel->comment($comment, $imageId);
+            //TODO handle comment validation message
+            if (isset($saveComment['content'])) {
+                Helper::dnd($saveComment['content']);
+            } else {
+                Helper::dnd("Comment saved");
+            }
         }
-        Helper::dnd("commenting on image Id: " . $this->request->get('image-id') . "\n" . "Comment: " . $this->request->get('comment'));
     }
 }

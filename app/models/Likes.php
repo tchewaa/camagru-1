@@ -20,6 +20,7 @@ class Likes extends Model {
         echo ' Updating like';
 //        Helper::dnd("Finally here");
     }
+
     public function upload($image) {
         $currentUser = Users::currentUser();
         $likedImage = $this->likedImage($image, $currentUser);
@@ -34,6 +35,8 @@ class Likes extends Model {
                 if ($imageAuthor->notification === 1) {
                     $this->_sendLikeEmail($imageAuthor);
                 }
+            } else {
+                return false;
             }
             return true;
         }

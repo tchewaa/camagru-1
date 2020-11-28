@@ -1,8 +1,8 @@
 const host = location.host;
 
-window.addEventListener('load', function (e) {
-    console.log('Page loaded');
-});
+// window.addEventListener('load', function (e) {
+//     console.log('Page loaded');
+// });
 
 //handle Like button
 const likeButton = document.getElementById('like-button');
@@ -13,8 +13,6 @@ likeButton.addEventListener('DOMContentLoaded', function (e) {
 });
 
 likeButton.addEventListener('click', function(e) {
-    console.log("Like button cliked...");
-    console.log("Image ID: " + likeButton.value);
     const formData = new FormData();
     const imageId = likeButton.value;
     const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
@@ -26,7 +24,8 @@ likeButton.addEventListener('click', function(e) {
         response => response.text()
     ).then(
         data => {
-            console.log(data);
+            // console.log(data);
+            window.location.reload();
         }
     )
     e.preventDefault();
@@ -38,8 +37,6 @@ const commentText = document.getElementById('comment-text');
 
 commentButton.addEventListener('click', function (e) {
     if (commentText.value !== '') {
-        console.log("comment: " + commentText.value);
-        console.log("image id: " + commentButton.value);
         const formData = new FormData();
         const comment = commentText.value;
         const imageId = commentButton.value;
@@ -53,13 +50,11 @@ commentButton.addEventListener('click', function (e) {
             response => response.text()
         ).then(
             data => {
-                console.log(data);
-                //reload page after commenting on image
-                // window.location.reload();
+                // console.log(data);
+                window.location.reload();
 
             }
         )
-        console.log("URL:" + url);
         e.preventDefault();
     } else {
         console.log("You cannot post empty comment...");

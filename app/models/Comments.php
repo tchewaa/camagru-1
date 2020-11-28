@@ -25,9 +25,8 @@ class Comments extends Model {
         $this->user_id = $currentUser->id;
         $this->image_id = $imageId;
         $this->content = $comment;
-        if ($this->save()) {
-            Helper::dnd($this->getErrorMessages());
-        }
+        $this->save();
+        return $this->getErrorMessages();
     }
 
     public function validator() {

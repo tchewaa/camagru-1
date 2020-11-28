@@ -1,4 +1,6 @@
 <?php
+
+use Core\FormHelper;
 use Core\Helper;
 ?>
 <?php $this->start('body'); ?>
@@ -13,6 +15,7 @@ use Core\Helper;
         </div>
         <div class="col-lg-4 col-lg-offset-3 comment-area">
             <form class="form" action="<?=PROOT?>home/comment" method="post">
+                <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
                 <div class="form-group">
                     <label for="comment">Comment</label>
                     <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50"></textarea>
