@@ -47,20 +47,15 @@ class HomeController extends Controller {
 
     public function likeAction() {
         $imageId = '';
-        //check if data was posted
         if ($this->request->isPost()) {
             $imageId .= $this->request->get('image-id');
-            $imageLiked = $this->ImagesModel->likeImage($imageId);
-            if ($imageLiked) {
-                //send success message
-                echo "Like updated";
-            } else {
-                echo "something went wrong";
-                //send error message
+            $likeStatus = $this->request->get('like-status');
+            if ($likeStatus === 'like') {
+                $this->ImagesModel->likeImage($imageId);
+            } elseif ($likeStatus === 'unlike') {
+                $this->ImagesModel->unlikeImage($imageId);
             }
         }
-//        $this->view->image = $this->ImagesModel->getImage($imageId);
-//        $this->view->render('home/image');
     }
 
     public function commentAction() {
@@ -71,11 +66,11 @@ class HomeController extends Controller {
             $imageId .= $this->request->get('image-id');
             $saveComment = $this->CommentsModel->comment($comment, $imageId);
             //TODO handle comment validation message
-            if (isset($saveComment['content'])) {
-                Helper::dnd($saveComment['content']);
-            } else {
-                Helper::dnd("Comment saved");
-            }
+//            if (isset($saveComment['content'])) {
+//                Helper::dnd($saveComment['content']);
+//            } else {
+//                Helper::dnd("Comment saved");
+//            }
         }
     }
 }

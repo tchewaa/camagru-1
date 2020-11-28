@@ -15,8 +15,10 @@ likeButton.addEventListener('DOMContentLoaded', function (e) {
 likeButton.addEventListener('click', function(e) {
     const formData = new FormData();
     const imageId = likeButton.value;
+    const likeStatus = likeButton.innerText;
     const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
     formData.append('image-id', imageId);
+    formData.append('like-status', likeStatus);
     fetch(url, {
         method: 'POST',
         body: formData

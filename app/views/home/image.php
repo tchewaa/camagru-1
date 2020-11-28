@@ -9,14 +9,21 @@ use Core\Helper;
             <img src="<?=$this->image->image_data?>" alt="article image">
         </div>
         <div class="col-lg-4 col-lg-offset-3 image-meta-data">
-            <p>Author: test1 </p>
-            <p>Timestamp: 20 November 2020</p>
-            <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">Like</button>
+            <p>Author: <?=$this->image->username?></p>
+            <p>Timestamp: <?=$this->image->date?></p>
+            <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">
+                <?php
+                    if ($this->imageLiked) {
+                        echo "unlike";
+                    } else {
+                        echo "like";
+                    }
+                ?>
+            </button>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comment-area">
             <?= FormHelper::csrfInput() ?>
             <form class="form" action="<?=PROOT?>home/comment" method="post">
-                <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
                 <div class="form-group">
                     <label for="comment">Comment</label>
                     <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50"></textarea>

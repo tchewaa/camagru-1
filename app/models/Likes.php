@@ -21,10 +21,11 @@ class Likes extends Model {
 //        Helper::dnd("Finally here");
     }
 
-    public function upload($image) {
+    public function uploadLike($image) {
         $currentUser = Users::currentUser();
         $likedImage = $this->likedImage($image, $currentUser);
         if ($likedImage->count() > 0) {
+            //TODO remove
             //unlike image
 //            Helper::dnd("Image already liked");
         } else {
@@ -41,6 +42,12 @@ class Likes extends Model {
             return true;
         }
         return false;
+    }
+
+    public function deleteLike($imageId, $userId) {
+        $sql = "DELETE FROM likes WHERE user_id = ? AND image_id = ?";
+        $params = [$userId, $imageId];
+        return $this->query($sql, $params);
     }
 
     public function likedImage($image, $user) {

@@ -52,8 +52,14 @@ class Images extends Model {
     public function likeImage($imageId) {
         $image = $this->findById($imageId);
         $imageLike = new Likes();
-        $imageLike = $imageLike->upload($image);
+        $imageLike = $imageLike->uploadLike($image);
         if ($imageLike) return true;
         return false;
+    }
+
+    public function unlikeImage($imageId) {
+        $userId = Users::currentUser()->id;
+        $likedImage = new Likes();
+        $likedImage->deleteLike($imageId, $userId);
     }
 }
