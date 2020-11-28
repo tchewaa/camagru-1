@@ -94,6 +94,24 @@ class Model {
         return $this->find();
     }
 
+    public function findComments($imageId) {
+        $sql = "
+            SELECT 
+                c.user_id, 
+                c.image_id, 
+                c.content,
+                c.date,
+                u.username 
+            FROM comments c, users u 
+            WHERE c.image_id = ? AND u.id = c.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results();
+//        Helper::dnd($t);
+//        return $this->find(['condtions' => "image_id = ?", 'bind' => [$imageId]]);
+    }
+
+    //TODO use findById method
     public function getImageById($imageId = '') {
         //TODO join tables
         $params = ['conditions' => "id = ?", 'bind' => [$imageId]];
