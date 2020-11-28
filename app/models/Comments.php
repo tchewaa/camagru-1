@@ -29,6 +29,10 @@ class Comments extends Model {
         return $this->getErrorMessages();
     }
 
+    public function getComments($imageId) {
+        return $this->findComments($imageId);
+    }
+
     public function validator() {
         $this->runValidation(new MinValidator($this, ['field' => 'content', 'rule' => 1, 'msg' => 'Comment must at least have 1 character']));
         $this->runValidation(new MaxValidator($this, ['field' => 'content', 'rule' => 255, 'msg' => 'Comment cannot be more that 255 characters']));

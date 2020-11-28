@@ -41,6 +41,7 @@ class HomeController extends Controller {
         }
         $this->view->image = $image;
         $this->view->imageLiked = $imageLiked;
+        $this->view->comments = $this->CommentsModel->getComments($imageId);
         $this->view->render('home/image');
     }
 

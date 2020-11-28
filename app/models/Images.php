@@ -39,8 +39,6 @@ class Images extends Model {
 
     public function getImage($imageId = '') {
         return $this->getImageById($imageId);
-//        $imageDetails = $this->getImageById($imageId);
-//        Helper::dnd($imageDetails);
     }
 
     public function imageCount() {
@@ -58,5 +56,4 @@ class Images extends Model {
         if ($imageLike) return true;
         return false;
     }
-
 }

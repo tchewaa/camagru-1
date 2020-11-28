@@ -201,6 +201,17 @@ class Helper {
         return $html;
     }
 
+    public static function displayComments($comments) {
+        $html = "";
+        if (isset($comments)) {
+            foreach ($comments as $comment) {
+                $html .= '<small>Author: '.$comment->username.' Timestamp: '.$comment->date.'</small>';
+                $html .= '<p>'.$comment->content.'</p>';
+            }
+        }
+        return $html;
+    }
+
     public static function validationMessage($message) {
         $html = "";
         if (isset($message['upload-error'])) {
@@ -213,4 +224,5 @@ class Helper {
         }
         return $html;
     }
+
 }
