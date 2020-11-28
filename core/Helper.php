@@ -210,7 +210,7 @@ class Helper {
         $html .= '<div class="row">';
         $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
         $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
-        //TODO refactor
+        //TODO refactor display images
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
@@ -219,7 +219,7 @@ class Helper {
 
         }
         $html .= '</div>';
-        //TODO refactor
+        //TODO refactor pagination
         $html .= '<div class="row">';
         $html .= '<div class="col-lg-12 col-lg-offset-4">';
         $html .= '<ul class="pagination">';

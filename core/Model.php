@@ -90,8 +90,8 @@ class Model {
         return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
 
-    public function images() {
-        return $this->find();
+    public function findImages() {
+        //TODO get images and related data e.g author, timestamp
     }
 
     public function findComments($imageId) {
