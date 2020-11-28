@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use App\Models\Users;
+
 class Helper {
     public static function dnd($data) {
         echo '<pre>';
@@ -97,6 +99,77 @@ class Helper {
         return $message;
     }
 
+    public static function formatImageLikeMessage($imageAuthor) {
+        $currentUser = Users::currentUser();
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
+    }
+
+    public static function formatImageCommentMessage($imageAuthor) {
+        $currentUser = Users::currentUser();
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Commented on your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Commented your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
+    }
+
+
     public static function generateRandomString($length = 30) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -163,6 +236,17 @@ class Helper {
         return $html;
     }
 
+    public static function displayComments($comments) {
+        $html = "";
+        if (isset($comments)) {
+            foreach ($comments as $comment) {
+                $html .= '<small>Author: '.$comment->username.' Timestamp: '.$comment->date.'</small>';
+                $html .= '<p>'.$comment->content.'</p>';
+            }
+        }
+        return $html;
+    }
+
     public static function validationMessage($message) {
         $html = "";
         if (isset($message['upload-error'])) {
@@ -175,4 +259,5 @@ class Helper {
         }
         return $html;
     }
+
 }

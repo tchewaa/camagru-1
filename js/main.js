@@ -1,5 +1,9 @@
 const host = location.host;
 
+// window.addEventListener('load', function (e) {
+//     console.log('Page loaded');
+// });
+
 //handle Like button
 const likeButton = document.getElementById('like-button');
 
@@ -9,12 +13,12 @@ likeButton.addEventListener('DOMContentLoaded', function (e) {
 });
 
 likeButton.addEventListener('click', function(e) {
-    console.log("Like button cliked...");
-    console.log("Image ID: " + likeButton.value);
     const formData = new FormData();
     const imageId = likeButton.value;
-    const url = (host.indexOf("Windows")) ? "http://localhost/camagru/like/update" : "http://localhost:8080/camagru/like/update";
+    const likeStatus = likeButton.innerText;
+    const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
     formData.append('image-id', imageId);
+    formData.append('like-status', likeStatus);
     fetch(url, {
         method: 'POST',
         body: formData
@@ -22,12 +26,10 @@ likeButton.addEventListener('click', function(e) {
         response => response.text()
     ).then(
         data => {
-            console.log(data);
-            //reload page after liking image
-            // window.location.reload();
+            // console.log(data);
+            window.location.reload();
         }
     )
-    console.log("URL:" + url);
     e.preventDefault();
 });
 
@@ -36,6 +38,27 @@ const commentButton = document.getElementById('comment-button');
 const commentText = document.getElementById('comment-text');
 
 commentButton.addEventListener('click', function (e) {
-   console.log("commenting");
-   console.log(commentText.innerHTML);
+    if (commentText.value !== '') {
+        const formData = new FormData();
+        const comment = commentText.value;
+        const imageId = commentButton.value;
+        formData.append('image-id', imageId);
+        formData.append('comment', comment);
+        const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/comment" : "http://localhost:8080/camagru/image/comment";
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then(
+            response => response.text()
+        ).then(
+            data => {
+                // console.log(data);
+                window.location.reload();
+
+            }
+        )
+        e.preventDefault();
+    } else {
+        console.log("You cannot post empty comment...");
+    }
 });

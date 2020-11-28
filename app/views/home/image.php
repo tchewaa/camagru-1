@@ -1,4 +1,6 @@
 <?php
+
+use Core\FormHelper;
 use Core\Helper;
 ?>
 <?php $this->start('body'); ?>
@@ -7,36 +9,30 @@ use Core\Helper;
             <img src="<?=$this->image->image_data?>" alt="article image">
         </div>
         <div class="col-lg-4 col-lg-offset-3 image-meta-data">
-            <p>Author: test1 </p>
-            <p>Timestamp: 20 November 2020</p>
-            <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">Like</button>
+            <p>Author: <?=$this->image->username?></p>
+            <p>Timestamp: <?=$this->image->date?></p>
+            <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">
+                <?php
+                    if ($this->imageLiked) {
+                        echo "unlike";
+                    } else {
+                        echo "like";
+                    }
+                ?>
+            </button>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comment-area">
+            <?= FormHelper::csrfInput() ?>
             <form class="form" action="<?=PROOT?>home/comment" method="post">
                 <div class="form-group">
                     <label for="comment">Comment</label>
-                    <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50">Test 1</textarea>
+                    <textarea class="form-control" id="comment-text" name="comment-text" rows="4" cols="50"></textarea>
                 </div>
-                <button type="button" class="btn btn-default pull-left" id="comment-button">Submit</button>
+                <button type="button" class="btn btn-default pull-left" id="comment-button" value="<?=$this->image->id?>">Submit</button>
             </form>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comments">
-            <small>Comment by: test1</small>
-            <small>Timestamp: 20 November 2020</small>
-            <p>
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing.
-            </p>
-            <small>Comment by: test1</small>
-            <small>Timestamp: 20 November 2020</small>
-            <p>
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing.
-            </p>
+            <?=Helper::displayComments($this->comments) ?>
         </div>
     </div>
     <div class="row">
