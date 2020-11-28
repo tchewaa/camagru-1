@@ -111,25 +111,28 @@ class Model {
 //        return $this->find(['condtions' => "image_id = ?", 'bind' => [$imageId]]);
     }
 
-    //TODO use findById method
     public function getImageById($imageId = '') {
         //TODO join tables
-        $params = ['conditions' => "id = ?", 'bind' => [$imageId]];
-        $imageDetails = $this->findFirst($params);
-//        $author = $this->findFirst(['conditions' => 'id = ?', 'bind' => [$imageDetails->user_id]]);
-//        $imageDetails->author = $author;
-//        Helper::dnd($imageDetails);
-        //Retrieve author
-        //Retrieve Likes
-        //Retrieve Comments
-        //return imageData;
-        return $imageDetails;
+        $sql = "
+            SELECT
+                i.id,
+                i.user_id,
+                i.image_data,
+                i.date,
+                u.username
+            FROM images i, users u 
+            WHERE i.id = ? AND u.id = i.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results()[0];
+//        Helper::dnd($temp);
+//        return $imageDetails;
     }
 
-    public function likedImage($image, $user) {
-        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
-        return $this->query($sql, [$user->id, $image->id]);
-    }
+//    public function likedImage($image, $user) {
+//        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
+//        return $this->query($sql, [$user->id, $image->id]);
+//    }
 
     public function insert($fields) {
         if(empty($fields)) return false;

@@ -43,6 +43,12 @@ class Likes extends Model {
         return false;
     }
 
+    public function likedImage($image, $user) {
+        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
+        $params = [$user->id, $image->id];
+        return $this->query($sql, $params);
+    }
+
     private function _sendLikeEmail($imageAuthor) {
         $headers = Helper::getHeaders();
         $subject = 'Camagru: Image Liked';

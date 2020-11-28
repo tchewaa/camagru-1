@@ -14,6 +14,7 @@ use Core\Helper;
             <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">Like</button>
         </div>
         <div class="col-lg-4 col-lg-offset-3 comment-area">
+            <?= FormHelper::csrfInput() ?>
             <form class="form" action="<?=PROOT?>home/comment" method="post">
                 <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
                 <div class="form-group">

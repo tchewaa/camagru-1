@@ -66,6 +66,7 @@ class HomeController extends Controller {
     public function commentAction() {
         $imageId = '';
         if ($this->request->isPost()) {
+            $this->request->csrfCheck();
             $comment = $this->request->get('comment');
             $imageId .= $this->request->get('image-id');
             $saveComment = $this->CommentsModel->comment($comment, $imageId);
