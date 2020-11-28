@@ -208,11 +208,12 @@ class Helper {
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
         $html .= '<div class="row">';
+        $url = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
         //TODO refactor
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
-            $html .= '<a href="http://localhost/camagru/home/image/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
+            $html .= '<a href="' . $url . $image->id . '"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
             $html .= '</div>';
 
         }
