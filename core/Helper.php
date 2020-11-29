@@ -265,7 +265,7 @@ class Helper {
     public static function getRandomImage() {
         $images = glob('app/assets/dummy/' . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
         $randomImages = [];
-        for ($i = 0; $i < 12; $i++) {
+        for ($i = 0; $i < 18; $i++) {
             $temp = file_get_contents($images[$i]);
             $imageData = imagecreatefromstring($temp);
             ob_start();

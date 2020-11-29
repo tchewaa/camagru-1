@@ -103,35 +103,46 @@ function setupDatabase() {
 
 function seedDatabase() {
     $db = Database::getInstance();
-    //TODO seed database
+    $username = "admin";
+    $email = "1281martian@gmail.com";
+    $password = password_hash("password", PASSWORD_DEFAULT);
+    $token = md5($username . $email . Helper::generateRandomString());
+
     try {
         $db->PDO()->beginTransaction();
 
-        //Query 1 insert user
-        $user_query = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
-        $stmt = $db->PDO()->prepare($user_query);
-        $stmt->execute(["test username", "test@test.com", "test password"]);
+        //Default Query
+        $sql = 'SELECT * FROM users';
+        $stmt = $db->PDO()->prepare($sql);
+        $stmt->execute();
 
-        //Get generated user id
-        $userId = $db->PDO()->lastInsertId();
+        if ($stmt->rowCount() == 0) {
+            //Query 1 insert user
+            $user_query = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
+            $stmt = $db->PDO()->prepare($user_query);
+            $stmt->execute([$username, $email, $password]);
 
-        //Query 2 insert verification
-        $verification_query = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
-        $stmt = $db->PDO()->prepare($verification_query);
-        $stmt->execute([$userId, "test token", 1]);
+            //Get generated user id
+            $userId = $db->PDO()->lastInsertId();
 
-        //Query 3 insert images
-        foreach (Helper::getRandomImage() as $image) {
-            $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
-            $stmt = $db->PDO()->prepare($image_query);
-            $stmt->execute([$userId, 'test', $image]);
+            //Query 2 insert verification
+            $verification_query = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
+            $stmt = $db->PDO()->prepare($verification_query);
+            $stmt->execute([$userId, $token, 1]);
+
+            //Query 3 insert images
+            foreach (Helper::getRandomImage() as $image) {
+                $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+                $stmt = $db->PDO()->prepare($image_query);
+                $stmt->execute([$userId, 'test', $image]);
+            }
+
+            //persist data
+            $db->PDO()->commit();
         }
 
-        //persist data
-        $db->PDO()->commit();
-
-
     } catch (PDOException $e) {
+        $db->PDO()->rollBack();
         die($e->getMessage());
     }
 }
