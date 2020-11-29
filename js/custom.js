@@ -7,7 +7,6 @@ if (registerButton) {
     registerButton.addEventListener('click', function (e) {
         console.log('clicked');
         loadSpinner.classList.add('loading');
-        // e.preventDefault();
     });
 }
 
@@ -15,7 +14,6 @@ if (resendButton) {
     resendButton.addEventListener('click', function (e) {
         console.log('clicked');
         loadSpinner.classList.add('loading');
-        // e.preventDefault();
     });
 }
 
@@ -23,7 +21,6 @@ if (forgotPasswordButton) {
     forgotPasswordButton.addEventListener('click', function (e) {
         console.log('clicked');
         loadSpinner.classList.add('loading');
-        // e.preventDefault();
     });
 }
 
