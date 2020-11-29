@@ -13,11 +13,10 @@ function setupDatabase() {
     echo "setting up database, please wait...";
     try {
         $db = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
-        $DB_NAME = 'testdb';
-        $sql = "CREATE DATABASE IF NOT EXISTS " . $DB_NAME;
+        $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
         $db->exec($sql);
 
-        $sql = "use " . $DB_NAME;
+        $sql = "use " . DB_NAME;
         $db->exec($sql);
 
         //Create table for users
@@ -27,7 +26,7 @@ function setupDatabase() {
             `username` varchar(50) NOT NULL,
             `email` varchar(150) NOT NULL,
             `password` varchar(150) NOT NULL,
-            `notification` tinyint(1) NOT NULL,
+            `notification` tinyint(1) NOT NULL DEFAULT '1',
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $db->exec($sql);
@@ -95,7 +94,43 @@ function setupDatabase() {
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $db->exec($sql);
 
-        echo 'database "testing created..."';
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+
+    seedDatabase();
+}
+
+function seedDatabase() {
+    $db = Database::getInstance();
+    //TODO seed database
+    try {
+        $db->PDO()->beginTransaction();
+
+        //Query 1 insert user
+        $user_query = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
+        $stmt = $db->PDO()->prepare($user_query);
+        $stmt->execute(["test username", "test@test.com", "test password"]);
+
+        //Get generated user id
+        $userId = $db->PDO()->lastInsertId();
+
+        //Query 2 insert verification
+        $verification_query = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
+        $stmt = $db->PDO()->prepare($verification_query);
+        $stmt->execute([$userId, "test token", 1]);
+
+        //Query 3 insert images
+        foreach (Helper::getRandomImage() as $image) {
+            $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+            $stmt = $db->PDO()->prepare($image_query);
+            $stmt->execute([$userId, 'test', $image]);
+        }
+
+        //persist data
+        $db->PDO()->commit();
+
+
     } catch (PDOException $e) {
         die($e->getMessage());
     }
