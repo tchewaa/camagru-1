@@ -4,6 +4,8 @@ const host = location.host;
 //     console.log('Page loaded');
 // });
 
+const loadSpinner = document.getElementById('load-spinner');
+
 //handle Like button
 const likeButton = document.getElementById('like-button');
 
@@ -19,17 +21,22 @@ likeButton.addEventListener('click', function(e) {
     const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
     formData.append('image-id', imageId);
     formData.append('like-status', likeStatus);
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    }).then(
-        response => response.text()
-    ).then(
-        data => {
-            // console.log(data);
+    loadSpinner.classList.add('loading');
+
+    try {
+        setTimeout( async function () {
+
+            await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+
             window.location.reload();
-        }
-    )
+        }, 2000)
+
+    } catch (e) {
+        console.log(e.message);
+    }
     e.preventDefault();
 });
 

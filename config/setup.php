@@ -129,8 +129,6 @@ function setupDatabase() {
 
              //persist data
              $conn->commit();
-
-             Helper::dnd($userId);
          }
     } catch (PDOException $e) {
         die($e->getMessage());

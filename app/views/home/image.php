@@ -4,6 +4,7 @@ use Core\FormHelper;
 use Core\Helper;
 ?>
 <?php $this->start('body'); ?>
+    <div id="load-spinner"></div>
     <div class="row polaroid">
         <div class="col-lg-9 col-lg-offset-3 user-image">
             <img src="<?=$this->image->image_data?>" alt="article image">
@@ -36,7 +37,6 @@ use Core\Helper;
         </div>
     </div>
     <div class="row">
-
     </div>
     <script type="text/javascript" src="<?=PROOT?>js/main.js"></script>
 <?php $this->end(); ?>

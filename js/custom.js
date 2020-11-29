@@ -95,5 +95,25 @@ document.addEventListener("click", function (e) {
     }, false);
 })();
 
+// window.addEventListener('load', function (e) {
+//     console.log('loading page');
+//     setTimeout(function() {
+//             const spinner = document.getElementById('loading');
+//             spinner.classList.add('hide');
+//         }, 3000
+//     );
+// });
+
+// window.onload = function(e) {
+//     console.log('loading page');
+//     setTimeout(function() {
+//             const spinner = document.getElementById('loading');
+//             spinner.classList.add('hide');
+//         }, 2000
+//     );
+// }
+
+
+
 
 
