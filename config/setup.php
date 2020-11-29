@@ -4,8 +4,6 @@ use Core\Helper;
 use Core\Database;
 
 include_once ('./Core/Helper.php');
-include_once ('./Core/Database.php');
-
 
 setupDatabase();
 
