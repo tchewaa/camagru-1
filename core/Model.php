@@ -62,8 +62,8 @@ class Model {
             $this->afterSave();
             return $save;
           } else {
-            $save = $this->insert($fields);
-            $this->afterSave();
+              $save = $this->insert($fields);
+              $this->afterSave();
             return $save;
           }
         }
