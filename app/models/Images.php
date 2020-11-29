@@ -34,13 +34,12 @@ class Images extends Model {
     }
 
     public function getImages() {
-        return $this->images();
+        return $this->find();
+//        return $this->images();
     }
 
     public function getImage($imageId = '') {
         return $this->getImageById($imageId);
-//        $imageDetails = $this->getImageById($imageId);
-//        Helper::dnd($imageDetails);
     }
 
     public function imageCount() {
@@ -51,4 +50,21 @@ class Images extends Model {
         return ceil($this->imageCount() / PAGE_SIZE);
     }
 
+    public function likeImage($imageId) {
+        $image = $this->findById($imageId);
+        $imageLike = new Likes();
+        $imageLike = $imageLike->uploadLike($image);
+        if ($imageLike) return true;
+        return false;
+    }
+
+    public function unlikeImage($imageId) {
+        $userId = Users::currentUser()->id;
+        $likedImage = new Likes();
+        $likedImage->deleteLike($imageId, $userId);
+    }
+
+    public function deleteImage($imageId) {
+        Helper::dnd("deleting images and related comments and likes");
+    }
 }

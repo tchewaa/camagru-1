@@ -141,7 +141,7 @@ for(let i = 0; i < deleteIcon.length; i++) {
 	response => response.text()
 	).then(
 	data => {
-		console.log(data);
+		// console.log(data);
 		window.location.reload();
 	})
 	//Reload page

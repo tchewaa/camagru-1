@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use App\Models\Users;
+
 class Helper {
     public static function dnd($data) {
         echo '<pre>';
@@ -97,6 +99,77 @@ class Helper {
         return $message;
     }
 
+    public static function formatImageLikeMessage($imageAuthor) {
+        $currentUser = Users::currentUser();
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Liked your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
+    }
+
+    public static function formatImageCommentMessage($imageAuthor) {
+        $currentUser = Users::currentUser();
+        $message = "";
+        if (php_uname('s') == 'Linux') {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Commented on your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        } else {
+            $message = "
+             <html>
+                <head>
+                    <title>Camagru confirmation email</title>
+                </head>
+                <body>
+                    <h3>Y'ello {$imageAuthor->username}</h3>
+                    <h4>{$currentUser->username} Commented your image</h4>
+                    <p>Regards</p>
+                    <p>Camagru Holdings</p>
+                </body>
+             </html>
+            ";
+        }
+        return $message;
+    }
+
+
     public static function generateRandomString($length = 30) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -135,31 +208,44 @@ class Helper {
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
         $html .= '<div class="row">';
-        //TODO refactor
+        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
+        $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
+        //TODO refactor display images
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
-            $html .= '<a href="http://localhost/camagru/home/image/'.$image->id.'"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
+            $html .= '<a href="' . $imageUrl . $image->id . '"><img src="'. $image->image_data .'" class="images" id="'. $image->id .'"></a>';
             $html .= '</div>';
 
         }
         $html .= '</div>';
-        //TODO refactor
+        //TODO refactor pagination
         $html .= '<div class="row">';
         $html .= '<div class="col-lg-12 col-lg-offset-4">';
         $html .= '<ul class="pagination">';
         while ($pageIndex <= $pageCount) {
-            $pages[] = '<li><a href="http://localhost/camagru/home/index/'.$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
+            $pages[] = '<li><a href="' . $pageUrl .$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
             $pageIndex++;
         }
-        $html .= '<li><a href="http://localhost/camagru/home/index/1" class="pages" id="pageNumber1">Begin</a></li>';
+        $html .= '<li><a href="'. $pageUrl . 1 . '" class="pages" id="pageNumber1">Prev</a></li>';
         foreach ($pages as $page) {
             $html .= $page;
         }
-        $html .= '<li><a href="http://localhost/camagru/home/index/'.$pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">End</a></li>';
+        $html .= '<li><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">Next</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '</div>';
+        return $html;
+    }
+
+    public static function displayComments($comments) {
+        $html = "";
+        if (isset($comments)) {
+            foreach ($comments as $comment) {
+                $html .= '<small>Author: '.$comment->username.' Timestamp: '.$comment->date.'</small>';
+                $html .= '<p>'.$comment->content.'</p>';
+            }
+        }
         return $html;
     }
 
@@ -174,5 +260,21 @@ class Helper {
             echo $message['upload-success'];
         }
         return $html;
+    }
+
+    public static function getRandomImage() {
+        $images = glob('app/assets/dummy/' . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+        $randomImages = [];
+        for ($i = 0; $i < 18; $i++) {
+            $temp = file_get_contents($images[$i]);
+            $imageData = imagecreatefromstring($temp);
+            ob_start();
+            imagejpeg($imageData);
+            $imageData = ob_get_clean();
+            $imageData = base64_encode($imageData);
+            $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
+            $randomImages[$i] = $base64Image;
+        }
+        return $randomImages;
     }
 }

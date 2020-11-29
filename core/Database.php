@@ -6,7 +6,12 @@ use \PDOException;
 
 class Database {
     private static $_instance = null;
-    private $_pdo, $_query, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
+    private $_pdo;
+    private $_query;
+    private $_error = false;
+    private $_result;
+    private $_count = 0;
+    private $_lastInsertID = null;
 
     private function __construct() {
         try {
@@ -24,6 +29,29 @@ class Database {
         }
         return self::$_instance;
     }
+
+    //TODO testing out transaction
+//    public function startTransaction() {
+//        $this->_pdo->beginTransaction();
+//    }
+//
+//    public function insertTransaction($sql, $data)
+//    {
+//        $stmt = $this->_pdo->prepare($sql);
+//        $stmt->execute($data);
+//        $this->_lastInsertID = $this->_pdo->lastInsertId();
+//    }
+//
+//    public function submitTransaction()
+//    {
+//        try {
+//            $this->_pdo->commit();
+//        } catch(PDOException $e) {
+//            $this->_pdo->rollBack();
+//            return false;
+//        }
+//        return true;
+//    }
 
     //TODO go through this method line by line
     public function query($sql, $params = [], $class = false) {
@@ -184,5 +212,9 @@ class Database {
 
     public function error() {
         return $this->_error;
+    }
+
+    public function PDO() {
+        return $this->_pdo;
     }
 }

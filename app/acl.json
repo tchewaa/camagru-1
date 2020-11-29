@@ -11,9 +11,8 @@
       "Register": ["index", "verify", "resendToken"],
       "Login": ["index", "forgotPassword", "resetPassword"]
     },
-    "Home" : ["logout", "image"],
+    "Home" : ["logout", "image", "like", "comment"],
     "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"],
-    "Editor" : ["index", "upload", "delete"],
-    "Like" : ["update"]
+    "Editor" : ["index", "upload", "delete"]
   }
 }
