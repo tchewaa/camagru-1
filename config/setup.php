@@ -10,7 +10,6 @@ include_once ('./Core/Database.php');
 setupDatabase();
 
 function setupDatabase() {
-    echo "setting up database, please wait...";
     try {
         $db = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
         $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
