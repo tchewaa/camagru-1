@@ -19,6 +19,7 @@ use Core\Session;
     <?php include( 'main_menu.php'); ?>
     <div class="container-fluid" style="min-height:cal(100% - 125px);" >
         <?= Session::displayMessage()?>
+        <div id="load-spinner"></div>
         <?= $this->content('body'); ?>
     </div>
     <?php include('footer.php'); ?>
