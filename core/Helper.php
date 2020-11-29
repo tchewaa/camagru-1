@@ -262,7 +262,7 @@ class Helper {
         return $html;
     }
 
-    public static function getRandomImage() {
+    public static function getImages() {
         $images = glob('app/assets/dummy/' . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
         $randomImages = [];
         for ($i = 0; $i < 18; $i++) {

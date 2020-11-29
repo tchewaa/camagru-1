@@ -30,29 +30,6 @@ class Database {
         return self::$_instance;
     }
 
-    //TODO testing out transaction
-//    public function startTransaction() {
-//        $this->_pdo->beginTransaction();
-//    }
-//
-//    public function insertTransaction($sql, $data)
-//    {
-//        $stmt = $this->_pdo->prepare($sql);
-//        $stmt->execute($data);
-//        $this->_lastInsertID = $this->_pdo->lastInsertId();
-//    }
-//
-//    public function submitTransaction()
-//    {
-//        try {
-//            $this->_pdo->commit();
-//        } catch(PDOException $e) {
-//            $this->_pdo->rollBack();
-//            return false;
-//        }
-//        return true;
-//    }
-
     //TODO go through this method line by line
     public function query($sql, $params = [], $class = false) {
         $this->_error = false;
@@ -212,9 +189,5 @@ class Database {
 
     public function error() {
         return $this->_error;
-    }
-
-    public function PDO() {
-        return $this->_pdo;
     }
 }

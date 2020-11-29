@@ -10,13 +10,16 @@ include_once ('./Core/Database.php');
 setupDatabase();
 
 function setupDatabase() {
-    try {
-        $db = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
+     try {
+        $conn = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
+
+        $conn->beginTransaction();
+
         $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
-        $db->exec($sql);
+        $conn->exec($sql);
 
         $sql = "use " . DB_NAME;
-        $db->exec($sql);
+        $conn->exec($sql);
 
         //Create table for users
         $sql = "
@@ -28,7 +31,7 @@ function setupDatabase() {
             `notification` tinyint(1) NOT NULL DEFAULT '1',
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $db->exec($sql);
+        $conn->exec($sql);
 
         //create table for user_sessions
         $sql = "
@@ -40,7 +43,7 @@ function setupDatabase() {
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES users(id)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $db->exec($sql);
+        $conn->exec($sql);
 
         //create table for verification
         $sql = "
@@ -52,7 +55,7 @@ function setupDatabase() {
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE 
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-         $db->exec($sql);
+         $conn->exec($sql);
 
         //create table for images
         $sql = "
@@ -65,7 +68,7 @@ function setupDatabase() {
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $db->exec($sql);
+        $conn->exec($sql);
 
         //create table for comments
         $sql = "
@@ -79,7 +82,7 @@ function setupDatabase() {
             FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $db->exec($sql);
+        $conn->exec($sql);
 
         //create table for likes
         $sql = "
@@ -91,57 +94,80 @@ function setupDatabase() {
             FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $db->exec($sql);
+        $conn->exec($sql);
 
+         //check if database is seeded
+         $sql = 'SELECT * FROM users';
+         $stmt = $conn->prepare($sql);
+         $stmt->execute();
+         if ($stmt->rowCount() == 0) {
+             //default user
+             $username = "admin";
+             $email = "1281martian@gmail.com";
+             $password = password_hash("password", PASSWORD_DEFAULT);
+             $token = md5($username . $email . Helper::generateRandomString());
+
+             //save default user
+             $sql = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
+             $stmt = $conn->prepare($sql);
+             $stmt->execute([$username, $email, $password]);
+
+             //get generated default user id
+             $userId = $conn->lastInsertId();
+
+             //save verification data
+             $sql = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
+             $stmt = $conn->prepare($sql);
+             $stmt->execute([$userId, $token, 1]);
+
+             //save images
+             foreach (Helper::getImages() as $image) {
+                 $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+                 $stmt = $conn->prepare($image_query);
+                 $stmt->execute([$userId, 'test', $image]);
+             }
+
+             //persist data
+             $conn->commit();
+
+             Helper::dnd($userId);
+         }
     } catch (PDOException $e) {
         die($e->getMessage());
     }
 
-    seedDatabase();
 }
 
-function seedDatabase() {
-    $db = Database::getInstance();
+function seedDatabase($conn) {
+//    $db = Database::getInstance();
     $username = "admin";
     $email = "1281martian@gmail.com";
     $password = password_hash("password", PASSWORD_DEFAULT);
     $token = md5($username . $email . Helper::generateRandomString());
 
-    try {
-        $db->PDO()->beginTransaction();
+//    $db->PDO()->beginTransaction();
 
-        //Default Query
-        $sql = 'SELECT * FROM users';
-        $stmt = $db->PDO()->prepare($sql);
-        $stmt->execute();
+    //Query 1 insert user
+    $user_query = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
+    $stmt = $db->PDO()->prepare($user_query);
+    $stmt->execute([$username, $email, $password]);
 
-        if ($stmt->rowCount() == 0) {
-            //Query 1 insert user
-            $user_query = 'INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)';
-            $stmt = $db->PDO()->prepare($user_query);
-            $stmt->execute([$username, $email, $password]);
+    //Get generated user id
+    $userId = $db->PDO()->lastInsertId();
 
-            //Get generated user id
-            $userId = $db->PDO()->lastInsertId();
+    //Query 2 insert verification
+    $verification_query = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
+    $stmt = $db->PDO()->prepare($verification_query);
+    $stmt->execute([$userId, $token, 1]);
 
-            //Query 2 insert verification
-            $verification_query = 'INSERT INTO `verification` (user_id, token, confirmed) VALUES (?, ?, ?)';
-            $stmt = $db->PDO()->prepare($verification_query);
-            $stmt->execute([$userId, $token, 1]);
-
-            //Query 3 insert images
-            foreach (Helper::getRandomImage() as $image) {
-                $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
-                $stmt = $db->PDO()->prepare($image_query);
-                $stmt->execute([$userId, 'test', $image]);
-            }
-
-            //persist data
-            $db->PDO()->commit();
-        }
-
-    } catch (PDOException $e) {
-        $db->PDO()->rollBack();
-        die($e->getMessage());
+    //Query 3 insert images
+    foreach (Helper::getRandomImage() as $image) {
+        $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+        $stmt = $db->PDO()->prepare($image_query);
+        $stmt->execute([$userId, 'test', $image]);
     }
+
+    //persist data
+    $db->PDO()->commit();
+
 }
