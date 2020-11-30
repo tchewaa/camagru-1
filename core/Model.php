@@ -107,8 +107,6 @@ class Model {
         $params = [$imageId];
         $this->query($sql, $params);
         return $this->_db->results();
-//        Helper::dnd($t);
-//        return $this->find(['condtions' => "image_id = ?", 'bind' => [$imageId]]);
     }
 
     public function getImageById($imageId = '') {
@@ -125,14 +123,7 @@ class Model {
         $params = [$imageId];
         $this->query($sql, $params);
         return $this->_db->results()[0];
-//        Helper::dnd($temp);
-//        return $imageDetails;
     }
-
-//    public function likedImage($image, $user) {
-//        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
-//        return $this->query($sql, [$user->id, $image->id]);
-//    }
 
     public function insert($fields) {
         if(empty($fields)) return false;
@@ -148,10 +139,6 @@ class Model {
     public function delete($id = '') {
         if($id == '' && $this->id == '') return false;
         $id = ($id == '')? $this->id : $id;
-        //TODO
-        // if($this->_softDelete) {
-        //     return $this->update($id, ['deleted' => 1]);
-        // }
         return $this->_db->delete($this->_table, $id);
     }
 
