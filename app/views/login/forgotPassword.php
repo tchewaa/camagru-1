@@ -10,7 +10,7 @@ use Core\FormHelper;
             <?= FormHelper::csrfInput() ?>
             <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
             <?= FormHelper::inputBlock('email','Email','email',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-            <?= FormHelper::submitBlock('Send', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
+            <?= FormHelper::submitBlock('Send', ['class'=>'btn btn-large btn-primary', 'id' => 'forgot-pwd-btn'],['class'=>'form-group'])?>
         </form>
     </div>
 <?php $this->end(); ?>

@@ -36,7 +36,6 @@ use Core\Helper;
         </div>
     </div>
     <div class="row">
-
     </div>
-    <script type="text/javascript" src="<?=PROOT?>js/main.js"></script>
+    <script type="text/javascript" src="<?=PROOT?>js/imageView.js"></script>
 <?php $this->end(); ?>

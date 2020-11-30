@@ -12,18 +12,17 @@ use Core\Session;
     <link type="text/css" rel="stylesheet" href="<?=PROOT?>css/bootstrap.min.css" media="screen" title="no title" charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="<?=PROOT?>css/custom.css" media="screen" title="no title" charset="UTF-8">
     <!-- TODO delete this, this the PDF states that no javascript framework are allowed   -->
-    <script type="text/javascript" src="<?=PROOT?>js/custom.js"></script>
     <script type="text/javascript" src="<?=PROOT?>js/bootstrap.min.js"></script>
     <?= $this->content('head'); ?>
 </head>
 <body>
-
     <?php include( 'main_menu.php'); ?>
     <div class="container-fluid" style="min-height:cal(100% - 125px);" >
         <?= Session::displayMessage()?>
+        <div id="load-spinner"></div>
         <?= $this->content('body'); ?>
     </div>
     <?php include('footer.php'); ?>
-
 </body>
+<script type="text/javascript" src="<?=PROOT?>js/custom.js"></script>
 </html>
