@@ -101,6 +101,25 @@ class ProfileController extends Controller {
         $this->view->render('profile/updateEmail');
     }
 
+    public function deleteAccountAction() {
+        $currentUser = Users::currentUser();
+        if ($this->request->isPost()) {
+            $passwordVerified = password_verify($this->request->get('password'), $currentUser->password);
+            if ($passwordVerified) {
+                $temp = $this->UsersModel->delete();
+                Helper::dnd($temp);
+                if ($this->UsersModel->delete()) {
+                    Helper::dnd("deleted");
+                };
+                Helper::dnd("deleting");
+            } else {
+                $this->view->validationMessages = ['password' => 'Invalid password'];
+            }
+        }
+        $this->view->user = $currentUser;
+        $this->view->render('profile/deleteAccount');
+    }
+
     protected function _getNotificationChecked($notification) {
         if ($notification == 'on') {
             return 1;

@@ -12,7 +12,7 @@
       "Login": ["index", "forgotPassword", "resetPassword"]
     },
     "Home" : ["logout", "image", "like", "comment"],
-    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername"],
+    "Profile" : ["index", "updatePassword", "updateEmail", "updateUsername", "deleteAccount"],
     "Editor" : ["index", "upload", "delete"]
   }
 }
