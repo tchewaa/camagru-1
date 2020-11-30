@@ -18,13 +18,16 @@ class Users extends Model {
     private $_sessionName;
     private $_cookieName;
     private $_confirm;
+    private $_confirmPassword;
     private $_new_password;
     public static $currentLoggedInUser = null;
     public $id;
     public $username;
     public $email;
     public $password;
+    public $token;
     public $notification = 1;
+    public $confirmed = 0;
 
     public function __construct($user='') {
         $table = 'users';
@@ -95,6 +98,28 @@ class Users extends Model {
         return true;
     }
 
+    public function sendConfirmation() {
+        Helper::dnd($this);
+        $headers = Helper::getHeaders();
+        $subject = 'Camagru account confirmation';
+//        $user = new Users($fields->username);
+        //TODO check if user exists
+        //TODO investigate
+//        $params = [
+//            'user_id' => $user->id,
+//        ];
+//        $this->assign($params); //
+//        $this->confirmed = 0;
+//        $this->user_id = $user->id;
+//        $this->token = md5($user->username . $user->email . Helper::generateRandomString());
+        $message = Helper::formatConfirmationMessage($this->token, $this->username);
+        //TODO check if token was saved
+        if (mail($this->email, $subject, $message, $headers)) {
+            return true;
+        }
+        return false;
+    }
+
     public function acls() {
         if(empty($this->acl)) return [];
         return json_decode($this->acl, true);
@@ -133,9 +158,18 @@ class Users extends Model {
             $this->runValidation(new PasswordValidator($this,['field'=>'password','rule'=>$this->password,'msg'=>"Password must contain Uppercase, Lowercase, Number and special character."]));
             $this->runValidation(new RequiredValidator($this,['field'=>'password','msg'=>'Password is required.']));
             if($this->isNew()){
-                $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>"Your passwords do not match"]));
+                $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirmPassword,'msg'=>"Your passwords do not match"]));
             }
         }
+    }
+
+
+    public function getConfirmPassword() {
+        return $this->_confirmPassword;
+    }
+
+    public function setConfirmPassword($confirmPassword) {
+        $this->_confirmPassword = $confirmPassword;
     }
 
     public function setConfirm($value) {

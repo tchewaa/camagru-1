@@ -24,9 +24,10 @@ class RegisterController extends Controller {
         if($this->request->isPost()) {
             $this->request->csrfCheck();
             $this->UsersModel->assign($this->request->get());
-            $this->UsersModel->setConfirm($this->request->get('confirm'));
+            $this->UsersModel->token = md5(Helper::generateRandomString());
+            $this->UsersModel->setConfirmPassword($this->request->get('confirmPassword'));
             if($this->UsersModel->save()){
-                $this->_sendConfirmation($this->UsersModel);
+                $this->UsersModel->sendConfirmation();
               Router::redirect('login');
             }
         }

@@ -61,7 +61,7 @@ class Helper {
         return $message;
     }
 
-    public static function formatConfirmationMessage($token, $user) {
+    public static function formatConfirmationMessage($token, $username) {
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -70,9 +70,9 @@ class Helper {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3>
+                    <h3>Y'ello {$username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
+                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -86,9 +86,9 @@ class Helper {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3>
+                    <h3>Y'ello {$username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
+                        <a href=\"localhost/camagru/register/verify/{$username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -277,4 +277,5 @@ class Helper {
         }
         return $randomImages;
     }
+
 }
