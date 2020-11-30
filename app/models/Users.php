@@ -99,24 +99,18 @@ class Users extends Model {
     }
 
     public function sendConfirmation() {
-        Helper::dnd($this);
         $headers = Helper::getHeaders();
         $subject = 'Camagru account confirmation';
-//        $user = new Users($fields->username);
-        //TODO check if user exists
-        //TODO investigate
-//        $params = [
-//            'user_id' => $user->id,
-//        ];
-//        $this->assign($params); //
-//        $this->confirmed = 0;
-//        $this->user_id = $user->id;
-//        $this->token = md5($user->username . $user->email . Helper::generateRandomString());
         $message = Helper::formatConfirmationMessage($this->token, $this->username);
-        //TODO check if token was saved
-        if (mail($this->email, $subject, $message, $headers)) {
-            return true;
-        }
+        if (mail($this->email, $subject, $message, $headers)) return true;
+        return false;
+    }
+
+    public function forgotPasswordToken() {
+        $headers = Helper::getHeaders();
+        $subject = 'Camagru: Forgot your password?';
+        $message = Helper::formatForgotPasswordMessage($this->token, $this->username);
+        if (mail($this->email, $subject, $message, $headers)) return true;
         return false;
     }
 
@@ -195,4 +189,5 @@ class Users extends Model {
             return 'off';
         }
     }
+
 }

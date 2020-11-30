@@ -39,17 +39,11 @@ class RegisterController extends Controller {
     public function resendTokenAction() {
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $this->UsersModel->assign($this->request->get());
-            $this->UsersModel->validator();
-            if ($this->UsersModel->validationPassed()) {
-                $user = $this->UsersModel->findByEmail($this->request->get("email"));
-                if ($user && $this->_resendToken($user)) {
-                    Router::redirect('login');
-                } else {
-                    $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
-                }
+            $user = $this->UsersModel->findByEmail($this->request->get("email"));
+            if ($user && $user->sendConfirmation($user)) {
+                Router::redirect('login');
             } else {
-                $this->view->validationMessages = $this->UsersModel->getErrorMessages();
+                $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
             }
         }
         $this->view->render('register/resendToken');
@@ -58,16 +52,13 @@ class RegisterController extends Controller {
     public function verifyAction($username = "", $token = "") {
         if ($username && $token) {
             $user = $this->UsersModel->findByUsername($username);
-            $verification= $this->VerificationModel->findByUserId($user->id);
-            if ($verification != null) {
-                $verification->confirmed = 1;
-                $verification->save();
+            if ($user) {
+                $user->confirmed = 1;
+                $user->save();
                 Router::redirect('login');
-            } else {
-                $this->view->validationMessages = ['token' => 'Invalid token'];
             }
         } else {
-            $this->view->validationMessages = ['email' => 'Email doesn\'t not exists in our records'];
+            $this->view->validationMessages = ['email' => 'Invalid token'];
         }
     }
 }

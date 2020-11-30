@@ -10,7 +10,7 @@ use Core\FormHelper;
         <?= FormHelper::csrfInput() ?>
         <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <?= FormHelper::inputBlock('password','Password','password',"",['class'=>'form-control'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('password','Confirm Password','confirm_password',"",['class'=>'form-control'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('password','Confirm Password','confirmPassword',"",['class'=>'form-control'],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Update', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
     </form>
 </div>
