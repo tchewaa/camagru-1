@@ -23,7 +23,6 @@ class LoginController extends Controller {
     }
 
     public function indexAction() {
-        //TODO create index page for login
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
             $this->AuthModel->assign($this->request->get());
