@@ -98,6 +98,7 @@ function setupDatabase() {
          $sql = 'SELECT * FROM users';
          $stmt = $conn->prepare($sql);
          $stmt->execute();
+
          if ($stmt->rowCount() == 0) {
              //default user
              $username = "admin";
