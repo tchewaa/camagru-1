@@ -34,6 +34,7 @@ class Images extends Model {
     }
 
     public function getImages() {
+        //TODO get images and related Authors
         return $this->find();
 //        return $this->images();
     }

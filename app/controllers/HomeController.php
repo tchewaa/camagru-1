@@ -59,10 +59,9 @@ class HomeController extends Controller {
     }
 
     public function commentAction() {
-        $imageId = '';
         if ($this->request->isPost()) {
             $comment = $this->request->get('comment');
-            $imageId .= $this->request->get('image-id');
+            $imageId = $this->request->get('image-id');
             $saveComment = $this->CommentsModel->comment($comment, $imageId);
             //TODO handle comment validation message
 //            if (isset($saveComment['content'])) {
