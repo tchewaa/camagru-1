@@ -4,14 +4,14 @@ use App\Models\Verification;
 use Core\Controller;
 use Core\Helper;
 use Core\Router;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Auth;
 
 class RegisterController extends Controller {
 
     public function __construct($controller, $action) {
         parent::__construct($controller, $action);
-        $this->load_model('Users');
+        $this->load_model('User');
         $this->load_model('Verification');
         $this->view->setLayout('default');
     }
@@ -23,23 +23,23 @@ class RegisterController extends Controller {
     public function registerUserAction() {
         if($this->request->isPost()) {
             $this->request->csrfCheck();
-            $this->UsersModel->assign($this->request->get());
-            $this->UsersModel->token = md5(Helper::generateRandomString());
-            $this->UsersModel->setConfirmPassword($this->request->get('confirmPassword'));
-            if($this->UsersModel->save()){
-                $this->UsersModel->sendConfirmation();
+            $this->UserModel->assign($this->request->get());
+            $this->UserModel->token = md5(Helper::generateRandomString());
+            $this->UserModel->setConfirmPassword($this->request->get('confirmPassword'));
+            if($this->UserModel->save()){
+                $this->UserModel->sendConfirmation();
               Router::redirect('login');
             }
         }
-        $this->view->user = $this->UsersModel;
-        $this->view->validationMessages = $this->UsersModel->getErrorMessages();
+        $this->view->user = $this->UserModel;
+        $this->view->validationMessages = $this->UserModel->getErrorMessages();
         $this->view->render('register/index');
     }
 
     public function resendTokenAction() {
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $user = $this->UsersModel->findByEmail($this->request->get("email"));
+            $user = $this->UserModel->findByEmail($this->request->get("email"));
             if ($user && $user->sendConfirmation($user)) {
                 Router::redirect('login');
             } else {
@@ -51,7 +51,7 @@ class RegisterController extends Controller {
 
     public function verifyAction($username = "", $token = "") {
         if ($username && $token) {
-            $user = $this->UsersModel->findByUsername($username);
+            $user = $this->UserModel->findByUsername($username);
             if ($user) {
                 $user->confirmed = 1;
                 $user->save();

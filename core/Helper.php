@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-use App\Models\Users;
+use App\Models\User;
 
 class Helper {
     public static function dnd($data) {
@@ -100,7 +100,7 @@ class Helper {
     }
 
     public static function formatImageLikeMessage($imageAuthor) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -135,7 +135,7 @@ class Helper {
     }
 
     public static function formatImageCommentMessage($imageAuthor) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "

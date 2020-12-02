@@ -9,7 +9,7 @@ use Core\Model;
 use Core\Validators\MaxValidator;
 use Core\Validators\MinValidator;
 
-class Comments extends Model {
+class Comment extends Model {
     public $id;
     public $user_id;
     public $image_id;
@@ -21,15 +21,15 @@ class Comments extends Model {
     }
 
     public function comment($comment, $imageId) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $this->user_id = $currentUser->id;
         $this->image_id = $imageId;
         $this->content = $comment;
         if ($this->save()) {
             //TODO refactor
-            $image = new Images();
+            $image = new Image();
             $image = $image->findById($imageId);
-            $imageAuthor = new Users($image->user_id);
+            $imageAuthor = new User($image->user_id);
             if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
                 $this->_sendCommentEmail($imageAuthor);
             }

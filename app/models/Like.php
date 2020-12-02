@@ -6,7 +6,7 @@ namespace App\Models;
 use Core\Helper;
 use Core\Model;
 
-class Likes extends Model {
+class Like extends Model {
     public $id;
     public $user_id;
     public $image_id;
@@ -22,17 +22,15 @@ class Likes extends Model {
     }
 
     public function uploadLike($image) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $likedImage = $this->likedImage($image, $currentUser);
         if ($likedImage->count() > 0) {
-            //TODO remove
-            //unlike image
-//            Helper::dnd("Image already liked");
+            //TODO
         } else {
             $this->image_id = $image->id;
             $this->user_id = $currentUser->id;
             if ($this->save()) {
-                $imageAuthor = new Users($image->user_id);
+                $imageAuthor = new User($image->user_id);
                 if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
                     $this->_sendLikeEmail($imageAuthor);
                 }

@@ -13,7 +13,7 @@ use Core\Validators\EmailValidator;
 use Core\Validators\MatchesValidator;
 use Core\Validators\UniqueValidator;
 
-class Users extends Model {
+class User extends Model {
     private $_isLoggedIn = false;
     private $_sessionName;
     private $_cookieName;
@@ -37,9 +37,9 @@ class Users extends Model {
         $this->_softDelete = true;
         if($user != '') {
           if(is_int($user)) {
-            $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]],'App\Models\Users');
+            $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]], 'App\Models\User');
           } else {
-            $u = $this->_db->findFirst($table, ['conditions'=>'username = ?','bind'=>[$user]],'App\Models\Users');
+            $u = $this->_db->findFirst($table, ['conditions'=>'username = ?','bind'=>[$user]], 'App\Models\User');
           }
           if($u) {
             foreach($u as $key => $val) {
@@ -57,7 +57,7 @@ class Users extends Model {
 
     public static function currentUser() {
         if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)) {
-          $u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
+          $u = new User((int)Session::get(CURRENT_USER_SESSION_NAME));
           self::$currentLoggedInUser = $u;
         }
         return self::$currentLoggedInUser;

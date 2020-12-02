@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Core\Controller;
 use Core\Helper;
 use Core\Router;
@@ -11,7 +11,7 @@ class EditorController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Images');
+        $this->load_model('Image');
         $this->view->setLayout('default');
     }
 
@@ -90,7 +90,7 @@ class EditorController extends Controller {
 
     public function deleteAction() {
         if ($this->request->isPost()) {
-            $userID = Users::currentUser()->id;
+            $userID = User::currentUser()->id;
             $imageID = $this->request->get("image-id");
             if ($this->ImagesModel->delete($imageID)) {
                 echo "image deleted";
@@ -106,6 +106,6 @@ class EditorController extends Controller {
     }
 
     private function _saveImage($image) {
-        return $this->ImagesModel->upload($image, Users::currentUser()->username . time());
+        return $this->ImagesModel->upload($image, User::currentUser()->username . time());
     }
 }

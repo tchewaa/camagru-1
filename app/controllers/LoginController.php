@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 
 use App\Models\Auth;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Verification;
 use Core\Controller;
 use Core\FormHelper;
@@ -16,9 +16,8 @@ class LoginController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Users');
+        $this->load_model('User');
         $this->load_model('Auth');
-        $this->load_model('Verification');
         $this->view->setLayout('default');
     }
 
@@ -26,7 +25,7 @@ class LoginController extends Controller {
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
             $this->AuthModel->assign($this->request->get());
-            $user = $this->UsersModel->findByUsername($_POST['username']);
+            $user = $this->UserModel->findByUsername($_POST['username']);
             $this->AuthModel->validator();
             if ($this->AuthModel->validationPassed() && $user){
                 $passwordVerified = password_verify($this->request->get('password'), $user->password);
@@ -51,7 +50,7 @@ class LoginController extends Controller {
     public function forgotPasswordAction() {
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $user = $this->UsersModel->findByEmail($this->request->get('email'));
+            $user = $this->UserModel->findByEmail($this->request->get('email'));
             if ($user && $user->forgotPasswordToken()) {
                 Router::redirect('login');
             } else {
@@ -65,16 +64,16 @@ class LoginController extends Controller {
         if ($username && $token) {
             if ($this->request->isPost()) {
                 $this->request->csrfCheck();
-                $this->UsersModel->assign($this->request->get());
-                $this->UsersModel->setConfirmPassword($this->request->get('confirmPassword'));
-                $this->UsersModel->validator();
-                if ($this->UsersModel->validationPassed()) {
-                    $user = $this->UsersModel->findByUsername($username);
+                $this->UserModel->assign($this->request->get());
+                $this->UserModel->setConfirmPassword($this->request->get('confirmPassword'));
+                $this->UserModel->validator();
+                if ($this->UserModel->validationPassed()) {
+                    $user = $this->UserModel->findByUsername($username);
                     $user->password = password_hash($this->request->get("password"), PASSWORD_DEFAULT);
                     $user->save();
                     Router::redirect('login');
                 } else {
-                    $this->view->validationMessages = $this->UsersModel->getErrorMessages();
+                    $this->view->validationMessages = $this->UserModel->getErrorMessages();
                 }
             }
             $this->view->render('login/resetPassword');

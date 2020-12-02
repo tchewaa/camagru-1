@@ -7,7 +7,7 @@ namespace App\Models;
 use Core\Helper;
 use Core\Model;
 
-class Images extends Model {
+class Image extends Model {
     public $id;
     public $user_id;
     public $image_name;
@@ -20,7 +20,7 @@ class Images extends Model {
     }
 
     public function upload($file, $name) {
-        $user = Users::currentUser();
+        $user = User::currentUser();
         $this->user_id = $user->id;
         $this->image_name = $name;
         $this->image_data = $file;
@@ -28,7 +28,7 @@ class Images extends Model {
     }
 
     public function getUserImages() {
-        $user = Users::currentUser();
+        $user = User::currentUser();
         $images = $this->userImages($user->id);
         return $images;
     }
@@ -53,15 +53,15 @@ class Images extends Model {
 
     public function likeImage($imageId) {
         $image = $this->findById($imageId);
-        $imageLike = new Likes();
+        $imageLike = new Like();
         $imageLike = $imageLike->uploadLike($image);
         if ($imageLike) return true;
         return false;
     }
 
     public function unlikeImage($imageId) {
-        $userId = Users::currentUser()->id;
-        $likedImage = new Likes();
+        $userId = User::currentUser()->id;
+        $likedImage = new Like();
         $likedImage->deleteLike($imageId, $userId);
     }
 
