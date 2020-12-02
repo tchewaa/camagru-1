@@ -21,7 +21,7 @@ likeButton.addEventListener('click', function(e) {
         const formData = new FormData();
         const imageId = likeButton.value;
         const likeStatus = likeButton.innerText;
-        const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
+        const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/home/like";
         formData.append('image-id', imageId);
         formData.append('like-status', likeStatus);
 
@@ -53,7 +53,7 @@ commentButton.addEventListener('click', function (e) {
             const imageId = commentButton.value;
             formData.append('image-id', imageId);
             formData.append('comment', comment);
-            const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/comment" : "http://localhost:8080/camagru/image/comment";
+            const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/comment" : "http://localhost:8080/camagru/home/comment";
 
             setTimeout( async function () {
                 const response = await fetch(url, {
