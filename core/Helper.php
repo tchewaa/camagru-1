@@ -227,7 +227,6 @@ class Helper {
             $pages[] = '<li><a href="' . $pageUrl .$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
             $pageIndex++;
         }
-        $html .= '<li><a href="'. $pageUrl . 1 . '" class="pages" id="pageNumber1">Prev</a></li>';
         foreach ($pages as $page) {
             $html .= $page;
         }
