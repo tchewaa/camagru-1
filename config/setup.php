@@ -5,6 +5,7 @@ use Core\Database;
 
 include_once ('./Core/Helper.php');
 
+//Database::getInstance()->setup();
 setupDatabase();
 
 function setupDatabase() {

@@ -40,7 +40,7 @@ class Image extends Model {
     }
 
     public function getImage($imageId = '') {
-        return $this->getImageById($imageId);
+        return $this->findImage($imageId);
     }
 
     public function imageCount() {

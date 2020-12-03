@@ -37,15 +37,15 @@ class Comment extends Model {
         return $this->getErrorMessages();
     }
 
+    public function getComments($imageId) {
+        return $this->findComments($imageId);
+    }
+
     private function _sendCommentEmail($imageAuthor) {
         $headers = Helper::getHeaders();
         $subject = 'Camagru: Comment made your image';
         $message = Helper::formatImageCommentMessage($imageAuthor);
         if (mail($imageAuthor->email, $subject, $message, $headers)) return true;
-    }
-
-    public function getComments($imageId) {
-        return $this->findComments($imageId);
     }
 
     public function validator() {
