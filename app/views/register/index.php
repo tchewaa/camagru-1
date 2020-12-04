@@ -16,7 +16,7 @@ use Core\FormHelper;
                 ['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('email','Email','email',(isset($this->user) ? $this->user->email : ''),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::inputBlock('password','Password','password',(isset($this->user) ? $this->user->password : ''),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-        <?= FormHelper::inputBlock('password','Confirm Password','confirm',(isset($this->user) ? $this->user->getConfirm() : ''),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
+        <?= FormHelper::inputBlock('password','Confirm Password','confirmPassword',(isset($this->user) ? $this->user->getConfirm() : ''),['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
         <?= FormHelper::submitBlock('Register',['class'=>'btn btn-primary btn-large', 'id' => 'register-btn'],['class'=>'form-group']) ?>
         <div class="text-right">
             <a href="<?=PROOT?>register/resendToken">Resend Verification</a>

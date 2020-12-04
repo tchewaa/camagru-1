@@ -2,7 +2,7 @@
   namespace App\Controllers;
   use Core\Controller;
   use Core\H;
-  use App\Models\Users;
+  use App\Models\User;
   use Core\Helper;
   use Core\Router;
 
@@ -10,30 +10,31 @@ class HomeController extends Controller {
 
     public function __construct($controller, $action) {
         parent::__construct($controller, $action);
-        $this->load_model('Images');
-        $this->load_model('Likes');
-        $this->load_model('Comments');
+        $this->load_model('Image');
+        $this->load_model('Like');
+        $this->load_model('Comment');
         $this->view->setLayout('default');
     }
 
     public function indexAction($page = 1) {
         $this->view->page = $page;
-        $images = array_slice(array_reverse($this->ImagesModel->getImages()), ($this->view->page - 1) * PAGE_SIZE, PAGE_SIZE);
+        $images = array_slice(array_reverse($this->ImageModel->getImages()), ($this->view->page - 1) * PAGE_SIZE, PAGE_SIZE);
         $this->view->images = $images;
-        $this->view->pageCount = $this->ImagesModel->pageCount();
+        $this->view->pageCount = $this->ImageModel->pageCount();
         $this->view->render('home/index');
     }
 
     public function logoutAction() {
-        if(Users::currentUser()) {
-            Users::currentUser()->logout();
+        if(User::currentUser()) {
+            User::currentUser()->logout();
         }
         Router::redirect('login');
     }
 
     public function imageAction($imageId = '') {
-        $image = $this->ImagesModel->getImage($imageId);
-        $imageLiked = $this->LikesModel->likedImage($image, Users::currentUser());
+        //TODO join table
+        $image = $this->ImageModel->getImage($imageId);
+        $imageLiked = $this->LikeModel->likedImage($image, User::currentUser());
         if ($imageLiked->results()) {
             $imageLiked = true;
         } else {
@@ -41,7 +42,7 @@ class HomeController extends Controller {
         }
         $this->view->image = $image;
         $this->view->imageLiked = $imageLiked;
-        $this->view->comments = $this->CommentsModel->getComments($imageId);
+        $this->view->comments = $this->CommentModel->getComments($imageId);
         $this->view->render('home/image');
     }
 
@@ -51,19 +52,18 @@ class HomeController extends Controller {
             $imageId .= $this->request->get('image-id');
             $likeStatus = $this->request->get('like-status');
             if ($likeStatus === 'like') {
-                $this->ImagesModel->likeImage($imageId);
+                $this->ImageModel->likeImage($imageId);
             } elseif ($likeStatus === 'unlike') {
-                $this->ImagesModel->unlikeImage($imageId);
+                $this->ImageModel->unlikeImage($imageId);
             }
         }
     }
 
     public function commentAction() {
-        $imageId = '';
         if ($this->request->isPost()) {
             $comment = $this->request->get('comment');
-            $imageId .= $this->request->get('image-id');
-            $saveComment = $this->CommentsModel->comment($comment, $imageId);
+            $imageId = $this->request->get('image-id');
+            $saveComment = $this->CommentModel->comment($comment, $imageId);
             //TODO handle comment validation message
 //            if (isset($saveComment['content'])) {
 //                Helper::dnd($saveComment['content']);

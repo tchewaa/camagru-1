@@ -18,35 +18,50 @@ class Model {
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
 
-    public function get_columns() {
-        return $this->_db->get_columns($this->_table);
+    public function findImages() {
+        //TODO get images and related data e.g author, timestamp
     }
 
-    //TODO remove
-    //  protected function _softDeleteParams($params){
-    //    if($this->_softDelete){
-    //      if(array_key_exists('conditions',$params)){
-    //        if(is_array($params['conditions'])){
-    //          $params['conditions'][] = "deleted != 1";
-    //        } else {
-    //          $params['conditions'] .= " AND deleted != 1";
-    //        }
-    //      } else {
-    //        $params['conditions'] = "deleted != 1";
-    //      }
-    //    }
-    //    return $params;
-    //  }
+    public function findComments($imageId) {
+        $sql = "
+            SELECT 
+                c.user_id, 
+                c.image_id, 
+                c.content,
+                c.date,
+                u.username 
+            FROM comments c, users u 
+            WHERE c.image_id = ? AND u.id = c.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results();
+    }
+
+    public function findImage($imageId = '') {
+        //TODO join tables
+        $sql = "
+            SELECT
+                i.id,
+                i.user_id,
+                i.image_data,
+                i.date,
+                u.username
+            FROM images i, users u 
+            WHERE i.id = ? AND u.id = i.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results()[0];
+    }
+
+
 
     public function find($params = []) {
-        //    $params = $this->_softDeleteParams($params);
         $resultsQuery = $this->_db->find($this->_table, $params,get_class($this));
         if(!$resultsQuery) return [];
         return $resultsQuery;
     }
 
     public function findFirst($params = []) {
-        //    $params = $this->_softDeleteParams($params);
         $resultQuery = $this->_db->findFirst($this->_table, $params,get_class($this));
         return $resultQuery;
     }
@@ -82,57 +97,9 @@ class Model {
         return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
     }
 
-    public function findByUserId($user_id) {
-        return $this->findFirst(['conditions'=> "user_id = ?", 'bind'=>[$user_id]]);
-    }
-
     public function userImages($user_id) {
         return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
-
-    public function findImages() {
-        //TODO get images and related data e.g author, timestamp
-    }
-
-    public function findComments($imageId) {
-        $sql = "
-            SELECT 
-                c.user_id, 
-                c.image_id, 
-                c.content,
-                c.date,
-                u.username 
-            FROM comments c, users u 
-            WHERE c.image_id = ? AND u.id = c.user_id";
-        $params = [$imageId];
-        $this->query($sql, $params);
-        return $this->_db->results();
-//        Helper::dnd($t);
-//        return $this->find(['condtions' => "image_id = ?", 'bind' => [$imageId]]);
-    }
-
-    public function getImageById($imageId = '') {
-        //TODO join tables
-        $sql = "
-            SELECT
-                i.id,
-                i.user_id,
-                i.image_data,
-                i.date,
-                u.username
-            FROM images i, users u 
-            WHERE i.id = ? AND u.id = i.user_id";
-        $params = [$imageId];
-        $this->query($sql, $params);
-        return $this->_db->results()[0];
-//        Helper::dnd($temp);
-//        return $imageDetails;
-    }
-
-//    public function likedImage($image, $user) {
-//        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
-//        return $this->query($sql, [$user->id, $image->id]);
-//    }
 
     public function insert($fields) {
         if(empty($fields)) return false;
@@ -148,10 +115,6 @@ class Model {
     public function delete($id = '') {
         if($id == '' && $this->id == '') return false;
         $id = ($id == '')? $this->id : $id;
-        //TODO
-        // if($this->_softDelete) {
-        //     return $this->update($id, ['deleted' => 1]);
-        // }
         return $this->_db->delete($this->_table, $id);
     }
 
@@ -183,6 +146,10 @@ class Model {
         foreach($result as $key => $val) {
           $this->$key = $val;
         }
+    }
+
+    public function get_columns() {
+        return $this->_db->get_columns($this->_table);
     }
 
     public function validator(){}

@@ -31,31 +31,4 @@ class Controller extends Application {
         exit;
     }
 
-    protected function _resendToken($user) {
-        if (!$user) return false;
-        $verification = new Verification();
-        $verification = $verification->findFirst([
-            'conditions' => 'user_id = ?',
-            'bind' => [$user->id]
-        ]);
-        if (!$verification) return false;
-        $token = $verification->token;
-        return $verification->resendVerificationToken($user, $token);
-    }
-
-    protected function _sendConfirmation($user) {
-        $verification = new Verification();
-        return $verification->sendVerificationToken($user);
-    }
-
-    protected function _forgotPasswordToken($user) {
-        if (!$user) return false;
-        $verification = new Verification();
-        $verification = $verification->findFirst([
-            'conditions' => 'user_id = ?',
-            'bind' => [$user->id]
-        ]);
-        $token = $verification->token;
-        return $verification->sendForgotPasswordToken($user, $token);
-    }
 }
