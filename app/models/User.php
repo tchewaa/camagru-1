@@ -30,7 +30,7 @@ class User extends Model {
     public $confirmed = 0;
 
     public function __construct($user='') {
-        $table = 'users';
+        $table = 'user';
         parent::__construct($table);
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
         $this->_cookieName = REMEMBER_ME_COOKIE_NAME;

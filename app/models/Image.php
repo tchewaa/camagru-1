@@ -15,7 +15,7 @@ class Image extends Model {
     public $date;
 
     public function __construct(){
-        $table = 'images';
+        $table = 'image';
         parent::__construct($table);
     }
 

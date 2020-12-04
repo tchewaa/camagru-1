@@ -16,7 +16,7 @@ class Comment extends Model {
     public $content;
 
     public function __construct(){
-        $table = 'comments';
+        $table = 'comment';
         parent::__construct($table);
     }
 

@@ -12,7 +12,7 @@ class Like extends Model {
     public $image_id;
 
     public function __construct(){
-        $table = 'likes';
+        $table = 'like';
         parent::__construct($table);
     }
 

@@ -6,7 +6,7 @@ use Core\Database;
 include_once ('./Core/Helper.php');
 
 //Database::getInstance()->setup();
-setupDatabase();
+// setupDatabase();
 
 function setupDatabase() {
      try {
@@ -42,7 +42,7 @@ function setupDatabase() {
             `session` varchar(255) NOT NULL,
             `user_agent` varchar(255) NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id)
+            FOREIGN KEY (`user_id`) REFERENCES user(id)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
@@ -56,7 +56,7 @@ function setupDatabase() {
             `image_data` longblob NOT NULL,
             `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
@@ -69,8 +69,8 @@ function setupDatabase() {
             `content` varchar(255) NOT NULL,
             `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
-            FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+            FOREIGN KEY (`image_id`) REFERENCES image(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
@@ -81,8 +81,8 @@ function setupDatabase() {
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
-            FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+            FOREIGN KEY (`image_id`) REFERENCES image(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
@@ -108,7 +108,7 @@ function setupDatabase() {
 
              //save images
              foreach (Helper::getImages() as $image) {
-                 $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+                 $image_query = 'INSERT INTO `image` (user_id, image_name, image_data) VALUES (?, ?, ?)';
                  $stmt = $conn->prepare($image_query);
                  $stmt->execute([$userId, 'test', $image]);
              }
