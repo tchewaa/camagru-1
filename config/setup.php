@@ -22,7 +22,7 @@ function setupDatabase() {
 
         //Create table for users
         $sql = "
-            CREATE TABLE IF NOT EXISTS `users` (
+            CREATE TABLE IF NOT EXISTS `user` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `username` varchar(50) NOT NULL,
             `email` varchar(150) NOT NULL,
@@ -36,7 +36,7 @@ function setupDatabase() {
 
         //create table for user_sessions
         $sql = "
-            CREATE TABLE IF NOT EXISTS `user_sessions` (
+            CREATE TABLE IF NOT EXISTS `user_session` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `session` varchar(255) NOT NULL,
@@ -49,7 +49,7 @@ function setupDatabase() {
 
         //create table for images
         $sql = "
-            CREATE TABLE IF NOT EXISTS `images` (
+            CREATE TABLE IF NOT EXISTS `image` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `image_name` varchar(255) NOT NULL,
@@ -62,7 +62,7 @@ function setupDatabase() {
 
         //create table for comments
         $sql = "
-            CREATE TABLE IF NOT EXISTS `comments` (
+            CREATE TABLE IF NOT EXISTS `comment` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
@@ -76,7 +76,7 @@ function setupDatabase() {
 
         //create table for likes
         $sql = "
-            CREATE TABLE IF NOT EXISTS `likes` (
+            CREATE TABLE IF NOT EXISTS `like` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
@@ -87,7 +87,7 @@ function setupDatabase() {
         $conn->exec($sql);
 
          //check if database is seeded
-         $sql = 'SELECT * FROM users';
+         $sql = 'SELECT * FROM user';
          $stmt = $conn->prepare($sql);
          $stmt->execute();
 
