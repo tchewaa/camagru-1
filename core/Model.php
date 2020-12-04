@@ -30,7 +30,7 @@ class Model {
                 c.content,
                 c.date,
                 u.username 
-            FROM comments c, users u 
+            FROM comment c, user u 
             WHERE c.image_id = ? AND u.id = c.user_id";
         $params = [$imageId];
         $this->query($sql, $params);
@@ -46,7 +46,7 @@ class Model {
                 i.image_data,
                 i.date,
                 u.username
-            FROM images i, users u 
+            FROM image i, user u 
             WHERE i.id = ? AND u.id = i.user_id";
         $params = [$imageId];
         $this->query($sql, $params);
