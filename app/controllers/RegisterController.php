@@ -31,6 +31,7 @@ class RegisterController extends Controller {
                 Router::redirect('login');
             }
         }
+
         $this->view->user = $this->UserModel;
         $this->view->validationMessages = $this->UserModel->getErrorMessages();
         $this->view->render('register/index');
