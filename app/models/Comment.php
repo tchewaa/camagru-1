@@ -16,29 +16,38 @@ class Comment extends Model {
     public $content;
 
     public function __construct(){
-        $table = 'comment';
+        $table = 'comments';
         parent::__construct($table);
     }
 
-    public function comment($comment, $imageId) {
+    public function uploadComment($comment, $imageId) {
         $currentUser = User::currentUser();
         $this->user_id = $currentUser->id;
         $this->image_id = $imageId;
         $this->content = $comment;
         if ($this->save()) {
-            //TODO refactor
-            $image = new Image();
-            $image = $image->findById($imageId);
-            $imageAuthor = new User($image->user_id);
-            if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
+            $imageAuthor = new User($this->user_id);
+            if ($imageAuthor->notification === 1 && $currentUser->id != $this->user_id) {
                 $this->_sendCommentEmail($imageAuthor);
             }
         }
         return $this->getErrorMessages();
     }
 
-    public function getComments($imageId) {
-        return $this->findComments($imageId);
+    public function findComments($imageId) {
+        $sql = "
+            SELECT 
+                c.user_id, 
+                c.image_id, 
+                c.content,
+                c.date,
+                u.username 
+            FROM comments c, user u 
+            WHERE c.image_id = ? AND u.id = c.user_id
+            ORDER BY `date` DESC";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results();
     }
 
     private function _sendCommentEmail($imageAuthor) {

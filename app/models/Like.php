@@ -12,16 +12,11 @@ class Like extends Model {
     public $image_id;
 
     public function __construct(){
-        $table = 'like';
+        $table = 'likes';
         parent::__construct($table);
     }
 
-    public function updateLike() {
-        echo ' Updating like';
-//        Helper::dnd("Finally here");
-    }
-
-    public function uploadLike($image) {
+    public function likeImage($image) {
         $currentUser = User::currentUser();
         $likedImage = $this->likedImage($image, $currentUser);
         if ($likedImage->count() > 0) {
@@ -42,14 +37,15 @@ class Like extends Model {
         return false;
     }
 
-    public function deleteLike($imageId, $userId) {
-        $sql = "DELETE FROM likes WHERE user_id = ? AND image_id = ?";
+    public function unlikeImage($imageId) {
+        $userId = User::currentUser()->id;
+        $sql = "DELETE FROM `likes` WHERE user_id = ? AND image_id = ?";
         $params = [$userId, $imageId];
         return $this->query($sql, $params);
     }
 
     public function likedImage($image, $user) {
-        $sql = "SELECT user_id, image_id FROM likes WHERE user_id = ? AND image_id = ?";
+        $sql = "SELECT user_id, image_id FROM `likes` WHERE user_id = ? AND image_id = ?";
         $params = [$user->id, $image->id];
         return $this->query($sql, $params);
     }

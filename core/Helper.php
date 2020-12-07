@@ -208,7 +208,7 @@ class Helper {
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
         $html .= '<div class="row">';
-        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
+        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/image/index/' : 'http://localhost/camagru/image/index/';
         $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
         //TODO refactor display images
         foreach($images as $image) {

@@ -17,7 +17,7 @@ class EditorController extends Controller {
 
     public function indexAction() {
         //TODO create index page for profile
-        $this->view->userImages = $this->ImageModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
