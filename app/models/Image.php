@@ -27,45 +27,46 @@ class Image extends Model {
         return $this->save();
     }
 
-    public function getUserImages() {
-        $user = User::currentUser();
-        $images = $this->userImages($user->id);
-        return $images;
+    public function findUserImages($userId) {
+        $sql = "SELECT * FROM images WHERE user_id = ? ORDER BY `date` DESC";
+        $params = [$userId];
+        $this->query($sql, $params);
+        return $this->_db->results();
     }
 
-    public function getImages() {
-        //TODO get images and related Authors
-        return $this->find();
-//        return $this->images();
+    public function findImages() {
+        $sql = "
+            SELECT
+                i.id,
+                i.user_id,
+                i.image_data,
+                i.date,
+                u.username
+            FROM images i, user u";
+        $this->query($sql);
+        return $this->_db->results();
     }
 
-    public function getImage($imageId = '') {
-        return $this->findImage($imageId);
+    public function findImage($imageId = '') {
+        $sql = "
+            SELECT
+                i.id,
+                i.user_id,
+                i.image_data,
+                i.date,
+                u.username
+            FROM images i, user u 
+            WHERE i.id = ? AND u.id = i.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->first();
     }
 
     public function imageCount() {
-        return count($this->getImages());
+        return count($this->findImages());
     }
 
     public function pageCount() {
         return ceil($this->imageCount() / PAGE_SIZE);
-    }
-
-    public function likeImage($imageId) {
-        $image = $this->findById($imageId);
-        $imageLike = new Like();
-        $imageLike = $imageLike->uploadLike($image);
-        if ($imageLike) return true;
-        return false;
-    }
-
-    public function unlikeImage($imageId) {
-        $userId = User::currentUser()->id;
-        $likedImage = new Like();
-        $likedImage->deleteLike($imageId, $userId);
-    }
-
-    public function deleteImage($imageId) {
-        Helper::dnd("deleting images and related comments and likes");
     }
 }

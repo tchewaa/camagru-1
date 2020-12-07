@@ -17,7 +17,7 @@ class EditorController extends Controller {
 
     public function indexAction() {
         //TODO create index page for profile
-        $this->view->userImages = $this->ImageModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
@@ -84,7 +84,7 @@ class EditorController extends Controller {
                 echo "<meta http-equiv='refresh' content='0'>";
             }
         }
-        $this->view->userImages = $this->ImageModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
@@ -96,7 +96,7 @@ class EditorController extends Controller {
                 echo "image deleted";
             }
         }
-        $this->view->userImages = $this->ImageModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 

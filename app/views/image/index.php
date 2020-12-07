@@ -13,11 +13,11 @@ use Core\Helper;
             <p>Timestamp: <?=$this->image->date?></p>
             <button type="button" class="btn btn-default" id="like-button" value="<?=$this->image->id?>">
                 <?php
-                    if ($this->imageLiked) {
-                        echo "unlike";
-                    } else {
-                        echo "like";
-                    }
+                if ($this->imageLiked) {
+                    echo "unlike";
+                } else {
+                    echo "like";
+                }
                 ?>
             </button>
         </div>

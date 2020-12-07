@@ -6,14 +6,64 @@ use Core\Database;
 include_once ('./Core/Helper.php');
 
 //Database::getInstance()->setup();
-setupDatabase();
+ setupDatabase();
 
 function setupDatabase() {
-     try {
+//    $dbSql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
+//    $useDbSql = "use " . DB_NAME;
+//    $userSql = "
+//            CREATE TABLE IF NOT EXISTS `user` (
+//            `id` int(11) NOT NULL AUTO_INCREMENT,
+//            `username` varchar(50) NOT NULL,
+//            `email` varchar(150) NOT NULL,
+//            `password` varchar(150) NOT NULL,
+//            `token` varchar(150) NOT NULL,
+//            `confirmed` tinyint(1) NOT NULL DEFAULT 0,
+//            `notification` tinyint(1) NOT NULL DEFAULT 1,
+//            PRIMARY KEY (`id`)
+//            ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+//
+//    $imagesSql = "
+//            CREATE TABLE IF NOT EXISTS `images` (
+//            `id` int(11) NOT NULL AUTO_INCREMENT,
+//            `user_id` int(11) NOT NULL,
+//            `image_name` varchar(255) NOT NULL,
+//            `image_data` longblob NOT NULL,
+//            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//            PRIMARY KEY (`id`),
+//            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
+//            ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+//
+//    $commentsSql = "
+//            CREATE TABLE IF NOT EXISTS `comments` (
+//            `id` int(11) NOT NULL AUTO_INCREMENT,
+//            `user_id` int(11) NOT NULL,
+//            `image_id` int(11) NOT NULL,
+//            `content` varchar(255) NOT NULL,
+//            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//            PRIMARY KEY (`id`),
+//            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+//            FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+//            ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+//
+//    $likesSql = "
+//            CREATE TABLE IF NOT EXISTS `comments` (
+//            `id` int(11) NOT NULL AUTO_INCREMENT,
+//            `user_id` int(11) NOT NULL,
+//            `image_id` int(11) NOT NULL,
+//            `content` varchar(255) NOT NULL,
+//            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//            PRIMARY KEY (`id`),
+//            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+//            FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+//            ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+
+    try {
         $conn = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
 
         $conn->beginTransaction();
 
+//        $dbSql
         $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
         $conn->exec($sql);
 
@@ -21,12 +71,13 @@ function setupDatabase() {
         $conn->exec($sql);
 
         //Create table for users
-        $sql = "
-            CREATE TABLE IF NOT EXISTS `users` (
+//        $userSql
+         $sql = "
+            CREATE TABLE IF NOT EXISTS `user` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `username` varchar(50) NOT NULL,
             `email` varchar(150) NOT NULL,
-            `password` varchar(150) NOT NULL,            
+            `password` varchar(150) NOT NULL,
             `token` varchar(150) NOT NULL,
             `confirmed` tinyint(1) NOT NULL DEFAULT 0,
             `notification` tinyint(1) NOT NULL DEFAULT 1,
@@ -34,20 +85,8 @@ function setupDatabase() {
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
-        //create table for user_sessions
-        $sql = "
-            CREATE TABLE IF NOT EXISTS `user_sessions` (
-            `id` int(11) NOT NULL AUTO_INCREMENT,
-            `user_id` int(11) NOT NULL,
-            `session` varchar(255) NOT NULL,
-            `user_agent` varchar(255) NOT NULL,
-            PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id)
-            ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-        $conn->exec($sql);
-
-
         //create table for images
+//         imagesSql
         $sql = "
             CREATE TABLE IF NOT EXISTS `images` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -56,11 +95,12 @@ function setupDatabase() {
             `image_data` longblob NOT NULL,
             `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
         //create table for comments
+//         $commentsSql
         $sql = "
             CREATE TABLE IF NOT EXISTS `comments` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,25 +109,32 @@ function setupDatabase() {
             `content` varchar(255) NOT NULL,
             `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
         //create table for likes
+//         $likesSql
         $sql = "
             CREATE TABLE IF NOT EXISTS `likes` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
+//        $conn->exec($dbSql);
+//        $conn->exec($useDbSql);
+//        $conn->exec($imagesSql);
+//        $conn->exec($commentsSql);
+//        $conn->exec($likesSql);
+
          //check if database is seeded
-         $sql = 'SELECT * FROM users';
+         $sql = 'SELECT * FROM `user`';
          $stmt = $conn->prepare($sql);
          $stmt->execute();
 
@@ -99,9 +146,9 @@ function setupDatabase() {
              $token = md5($username . $email . Helper::generateRandomString());
 
              //save default user
-             $sql = 'INSERT INTO `users` (username, email, password, token) VALUES (?, ?, ?, ?)';
+             $sql = 'INSERT INTO `user` (username, email, password, token, confirmed) VALUES (?, ?, ?, ?, ?)';
              $stmt = $conn->prepare($sql);
-             $stmt->execute([$username, $email, $password, $token]);
+             $stmt->execute([$username, $email, $password, $token, 1]);
 
              //get generated default user id
              $userId = $conn->lastInsertId();

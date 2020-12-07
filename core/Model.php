@@ -7,7 +7,6 @@ class Model {
     protected $_db;
     protected $_table;
     protected $_modelName;
-    protected $_softDelete = false;
     protected $_validates=true;
     protected $_validationErrors=[];
     public $id;
@@ -17,42 +16,6 @@ class Model {
         $this->_table = $table;
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
-
-    public function findImages() {
-        //TODO get images and related data e.g author, timestamp
-    }
-
-    public function findComments($imageId) {
-        $sql = "
-            SELECT 
-                c.user_id, 
-                c.image_id, 
-                c.content,
-                c.date,
-                u.username 
-            FROM comments c, users u 
-            WHERE c.image_id = ? AND u.id = c.user_id";
-        $params = [$imageId];
-        $this->query($sql, $params);
-        return $this->_db->results();
-    }
-
-    public function findImage($imageId = '') {
-        //TODO join tables
-        $sql = "
-            SELECT
-                i.id,
-                i.user_id,
-                i.image_data,
-                i.date,
-                u.username
-            FROM images i, users u 
-            WHERE i.id = ? AND u.id = i.user_id";
-        $params = [$imageId];
-        $this->query($sql, $params);
-        return $this->_db->results()[0];
-    }
-
 
 
     public function find($params = []) {
@@ -95,10 +58,6 @@ class Model {
 
     public function findById($id) {
         return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
-    }
-
-    public function userImages($user_id) {
-        return $this->find(['conditions'=> "user_id = ?", 'order'=>"image_name DESC",'bind'=>[$user_id]]);
     }
 
     public function insert($fields) {

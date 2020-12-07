@@ -12,7 +12,6 @@ class RegisterController extends Controller {
     public function __construct($controller, $action) {
         parent::__construct($controller, $action);
         $this->load_model('User');
-        $this->load_model('Verification');
         $this->view->setLayout('default');
     }
 
@@ -28,9 +27,10 @@ class RegisterController extends Controller {
             $this->UserModel->setConfirmPassword($this->request->get('confirmPassword'));
             if($this->UserModel->save()){
                 $this->UserModel->sendConfirmation();
-              Router::redirect('login');
+                Router::redirect('login');
             }
         }
+
         $this->view->user = $this->UserModel;
         $this->view->validationMessages = $this->UserModel->getErrorMessages();
         $this->view->render('register/index');
