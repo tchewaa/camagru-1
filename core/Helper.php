@@ -219,6 +219,7 @@ class Helper {
 
         }
         $html .= '</div>';
+        //FIXME pagination not fully working!
         //TODO refactor pagination
         $html .= '<div class="row">';
         $html .= '<div class="col-lg-12 col-lg-offset-4">';
