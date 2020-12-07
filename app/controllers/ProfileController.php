@@ -4,7 +4,7 @@
 namespace App\Controllers;
 
 
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Verification;
 use Core\Controller;
 use Core\Helper;
@@ -15,27 +15,27 @@ class ProfileController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Users');
+        $this->load_model('User');
         $this->load_model('Verification');
         $this->view->setLayout('default');
     }
 
     public function indexAction() {
-        $this->view->user = Users::currentUser();
+        $this->view->user = User::currentUser();
         $this->view->render('profile/index');
     }
 
     public function updateUsernameAction() {
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            $this->UsersModel->assign($this->request->get());
-            $this->UsersModel->validator();
+            $this->UserModel->assign($this->request->get());
+            $this->UserModel->validator();
             $username = $this->request->get('username');
-            if ($this->UsersModel->validationPassed()) {
-                $this->UsersModel->update(Users::currentUser()->id, ['username' => $username]);
+            if ($this->UserModel->validationPassed()) {
+                $this->UserModel->update(User::currentUser()->id, ['username' => $username]);
                 Router::redirect('profile/index');
             }
-            $this->view->validationMessages = $this->UsersModel->getErrorMessages();
+            $this->view->validationMessages = $this->UserModel->getErrorMessages();
         }
         $this->view->render('profile/updateUsername');
     }
@@ -46,14 +46,14 @@ class ProfileController extends Controller {
             $current_password = $this->request->get('password');
             $new_password = $this->request->get('new_password');
             $confirm_password = $this->request->get('confirm_password');
-            if (password_verify($current_password, Users::currentUser()->password)) {
-                $this->UsersModel->password = $new_password;
-                $this->UsersModel->setConfirm($confirm_password);
-                $this->UsersModel->validator();
-                if ($this->UsersModel->validationPassed()) {
+            if (password_verify($current_password, User::currentUser()->password)) {
+                $this->UserModel->password = $new_password;
+                $this->UserModel->setConfirm($confirm_password);
+                $this->UserModel->validator();
+                if ($this->UserModel->validationPassed()) {
                     $new_password = password_hash($new_password, PASSWORD_DEFAULT);
-                    $id = Users::currentUser()->id;
-                    $this->UsersMode->update($id, ['password' => $new_password]);
+                    $id = User::currentUser()->id;
+                    $this->UserMode->update($id, ['password' => $new_password]);
                     Router::redirect('profile/index');
                 }
                 $this->view->validationMessages = $this->user->getErrorMessages();
@@ -66,17 +66,17 @@ class ProfileController extends Controller {
     }
 
     public function updateEmailAction() {
-        $current_user = Users::$currentLoggedInUser;
+        $current_user = User::$currentLoggedInUser;
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
             $email = $this->request->get('email');
             $notification = $this->_getNotificationChecked($this->request->get('notification'));
 //            $this->user->assign($this->request->get());
-            $this->UsersModel->assign($this->request->get());
+            $this->UserModel->assign($this->request->get());
 //            $this->user->validator();
-            $this->UsersModel->validator();
-            if ($this->UsersModel->validationPassed()) {
-                $emailExists = $this->UsersModel->findByEmail($email);
+            $this->UserModel->validator();
+            if ($this->UserModel->validationPassed()) {
+                $emailExists = $this->UserModel->findByEmail($email);
                 if (!$emailExists) {
                     $verification = $this->VerificationModel->findFirst([
                         'conditions' => 'user_id = ?',
@@ -99,6 +99,25 @@ class ProfileController extends Controller {
         }
         $this->view->user = $current_user;
         $this->view->render('profile/updateEmail');
+    }
+
+    public function deleteAccountAction() {
+        $currentUser = User::currentUser();
+        if ($this->request->isPost()) {
+            $passwordVerified = password_verify($this->request->get('password'), $currentUser->password);
+            if ($passwordVerified) {
+                $temp = $this->UserModel->delete();
+                Helper::dnd($temp);
+                if ($this->UserModel->delete()) {
+                    Helper::dnd("deleted");
+                };
+                Helper::dnd("deleting");
+            } else {
+                $this->view->validationMessages = ['password' => 'Invalid password'];
+            }
+        }
+        $this->view->user = $currentUser;
+        $this->view->render('profile/deleteAccount');
     }
 
     protected function _getNotificationChecked($notification) {

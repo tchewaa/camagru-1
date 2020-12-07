@@ -1,7 +1,7 @@
 <?php
     use Core\Router;
     use Core\Helper;
-    use App\Models\Users;
+    use App\Models\User;
     $menu = Router::getMenu('menu_acl');
     $currentPage = Helper::currentPage();
 ?>
@@ -28,8 +28,8 @@
                 <?php endforeach; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <?php if(Users::currentUser()): ?>
-                    <li><a href="#">Y'ello <?=Users::currentUser()->username?></a></li>
+                <?php if(User::currentUser()): ?>
+                    <li><a href="#">Y'ello <?=User::currentUser()->username?></a></li>
                 <?php endif; ?>
             </ul>
         </div><!-- /.navbar-collapse -->

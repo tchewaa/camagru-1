@@ -9,7 +9,7 @@ use Core\Model;
 use Core\Validators\MaxValidator;
 use Core\Validators\MinValidator;
 
-class Comments extends Model {
+class Comment extends Model {
     public $id;
     public $user_id;
     public $image_id;
@@ -20,21 +20,34 @@ class Comments extends Model {
         parent::__construct($table);
     }
 
-    public function comment($comment, $imageId) {
-        $currentUser = Users::currentUser();
+    public function uploadComment($comment, $imageId) {
+        $currentUser = User::currentUser();
         $this->user_id = $currentUser->id;
         $this->image_id = $imageId;
         $this->content = $comment;
         if ($this->save()) {
-            //TODO refactor
-            $image = new Images();
-            $image = $image->findById($imageId);
-            $imageAuthor = new Users($image->user_id);
-            if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
+            $imageAuthor = new User($this->user_id);
+            if ($imageAuthor->notification === 1 && $currentUser->id != $this->user_id) {
                 $this->_sendCommentEmail($imageAuthor);
             }
         }
         return $this->getErrorMessages();
+    }
+
+    public function findComments($imageId) {
+        $sql = "
+            SELECT 
+                c.user_id, 
+                c.image_id, 
+                c.content,
+                c.date,
+                u.username 
+            FROM comments c, user u 
+            WHERE c.image_id = ? AND u.id = c.user_id
+            ORDER BY `date` DESC";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->results();
     }
 
     private function _sendCommentEmail($imageAuthor) {
@@ -42,10 +55,6 @@ class Comments extends Model {
         $subject = 'Camagru: Comment made your image';
         $message = Helper::formatImageCommentMessage($imageAuthor);
         if (mail($imageAuthor->email, $subject, $message, $headers)) return true;
-    }
-
-    public function getComments($imageId) {
-        return $this->findComments($imageId);
     }
 
     public function validator() {

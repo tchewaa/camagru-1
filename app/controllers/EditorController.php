@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Core\Controller;
 use Core\Helper;
 use Core\Router;
@@ -11,13 +11,13 @@ class EditorController extends Controller {
 
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
-        $this->load_model('Images');
+        $this->load_model('Image');
         $this->view->setLayout('default');
     }
 
     public function indexAction() {
         //TODO create index page for profile
-        $this->view->userImages = $this->ImagesModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
@@ -84,19 +84,19 @@ class EditorController extends Controller {
                 echo "<meta http-equiv='refresh' content='0'>";
             }
         }
-        $this->view->userImages = $this->ImagesModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
     public function deleteAction() {
         if ($this->request->isPost()) {
-            $userID = Users::currentUser()->id;
+            $userID = User::currentUser()->id;
             $imageID = $this->request->get("image-id");
-            if ($this->ImagesModel->delete($imageID)) {
+            if ($this->ImageModel->delete($imageID)) {
                 echo "image deleted";
             }
         }
-        $this->view->userImages = $this->ImagesModel->getUserImages();
+        $this->view->userImages = $this->ImageModel->findUserImages(User::currentUser()->id);
         $this->view->render('editor/index');
     }
 
@@ -106,6 +106,6 @@ class EditorController extends Controller {
     }
 
     private function _saveImage($image) {
-        return $this->ImagesModel->upload($image, Users::currentUser()->username . time());
+        return $this->ImageModel->upload($image, User::currentUser()->username . time());
     }
 }

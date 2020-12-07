@@ -10,75 +10,53 @@ USE camagru;
 
 # Create user table
 # ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `user` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `username` varchar(50) NOT NULL,
     `email` varchar(150) NOT NULL,
-    `password` varchar(150) NOT NULL,
-    `notification` tinyint(1) NOT NULL,
+    `password` varchar(150) NOT NULL,            
+    `token` varchar(150) NOT NULL,
+    `confirmed` tinyint(1) NOT NULL DEFAULT 0,
+    `notification` tinyint(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-# Create sessions table
-# ------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS `user_sessions` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `session` varchar(255) NOT NULL,
-    `user_agent` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users(id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-# Create table for user verification
-# ------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS `verification` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `token` varchar(150) NOT NULL,
-    `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users(id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Create table for images
 # ------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `images` (
+CREATE TABLE IF NOT EXISTS `image` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
     `image_name` varchar(255) NOT NULL,
     `image_data` longblob NOT NULL,
     `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users(id)
+    FOREIGN KEY (`user_id`) REFERENCES user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Create table for comments
 # ------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `comments` (
+CREATE TABLE IF NOT EXISTS `comment` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
     `image_id` int(11) NOT NULL,
     `content` varchar(255) NOT NULL,
     `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+    FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (`image_id`) REFERENCES image(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Create table for likes
 # ------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `likes` (
+CREATE TABLE IF NOT EXISTS `like` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
     `image_id` int(11) NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
+    FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (`image_id`) REFERENCES image(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

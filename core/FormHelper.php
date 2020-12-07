@@ -72,6 +72,7 @@ class FormHelper {
         return $clean_ary;
     }
 
+    //TODO move this to helper class
     public static function displayValidationMessage($errors) {
         $html = "";
         if (isset($errors['success'])) {

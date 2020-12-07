@@ -30,6 +30,11 @@ class Database {
         return self::$_instance;
     }
 
+    public function setup() {
+       echo "seeding database";
+       Helper::dnd($this->_pdo);
+    }
+
     //TODO go through this method line by line
     public function query($sql, $params = [], $class = false) {
         $this->_error = false;

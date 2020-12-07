@@ -21,7 +21,7 @@ likeButton.addEventListener('click', function(e) {
         const formData = new FormData();
         const imageId = likeButton.value;
         const likeStatus = likeButton.innerText;
-        const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/like" : "http://localhost:8080/camagru/image/like";
+        const url = (host.indexOf("Windows")) ? "http://localhost/camagru/image/like" : "http://localhost:8080/camagru/image/like";
         formData.append('image-id', imageId);
         formData.append('like-status', likeStatus);
 
@@ -30,8 +30,12 @@ likeButton.addEventListener('click', function(e) {
                 method: 'POST',
                 body: formData
             });
+            // const payload = Promise.resolve(response.text());
+            // payload.then(function (value) {
+            //     console.log(value);
+            // });
             window.location.reload();
-        }, 2000)
+        }, 2000);
 
     } catch (e) {
         console.log(e.message);
@@ -53,13 +57,17 @@ commentButton.addEventListener('click', function (e) {
             const imageId = commentButton.value;
             formData.append('image-id', imageId);
             formData.append('comment', comment);
-            const url = (host.indexOf("Windows")) ? "http://localhost/camagru/home/comment" : "http://localhost:8080/camagru/image/comment";
+            const url = (host.indexOf("Windows")) ? "http://localhost/camagru/image/comment" : "http://localhost:8080/camagru/image/comment";
 
             setTimeout( async function () {
                 const response = await fetch(url, {
                     method: 'POST',
                     body: formData
                 });
+                // const payload = Promise.resolve(response.text());
+                // payload.then(function (value) {
+                //     console.log(value);
+                // });
                 window.location.reload();
             }, 2000)
             e.preventDefault();

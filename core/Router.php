@@ -1,7 +1,7 @@
 <?php
   namespace Core;
   use Core\Session;
-  use App\Models\Users;
+  use App\Models\User;
 
   class Router {
 
@@ -60,7 +60,7 @@
 
       if(Session::exists(CURRENT_USER_SESSION_NAME)) {
         $current_user_acls[] = "LoggedIn";
-        foreach(Users::currentUser()->acls() as $a) {
+        foreach(User::currentUser()->acls() as $a) {
           $current_user_acls[] = $a;
         }
       }

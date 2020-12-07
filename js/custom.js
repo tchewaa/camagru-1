@@ -12,8 +12,8 @@ if (registerButton) {
 
 if (resendButton) {
     resendButton.addEventListener('click', function (e) {
-        console.log('clicked');
         loadSpinner.classList.add('loading');
+        window.location.reload();
     });
 }
 

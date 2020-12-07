@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-use App\Models\Users;
+use App\Models\User;
 
 class Helper {
     public static function dnd($data) {
@@ -23,7 +23,7 @@ class Helper {
         return get_object_vars($obj);
     }
 
-    public static function formatForgotPasswordMessage($token, $user) {
+    public static function formatForgotPasswordMessage($token, $username) {
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -32,9 +32,9 @@ class Helper {
                     <title>Camagru Forgot Password</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3> <br />
+                    <h3>Y'ello {$username}</h3> <br />
                     <h4>Did you forgot your password? No worries, just follow the link: </h4> <br />
-                    <a href=\"http://127.0.0.1:8080/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
+                    <a href=\"http://127.0.0.1:8080/camagru/login/resetPassword/{$username}/{$token}\">Reset password</a>
                     <br />
                     <h6>Regards</h6>
                     <h6>Camagru Holdings</h6>
@@ -48,9 +48,9 @@ class Helper {
                     <title>Camagru Forgot Password</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3>
+                    <h3>Y'ello {$username}</h3>
                     <h4>Did you forgot your password? No worries, just follow the link:
-                        <a href=\"http://localhost/camagru/login/resetPassword/{$user->username}/{$token}\">Reset password</a>
+                        <a href=\"http://localhost/camagru/login/resetPassword/{$username}/{$token}\">Reset password</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -61,7 +61,7 @@ class Helper {
         return $message;
     }
 
-    public static function formatConfirmationMessage($token, $user) {
+    public static function formatConfirmationMessage($token, $username) {
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -70,9 +70,9 @@ class Helper {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3>
+                    <h3>Y'ello {$username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
+                        <a href=\"http://127.0.0.1:8080/camagru/register/verify/{$username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -86,9 +86,9 @@ class Helper {
                     <title>Camagru confirmation email</title>
                 </head>
                 <body>
-                    <h3>Y'ello {$user->username}</h3>
+                    <h3>Y'ello {$username}</h3>
                     <h4>Please click on the following link to verify your email:
-                        <a href=\"localhost/camagru/register/verify/{$user->username}/{$token}\">confirm email</a>
+                        <a href=\"localhost/camagru/register/verify/{$username}/{$token}\">confirm email</a>
                     </h4>
                     <p>Regards</p>
                     <p>Camagru Holdings</p>
@@ -100,7 +100,7 @@ class Helper {
     }
 
     public static function formatImageLikeMessage($imageAuthor) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -135,7 +135,7 @@ class Helper {
     }
 
     public static function formatImageCommentMessage($imageAuthor) {
-        $currentUser = Users::currentUser();
+        $currentUser = User::currentUser();
         $message = "";
         if (php_uname('s') == 'Linux') {
             $message = "
@@ -208,7 +208,7 @@ class Helper {
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
         $html .= '<div class="row">';
-        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/image/' : 'http://localhost/camagru/home/image/';
+        $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/image/index/' : 'http://localhost/camagru/image/index/';
         $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
         //TODO refactor display images
         foreach($images as $image) {
@@ -219,6 +219,7 @@ class Helper {
 
         }
         $html .= '</div>';
+        //FIXME pagination not fully working!
         //TODO refactor pagination
         $html .= '<div class="row">';
         $html .= '<div class="col-lg-12 col-lg-offset-4">';
@@ -227,7 +228,6 @@ class Helper {
             $pages[] = '<li><a href="' . $pageUrl .$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
             $pageIndex++;
         }
-        $html .= '<li><a href="'. $pageUrl . 1 . '" class="pages" id="pageNumber1">Prev</a></li>';
         foreach ($pages as $page) {
             $html .= $page;
         }
@@ -277,4 +277,5 @@ class Helper {
         }
         return $randomImages;
     }
+
 }
