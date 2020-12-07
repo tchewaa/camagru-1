@@ -41,7 +41,6 @@ class Model {
             return $save;
           } else {
               $save = $this->insert($fields);
-              Helper::dnd($save);
               $this->afterSave();
             return $save;
           }
