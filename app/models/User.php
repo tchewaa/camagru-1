@@ -17,10 +17,9 @@ class User extends Model {
     private $_isLoggedIn = false;
     private $_sessionName;
     private $_cookieName;
-    private $_confirm;
     private $_confirmPassword;
     private $_new_password;
-    public static $currentLoggedInUser = null;
+
     public $id;
     public $username;
     public $email;
@@ -28,6 +27,8 @@ class User extends Model {
     public $token;
     public $notification = 1;
     public $confirmed = 0;
+
+    public static $currentLoggedInUser = null;
 
     public function __construct($user='') {
         $table = 'user';
@@ -166,13 +167,6 @@ class User extends Model {
         $this->_confirmPassword = $confirmPassword;
     }
 
-    public function setConfirm($value) {
-        $this->_confirm = $value;
-    }
-
-    public function getConfirm() {
-        return $this->_confirm;
-    }
 
     public function getIsLoggedIn() {
         return $this->_isLoggedIn;
