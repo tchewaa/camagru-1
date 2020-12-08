@@ -85,6 +85,19 @@ function setupDatabase() {
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
         $conn->exec($sql);
 
+        //create table for session
+//         sessionSql
+        $sql = "
+            CREATE TABLE IF NOT EXISTS `session` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `user_id` int(11) NULL,
+            `session` varchar(255) NULL,
+            `user_agent` varchar(255) NULL,
+            PRIMARY KEY (`id`),
+            FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE 
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $conn->exec($sql);
+
         //create table for images
 //         imagesSql
         $sql = "

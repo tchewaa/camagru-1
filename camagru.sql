@@ -21,6 +21,17 @@ CREATE TABLE IF NOT EXISTS `user` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+# Create session table
+# ------------------------------------------------------------
+CREATE TABLE `session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL,
+  `session` varchar(255) NULL,
+  `user_agent` varchar(255) NULL,
+  PRIMARY KEY (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 # Create table for images
 # ------------------------------------------------------------
@@ -32,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `image` (
     `image_data` longblob NOT NULL,
     `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES user(id)
+    FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Create table for comments

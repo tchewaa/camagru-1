@@ -34,7 +34,6 @@ class User extends Model {
         parent::__construct($table);
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
         $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
-        $this->_softDelete = true;
         if($user != '') {
           if(is_int($user)) {
             $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]], 'App\Models\User');
@@ -94,6 +93,7 @@ class User extends Model {
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
           Cookie::delete(REMEMBER_ME_COOKIE_NAME);
         }
+        $this->setIsLoggedIn(false);
         self::$currentLoggedInUser = null;
         return true;
     }

@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Models\User;
 use Core\Controller;
 use Core\Helper;
+use Core\Router;
 
 class ImageController extends Controller {
 
@@ -20,17 +21,22 @@ class ImageController extends Controller {
     }
 
     public function indexAction($imageId) {
-        $image = $this->ImageModel->findImage($imageId);
-        $imageLiked = $this->LikeModel->likedImage($image, User::currentUser());
-        if ($imageLiked->results()) {
-            $imageLiked = true;
+        if (User::currentUser()) {
+            $image = $this->ImageModel->findImage($imageId);
+            $imageLiked = $this->LikeModel->likedImage($image, User::currentUser());
+            if ($imageLiked->results()) {
+                $imageLiked = true;
+            } else {
+                $imageLiked = false;
+            }
+            $this->view->image = $image;
+            $this->view->imageLiked = $imageLiked;
+            $this->view->comments = $this->CommentModel->findComments($imageId);
+            $this->view->render('image/index');
         } else {
-            $imageLiked = false;
+            //TODO flash a message
+            Router::redirect('login');
         }
-        $this->view->image = $image;
-        $this->view->imageLiked = $imageLiked;
-        $this->view->comments = $this->CommentModel->findComments($imageId);
-        $this->view->render('image/index');
     }
 
     public function likeAction() {
