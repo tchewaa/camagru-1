@@ -35,14 +35,7 @@ class Image extends Model {
     }
 
     public function findImages() {
-        $sql = "
-            SELECT
-                i.id,
-                i.user_id,
-                i.image_data,
-                i.date,
-                u.username
-            FROM images i, user u";
+        $sql = "SELECT * FROM images ORDER BY `date` DESC";
         $this->query($sql);
         return $this->_db->results();
     }
