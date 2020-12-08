@@ -31,8 +31,20 @@ class Database {
     }
 
     public function setup() {
-       echo "seeding database";
-       Helper::dnd($this->_pdo);
+
+        try {
+            $this->_pdo->beginTransaction();
+
+            $dbSql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
+            $this->_pdo->prepare($dbSql);
+            $this->_pdo->exec($dbSql);
+
+//        $useDbSql = "use " . DB_NAME;
+//        $this->_pdo->exec($dbSql);
+        } catch (PDOException $e) {
+            $this->_pdo->rollBack();
+            die($e->getMessage());
+        }
     }
 
     //TODO go through this method line by line
@@ -195,4 +207,5 @@ class Database {
     public function error() {
         return $this->_error;
     }
+
 }
