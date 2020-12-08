@@ -152,7 +152,6 @@ function setupDatabase() {
          $stmt->execute();
 
          if ($stmt->rowCount() == 0) {
-             Helper::dnd("testing");
              //default user
              $username = "admin";
              $email = "1281martian@gmail.com";
