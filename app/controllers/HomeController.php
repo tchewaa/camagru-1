@@ -5,8 +5,9 @@
   use App\Models\User;
   use Core\Helper;
   use Core\Router;
+  use Core\Session;
 
-class HomeController extends Controller {
+  class HomeController extends Controller {
 
     public function __construct($controller, $action) {
         parent::__construct($controller, $action);
