@@ -96,12 +96,9 @@ class ProfileController extends Controller {
         if ($this->request->isPost()) {
             $passwordVerified = password_verify($this->request->get('password'), $currentUser->password);
             if ($passwordVerified) {
-                $temp = $this->UserModel->delete();
-                Helper::dnd($temp);
-                if ($this->UserModel->delete()) {
-                    Helper::dnd("deleted");
-                };
-                Helper::dnd("deleting");
+                $currentUser->logout();
+                $currentUser->delete();
+                Router::redirect('login');
             } else {
                 $this->view->validationMessages = ['password' => 'Invalid password'];
             }
