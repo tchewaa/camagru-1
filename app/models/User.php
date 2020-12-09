@@ -70,8 +70,8 @@ class User extends Model {
           $user_agent = Session::uagent_no_version();
           Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
           $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-          $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
-          $this->_db->insert('user_sessions', $fields);
+          $this->_db->query("DELETE FROM `session` WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+          $this->_db->insert('session', $fields);
         }
     }
 
