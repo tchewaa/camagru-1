@@ -176,12 +176,8 @@ class User extends Model {
         $this->_isLoggedIn = $isLoggedIn;
     }
 
-    public function getNotificationChecked() {
-        if ($this->notification == 1) {
-            return 'on';
-        } else {
-            return 'off';
-        }
+    public function toggleNotification() {
+        return $this->notification == 1;
     }
 
 }
