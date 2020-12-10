@@ -25,8 +25,7 @@ class Model {
     }
 
     public function findFirst($params = []) {
-        $resultQuery = $this->_db->findFirst($this->_table, $params,get_class($this));
-        return $resultQuery;
+        return $this->_db->findFirst($this->_table, $params,get_class($this));
     }
 
     public function save() {
@@ -79,6 +78,14 @@ class Model {
 
     public function query($sql, $bind=[]) {
         return $this->_db->query($sql, $bind);
+    }
+
+    public function results() {
+        return $this->_db->results();
+    }
+
+    public function first() {
+        return $this->_db->first();
     }
 
     public function data() {

@@ -35,6 +35,7 @@ class User extends Model {
         parent::__construct($table);
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
         $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
+        //TODO should I remove this?
         if($user != '') {
           if(is_int($user)) {
             $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]], 'App\Models\User');
@@ -70,8 +71,8 @@ class User extends Model {
           $user_agent = Session::uagent_no_version();
           Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
           $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-          $this->_db->query("DELETE FROM `session` WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
-          $this->_db->insert('session', $fields);
+          $this->query("DELETE FROM `session` WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+          $this->insert('session', $fields);
         }
     }
 

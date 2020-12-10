@@ -48,7 +48,7 @@ class Comment extends Model {
             ORDER BY `date` DESC";
         $params = [$imageId];
         $this->query($sql, $params);
-        return $this->_db->results();
+        return $this->results();
     }
 
     private function _sendCommentEmail($imageAuthor) {

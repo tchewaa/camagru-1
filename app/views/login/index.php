@@ -2,6 +2,7 @@
 use Core\FormHelper;
 ?>
 <?php $this->start('head'); ?>
+<?php $this->setSiteTitle("Camagru | Login"); ?>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
 <div class="col-md-4 col-md-offset-4 jumbotron">
