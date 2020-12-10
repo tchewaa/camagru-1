@@ -26,7 +26,7 @@ class RegisterController extends Controller {
             $this->UserModel->token = md5(Helper::generateRandomString());
             $this->UserModel->setConfirmPassword($this->request->get('confirmPassword'));
             if($this->UserModel->save()){
-//                $this->UserModel->sendConfirmation();
+                $this->UserModel->sendConfirmation();
                 Router::redirect('login');
             }
         }

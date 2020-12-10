@@ -44,10 +44,10 @@ class ImageController extends Controller {
         if ($this->request->isPost()) {
             $imageId .= $this->request->get('image-id');
             $likeStatus = $this->request->get('like-status');
-            $image = $this->ImageModel->findbyId($imageId);
-            if ($likeStatus === 'like' && $image) {
-                $this->LikeModel->likeImage($image);
-            } elseif ($likeStatus === 'unlike' && $image) {
+            $imageAuthor = $this->ImageModel->findImageAuthor($imageId);
+            if ($likeStatus === 'like' && $imageAuthor) {
+                $this->LikeModel->likeImage($imageAuthor);
+            } elseif ($likeStatus === 'unlike' && $imageAuthor) {
                 $this->LikeModel->unlikeImage($imageId);
             }
         }
@@ -57,13 +57,8 @@ class ImageController extends Controller {
         if ($this->request->isPost()) {
             $comment = $this->request->get('comment');
             $imageId = $this->request->get('image-id');
-            $saveComment = $this->CommentModel->uploadComment($comment, $imageId);
-            //TODO handle comment validation message
-//            if (isset($saveComment['content'])) {
-//                Helper::dnd($saveComment['content']);
-//            } else {
-//                Helper::dnd("Comment saved");
-//            }
+            $imageAuthor = $this->ImageModel->findImageAuthor($imageId);
+            $this->CommentModel->uploadComment($comment, $imageAuthor);
         }
     }
 

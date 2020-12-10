@@ -20,18 +20,19 @@ class Comment extends Model {
         parent::__construct($table);
     }
 
-    public function uploadComment($comment, $imageId) {
+    public function uploadComment($comment, $imageAuthor) {
         $currentUser = User::currentUser();
         $this->user_id = $currentUser->id;
-        $this->image_id = $imageId;
+        $this->image_id = $imageAuthor->id;
         $this->content = $comment;
         if ($this->save()) {
-            $imageAuthor = new User($this->user_id);
-            if ($imageAuthor->notification === 1 && $currentUser->id != $this->user_id) {
+            if ($imageAuthor->notification === 1 && $currentUser->id != $imageAuthor->user_id) {
                 $this->_sendCommentEmail($imageAuthor);
             }
+        } else {
+            return false;
         }
-        return $this->getErrorMessages();
+        return true;
     }
 
     public function findComments($imageId) {

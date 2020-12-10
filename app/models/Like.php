@@ -16,25 +16,18 @@ class Like extends Model {
         parent::__construct($table);
     }
 
-    public function likeImage($image) {
+    public function likeImage($imageAuthor) {
         $currentUser = User::currentUser();
-        $likedImage = $this->likedImage($image, $currentUser);
-        if ($likedImage->count() > 0) {
-            //TODO
-        } else {
-            $this->image_id = $image->id;
-            $this->user_id = $currentUser->id;
-            if ($this->save()) {
-                $imageAuthor = new User($image->user_id);
-                if ($imageAuthor->notification === 1 && $currentUser->id != $image->user_id) {
-                    $this->_sendLikeEmail($imageAuthor);
-                }
-            } else {
-                return false;
+        $this->image_id = $imageAuthor->id;
+        $this->user_id = $currentUser->id;
+        if ($this->save()) {
+            if ($imageAuthor->notification === 1 && $currentUser->id != $imageAuthor->user_id) {
+                $this->_sendLikeEmail($imageAuthor);
             }
-            return true;
+        } else {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public function unlikeImage($imageId) {

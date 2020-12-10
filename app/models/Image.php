@@ -55,6 +55,21 @@ class Image extends Model {
         return $this->_db->first();
     }
 
+    public function findImageAuthor($imageId = '') {
+        $sql = "
+            SELECT
+                i.id,
+                i.user_id,
+                u.username,
+                u.email,
+                u.notification
+            FROM images i, user u 
+            WHERE i.id = ? AND u.id = i.user_id";
+        $params = [$imageId];
+        $this->query($sql, $params);
+        return $this->_db->first();
+    }
+
     public function imageCount() {
         return count($this->findImages());
     }
