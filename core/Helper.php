@@ -183,7 +183,7 @@ class Helper {
     public static function getHeaders() {
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: pmalope@student.wethinkcode.co.za";
+        $headers .= "From: camagru@gmail.com";
         return $headers;
     }
 
@@ -194,7 +194,6 @@ class Helper {
             foreach ($images as $key => $value) {
                 $html .= "<div class=\"col-sm-4 thumbnail\">";
                 $html .= "<span class=\"glyphicon glyphicon-remove-sign pull-right delete\" id=\"" . $value->id . "\" style=\"color:red;font-size:30px\"> </span>";
-//                $html .= "<img src=\"" . $value->image_data . "\" id=\"user-image\">";
                 $html .= '<img src="'. $value->image_data .'" class="images" id="user-image">';
                 $html .= '</div>';
             }
@@ -221,11 +220,13 @@ class Helper {
         $html .= '</div>';
         //FIXME pagination not fully working!
         //TODO refactor pagination
-        $html .= '<div class="row">';
-        $html .= '<div class="col-lg-12 col-lg-offset-4">';
-        $html .= '<ul class="pagination">';
+//        $html .= '<div class="row">';
+        $html .= '<div class="col-lg-12">';
+        $html .= '<ul class="pagination justify-content-center">';
         while ($pageIndex <= $pageCount) {
-            $pages[] = '<li><a href="' . $pageUrl .$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a></li>';
+            $pages[] = '<li>
+                            <a href="'.$pageUrl.$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a>
+                        </li>';
             $pageIndex++;
         }
         foreach ($pages as $page) {
@@ -234,7 +235,7 @@ class Helper {
         $html .= '<li><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">Next</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
-        $html .= '</div>';
+//        $html .= '</div>';
         return $html;
     }
 
