@@ -12,7 +12,7 @@ class UserSession extends Model {
   public $user_agent;
 
   public function __construct() {
-    $table = 'user_session';
+    $table = 'session';
     parent::__construct($table);
   }
 

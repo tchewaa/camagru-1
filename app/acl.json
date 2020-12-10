@@ -4,6 +4,7 @@
     "Home" : ["index"],
     "Register": ["index", "registerUser", "verify", "resendToken"],
     "Login": ["index", "forgotPassword", "resetPassword"],
+    "Image" : ["index"],
     "Restricted" : ["*"]
   },
   "LoggedIn" : {

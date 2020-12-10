@@ -10,8 +10,8 @@ use Core\FormHelper;
         <?= FormHelper::csrfInput() ?>
         <?= FormHelper::displayValidationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
         <?= FormHelper::inputBlock('email','Email','email',"",['class'=>'form-control input-sm'],['class'=>'form-group']) ?>
-        <?= FormHelper::checkboxBlock('Notification','notification',$this->user->getNotificationChecked(),['class'=>'form-group']) ?>
-        <?= FormHelper::submitBlock('Update', ['class'=>'btn btn-large btn-primary'],['class'=>'form-group'])?>
+        <?= FormHelper::checkboxBlock('Notification','notification',$this->user->toggleNotification(),['class'=>'form-group']) ?>
+        <?= FormHelper::submitBlock('Update', ['class'=>'btn btn-large btn-primary', 'id' => 'update-email-btn'],['class'=>'form-group'])?>
         <div class="text-center">
             <a href="<?=PROOT?>profile/index"><h5>Go back</h5></a>
         </div>

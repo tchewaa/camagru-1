@@ -17,10 +17,9 @@ class User extends Model {
     private $_isLoggedIn = false;
     private $_sessionName;
     private $_cookieName;
-    private $_confirm;
     private $_confirmPassword;
     private $_new_password;
-    public static $currentLoggedInUser = null;
+
     public $id;
     public $username;
     public $email;
@@ -29,12 +28,13 @@ class User extends Model {
     public $notification = 1;
     public $confirmed = 0;
 
+    public static $currentLoggedInUser = null;
+
     public function __construct($user='') {
         $table = 'user';
         parent::__construct($table);
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
         $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
-        $this->_softDelete = true;
         if($user != '') {
           if(is_int($user)) {
             $u = $this->_db->findFirst($table,['conditions'=>'id = ?', 'bind'=>[$user]], 'App\Models\User');
@@ -70,8 +70,8 @@ class User extends Model {
           $user_agent = Session::uagent_no_version();
           Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
           $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-          $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
-          $this->_db->insert('user_sessions', $fields);
+          $this->_db->query("DELETE FROM `session` WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+          $this->_db->insert('session', $fields);
         }
     }
 
@@ -94,6 +94,7 @@ class User extends Model {
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
           Cookie::delete(REMEMBER_ME_COOKIE_NAME);
         }
+        $this->setIsLoggedIn(false);
         self::$currentLoggedInUser = null;
         return true;
     }
@@ -166,13 +167,6 @@ class User extends Model {
         $this->_confirmPassword = $confirmPassword;
     }
 
-    public function setConfirm($value) {
-        $this->_confirm = $value;
-    }
-
-    public function getConfirm() {
-        return $this->_confirm;
-    }
 
     public function getIsLoggedIn() {
         return $this->_isLoggedIn;
@@ -182,12 +176,8 @@ class User extends Model {
         $this->_isLoggedIn = $isLoggedIn;
     }
 
-    public function getNotificationChecked() {
-        if ($this->notification == 1) {
-            return 'on';
-        } else {
-            return 'off';
-        }
+    public function toggleNotification() {
+        return $this->notification == 1;
     }
 
 }

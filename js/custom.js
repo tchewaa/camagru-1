@@ -1,6 +1,7 @@
 const registerButton = document.getElementById('register-btn');
 const forgotPasswordButton = document.getElementById('forgot-pwd-btn');
 const resendButton = document.getElementById('resend-btn');
+const updateEmailButton = document.getElementById('update-email-btn');
 const loadSpinner = document.getElementById('load-spinner');
 
 if (registerButton) {
@@ -23,6 +24,17 @@ if (forgotPasswordButton) {
         loadSpinner.classList.add('loading');
     });
 }
+
+if (updateEmailButton) {
+    updateEmailButton.addEventListener('click', function (e) {
+        console.log('clicked');
+        // e.preventDefault();
+        loadSpinner.classList.add('loading');
+        window.location.reload();
+
+    });
+}
+
 
 
 

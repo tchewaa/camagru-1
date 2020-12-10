@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Models\User;
 use Core\Controller;
 use Core\Helper;
+use Core\Router;
 
 class ImageController extends Controller {
 
@@ -20,17 +21,22 @@ class ImageController extends Controller {
     }
 
     public function indexAction($imageId) {
-        $image = $this->ImageModel->findImage($imageId);
-        $imageLiked = $this->LikeModel->likedImage($image, User::currentUser());
-        if ($imageLiked->results()) {
-            $imageLiked = true;
+        if (User::currentUser()) {
+            $image = $this->ImageModel->findImage($imageId);
+            $imageLiked = $this->LikeModel->likedImage($image, User::currentUser());
+            if ($imageLiked->results()) {
+                $imageLiked = true;
+            } else {
+                $imageLiked = false;
+            }
+            $this->view->image = $image;
+            $this->view->imageLiked = $imageLiked;
+            $this->view->comments = $this->CommentModel->findComments($imageId);
+            $this->view->render('image/index');
         } else {
-            $imageLiked = false;
+            //TODO flash a message
+            Router::redirect('login');
         }
-        $this->view->image = $image;
-        $this->view->imageLiked = $imageLiked;
-        $this->view->comments = $this->CommentModel->findComments($imageId);
-        $this->view->render('image/index');
     }
 
     public function likeAction() {
@@ -38,10 +44,10 @@ class ImageController extends Controller {
         if ($this->request->isPost()) {
             $imageId .= $this->request->get('image-id');
             $likeStatus = $this->request->get('like-status');
-            $image = $this->ImageModel->findbyId($imageId);
-            if ($likeStatus === 'like' && $image) {
-                $this->LikeModel->likeImage($image);
-            } elseif ($likeStatus === 'unlike' && $image) {
+            $imageAuthor = $this->ImageModel->findImageAuthor($imageId);
+            if ($likeStatus === 'like' && $imageAuthor) {
+                $this->LikeModel->likeImage($imageAuthor);
+            } elseif ($likeStatus === 'unlike' && $imageAuthor) {
                 $this->LikeModel->unlikeImage($imageId);
             }
         }
@@ -51,13 +57,8 @@ class ImageController extends Controller {
         if ($this->request->isPost()) {
             $comment = $this->request->get('comment');
             $imageId = $this->request->get('image-id');
-            $saveComment = $this->CommentModel->uploadComment($comment, $imageId);
-            //TODO handle comment validation message
-//            if (isset($saveComment['content'])) {
-//                Helper::dnd($saveComment['content']);
-//            } else {
-//                Helper::dnd("Comment saved");
-//            }
+            $imageAuthor = $this->ImageModel->findImageAuthor($imageId);
+            $this->CommentModel->uploadComment($comment, $imageAuthor);
         }
     }
 
