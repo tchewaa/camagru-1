@@ -60,10 +60,6 @@ small {
     transform: scale(1.1);
 }
 
-.gallery {
-    padding-left: 10%;
-}
-
 .end-section {
     height: 100%;
     overflow: auto;
@@ -171,6 +167,11 @@ form {
 /*Gallery*/
 .gallery {
     padding-left: 10%;
+}
+
+.pagination {
+    padding-left: 40%;
+    padding-bottom: 10%;
 }
 
 .images {

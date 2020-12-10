@@ -206,10 +206,10 @@ class Helper {
         $html = "";
         $pageIndex = $pageNumber > 1 ? $pageNumber - 1 : $pageNumber;
         $pages = [];
-        $html .= '<div class="row">';
         $imageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/image/index/' : 'http://localhost/camagru/image/index/';
         $pageUrl = (php_uname('s') == 'Linux') ? 'http://localhost:8080/camagru/home/index/' : 'http://localhost/camagru/home/index/';
         //TODO refactor display images
+        $html .= '<div class="row">';
         foreach($images as $image) {
             $html .= '<div class="col-lg-4">';
             //TODO refactor url
@@ -220,22 +220,24 @@ class Helper {
         $html .= '</div>';
         //FIXME pagination not fully working!
         //TODO refactor pagination
-//        $html .= '<div class="row">';
+        $html .= '<div class="row">';
         $html .= '<div class="col-lg-12">';
-        $html .= '<ul class="pagination justify-content-center">';
+        $html .= '<ul class="pagination">';
         while ($pageIndex <= $pageCount) {
             $pages[] = '<li>
                             <a href="'.$pageUrl.$pageIndex.'" class="pages" id="pageNumber'.$pageIndex.'">'.$pageIndex.'</a>
                         </li>';
             $pageIndex++;
         }
+        $temp = ($pageNumber <= 1) ? 'disabled' : '';
+        $html .= '<li class="disabled"><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">Prev</a></li>';
         foreach ($pages as $page) {
             $html .= $page;
         }
-        $html .= '<li><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">Next</a></li>';
+        $html .= '<li class="disabled"><a href="'. $pageUrl . $pageNumber.'" class="pages" id="pageNumber'.$pageNumber.'">Next</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
-//        $html .= '</div>';
+        $html .= '</div>';
         return $html;
     }
 
