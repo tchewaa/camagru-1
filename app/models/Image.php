@@ -31,13 +31,13 @@ class Image extends Model {
         $sql = "SELECT * FROM images WHERE user_id = ? ORDER BY `date` DESC";
         $params = [$userId];
         $this->query($sql, $params);
-        return $this->_db->results();
+        return $this->results();
     }
 
     public function findImages() {
         $sql = "SELECT * FROM images ORDER BY `date` ASC ";
         $this->query($sql);
-        return $this->_db->results();
+        return $this->results();
     }
 
     public function findImage($imageId = '') {
@@ -52,7 +52,7 @@ class Image extends Model {
             WHERE i.id = ? AND u.id = i.user_id";
         $params = [$imageId];
         $this->query($sql, $params);
-        return $this->_db->first();
+        return $this->first();
     }
 
     public function findImageAuthor($imageId = '') {
@@ -67,7 +67,7 @@ class Image extends Model {
             WHERE i.id = ? AND u.id = i.user_id";
         $params = [$imageId];
         $this->query($sql, $params);
-        return $this->_db->first();
+        return $this->first();
     }
 
     public function imageCount() {

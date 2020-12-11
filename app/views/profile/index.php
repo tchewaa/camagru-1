@@ -1,4 +1,4 @@
-<?php $this->setSiteTitle("Profile"); ?>
+<?php $this->setSiteTitle("Camagru | Profile"); ?>
 <?php $this->start('body'); ?>
     <div class="col-md-4 col-md-offset-4 jumbotron">
         <div class="text-center">

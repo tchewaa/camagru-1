@@ -3,6 +3,7 @@
 use Core\FormHelper;
 use Core\Helper;
 ?>
+<?php $this->setSiteTitle("Camagru | View Image"); ?>
 <?php $this->start('body'); ?>
     <div class="row polaroid">
         <div class="col-lg-9 col-lg-offset-3 user-image">

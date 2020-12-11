@@ -1,7 +1,7 @@
 <?php
 use Core\Helper;
 ?>
-<?php $this->setSiteTitle('upload or take a pic'); ?>
+<?php $this->setSiteTitle("Camagru | Upload or take a picture"); ?>
 <?php $this->start('body'); ?>
     <div class="row jumbotron" id="gallery">
         <?= Helper::validationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
