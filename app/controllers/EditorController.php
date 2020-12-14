@@ -65,7 +65,8 @@ class EditorController extends Controller {
             $imageData = ob_get_clean();
             $imageData = base64_encode($imageData);
             $base64Image = 'data:image/' . 'png' . ';base64,' . $imageData;
-            $this->_saveImage($base64Image);
+            $this->ImageModel->upload($base64Image, User::currentUser()->username . time());                
+            // $this->_saveImage($base64Image);
             $this->view->render('editor/index');
         } elseif (isset($_FILES) && isset($_FILES['image-upload'])) {
             $imageData = file_get_contents($_FILES['image-upload']['tmp_name']);
@@ -77,7 +78,8 @@ class EditorController extends Controller {
                 $imageData = base64_encode($imageData);
                 $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
                 $this->view->validationMessages = ["upload-success" => "Image uploaded.."];
-                $this->_saveImage($base64Image);
+                $this->ImageModel->upload($base64Image, User::currentUser()->username . time());                
+                // $this->_saveImage($base64Image);
                 echo "<meta http-equiv='refresh' content='0'>";
             } else {
                 $this->view->validationMessages = ["upload-error" => "Something went wrong while uploading your image, please try again later"];
@@ -105,7 +107,7 @@ class EditorController extends Controller {
         return $newFrame;
     }
 
-    private function _saveImage($image) {
-        return $this->ImageModel->upload($image, User::currentUser()->username . time());
-    }
+    // private function _saveImage($image) {
+    //     return $this->ImageModel->upload($image, User::currentUser()->username . time());
+    // }
 }
