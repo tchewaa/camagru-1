@@ -59,6 +59,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#usage">Architecture</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -123,6 +124,9 @@ This is an example of how to list things you need to use the software and how to
    const API_KEY = 'ENTER YOUR API';
    ```
 
+<!-- Architecture -->
+
+[![Product Name Screen Shot][product-screenshot1]](https://example.com)
 
 
 <!-- USAGE EXAMPLES -->
@@ -158,17 +162,6 @@ Contributions are what make the open source community such an amazing place to b
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@martian1431](https://twitter.com/martian1431) - phetomalope@gmail.com
-
-Project Link: [https://github.com/martian1431/camagru](https://github.com/martian1431/camagru)
-
-
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
@@ -206,5 +199,6 @@ Project Link: [https://github.com/martian1431/camagru](https://github.com/martia
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
+[product-screenshot1]: images/screenshot1.png
 [last-commit-shield]: https://img.shields.io/github/contributors/martian1431/camagru.svg?style=for-the-badge
 [last-commit-url]: https://github.com/martian1431/camagru/graphs/contributors
