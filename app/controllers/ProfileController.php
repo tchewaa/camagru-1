@@ -57,7 +57,6 @@ class ProfileController extends Controller {
                 }
                 $this->view->validationMessages = $this->user->getErrorMessages();
             } else {
-                //TODO custom error message
                 $this->view->validationMessages = ['password' => 'Invalid password'];
             }
         }
