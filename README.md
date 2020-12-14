@@ -29,13 +29,9 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Camagru Documentation</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/martian1431/camagru"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/martian1431/camagru">View Demo</a>
     ·
@@ -80,14 +76,21 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-(Insert project description)
+A small web application allowing you to make basic photo and video editing 
+using your webcam and some predefined images. Users are be able to select an 
+image in a list of superposable images (for instance a picture frame, or stickers), 
+take a picture with his/her webcam and admire the result that should be mixing both pictures. 
+All captured images are likeables and commentable.
 
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 * [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [Javascript](https://www.javascript.com/)
+* [PHP](https://www.php.net/)
+* [Mysql](https://www.mysql.com/)
 
 
 
