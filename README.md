@@ -126,6 +126,7 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- Architecture -->
 ## Architecture
+
 [![Architecture Screen Shot][product-screenshot1]](https://example.com)
 
 
