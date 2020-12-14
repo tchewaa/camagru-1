@@ -20,6 +20,7 @@ const saveButton = document.getElementById('save-button');
 const stickers = document.getElementById('stickers');
 const uploadForm = document.getElementById('upload-form');
 const deleteIcon = document.getElementsByClassName('delete');
+// const loadSpinner = document.getElementById('load-spinner');
 
 
 //Get stream
@@ -54,6 +55,7 @@ video.addEventListener('canplay', function(e) {
 photoButton.addEventListener('click', function(e) {
 	photoButton.classList.add("hide");
 	uploadForm.classList.add("hide");
+	video.classList.add("hide");
 	saveButton.classList.remove("hide");
 	clearButton.classList.remove("hide");
 	takePicture();
@@ -103,7 +105,7 @@ function takePicture() {
 
 
 saveButton.addEventListener('click', function(e) {
-	const url = "http://localhost:8080/camagru/editor/upload";
+	  const url = (host.indexOf("Windows")) ? "http://localhost/camagru/editor/upload" : "http://localhost:8080/camagru/editor/upload";
 	const formData = new FormData();
 	formData.append('webCamImage', imageUrl);
 	formData.append('selectedStickers', selectedSticker);
@@ -124,28 +126,23 @@ saveButton.addEventListener('click', function(e) {
 //delete icon
 for(let i = 0; i < deleteIcon.length; i++) {
   deleteIcon[i].addEventListener("click", function(e) {
-  	let url = "";
-	if (host.indexOf("Windows")) {
-		console.log('test');
-		url += "http://localhost/camagru/editor/delete";
-	} else {
-		url += "http://localhost:8080/camagru/editor/delete";
-	}
-    const imageID =  deleteIcon[i].getAttribute("id");
-	const formData = new FormData();
-	formData.append('image-id', imageID);
-	fetch(url, {
-		method : 'POST',
-		body: formData
-	}).then(
-	response => response.text()
-	).then(
-	data => {
+	  loadSpinner.classList.add('loading');
+	  const url = (host.indexOf("Windows")) ? "http://localhost/camagru/editor/delete" : "http://localhost:8080/camagru/editor/delete";
+	  const imageID =  deleteIcon[i].getAttribute("id");
+	  const formData = new FormData();
+	  formData.append('image-id', imageID);
+	  fetch(url, {
+	  	method : 'POST',
+	  	body: formData
+	  }).then(
+	  	response => response.text()
+	  ).then(
+	  	data => {
 		// console.log(data);
 		window.location.reload();
-	})
-	//Reload page
-	e.preventDefault();
+	  	})
+	  //Reload page
+	  // e.preventDefault();
   })
 }
 

@@ -21,10 +21,10 @@ class Image extends Model {
 
     public function upload($file, $name) {
         $user = User::currentUser();
-        $this->user_id = $user->id;
-        $this->image_name = $name;
-        $this->image_data = $file;
-        return $this->save();
+        $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
+        $this->query($image_query,[$user->id, $name, $file]);
+        return $this->results();
+        // $stmt->execute([$user->id, $name, $file]);
     }
 
     public function findUserImages($userId) {
