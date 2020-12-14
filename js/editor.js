@@ -54,6 +54,7 @@ video.addEventListener('canplay', function(e) {
 photoButton.addEventListener('click', function(e) {
 	photoButton.classList.add("hide");
 	uploadForm.classList.add("hide");
+	video.classList.add("hide");
 	saveButton.classList.remove("hide");
 	clearButton.classList.remove("hide");
 	takePicture();

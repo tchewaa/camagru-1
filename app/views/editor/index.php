@@ -5,10 +5,8 @@ use Core\Helper;
 <?php $this->start('body'); ?>
     <div class="row jumbotron" id="gallery">
         <?= Helper::validationMessage((isset($this->validationMessages) ? $this->validationMessages : '')) ?>
-        <h3>Upload or Take a Picture</h3>
         <div class="row">
-            <div class="col-md-6">
-                <h3>Webcam</h3>
+            <div class="col-md-6 col-md-offset-3">
                 <video id="video">Stream not available</video>
                 <div class="row">
                     <div class="col-sm-12">
@@ -23,9 +21,6 @@ use Core\Helper;
                         </form>  
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <h3>Editor</h3>
                 <canvas id="canvas"></canvas>
                 <!--TODO do I need this-->
                 <div id="photos"></div>
@@ -52,7 +47,6 @@ use Core\Helper;
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Your images</h3>
                     <?= Helper::displayImages($this->userImages); ?>
                 </div>
             </div>

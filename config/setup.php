@@ -36,6 +36,7 @@ function setupDatabase() {
             $password = password_hash("password", PASSWORD_DEFAULT);
             $token = md5($username . $email . Helper::generateRandomString());
 
+
             //save default user
             $sql = 'INSERT INTO `user` (username, email, password, token, confirmed) VALUES (?, ?, ?, ?, ?)';
             $stmt = $conn->prepare($sql);
@@ -90,7 +91,7 @@ function setupQueries() {
             `user_id` int(11) NOT NULL,
             `image_name` varchar(255) NOT NULL,
             `image_data` longblob NOT NULL,
-            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `date` timestamp DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1",
@@ -100,7 +101,7 @@ function setupQueries() {
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
             `content` varchar(255) NOT NULL,
-            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `date` timestamp DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
@@ -111,7 +112,7 @@ function setupQueries() {
             `user_id` int(11) NOT NULL,
             `image_id` int(11) NOT NULL,
             `content` varchar(255) NOT NULL,
-            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `date` timestamp DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
