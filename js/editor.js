@@ -20,7 +20,7 @@ const saveButton = document.getElementById('save-button');
 const stickers = document.getElementById('stickers');
 const uploadForm = document.getElementById('upload-form');
 const deleteIcon = document.getElementsByClassName('delete');
-const loadSpinner = document.getElementById('load-spinner');
+// const loadSpinner = document.getElementById('load-spinner');
 
 
 //Get stream
@@ -105,7 +105,7 @@ function takePicture() {
 
 
 saveButton.addEventListener('click', function(e) {
-	const url = "http://localhost:8080/camagru/editor/upload";
+	  const url = (host.indexOf("Windows")) ? "http://localhost/camagru/editor/upload" : "http://localhost:8080/camagru/editor/upload";
 	const formData = new FormData();
 	formData.append('webCamImage', imageUrl);
 	formData.append('selectedStickers', selectedSticker);
@@ -133,7 +133,7 @@ for(let i = 0; i < deleteIcon.length; i++) {
 	  formData.append('image-id', imageID);
 	  fetch(url, {
 	  	method : 'POST',
-		  body: formData
+	  	body: formData
 	  }).then(
 	  	response => response.text()
 	  ).then(
