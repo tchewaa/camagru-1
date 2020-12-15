@@ -26,6 +26,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
+
 <p align="center">
   <a href="https://github.com/martian1431/camagru">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
@@ -59,7 +60,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Architecture</a></li>
+    <li><a href="#architecture">Architecture</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -77,21 +78,26 @@
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 A small web application allowing you to make basic photo and video editing 
-using your webcam and some predefined images. Users are be able to select an 
+using your webcam, and some predefined images. Users are be able to select an 
 image in a list of superposable images (for instance a picture frame, or stickers), 
-take a picture with his/her webcam and admire the result that should be mixing both pictures. 
-All captured images are likeables and commentable.
+a user can take a picture with his/her webcam and admire the result that should be mixing both pictures. 
+All captured images are like-able and comment-able.
 
-### Built With
+### Built With [XAMPP](https://www.apachefriends.org/index.html)
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+XAMPP is a free and open-source cross-platform web server solution stack package developed by Apache Friends, 
+consisting mainly of the Apache HTTP Server, Mysql database, and interpreters for scripts written in the PHP 
+and Perl programming languages. 
+
+###### *Tools and Languages:*
+* [Apache HTTP server](https://httpd.apache.org/)
+* [Send Mail]()
+* [PHP](https://www.php.net/)
+* [Mysql](https://www.mysql.com/)
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 * [Bootstrap](https://getbootstrap.com)
 * [Javascript](https://www.javascript.com/)
-* [PHP](https://www.php.net/)
-* [Mysql](https://www.mysql.com/)
-
 
 
 <!-- GETTING STARTED -->
