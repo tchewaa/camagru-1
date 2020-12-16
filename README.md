@@ -1,12 +1,3 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -20,9 +11,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 ![GitHub last commit](https://img.shields.io/github/last-commit/martian1431/camagru?style=for-the-badge)
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -40,8 +28,6 @@
     <a href="https://github.com/martian1431/camagru/issues">Request Feature</a>
   </p>
 </p>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -61,7 +47,7 @@
       </ul>
     </li>
     <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#tests">Tests</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -77,9 +63,8 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-A small web application allowing you to make basic photo and video editing 
-using your webcam, and some predefined images. Users are be able to select an 
-image in a list of superposable images (for instance a picture frame, or stickers), 
+This is a small web application allowing you to upload a basic photo or use a webcam to take a photo
+Users are be able to select an image in a list of superposable images (for instance a picture frame, or stickers), 
 a user can take a picture with his/her webcam and admire the result that should be mixing both pictures. 
 All captured images are like-able and comment-able.
 
@@ -186,11 +171,52 @@ To run this application you need to follow the instruction below
 5. Open browser and enter url localhost/camagru
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Tests
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+  <ul>
+    <li>
+        The application should allow a user to sign up by asking at least a valid email address,
+        an username and a password with at least a minimum level of complexity
+    </li>
+    <li>
+        At the end of the registration process, an user should confirm his account via a unique 
+        link sent at the email address fullfiled in the registration form.
+    </li>
+    <li>
+        The user should then be able to connect to your application, using his username and his 
+        password. He also should be able to tell the application to send a password reinitialisation 
+        mail, if he forget his password.
+    </li>
+    <li>
+        The user should be able to disconnect in one click at any time on any page.
+    </li>
+    <li>
+        Once connected, an user should modify his username, mail address or password.
+    </li>
+    <li>
+        Gallery is to be public and must display all the images edited by all the users, It should also 
+        allow (only) a connected user to like them and/or comment them.
+    </li>
+    <li>
+        When an image receives a new comment, the author of the image should be notified by email. 
+        This preference must be set as true by default but can be deactivated in user’s preferences.
+    </li>
+    <li>
+        The list of images must be paginated, with at least 5 elements per page
+    </li>
+    <li>
+        Capture image with webcam and add sticker before saving.
+    </li>
+    <li>
+        Because not everyone has a webcam, a user should be allowed to upload a image instead of 
+        capturing one with the webcam.
+    </li>
+    <li>
+        The user should be able to delete his edited images, but only his, not other users’ creations.
+    </li>
+  </ul>
 
 
 
