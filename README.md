@@ -132,32 +132,60 @@ used to view the Customer data.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To run this application you need to follow the instruction below 
 
 ### Prerequisites
+  <ol>
+    <li>Download and install <a href=""> XAMPP </a></li>
+    <li>Extract the </li>
+    <li>
+        Enable send mail function using PHP.ini file. Add or Edit the following
+        <ul>
+            <li>
+                sendmail_path = "\"C:\xampp_folder\sendmail\sendmail.exe\" -t"
+            </li>
+        </ul>
+    </li>
+    <li>
+        Configure sendmail. Add or Edit the following
+        <ul>
+            <li>
+                smtp_server = smtp.gmail.com
+            </li>
+            <li>
+                smtp_port = 587
+            </li>
+            <li>
+                auth_username = example@domain.com
+            </li>
+            <li>
+                auth_password = password
+            </li>
+        </ul>
+    </li>
+  </ol>
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+
+> **_NOTE:_**  
+>You can use this default email address if you don't wanna spend extra time configuring\  
+>Email: camagru1431@gmail.com\
+>Password: martian1431@
+
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Using your terminal cd into htdocs directory
+    ```sh
+   $ cd "C:/path_to_xampp/htdocs"
+   ```
+2. Clear the folder
+3. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/martian1431/camagru.git/
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
+4. Open Xampp control panel
+5. Start Apache and Mysql servers
+6. Open browser and enter url localhost/camagru
 
 <!-- USAGE EXAMPLES -->
 ## Usage
