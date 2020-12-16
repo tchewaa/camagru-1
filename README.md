@@ -137,12 +137,11 @@ To run this application you need to follow the instruction below
 ### Prerequisites
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
-    <li>Extract the </li>
     <li>
         Enable send mail function using PHP.ini file. Add or Edit the following
         <ul>
             <li>
-                sendmail_path = "\"C:\xampp_folder\sendmail\sendmail.exe\" -t"
+                sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
             </li>
         </ul>
     </li>
@@ -176,7 +175,7 @@ To run this application you need to follow the instruction below
 
 1. Using your terminal cd into htdocs directory
     ```sh
-   $ cd "C:/path_to_xampp/htdocs"
+   $ cd "C:/xampp/htdocs"
    ```
 2. Clone the repo
    ```sh
