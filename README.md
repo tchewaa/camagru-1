@@ -141,8 +141,6 @@ This is an example of how to list things you need to use the software and how to
     <img src="images/screenshot1.png" alt="Architecture Screen Shot">
  </p>
  
- [![Architecture Screen Shot][product-screenshot1]](https://example.com)
-
 ##### *Controller*
 Controllers act as an interface between Model and View components to process all the business logic 
 and incoming requests, manipulate data using the Model component and interact with the Views to render 
