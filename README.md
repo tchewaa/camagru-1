@@ -137,7 +137,9 @@ This is an example of how to list things you need to use the software and how to
  This is done to separate internal representations of information from the ways 
  information is presented to and accepted from the user.
  
-   [![Architecture Screen Shot][product-screenshot1]](https://example.com)
+ <img src="images/screenshot1.png" alt="Architecture Screen Shot" width="80" height="80">
+   
+ [![Architecture Screen Shot][product-screenshot1]](https://example.com)
 
 ##### *Controller*
 Controllers act as an interface between Model and View components to process all the business logic 
