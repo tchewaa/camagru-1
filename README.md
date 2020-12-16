@@ -178,14 +178,13 @@ To run this application you need to follow the instruction below
     ```sh
    $ cd "C:/path_to_xampp/htdocs"
    ```
-2. Clear the folder
-3. Clone the repo
+2. Clone the repo
    ```sh
-   git clone https://github.com/martian1431/camagru.git/
+   git clone https://github.com/martian1431/camagru.git
    ```
-4. Open Xampp control panel
-5. Start Apache and Mysql servers
-6. Open browser and enter url localhost/camagru
+3. Open Xampp control panel
+4. Start Apache and Mysql servers
+5. Open browser and enter url localhost/camagru
 
 <!-- USAGE EXAMPLES -->
 ## Usage
