@@ -64,7 +64,7 @@
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 This is a small web application allowing users to upload a basic photo or use a webcam to take a photo
-Users are be able to apply filters to the photo taken using a webcam (for instance a picture frame, or stickers). 
+Users are able to apply filters to the photo taken using a webcam (for instance a picture frame, or stickers). 
 All captured images are like-able and comment-able.
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
