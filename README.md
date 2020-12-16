@@ -63,9 +63,8 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This is a small web application allowing you to upload a basic photo or use a webcam to take a photo
-Users are be able to select an image in a list of superposable images (for instance a picture frame, or stickers), 
-a user can take a picture with his/her webcam and admire the result that should be mixing both pictures. 
+This is a small web application allowing users to upload a basic photo or use a webcam to take a photo
+Users are be able to apply filters to the photo taken using a webcam (for instance a picture frame, or stickers). 
 All captured images are like-able and comment-able.
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
@@ -151,7 +150,7 @@ To run this application you need to follow the instruction below
 
 
 > **_NOTE:_**  
->You can use this default email address if you don't wanna spend extra time configuring\  
+>You can use this default email address if you don't wanna spend extra time configuring\
 >Email: camagru1431@gmail.com\
 >Password: martian1431@
 
