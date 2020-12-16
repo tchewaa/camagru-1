@@ -137,8 +137,10 @@ This is an example of how to list things you need to use the software and how to
  This is done to separate internal representations of information from the ways 
  information is presented to and accepted from the user.
  
- <img src="images/screenshot1.png" alt="Architecture Screen Shot" width="80" height="80">
-   
+ <p align="center">
+    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
+ </p>
+ 
  [![Architecture Screen Shot][product-screenshot1]](https://example.com)
 
 ##### *Controller*
