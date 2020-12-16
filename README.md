@@ -99,6 +99,35 @@ and Perl programming languages.
 * [Bootstrap](https://getbootstrap.com)
 * [Javascript](https://www.javascript.com/)
 
+<!-- Architecture -->
+## Architecture
+ Model–view–controller is a software design pattern commonly used for developing 
+ User interface that divides the related program logic into three interconnected elements. 
+ This is done to separate internal representations of information from the ways 
+ information is presented to and accepted from the user.
+ 
+ <p align="center">
+    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
+ </p>
+ 
+##### *Controller*
+Controllers act as an interface between Model and View components to process all the business logic 
+and incoming requests, manipulate data using the Model component and interact with the Views to render 
+the final output. For example, the Customer controller will handle all the interactions and inputs 
+from the Customer View and update the database using the Customer Model. The same controller will be 
+used to view the Customer data.
+ 
+ ##### *Model*
+  The Model component corresponds to all the data-related logic that the user works with. 
+  This can represent either the data that is being transferred between the View and Controller 
+  components or any other business logic-related data. For example, a Customer object will 
+  retrieve the customer information from the database, manipulate it and update it data back 
+  to the database or use it to render data.
+  
+  ##### *View*
+  The View component is used for all the UI logic of the application. For example, the User view 
+  will include all the UI components such as forms, dropdowns, etc. that the final user interacts with.
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -129,35 +158,6 @@ This is an example of how to list things you need to use the software and how to
    ```JS
    const API_KEY = 'ENTER YOUR API';
    ```
-
-<!-- Architecture -->
-## Architecture
- Model–view–controller is a software design pattern commonly used for developing 
- User interface that divides the related program logic into three interconnected elements. 
- This is done to separate internal representations of information from the ways 
- information is presented to and accepted from the user.
- 
- <p align="center">
-    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
- </p>
- 
-##### *Controller*
-Controllers act as an interface between Model and View components to process all the business logic 
-and incoming requests, manipulate data using the Model component and interact with the Views to render 
-the final output. For example, the Customer controller will handle all the interactions and inputs 
-from the Customer View and update the database using the Customer Model. The same controller will be 
-used to view the Customer data.
- 
- ##### *Model*
-  The Model component corresponds to all the data-related logic that the user works with. 
-  This can represent either the data that is being transferred between the View and Controller 
-  components or any other business logic-related data. For example, a Customer object will 
-  retrieve the customer information from the database, manipulate it and update it data back 
-  to the database or use it to render data.
-  
-  ##### *View*
-  The View component is used for all the UI logic of the application. For example, the User view 
-  will include all the UI components such as forms, dropdowns, etc. that the final user interacts with.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
