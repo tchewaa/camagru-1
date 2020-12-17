@@ -121,8 +121,15 @@ To run this application you need to follow the instruction below
 ### Prerequisites
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
+        <li>
+            Configure your Mysql to use these default credentials
+            <ul>
+                <li>Username: root</li>
+                <li>Password: password</li>
+            </ul>
+        </li>
     <li>
-        Enable send mail function using PHP.ini file. Add or Edit the following
+        Enable send mail function using PHP.ini file. Add or Edit the following line
         <ul>
             <li>
                 sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
@@ -130,7 +137,7 @@ To run this application you need to follow the instruction below
         </ul>
     </li>
     <li>
-        Configure sendmail. Add or Edit the following
+        Configure sendmail. Add or Edit the following lines
         <ul>
             <li>
                 smtp_server = smtp.gmail.com
@@ -150,9 +157,7 @@ To run this application you need to follow the instruction below
 
 
 > **_NOTE:_**  
->You can use this default email address if you don't wanna spend extra time configuring\
->Email: camagru1431@gmail.com\
->Password: martian1431@
+>If you using google to configure send mail plugin you need to enable "Less secure app access" on google under security https://myaccount.google.com/security
 
 
 ### Installation
@@ -165,9 +170,8 @@ To run this application you need to follow the instruction below
    ```sh
    git clone https://github.com/martian1431/camagru.git
    ```
-3. Open Xampp control panel
-4. Start Apache and Mysql servers
-5. Open browser and enter url localhost/camagru
+3. Start Apache and Mysql servers
+4. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
 
 <!-- USAGE EXAMPLES -->
 ## Tests
@@ -177,15 +181,15 @@ Use this space to show useful examples of how a project can be used. Additional 
   <ul>
     <li>
         The application should allow a user to sign up by asking at least a valid email address,
-        an username and a password with at least a minimum level of complexity
+        an username and a password.
     </li>
     <li>
         At the end of the registration process, an user should confirm his account via a unique 
-        link sent at the email address fullfiled in the registration form.
+        link sent at the email address used in the registration form.
     </li>
     <li>
-        The user should then be able to connect to your application, using his username and his 
-        password. He also should be able to tell the application to send a password reinitialisation 
+        The user should then be able to connect to the application, using their username and 
+        password, and also should be able to tell the application to send a password reinitialisation 
         mail, if he forget his password.
     </li>
     <li>
@@ -195,15 +199,15 @@ Use this space to show useful examples of how a project can be used. Additional 
         Once connected, an user should modify his username, mail address or password.
     </li>
     <li>
-        Gallery is to be public and must display all the images edited by all the users, It should also 
+        Gallery is public and must display all the images edited by all the users, It should also 
         allow (only) a connected user to like them and/or comment them.
+    </li>
+    <li>
+        The list of images must be paginated, with at least 5 elements per page
     </li>
     <li>
         When an image receives a new comment, the author of the image should be notified by email. 
         This preference must be set as true by default but can be deactivated in user’s preferences.
-    </li>
-    <li>
-        The list of images must be paginated, with at least 5 elements per page
     </li>
     <li>
         Capture image with webcam and add sticker before saving.
