@@ -48,10 +48,6 @@
     </li>
     <li><a href="#architecture">Architecture</a></li>
     <li><a href="#tests">Tests</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -95,20 +91,15 @@ and Perl programming languages.
 ##### *Controller*
 Controllers act as an interface between Model and View components to process all the business logic 
 and incoming requests, manipulate data using the Model component and interact with the Views to render 
-the final output. For example, the Customer controller will handle all the interactions and inputs 
-from the Customer View and update the database using the Customer Model. The same controller will be 
-used to view the Customer data.
+the final output.
  
  ##### *Model*
   The Model component corresponds to all the data-related logic that the user works with. 
   This can represent either the data that is being transferred between the View and Controller 
-  components or any other business logic-related data. For example, a Customer object will 
-  retrieve the customer information from the database, manipulate it and update it data back 
-  to the database or use it to render data.
+  components or any other business logic-related data.
   
   ##### *View*
-  The View component is used for all the UI logic of the application. For example, the User view 
-  will include all the UI components such as forms, dropdowns, etc. that the final user interacts with.
+  The View component it is used for all the UI logic of the application. 
 
 
 <!-- GETTING STARTED -->
@@ -217,36 +208,8 @@ To run this application you need to follow the instruction below
     </li>
   </ul>
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/martian1431/camagru/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [Curtis Parham](https://bitbucket.org/parhamcurtis/ruahmvcyoutubecourse/src/master/)
 * [Ruah MVC YouTube Course](https://www.youtube.com/watch?v=rkaLJrYnpOM&list=PLFPkAJFH7I0keB1qpWk5qVVUYdNLTEUs3&index=1&ab_channel=CurtisParham)
 
 <!--
