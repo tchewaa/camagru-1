@@ -153,7 +153,7 @@ To run this application you need to follow the instruction below
 
 1. Using your terminal cd into htdocs directory
     ```sh
-   $ cd "C:/xampp/htdocs"
+   cd "C:/xampp/htdocs"
    ```
 2. Clone the repo
    ```sh
