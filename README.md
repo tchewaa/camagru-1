@@ -174,8 +174,6 @@ To run this application you need to follow the instruction below
 <!-- USAGE EXAMPLES -->
 ## Tests
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
   <ul>
     <li>
         The application should allow a user to sign up by asking at least a valid email address,
