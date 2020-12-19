@@ -166,68 +166,52 @@ To run this application you need to follow the instruction below
 <!-- USAGE EXAMPLES -->
 ## Tests
 
-  <ul>
+  <ol>
     <li>
-        The application should allow a user to sign up by asking at least a valid email address,
-        an username and a password.
+      These some of the tests that we executed:
+      <ul>
+        <li>Preliminary Checks, used PHP, used PDOs, config files at correct location</li>
+        <li>Webserver starts</li>
+        <li>
+            The application should allow a user to sign up by asking at least a valid email address,
+            an username and a password.
+        </li>
+        <li>
+            At the end of the registration process, an user should confirm his account via a unique 
+            link sent at the email address used in the registration form.
+        </li>
+        <li>User should able to login using correct credentials</li>
+        <li>Capture image with webcam and add sticker before saving.</li>
+        <li>
+            Gallery is public and must display all the images edited by all the users, It should also 
+            allow (only) a connected user to like them and/or comment them.
+        </li>
+        <li>
+            When an image receives a new comment, the author of the image should be notified by email. 
+            This preference must be set as true by default but can be deactivated in user’s preferences.
+        </li>
+        <li>Change user credentials</li>
+      </ul>
     </li>
     <li>
-        At the end of the registration process, an user should confirm his account via a unique 
-        link sent at the email address used in the registration form.
+        Expected outcomes:
+        <ul>
+            <li>Used PHP for backend</li>
+            <li>No Framework used</li>
+            <li>database.php + setup.php in config folder</li>
+            <li>Able to register</li>
+            <li>Able to tell the application to send a password reinitialisation mail, if user forget his/her password.</li>
+            <li>Able to login only if email account was confirmed</li>
+            <li>Able to capture photo</li>
+            <li>Able to visit gallery</li>
+            <li>Able to change credentials</li>
+        </ul>
     </li>
-    <li>
-        The user should then be able to connect to the application, using their username and 
-        password, and also should be able to tell the application to send a password reinitialisation 
-        mail, if he forget his password.
-    </li>
-    <li>
-        The user should be able to disconnect in one click at any time on any page.
-    </li>
-    <li>
-        Once connected, an user should modify his username, mail address or password.
-    </li>
-    <li>
-        Gallery is public and must display all the images edited by all the users, It should also 
-        allow (only) a connected user to like them and/or comment them.
-    </li>
-    <li>
-        The list of images must be paginated, with at least 5 elements per page
-    </li>
-    <li>
-        When an image receives a new comment, the author of the image should be notified by email. 
-        This preference must be set as true by default but can be deactivated in user’s preferences.
-    </li>
-    <li>
-        Capture image with webcam and add sticker before saving.
-    </li>
-    <li>
-        Because not everyone has a webcam, a user should be allowed to upload a image instead of 
-        capturing one with the webcam.
-    </li>
-    <li>
-        The user should be able to delete his edited images, but only his, not other users’ creations.
-    </li>
-  </ul>
+  </ol>
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * [Ruah MVC YouTube Course](https://www.youtube.com/watch?v=rkaLJrYnpOM&list=PLFPkAJFH7I0keB1qpWk5qVVUYdNLTEUs3&index=1&ab_channel=CurtisParham)
-
-<!--
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
--->
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
