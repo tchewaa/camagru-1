@@ -74,7 +74,7 @@ To run this application you need to follow the instruction below
         Enable send mail function using PHP.ini file.
         <ul>
             <li>
-                <img src="docs/images/php_ini_1.png" alt="configure send mail">
+                <img src="docs/images/php_ini_1.png" alt="configure send mail" width="400" height="200">
             </li>
             <li>
                 <img src="docs/images/php_ini_2.png" alt="configure send mail">
