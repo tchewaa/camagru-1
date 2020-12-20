@@ -11,10 +11,10 @@ function setupDatabase() {
         $queries = setupQueries();
 
         $conn->exec($queries['create-db-sql']);
-        echo '.<br/>';
+        echo 'Database \'camagru\' created...<br/>';
 
         $conn->exec($queries['select-db']);
-        echo 'Database \'camagru\' created...<br/>';
+        echo 'Using \'camagru\' database';
 
         $conn->exec($queries['create-user-sql']);
         echo 'Table \'user\' created...<br/>';
