@@ -69,7 +69,7 @@ To run this application you need to follow the instruction below
         </ul>
     </li>
     <li>
-        Configure sendmail. Add or Edit the following lines
+        Configure sendmail
         <ul>
             <li>
                 <p align="center">
@@ -109,7 +109,7 @@ To run this application you need to follow the instruction below
 3. Start Apache and Mysql servers
 4. Configure camagru 
 <p align="center"><img src="docs/images/config.png" alt="configure send mail"></p>
-5. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
+5. Open browser and Go to url http://localhost/config/setup, this will create a database and tables.
 
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
