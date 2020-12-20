@@ -105,7 +105,8 @@ To run this application you need to follow the instruction below
 
 
 > **_NOTE:_**  
->If you using google to configure send mail plugin you need to enable "Less secure app access" on google under security https://myaccount.google.com/security
+>If you want to use your own google account to configure send mail plugin you need to enable "Less secure app access" 
+>on google under security https://myaccount.google.com/security
 
 
 ### Installation
