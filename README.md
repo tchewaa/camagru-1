@@ -77,10 +77,10 @@ To run this application you need to follow the instruction below
                 <img src="docs/images/php_ini_1.png" alt="configure send mail" width="600" height="400">
             </li>
             <li>
-                <img src="docs/images/php_ini_2.png" alt="configure send mail">
+                <img src="docs/images/php_ini_2.png" alt="configure send mail" width="600" height="400">
             </li>
             <li>
-                <img src="docs/images/php_ini_3.png" alt="configure send mail">
+                <img src="docs/images/php_ini_3.png" alt="configure send mail" width="600" height="400">
             </li>
             <li>
                 Add path to sendmail, please note that my path might be different to yours.
@@ -91,13 +91,13 @@ To run this application you need to follow the instruction below
         Configure sendmail. Add or Edit the following lines
         <ul>
             <li>
-                <img src="docs/images/sendmail_ini_1.png" alt="configure send mail">
+                <img src="docs/images/sendmail_ini_1.png" alt="configure send mail" width="600" height="400">
             </li>
             <li>
-                <img src="docs/images/sendmail_ini_2.png" alt="configure send mail">
+                <img src="docs/images/sendmail_ini_2.png" alt="configure send mail" width="600" height="400">
             </li>
             <li>
-                <img src="docs/images/sendmail_ini_3.png" alt="configure send mail">
+                <img src="docs/images/sendmail_ini_3.png" alt="configure send mail" width="600" height="400">
             </li>
         </ul>
     </li>
