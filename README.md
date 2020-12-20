@@ -100,7 +100,7 @@ Install <a href=""> XAMPP </a> on windows.
 <p align="center"><img src="docs/images/config.png" alt="configure send mail"></p>
 2. Start Apache and Mysql servers
 <p align="center"><img src="docs/images/mysql-server.png" alt="start Mysql server"></p>
-3. Open browser and Go to url http://localhost/config/setup, this will create a database and tables.
+3. Open browser and Go to url <a href="http://localhost/config/setup">http://localhost/config/setup</a>, this will create a database and tables.
 
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
