@@ -50,7 +50,7 @@ Install <a href=""> XAMPP </a> on windows.
 >This application was developed on windows machine, so it might not work properly on other
 >operating systems
 
-###Clone
+### Clone
 
 1. Using your terminal cd into htdocs directory
     ```sh
