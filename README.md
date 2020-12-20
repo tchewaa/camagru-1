@@ -30,31 +30,6 @@
   </p>
 </p>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#tests">Tests</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -67,20 +42,26 @@ Camagru is a sharing site where users can either upload or take photos with thei
 
 To run this application you need to follow the instruction below 
 
-### Prerequisites
+### Download and configure server environment
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
     <li>
         Enable send mail function using PHP.ini file.
         <ul>
             <li>
-                <img src="docs/images/php_ini_1.png" alt="configure send mail" width="600" height="400">
+                <p align="center">
+                    <img src="docs/images/php_ini_1.png" alt="configure send mail" width="600" height="400">
+                </p>
             </li>
             <li>
-                <img src="docs/images/php_ini_2.png" alt="configure send mail" width="600" height="400">
+                <p align="center">
+                    <img src="docs/images/php_ini_2.png" alt="configure send mail" width="600" height="400">
+                </p>
             </li>
             <li>
-                <img src="docs/images/php_ini_3.png" alt="configure send mail" width="600" height="400">
+                <p align="center">
+                    <img src="docs/images/php_ini_3.png" alt="configure send mail">
+                </p>
             </li>
             <li>
                 Add path to sendmail, please note that my path might be different to yours.
@@ -91,13 +72,19 @@ To run this application you need to follow the instruction below
         Configure sendmail. Add or Edit the following lines
         <ul>
             <li>
-                <img src="docs/images/sendmail_ini_1.png" alt="configure send mail" width="600" height="400">
+                <p align="center">
+                    <img src="docs/images/sendmail_ini_1.png" alt="configure send mail" width="600" height="400">
+                </p>
             </li>
             <li>
-                <img src="docs/images/sendmail_ini_2.png" alt="configure send mail" width="600" height="400">
+                <p align="center">
+                    <img src="docs/images/sendmail_ini_2.png" alt="configure send mail" width="600" height="400">
+                </p>
             </li>
             <li>
-                <img src="docs/images/sendmail_ini_3.png" alt="configure send mail" width="600" height="400">
+                <p align="center">             
+                    <img src="docs/images/sendmail_ini_3.png" alt="configure send mail">
+                </p>
             </li>
         </ul>
     </li>
@@ -120,7 +107,8 @@ To run this application you need to follow the instruction below
    git clone https://github.com/martian1431/camagru.git
    ```
 3. Start Apache and Mysql servers
-4. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
+4. <p align="center"><img src="docs/images/sendmail_ini_3.png" alt="configure send mail"></p>
+5. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
 
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
