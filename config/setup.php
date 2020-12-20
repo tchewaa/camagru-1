@@ -1,11 +1,8 @@
 <?php
+include_once ('database.php');
+include_once ('config.php');
 
-use Core\Database;
-use Core\Helper;
-
-include_once ('./Core/Helper.php');
-
- setupDatabase();
+setupDatabase();
 
 function setupDatabase() {
     $conn = null;
@@ -13,13 +10,26 @@ function setupDatabase() {
         $conn = new PDO('mysql:host='.DB_HOST.';',DB_USER, DB_PASSWORD);
         $queries = setupQueries();
 
-        $conn->exec($queries['db-sql']);
+        $conn->exec($queries['create-db-sql']);
+        echo '.<br/>';
+
         $conn->exec($queries['select-db']);
-        $conn->exec($queries['user-sql']);
-        $conn->exec($queries['session-sql']);
-        $conn->exec($queries['images-sql']);
-        $conn->exec($queries['comments-sql']);
-        $conn->exec($queries['likes-sql']);
+        echo 'Database \'camagru\' created...<br/>';
+
+        $conn->exec($queries['create-user-sql']);
+        echo 'Table \'user\' created...<br/>';
+
+        $conn->exec($queries['create-session-sql']);
+        echo 'Table \'session\' created...<br/>';
+
+        $conn->exec($queries['create-images-sql']);
+        echo 'Table \'images\' created...<br/>';
+
+        $conn->exec($queries['create-comments-sql']);
+        echo 'Table \'comments\' created...<br/>';
+
+        $conn->exec($queries['create-likes-sql']);
+        echo 'Table \'likes\' created...';
 
         $conn->beginTransaction();
         //check if database is seeded
@@ -27,14 +37,13 @@ function setupDatabase() {
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $defaultUserExist = $stmt->rowCount();
-        $stmt->closeCursor();
 
         if ($defaultUserExist == 0) {
              //default user
             $username = "admin";
             $email = "1281martian@gmail.com";
             $password = password_hash("password", PASSWORD_DEFAULT);
-            $token = md5($username . $email . Helper::generateRandomString());
+            $token = md5($username . $email . '4493ygWdMWfARTc1BtbS3CUKLl0MDl');
 
 
             //save default user
@@ -43,29 +52,46 @@ function setupDatabase() {
             $stmt->execute([$username, $email, $password, $token, 1]);
              //get generated default user id
             $userId = $conn->lastInsertId();
-            $stmt->closeCursor();
 
-             //save images
-            foreach (Helper::getImages() as $image) {
+            //TODO refactor
+            //retrieve images
+            $images = glob('../app/assets/dummy/' . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+            $randomImages = [];
+            for ($i = 0; $i < count($images); $i++) {
+                $temp = file_get_contents($images[$i]);
+                $imageData = imagecreatefromstring($temp);
+                ob_start();
+                imagejpeg($imageData);
+                $imageData = ob_get_clean();
+                $imageData = base64_encode($imageData);
+                $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
+                $randomImages[$i] = $base64Image;
+            }
+
+            //TODO refactor
+            //save images
+            foreach ($randomImages as $image) {
                 $image_query = 'INSERT INTO `images` (user_id, image_name, image_data) VALUES (?, ?, ?)';
                 $stmt = $conn->prepare($image_query);
-                $stmt->execute([$userId, 'test', $image]);
+                $stmt->execute([$userId, 'admin', $image]);
              }
 
             //persist data
             $conn->commit();
+            echo '<br/>Default user \'admin\' created <br/>';
+            echo 'Default password \'password\'';
          }
     } catch (PDOException | Exception $e) {
         $conn->rollBack();
-        Helper::dnd($e->getMessage());
+        die($e->getMessage());
     }
 }
 
 function setupQueries() {
     return [
-        'db-sql' => "CREATE DATABASE IF NOT EXISTS " . DB_NAME,
+        'create-db-sql' => "CREATE DATABASE IF NOT EXISTS " . DB_NAME,
         'select-db' => "USE " . DB_NAME,
-        'user-sql' => "
+        'create-user-sql' => "
             CREATE TABLE IF NOT EXISTS `user` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `username` varchar(50) NOT NULL,
@@ -76,7 +102,7 @@ function setupQueries() {
             `notification` tinyint(1) NOT NULL DEFAULT 1,
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1",
-        'session-sql' => "
+        'create-session-sql' => "
             CREATE TABLE IF NOT EXISTS `session` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NULL,
@@ -85,7 +111,7 @@ function setupQueries() {
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1",
-        'images-sql' => "
+        'create-images-sql' => "
             CREATE TABLE IF NOT EXISTS `images` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
@@ -95,7 +121,7 @@ function setupQueries() {
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1",
-        'comments-sql' => "
+        'create-comments-sql' => "
             CREATE TABLE IF NOT EXISTS `comments` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
@@ -106,7 +132,7 @@ function setupQueries() {
             FOREIGN KEY (`user_id`) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (`image_id`) REFERENCES images(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1",
-        'likes-sql' => "
+        'create-likes-sql' => "
             CREATE TABLE IF NOT EXISTS `likes` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,

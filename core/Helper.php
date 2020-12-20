@@ -264,21 +264,4 @@ class Helper {
         }
         return $html;
     }
-
-    public static function getImages() {
-        $images = glob('app/assets/dummy/' . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
-        $randomImages = [];
-        for ($i = 0; $i < 18; $i++) {
-            $temp = file_get_contents($images[$i]);
-            $imageData = imagecreatefromstring($temp);
-            ob_start();
-            imagejpeg($imageData);
-            $imageData = ob_get_clean();
-            $imageData = base64_encode($imageData);
-            $base64Image = 'data:image/' . 'jpeg' . ';base64,' . $imageData;
-            $randomImages[$i] = $base64Image;
-        }
-        return $randomImages;
-    }
-
 }
