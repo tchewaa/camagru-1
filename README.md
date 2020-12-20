@@ -103,13 +103,7 @@ Install <a href=""> XAMPP </a> on windows.
 3. Open browser and Go to url <a href="http://localhost/config/setup">http://localhost/config/setup</a>, this will create a database and tables.
 
 
-### Built With [XAMPP](https://www.apachefriends.org/index.html)
-
-XAMPP is a free and open-source cross-platform web server solution stack package developed by Apache Friends, 
-consisting mainly of the Apache HTTP Server, Mysql database, and interpreters for scripts written in the PHP 
-and Perl programming languages. 
-
-###### *Tools and Languages:*
+### Tools and Languages:
 * [Apache HTTP server](https://httpd.apache.org/)
 * [Send Mail]()
 * [PHP](https://www.php.net/)
@@ -118,6 +112,8 @@ and Perl programming languages.
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 * [Bootstrap](https://getbootstrap.com)
 * [Javascript](https://www.javascript.com/)
+
+### Project file structure
 
 <!-- Architecture -->
 ## Architecture
