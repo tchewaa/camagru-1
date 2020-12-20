@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://github.com/martian1431/camagru">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="app/assets/documentation/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Camagru Documentation</h3>
   <p align="center">
@@ -60,48 +60,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This is a small web application allowing users to upload a basic photo or use a webcam to take a photo.
-
-### Built With [XAMPP](https://www.apachefriends.org/index.html)
-
-XAMPP is a free and open-source cross-platform web server solution stack package developed by Apache Friends, 
-consisting mainly of the Apache HTTP Server, Mysql database, and interpreters for scripts written in the PHP 
-and Perl programming languages. 
-
-###### *Tools and Languages:*
-* [Apache HTTP server](https://httpd.apache.org/)
-* [Send Mail]()
-* [PHP](https://www.php.net/)
-* [Mysql](https://www.mysql.com/)
-* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
-* [Bootstrap](https://getbootstrap.com)
-* [Javascript](https://www.javascript.com/)
-
-<!-- Architecture -->
-## Architecture
- Model–view–controller is a software design pattern commonly used for developing 
- User interface that divides the related program logic into three interconnected elements. 
- This is done to separate internal representations of information from the ways 
- information is presented to and accepted from the user.
- 
- <p align="center">
-    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
- </p>
- 
-##### *Controller*
-Controllers act as an interface between Model and View components to process all the business logic 
-and incoming requests, manipulate data using the Model component and interact with the Views to render 
-the final output.
- 
- ##### *Model*
-  The Model component corresponds to all the data-related logic that the user works with. 
-  This can represent either the data that is being transferred between the View and Controller 
-  components or any other business logic-related data.
-  
-  ##### *View*
-  The View component it is used for all the UI logic of the application. 
-
+Camagru is a sharing site where users can either upload or take photos with their web camera and edit them by adding 'stickers' on top.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -111,16 +70,18 @@ To run this application you need to follow the instruction below
 ### Prerequisites
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
-        <li>
-            Configure your Mysql to use these default credentials
-            <ul>
-                <li>Username: root</li>
-                <li>Password: password</li>
-            </ul>
-        </li>
     <li>
         Enable send mail function using PHP.ini file. Add or Edit the following line
         <ul>
+            <li>
+                <img src="app/assets/documentation/php_ini_1.png" alt="configure send mail">
+            </li>
+            <li>
+                <img src="app/assets/documentation/php_ini_2.png" alt="configure send mail">
+            </li>
+            <li>
+                <img src="app/assets/documentation/php_ini_3.png" alt="configure send mail">
+            </li>
             <li>
                 sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
             </li>
@@ -162,6 +123,47 @@ To run this application you need to follow the instruction below
    ```
 3. Start Apache and Mysql servers
 4. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
+
+
+### Built With [XAMPP](https://www.apachefriends.org/index.html)
+
+XAMPP is a free and open-source cross-platform web server solution stack package developed by Apache Friends, 
+consisting mainly of the Apache HTTP Server, Mysql database, and interpreters for scripts written in the PHP 
+and Perl programming languages. 
+
+###### *Tools and Languages:*
+* [Apache HTTP server](https://httpd.apache.org/)
+* [Send Mail]()
+* [PHP](https://www.php.net/)
+* [Mysql](https://www.mysql.com/)
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+* [Bootstrap](https://getbootstrap.com)
+* [Javascript](https://www.javascript.com/)
+
+<!-- Architecture -->
+## Architecture
+ Model–view–controller is a software design pattern commonly used for developing 
+ User interface that divides the related program logic into three interconnected elements. 
+ This is done to separate internal representations of information from the ways 
+ information is presented to and accepted from the user.
+ 
+ <p align="center">
+    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
+ </p>
+ 
+##### *Controller*
+Controllers act as an interface between Model and View components to process all the business logic 
+and incoming requests, manipulate data using the Model component and interact with the Views to render 
+the final output.
+ 
+ ##### *Model*
+  The Model component corresponds to all the data-related logic that the user works with. 
+  This can represent either the data that is being transferred between the View and Controller 
+  components or any other business logic-related data.
+  
+  ##### *View*
+  The View component it is used for all the UI logic of the application. 
 
 <!-- USAGE EXAMPLES -->
 ## Tests
