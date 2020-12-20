@@ -113,8 +113,6 @@ Install <a href=""> XAMPP </a> on windows.
 * [Bootstrap](https://getbootstrap.com)
 * [Javascript](https://www.javascript.com/)
 
-### Project file structure
-
 <!-- Architecture -->
 ## Architecture
  Model–view–controller is a software design pattern commonly used for developing 
