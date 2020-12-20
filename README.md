@@ -91,7 +91,7 @@ To run this application you need to follow the instruction below
   </ol>
 
 > **_NOTE:_**  
->If you want to use your own google account to configure send mail plugin you need to enable "Less secure app access" 
+>To use your own google account to configure send mail plugin you need to enable "Less secure app access" 
 >on google under security https://myaccount.google.com/security
 
 
