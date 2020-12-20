@@ -83,7 +83,7 @@ To run this application you need to follow the instruction below
             </li>
             <li>
                 <p align="center">             
-                    <img src="docs/images/sendmail_ini_3.png" alt="configure send mail">
+                    <img src="docs/images/send-mail_ini_3.png" alt="configure send mail">
                 </p>
             </li>
         </ul>
