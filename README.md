@@ -50,12 +50,12 @@ To run this application you need to follow the instruction below
         <ul>
             <li>
                 <p align="center">
-                    <img src="docs/images/php_ini_1.png" alt="configure send mail" width="600" height="400">
+                    <img src="docs/images/php_ini_1.png" alt="configure send mail">
                 </p>
             </li>
             <li>
                 <p align="center">
-                    <img src="docs/images/php_ini_2.png" alt="configure send mail" width="600" height="400">
+                    <img src="docs/images/php_ini_2.png" alt="configure send mail">
                 </p>
             </li>
             <li>
@@ -73,12 +73,12 @@ To run this application you need to follow the instruction below
         <ul>
             <li>
                 <p align="center">
-                    <img src="docs/images/sendmail_ini_1.png" alt="configure send mail" width="600" height="400">
+                    <img src="docs/images/sendmail_ini_1.png" alt="configure send mail">
                 </p>
             </li>
             <li>
                 <p align="center">
-                    <img src="docs/images/sendmail_ini_2.png" alt="configure send mail" width="600" height="400">
+                    <img src="docs/images/sendmail_ini_2.png" alt="configure send mail">
                 </p>
             </li>
             <li>
