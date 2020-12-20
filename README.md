@@ -40,12 +40,30 @@ Camagru is a sharing site where users can either upload or take photos with thei
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To run this application you need to follow the instruction below 
+### Prerequisites
 
-### Download and configure server environment
+A local server to host the application is needed:
 
-1. Download and install <a href=""> XAMPP </a>
-2. Enable sendmail function in php.ini file:
+Install <a href=""> XAMPP </a> on windows.
+
+> **_NOTE:_**  
+>This application was developed on windows machine, so it might not work properly on other
+>operating systems
+
+###Clone
+
+1. Using your terminal cd into htdocs directory
+    ```sh
+   cd "[Path to XAMPP directory]/htdocs"
+   ```
+2. Clone the repo
+   ```sh
+   git clone https://github.com/martian1431/camagru.git
+   ```
+
+### Configure server environment
+
+1. Enable sendmail function in php.ini file:
 <p align="center">
     <img src="docs/images/php_ini_1.png" alt="configure send mail">
 </p>
@@ -59,9 +77,9 @@ To run this application you need to follow the instruction below
 </p>
 
 > **_NOTE:_**  
->My path might be different to yours.
+>Insert path to sendmail directory.
 
-3. Configure sendmail function:
+2. Configure sendmail function:
 <p align="center">
     <img src="docs/images/sendmail_ini_1.png" alt="configure send mail">
 </p>
@@ -77,20 +95,12 @@ To run this application you need to follow the instruction below
 >on google under security https://myaccount.google.com/security
 
 
-### Installation
-
-1. Using your terminal cd into htdocs directory
-    ```sh
-   cd "C:/xampp/htdocs"
-   ```
-2. Clone the repo
-   ```sh
-   git clone https://github.com/martian1431/camagru.git
-   ```
-3. Start Apache and Mysql servers
-4. Configure camagru 
+### Configure camagru
+1. Change the password of $DB_PASSWORD, to the password chosen during from xampp setup.
 <p align="center"><img src="docs/images/config.png" alt="configure send mail"></p>
-5. Open browser and Go to url http://localhost/config/setup, this will create a database and tables.
+2. Start Apache and Mysql servers
+<p align="center"><img src="docs/images/mysql-server.png" alt="start Mysql server"></p>
+3. Open browser and Go to url http://localhost/config/setup, this will create a database and tables.
 
 
 ### Built With [XAMPP](https://www.apachefriends.org/index.html)
