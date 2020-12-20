@@ -107,7 +107,8 @@ To run this application you need to follow the instruction below
    git clone https://github.com/martian1431/camagru.git
    ```
 3. Start Apache and Mysql servers
-4. <p align="center"><img src="docs/images/sendmail_ini_3.png" alt="configure send mail"></p>
+4. Configure camagru 
+<p align="center"><img src="docs/images/config.png" alt="configure send mail"></p>
 5. Open browser and Go to url http://localhost/camagru, this will create a database and tables.
 
 
