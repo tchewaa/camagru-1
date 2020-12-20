@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://github.com/martian1431/camagru">
-    <img src="app/assets/documentation/logo.png" alt="Logo" width="80" height="80">
+    <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Camagru Documentation</h3>
   <p align="center">
@@ -74,13 +74,13 @@ To run this application you need to follow the instruction below
         Enable send mail function using PHP.ini file. Add or Edit the following line
         <ul>
             <li>
-                <img src="app/assets/documentation/php_ini_1.png" alt="configure send mail">
+                <img src="docs/images/php_ini_1.png" alt="configure send mail">
             </li>
             <li>
-                <img src="app/assets/documentation/php_ini_2.png" alt="configure send mail">
+                <img src="docs/images/php_ini_2.png" alt="configure send mail">
             </li>
             <li>
-                <img src="app/assets/documentation/php_ini_3.png" alt="configure send mail">
+                <img src="docs/images/php_ini_3.png" alt="configure send mail">
             </li>
             <li>
                 sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
