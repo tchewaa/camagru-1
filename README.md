@@ -43,6 +43,21 @@ Camagru is a sharing site where users can either upload or take photos with thei
 To run this application you need to follow the instruction below 
 
 ### Download and configure server environment
+
+1. Download and install <a href=""> XAMPP </a>
+2. Configure send mail plugin:
+<p align="center">
+    <img src="docs/images/php_ini_1.png" alt="configure send mail">
+</p>
+
+<p align="center">
+    <img src="docs/images/php_ini_2.png" alt="configure send mail">
+</p>
+
+<p align="center">
+    <img src="docs/images/php_ini_3.png" alt="configure send mail">
+</p>
+
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
     <li>
