@@ -119,11 +119,9 @@ Install <a href=""> XAMPP </a> on windows.
 ## Architecture
  Model–view–controller is a software design pattern commonly used for developing 
  User interface that divides the related program logic into three interconnected elements. 
- This is done to separate internal representations of information from the ways 
- information is presented to and accepted from the user.
  
  <p align="center">
-    <img src="images/screenshot1.png" alt="Architecture Screen Shot">
+    <img src="docs/images/screenshot1.png" alt="Architecture Screen Shot">
  </p>
  
 ##### *Controller*
