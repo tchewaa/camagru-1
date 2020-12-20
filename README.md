@@ -71,7 +71,7 @@ To run this application you need to follow the instruction below
   <ol>
     <li>Download and install <a href=""> XAMPP </a></li>
     <li>
-        Enable send mail function using PHP.ini file. Add or Edit the following line
+        Enable send mail function using PHP.ini file.
         <ul>
             <li>
                 <img src="docs/images/php_ini_1.png" alt="configure send mail">
@@ -83,7 +83,7 @@ To run this application you need to follow the instruction below
                 <img src="docs/images/php_ini_3.png" alt="configure send mail">
             </li>
             <li>
-                sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
+                Add path to sendmail, please note that my path might be different to yours.
             </li>
         </ul>
     </li>
@@ -91,16 +91,13 @@ To run this application you need to follow the instruction below
         Configure sendmail. Add or Edit the following lines
         <ul>
             <li>
-                smtp_server = smtp.gmail.com
+                <img src="docs/images/sendmail_ini_1.png" alt="configure send mail">
             </li>
             <li>
-                smtp_port = 587
+                <img src="docs/images/sendmail_ini_2.png" alt="configure send mail">
             </li>
             <li>
-                auth_username = example@domain.com
-            </li>
-            <li>
-                auth_password = password
+                <img src="docs/images/sendmail_ini_3.png" alt="configure send mail">
             </li>
         </ul>
     </li>
