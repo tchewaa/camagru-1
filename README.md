@@ -42,9 +42,19 @@ Camagru is a sharing site where users can either upload or take photos with thei
 
 ### Prerequisites
 
-A local server to host the application is needed:
+A local server to host the application:
 
-Install <a href=""> XAMPP </a> on windows.
+### Windows
+
+Install <a href=""> XAMPP </a>
+
+### Linux
+
+Install <a href="">Bitnami LAMP</a>
+
+### MacOS
+
+Install <a href="">Bitnami MAMP</a>
 
 > **_NOTE:_**  
 >This application was developed on windows machine, so it might not work properly on other
@@ -158,8 +168,9 @@ the final output.
             At the end of the registration process, an user should confirm his account via a unique 
             link sent at the email address used in the registration form.
         </li>
-        <li>User should able to login using correct credentials</li>
+        <li>User should be able to login using correct credentials</li>
         <li>Capture image with webcam and add sticker before saving.</li>
+        <li>Upload Image</li>
         <li>
             Gallery is public and must display all the images edited by all the users, It should also 
             allow (only) a connected user to like them and/or comment them.
@@ -179,7 +190,7 @@ the final output.
             <li>database.php + setup.php in config folder</li>
             <li>Able to register</li>
             <li>Able to tell the application to send a password reinitialisation mail, if user forget his/her password.</li>
-            <li>Able to login only if email account was confirmed</li>
+            <li>Able to login only if email account is confirmed</li>
             <li>Able to capture photo</li>
             <li>Able to visit gallery</li>
             <li>Able to change credentials</li>
