@@ -14,7 +14,7 @@ function setupDatabase() {
         echo 'Database \'camagru\' created...<br/>';
 
         $conn->exec($queries['select-db']);
-        echo 'Using \'camagru\' database';
+        echo 'Using \'camagru\' database...<br/>';
 
         $conn->exec($queries['create-user-sql']);
         echo 'Table \'user\' created...<br/>';
