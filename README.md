@@ -130,6 +130,7 @@ Install <a href="">Bitnami MAMP</a>
 * [Javascript](https://www.javascript.com/)
 
 <!-- Architecture -->
+
 ## Architecture
  Model–view–controller is a software design pattern commonly used for developing 
  User interface that divides the related program logic into three interconnected elements. 
