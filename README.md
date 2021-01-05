@@ -119,38 +119,108 @@ Install <a href="">Bitnami MAMP</a>
 3. Open browser and Go to url <a href="http://localhost/config/setup">http://localhost/config/setup</a>, this will create a database and tables.
 
 
-### Tools and Languages:
+### Code Breakdown:
+
+##### *Back End Technologies*
+
 * [Apache HTTP server](https://httpd.apache.org/)
 * [Send Mail]()
 * [PHP](https://www.php.net/)
-* [Mysql](https://www.mysql.com/)
+
+##### *Front End Technologies*
+
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 * [Bootstrap](https://getbootstrap.com)
 * [Javascript](https://www.javascript.com/)
 
-<!-- Architecture -->
 
-## Architecture
- Model–view–controller is a software design pattern commonly used for developing 
- User interface that divides the related program logic into three interconnected elements. 
- 
- <p align="center">
-    <img src="docs/images/screenshot1.png" alt="Architecture Screen Shot">
- </p>
- 
-##### *Controller*
-Controllers act as an interface between Model and View components to process all the business logic 
-and incoming requests, manipulate data using the Model component and interact with the Views to render 
-the final output.
- 
- ##### *Model*
-  The Model component corresponds to all the data-related logic that the user works with. 
-  This can represent either the data that is being transferred between the View and Controller 
-  components or any other business logic-related data.
-  
-  ##### *View*
-  The View component it is used for all the UI logic of the application. 
+##### *Database management systems*
+* [Mysql](https://www.mysql.com/)
+* [phpmyadmin]()
+
+<!-- Project folder structure -->
+
+## Project folder structure
+
+- app
+    - assests
+    - controllers
+        * EditorController.php
+        * HomeController.php
+        * ImageController.php
+        * LoginController.php
+        * ProfileController.php
+        * RegisterController.php
+    - models
+        * Auth.php
+        * Comment.php
+        * Image.php
+        * Like.php
+        * User.php
+        * UserSession.php
+    - views
+        - editor
+            * index.php
+        - home
+            * index.php
+        - image
+            * index.php
+        - layouts
+            * default.php
+            * footer.php
+            * main_menu.php
+        - login
+            * forgotPassword.php
+            * index.php
+            * resetPassword.php
+        - profile
+            * deleteAccount.php
+            * index.php
+            * updateEmail.php
+            * updatePassword.php
+            * updateUsername.php
+        - register
+            * index.php
+            * resendToken.php
+        * acl.json
+        * menu_acl.json
+- config
+    * config.php
+    * database.php
+    * setup.php
+- core
+    - validation
+        * CustomValidation.php
+        * EmailValidator.php
+        * MatchesValidator.php
+        * MaxValidator.php
+        * MinValidator.php
+        * NumericValidator.php
+        * PasswordValidator.php
+        * RequiredValidator.php
+        * UniqueValidator.php
+    * Application.php
+    * Controller.php
+    * Cookie.php
+    * Database.php
+    * FormHelper.php
+    * Helper.php
+    * Input.php
+    * Model.php
+    * Router.php
+    * Session.php
+    * View.php
+- css
+    * bootstrap.min.css
+    * custom.css
+- js
+    * bootstrap.min.js
+    * custom.js
+    * editor.js
+    * imageView.js
+* .htaccess
+* index.php
 
 <!-- USAGE EXAMPLES -->
 ## Tests
